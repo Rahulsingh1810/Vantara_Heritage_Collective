@@ -11,6 +11,7 @@ import HeroSectionAnimated from "@/components/hero-section-animated"
 import FeaturedVendors from "@/components/featured-vendors"
 import ContactFormPopup from "@/components/contact-form-popup"
 import { useState } from "react"
+import fetchProducts, { fetchProductBySlug } from "@/utils/queries/page"
 
 const featuredProducts = [
   // Sample featured products data
@@ -20,9 +21,14 @@ const featuredProducts = [
   { id: 4, name: "Product 4", image: "/path/to/image4.jpg" },
 ]
 
-export default function Page() {
+export default async function Page() {
   const [showContactPopup, setShowContactPopup] = useState(false)
+  const data = await fetchProducts();
 
+  console.log("Fetched Products:", data);
+
+  const products = await fetchProductBySlug("Vase-rahul");
+  console.log("products",products);
   return (
     <>
       {/* Hero Section Animated */}
