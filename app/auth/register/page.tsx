@@ -1,19 +1,25 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { AlertCircle, UserPlus } from "lucide-react"
+import { AlertCircle, UserPlus, Globe } from "lucide-react"
+import { signInWithGoogle } from "@/lib/auth-client"
 
 export default function RegisterPage() {
   const router = useRouter()
-  const [formData, setFormData] = useState({ email: "", name: "", password: "", confirmPassword: "" })
+  const [formData, setFormData] = useState({
+    email: "",
+    name: "",
+    password: "",
+    confirmPassword: "",
+  })
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [googleLoading, setGoogleLoading] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -39,20 +45,42 @@ export default function RegisterPage() {
       const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: formData.email, name: formData.name, password: formData.password }),
+        body: JSON.stringify({
+          email: formData.email,
+          name: formData.name,
+          password: formData.password,
+        }),
       })
 
       if (!response.ok) {
         const data = await response.json()
         setError(data.error || "Registration failed")
-        setIsLoading(false)
         return
       }
 
       router.push("/dashboard")
     } catch (err) {
       setError("An error occurred. Please try again.")
+    } finally {
       setIsLoading(false)
+    }
+  }
+
+  const handleGoogleSignIn = async () => {
+    setGoogleLoading(true)
+    setError("")
+
+    try {
+      await signInWithGoogle()
+      router.push("/dashboard")
+    } catch (err: any) {
+      setError(
+        err.code === "auth/popup-closed-by-user"
+          ? "Sign-up was cancelled"
+          : "Google sign-up failed. Please try again."
+      )
+    } finally {
+      setGoogleLoading(false)
     }
   }
 
@@ -62,7 +90,9 @@ export default function RegisterPage() {
         <Card>
           <CardHeader className="text-center">
             <CardTitle className="text-3xl mb-2">Create Account</CardTitle>
-            <p className="text-muted-foreground">Join The Heritage Collective community</p>
+            <p className="text-muted-foreground">
+              Join The Heritage Collective community
+            </p>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -130,6 +160,27 @@ export default function RegisterPage() {
                 {isLoading ? "Creating account..." : "Create Account"}
               </Button>
             </form>
+
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-border" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-card px-2 text-muted-foreground">
+                  Or continue with
+                </span>
+              </div>
+            </div>
+
+            <Button
+              variant="outline"
+              className="w-full gap-2"
+              onClick={handleGoogleSignIn}
+              disabled={googleLoading || isLoading}
+            >
+              <Globe className="h-5 w-5" />
+              {googleLoading ? "Connecting..." : "Sign up with Google"}
+            </Button>
 
             <p className="text-center text-sm text-muted-foreground mt-6">
               Already have an account?{" "}

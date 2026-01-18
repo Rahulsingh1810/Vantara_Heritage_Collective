@@ -1,14 +1,14 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { AlertCircle, LogIn } from "lucide-react"
+import { AlertCircle, LogIn, Globe } from "lucide-react"
 import { useUser } from "@/lib/user-context"
+import { signInWithGoogle } from "@/lib/auth-client"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -16,6 +16,7 @@ export default function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" })
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [googleLoading, setGoogleLoading] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -36,7 +37,6 @@ export default function LoginPage() {
       if (!response.ok) {
         const data = await response.json()
         setError(data.error || "Login failed")
-        setIsLoading(false)
         return
       }
 
@@ -44,7 +44,27 @@ export default function LoginPage() {
       router.push("/dashboard")
     } catch (err) {
       setError("An error occurred. Please try again.")
+    } finally {
       setIsLoading(false)
+    }
+  }
+
+  const handleGoogleSignIn = async () => {
+    setGoogleLoading(true)
+    setError("")
+
+    try {
+      await signInWithGoogle()
+      await refetchUser()
+      router.push("/dashboard")
+    } catch (err: any) {
+      setError(
+        err.code === "auth/popup-closed-by-user"
+          ? "Sign-in was cancelled"
+          : "Google sign-in failed. Please try again."
+      )
+    } finally {
+      setGoogleLoading(false)
     }
   }
 
@@ -54,7 +74,9 @@ export default function LoginPage() {
         <Card>
           <CardHeader className="text-center">
             <CardTitle className="text-3xl mb-2">Welcome Back</CardTitle>
-            <p className="text-muted-foreground">Sign in to your Heritage Collective account</p>
+            <p className="text-muted-foreground">
+              Sign in to your Heritage Collective account
+            </p>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -96,6 +118,27 @@ export default function LoginPage() {
                 {isLoading ? "Signing in..." : "Sign In"}
               </Button>
             </form>
+
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-border" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-card px-2 text-muted-foreground">
+                  Or continue with
+                </span>
+              </div>
+            </div>
+
+            <Button
+              variant="outline"
+              className="w-full gap-2"
+              onClick={handleGoogleSignIn}
+              disabled={googleLoading || isLoading}
+            >
+              <Globe className="h-5 w-5" />
+              {googleLoading ? "Connecting..." : "Sign in with Google"}
+            </Button>
 
             <p className="text-center text-sm text-muted-foreground mt-6">
               Don't have an account?{" "}

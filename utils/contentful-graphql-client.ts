@@ -17,7 +17,7 @@ export default async function graphQlClient<T>(query: string, tags: string[]): P
     },
     body: JSON.stringify({ query }),
     next: { tags: ['contentful', ...tags] },
-    // cache: 'force-cache'
+    cache: 'force-cache'
   })
 
   if (!response.ok) {

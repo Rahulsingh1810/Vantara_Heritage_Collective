@@ -49,7 +49,7 @@ export default async function fetchProducts() {
   return pageCollection?.items?.[0]?.productsCollection?.items ?? []
 }
 
-export async function fetchProductBySlug(slug: string) {
+export  async function fetchProductBySlug(slug: string) {
   const query = `
     query  {
       pageCollection(limit: 1) {

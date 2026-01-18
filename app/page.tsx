@@ -23,12 +23,12 @@ const featuredProducts = [
 
 export default async function Page() {
   const [showContactPopup, setShowContactPopup] = useState(false)
-  const data = await fetchProducts();
+  // const data = await fetchProducts();
 
-  console.log("Fetched Products:", data);
+  // console.log("Fetched Products:", data);
 
-  const products = await fetchProductBySlug("Vase-rahul");
-  console.log("products",products);
+  // const products = await fetchProductBySlug("Vase-rahul");
+  // console.log("products",products);
   return (
     <>
       {/* Hero Section Animated */}
