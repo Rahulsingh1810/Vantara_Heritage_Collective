@@ -3,10 +3,6 @@ export default async function graphQlClient<T>(query: string, tags: string[]): P
   const SPACE_ID = process.env.CONTENTFUL_SPACE_ID
   const ENVIRONMENT_ID = process.env.CONTENTFUL_ENVIRONMENT_ID ?? 'master'
 
-  console.log("Using Space ID:", SPACE_ID);
-  console.log("Using Environment ID:", ENVIRONMENT_ID);
-  console.log("Using Access Token:", ACCESS_TOKEN);
-
   const REQUEST_URL = `https://graphql.contentful.com/content/v1/spaces/${SPACE_ID}/environments/${ENVIRONMENT_ID}`
 
   const response = await fetch(REQUEST_URL, {

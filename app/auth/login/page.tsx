@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { AlertCircle, LogIn, Globe } from "lucide-react"
 import { useUser } from "@/lib/user-context"
 import { signInWithGoogle } from "@/lib/auth-client"
+import { firebaseLogin } from "@/lib/firebase-login"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -49,24 +50,26 @@ export default function LoginPage() {
     }
   }
 
-  const handleGoogleSignIn = async () => {
-    setGoogleLoading(true)
-    setError("")
+const handleGoogleSignIn = async () => {
+  setGoogleLoading(true)
+  setError("")
 
-    try {
-      await signInWithGoogle()
-      await refetchUser()
-      router.push("/dashboard")
-    } catch (err: any) {
-      setError(
-        err.code === "auth/popup-closed-by-user"
-          ? "Sign-in was cancelled"
-          : "Google sign-in failed. Please try again."
-      )
-    } finally {
-      setGoogleLoading(false)
-    }
+  try {
+    const result = await signInWithGoogle()
+    const idToken = await result.user.getIdToken()
+    await firebaseLogin(idToken) // this sets the cookie via backend
+    await refetchUser()
+    router.push("/dashboard")
+  } catch (err: any) {
+    setError(
+      err.code === "auth/popup-closed-by-user"
+        ? "Sign-in was cancelled"
+        : "Google sign-in failed. Please try again."
+    )
+  } finally {
+    setGoogleLoading(false)
   }
+}
 
   return (
     <main className="min-h-screen bg-background flex items-center justify-center py-12">
