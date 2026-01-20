@@ -22,11 +22,13 @@ export type Product = {
   productCulturalSignificance: string
   productCategory: string
   productCare: string
-  vendor?: Vendor
-  productPrice?: number
-  productWeight?: string
+  productStock: number
+  vendor: Vendor
+  productPrice: number
+  productWeight: string
   productDimensions?: string
-  productOrigin?: string
+  productOrigin: string
+  productMaterial: string
 }
 
 export type ProductsCollection = {

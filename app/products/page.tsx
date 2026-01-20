@@ -1,9 +1,12 @@
+// app/products/page.tsx
 import type { Metadata } from "next"
 import ProductFilters from "@/components/product-filters"
 import ProductGrid from "@/components/product-grid"
 import DiscountBanner from "@/components/discount-banner"
 import DiscountClaimModal from "@/components/discount-claim-modal"
-import fetchProducts from "@/utils/queries/page"   // adjust path to match your file name/location
+
+// ── Use these imports ──
+import  fetchProducts from "@/utils/queries/page"   // or wherever your fetchProducts is now
 
 export const metadata: Metadata = {
   title: "Products - The Heritage Collective",
@@ -17,7 +20,17 @@ export default async function Products({
 }) {
   const params = await searchParams
 
+  // ── Fetch here ──
   const cfProducts = await fetchProducts()
+
+  // ── Inspect raw data from Contentful ──
+  console.log("=== RAW PRODUCTS FROM CONTENTFUL ===")
+  console.log("Count:", cfProducts.length)
+  console.log("First product (full):", cfProducts[0] ? JSON.stringify(cfProducts[0], null, 2) : "No products")
+  if (cfProducts.length > 0) {
+    console.log("Available top-level keys in first product:", Object.keys(cfProducts[0]))
+  }
+  console.log("=====================================")
 
   // Basic filtering — extend as needed (client-side for now)
   const filtered = cfProducts.filter((p) => {
@@ -27,8 +40,6 @@ export default async function Products({
       const cat = String(params.category).toLowerCase()
       match = match && (p.productCategory || "").toLowerCase() === cat
     }
-
-    // Add more filters (vendor, price range, etc.) here when needed
 
     return match
   })
@@ -51,10 +62,9 @@ export default async function Products({
       p.productImagesCollection?.items?.[0]?.url ||
       "/traditional-indian-artifact.jpg",
     price: Number.parseFloat(String(p.productPrice || "0")) || 0,
-    stock_quantity: 999, // placeholder — consider adding inventory field to Contentful
+    stock_quantity: 999,
     category_id: p.productCategory || null,
     vendor_id: p.vendor?.vendorName || null,
-    // Add any other fields your product card / grid needs
   }))
 
   return (

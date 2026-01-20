@@ -59,6 +59,8 @@ export  async function fetchProductBySlug(slug: string) {
               productId
               productTitle
               productDescription
+              productMaterial
+              productStock
               productImagesCollection(limit: 3) {
                 items {
                   title

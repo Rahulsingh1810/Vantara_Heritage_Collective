@@ -3,23 +3,25 @@
 import { useState } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import type { Product } from "@/type/page"  // or wherever your Product type is defined
 
-interface ProductImageGalleryProps {
-  primaryImage: string
-  productName: string
+type ProductImageGalleryProps = {
+  product: Product
 }
 
-export default function ProductImageGallery({ primaryImage, productName }: ProductImageGalleryProps) {
+export default function ProductImageGallery({ product }: ProductImageGalleryProps) {
+  const images =
+    product?.productImagesCollection?.items?.map((img) => img.url) || []
+
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  // Generate multiple images for the gallery (simulating different angles/details)
-  const images = [
-    primaryImage || "/traditional-indian-artifact.jpg",
-    "/traditional-indian-clay-pottery.jpg",
-    "/handcrafted-indian-artifact-detail.jpg",
-    "/traditional-indian-artisan-work.jpg",
-    "/heritage-indian-craft-close-up.jpg",
-  ]
+  if (images.length === 0) {
+    return (
+      <div className="aspect-square bg-muted rounded-xl flex items-center justify-center text-muted-foreground">
+        No images available
+      </div>
+    )
+  }
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
@@ -31,59 +33,68 @@ export default function ProductImageGallery({ primaryImage, productName }: Produ
 
   return (
     <div className="space-y-4">
-      {/* Main Image with Glow Effect */}
-      <div className="relative w-full aspect-square bg-muted rounded-xl overflow-hidden animate-glow">
+      {/* Main Image */}
+      <div className="relative w-full aspect-square bg-muted rounded-xl overflow-hidden">
         <Image
-          src={images[currentIndex] || "/placeholder.svg"}
-          alt={`${productName} - Image ${currentIndex + 1}`}
+          src={images[currentIndex]}
+          alt={`${product.productTitle} image ${currentIndex + 1}`}
           fill
-          className="object-cover hover:scale-105 transition-transform duration-500"
           priority
+          className="object-cover transition-transform duration-500 hover:scale-105"
         />
 
-        {/* Navigation Arrows */}
-        <button
-          onClick={goToPrevious}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white p-2 rounded-full transition-all duration-300 hover:scale-110 z-10"
-          aria-label="Previous image"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button
-          onClick={goToNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white p-2 rounded-full transition-all duration-300 hover:scale-110 z-10"
-          aria-label="Next image"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
+        {/* Navigation */}
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={goToPrevious}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 text-white p-2 rounded-full hover:bg-black/80 transition"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
 
-        {/* Image Counter */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium">
+            <button
+              onClick={goToNext}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 text-white p-2 rounded-full hover:bg-black/80 transition"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </>
+        )}
+
+        {/* Counter */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white px-3 py-1 rounded-full text-sm">
           {currentIndex + 1} / {images.length}
         </div>
       </div>
 
-      {/* Thumbnail Gallery */}
-      <div className="grid grid-cols-5 gap-3">
-        {images.map((image, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-300 ${
-              currentIndex === index
-                ? "border-primary ring-2 ring-primary/50 scale-105"
-                : "border-muted hover:border-primary/50"
-            }`}
-          >
-            <Image
-              src={image || "/placeholder.svg"}
-              alt={`${productName} thumbnail ${index + 1}`}
-              fill
-              className="object-cover"
-            />
-          </button>
-        ))}
-      </div>
+      {/* Thumbnails */}
+      {images.length > 1 && (
+        <div className="grid grid-cols-5 gap-3">
+          {images.map((image, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`relative aspect-square rounded-lg overflow-hidden border-2 transition
+                ${
+                  currentIndex === index
+                    ? "border-primary ring-2 ring-primary/40"
+                    : "border-muted hover:border-primary/50"
+                }
+              `}
+            >
+              <Image
+                src={image}
+                alt={`${product.productTitle} thumbnail ${index + 1}`}
+                fill
+                className="object-cover"
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
