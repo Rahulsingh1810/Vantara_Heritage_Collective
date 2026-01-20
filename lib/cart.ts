@@ -1,10 +1,10 @@
 // Cart management utilities
-import type { CartItem } from "./types"
+import type { CartItem } from './types'
 
-const CART_STORAGE_KEY = "heritage_cart"
+const CART_STORAGE_KEY = 'heritage_cart'
 
 export function getCart(): CartItem[] {
-  if (typeof window === "undefined") return []
+  if (typeof window === 'undefined') return []
   try {
     const cart = localStorage.getItem(CART_STORAGE_KEY)
     return cart ? JSON.parse(cart) : []
@@ -14,13 +14,13 @@ export function getCart(): CartItem[] {
 }
 
 export function saveCart(cart: CartItem[]): void {
-  if (typeof window === "undefined") return
+  if (typeof window === 'undefined') return
   localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart))
 }
 
 export function addToCart(product: any, quantity = 1): CartItem[] {
   const cart = getCart()
-  const existingItem = cart.find((item) => item.product.id === product.id)
+  const existingItem = cart.find(item => item.product.id === product.id)
 
   if (existingItem) {
     existingItem.quantity += quantity
@@ -34,14 +34,14 @@ export function addToCart(product: any, quantity = 1): CartItem[] {
 
 export function removeFromCart(productId: number): CartItem[] {
   const cart = getCart()
-  const filtered = cart.filter((item) => item.product.id !== productId)
+  const filtered = cart.filter(item => item.product.id !== productId)
   saveCart(filtered)
   return filtered
 }
 
 export function updateCartQuantity(productId: number, quantity: number): CartItem[] {
   const cart = getCart()
-  const item = cart.find((item) => item.product.id === productId)
+  const item = cart.find(item => item.product.id === productId)
 
   if (item) {
     if (quantity <= 0) {
@@ -55,7 +55,7 @@ export function updateCartQuantity(productId: number, quantity: number): CartIte
 }
 
 export function clearCart(): void {
-  if (typeof window === "undefined") return
+  if (typeof window === 'undefined') return
   localStorage.removeItem(CART_STORAGE_KEY)
 }
 

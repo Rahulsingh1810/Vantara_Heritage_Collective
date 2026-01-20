@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import { useCart } from "@/components/cart-provider"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import Image from "next/image"
-import Link from "next/link"
-import { Trash2, ArrowLeft } from "lucide-react"
-import { ensureNumber } from "@/lib/utils"
+import { useCart } from '@/components/cart-provider'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Trash2, ArrowLeft } from 'lucide-react'
+import { ensureNumber } from '@/lib/utils'
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, total, clearCart } = useCart()
@@ -15,17 +15,17 @@ export default function CartPage() {
     return (
       <main>
         <div className="bg-primary text-primary-foreground py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl font-bold">Shopping Cart</h1>
           </div>
         </div>
 
-        <section className="py-20 bg-background">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-lg text-muted-foreground mb-8">Your cart is empty</p>
+        <section className="bg-background py-20">
+          <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+            <p className="text-muted-foreground mb-8 text-lg">Your cart is empty</p>
             <Link href="/products">
               <Button size="lg">
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                <ArrowLeft className="mr-2 h-4 w-4" />
                 Continue Shopping
               </Button>
             </Link>
@@ -39,54 +39,54 @@ export default function CartPage() {
     <main>
       {/* Header */}
       <div className="bg-primary text-primary-foreground py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold">Shopping Cart</h1>
           <p className="mt-2 opacity-90">{cart.length} items in your cart</p>
         </div>
       </div>
 
       {/* Cart Content */}
-      <section className="py-12 md:py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <section className="bg-background py-12 md:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {/* Cart Items */}
-            <div className="lg:col-span-2 space-y-4">
-              {cart.map((item) => (
+            <div className="space-y-4 lg:col-span-2">
+              {cart.map(item => (
                 <Card key={item.product.id}>
                   <CardContent className="p-6">
                     <div className="flex gap-6">
                       {/* Product Image */}
-                      <div className="relative w-24 h-24 flex-shrink-0 bg-muted rounded">
+                      <div className="bg-muted relative h-24 w-24 flex-shrink-0 rounded">
                         <Image
-                          src={item.product.image_url || "/placeholder.svg?height=96&width=96&query=artifact"}
+                          src={item.product.image_url || '/placeholder.svg?height=96&width=96&query=artifact'}
                           alt={item.product.name}
                           fill
-                          className="object-cover rounded"
+                          className="rounded object-cover"
                         />
                       </div>
 
                       {/* Product Info */}
                       <div className="flex-1">
                         <Link href={`/products/${item.product.id}`}>
-                          <h3 className="font-semibold text-lg hover:text-primary transition-colors mb-2">
+                          <h3 className="hover:text-primary mb-2 text-lg font-semibold transition-colors">
                             {item.product.name}
                           </h3>
                         </Link>
-                        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{item.product.description}</p>
+                        <p className="text-muted-foreground mb-4 line-clamp-2 text-sm">{item.product.description}</p>
 
                         {/* Quantity Controls */}
                         <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-2 border border-border rounded-lg p-1">
+                          <div className="border-border flex items-center gap-2 rounded-lg border p-1">
                             <button
                               onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                              className="px-2 py-1 hover:bg-muted rounded"
+                              className="hover:bg-muted rounded px-2 py-1"
                             >
                               −
                             </button>
                             <span className="px-3 font-medium">{item.quantity}</span>
                             <button
                               onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                              className="px-2 py-1 hover:bg-muted rounded"
+                              className="hover:bg-muted rounded px-2 py-1"
                               disabled={item.quantity >= item.product.stock_quantity}
                             >
                               +
@@ -94,17 +94,17 @@ export default function CartPage() {
                           </div>
 
                           <Button variant="destructive" size="sm" onClick={() => removeFromCart(item.product.id)}>
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
                       </div>
 
                       {/* Price */}
-                      <div className="text-right flex flex-col justify-between">
-                        <div className="text-sm text-muted-foreground">
+                      <div className="flex flex-col justify-between text-right">
+                        <div className="text-muted-foreground text-sm">
                           ${ensureNumber(item.product.price).toFixed(2)} each
                         </div>
-                        <div className="text-2xl font-bold text-primary">
+                        <div className="text-primary text-2xl font-bold">
                           ${(ensureNumber(item.product.price) * item.quantity).toFixed(2)}
                         </div>
                       </div>
@@ -113,7 +113,7 @@ export default function CartPage() {
                 </Card>
               ))}
 
-              <div className="text-center pt-4">
+              <div className="pt-4 text-center">
                 <Button variant="outline" onClick={clearCart} className="bg-transparent">
                   Clear Cart
                 </Button>
@@ -128,13 +128,13 @@ export default function CartPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {/* Subtotal */}
-                  <div className="flex justify-between pb-4 border-b border-border">
+                  <div className="border-border flex justify-between border-b pb-4">
                     <span className="text-muted-foreground">Subtotal</span>
                     <span className="font-medium">${total.toFixed(2)}</span>
                   </div>
 
                   {/* Shipping */}
-                  <div className="flex justify-between pb-4 border-b border-border">
+                  <div className="border-border flex justify-between border-b pb-4">
                     <span className="text-muted-foreground">Shipping</span>
                     <span className="font-medium">Calculated at checkout</span>
                   </div>
@@ -147,7 +147,7 @@ export default function CartPage() {
 
                   {/* Checkout Button */}
                   <Link href="/checkout">
-                    <Button size="lg" className="w-full mt-6">
+                    <Button size="lg" className="mt-6 w-full">
                       Proceed to Checkout
                     </Button>
                   </Link>
@@ -160,7 +160,7 @@ export default function CartPage() {
                   </Link>
 
                   {/* Secure Badge */}
-                  <div className="text-center text-xs text-muted-foreground mt-6 pt-6 border-t border-border">
+                  <div className="text-muted-foreground border-border mt-6 border-t pt-6 text-center text-xs">
                     <p className="mb-2">✓ Secure Checkout</p>
                     <p>Your order information is safe and secure</p>
                   </div>

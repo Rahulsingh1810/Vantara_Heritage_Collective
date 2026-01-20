@@ -1,5 +1,5 @@
-import { ProductsQueryResponse } from "@/type/page"
-import graphQlClient from "../contentful-graphql-client"
+import { ProductsQueryResponse } from '@/type/page'
+import graphQlClient from '../contentful-graphql-client'
 
 export default async function fetchProductBySlug(slug: string) {
   const query = `
@@ -43,12 +43,7 @@ export default async function fetchProductBySlug(slug: string) {
 
   const {
     data: { pageCollection }
-  } = await graphQlClient<{ data: ProductsQueryResponse }>(
-    query.replace('$slug', `"${slug}"`),
-    [`product-${slug}`]
-  )
+  } = await graphQlClient<{ data: ProductsQueryResponse }>(query.replace('$slug', `"${slug}"`), [`product-${slug}`])
 
-  return (
-    pageCollection?.items?.[0]?.productsCollection?.items?.[0] ?? null
-  )
+  return pageCollection?.items?.[0]?.productsCollection?.items?.[0] ?? null
 }

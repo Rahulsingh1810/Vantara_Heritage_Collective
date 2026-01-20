@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import type React from "react"
-import { createContext, useContext, useState, useEffect } from "react"
+import type React from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 
 interface User {
   id: number
@@ -29,7 +29,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const refetchUser = async () => {
     try {
-      const response = await fetch("/api/auth/me")
+      const response = await fetch('/api/auth/me')
       if (response.ok) {
         const data = await response.json()
         setUser(data.user)
@@ -37,7 +37,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setUser(null)
       }
     } catch (error) {
-      console.error("Error fetching user:", error)
+      console.error('Error fetching user:', error)
       setUser(null)
     }
   }
@@ -56,7 +56,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 export function useUser() {
   const context = useContext(UserContext)
   if (context === undefined) {
-    throw new Error("useUser must be used within UserProvider")
+    throw new Error('useUser must be used within UserProvider')
   }
   return context
 }

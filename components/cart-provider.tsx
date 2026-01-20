@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import type React from "react"
-import { createContext, useContext, useState, useEffect } from "react"
-import type { CartItem } from "@/lib/types"
-import { getCart, saveCart, getCartTotal } from "@/lib/cart"
+import type React from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
+import type { CartItem } from '@/lib/types'
+import { getCart, saveCart, getCartTotal } from '@/lib/cart'
 
 interface CartContextType {
   cart: CartItem[]
@@ -31,7 +31,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const handleAddToCart = (product: any, quantity: number) => {
     const newCart = [...cart]
-    const existingItem = newCart.find((item) => item.product.id === product.id)
+    const existingItem = newCart.find(item => item.product.id === product.id)
 
     if (existingItem) {
       existingItem.quantity += quantity
@@ -44,7 +44,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }
 
   const handleRemoveFromCart = (productId: number) => {
-    const newCart = cart.filter((item) => item.product.id !== productId)
+    const newCart = cart.filter(item => item.product.id !== productId)
     setCart(newCart)
     saveCart(newCart)
   }
@@ -55,7 +55,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       return
     }
 
-    const newCart = cart.map((item) => (item.product.id === productId ? { ...item, quantity } : item))
+    const newCart = cart.map(item => (item.product.id === productId ? { ...item, quantity } : item))
 
     setCart(newCart)
     saveCart(newCart)
@@ -63,7 +63,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const handleClearCart = () => {
     setCart([])
-    localStorage.removeItem("heritage_cart")
+    localStorage.removeItem('heritage_cart')
   }
 
   const total = getCartTotal(cart)
@@ -79,7 +79,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         clearCart: handleClearCart,
         total,
         itemCount,
-        isLoaded,
+        isLoaded
       }}
     >
       {children}
@@ -90,7 +90,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 export function useCart() {
   const context = useContext(CartContext)
   if (!context) {
-    throw new Error("useCart must be used within CartProvider")
+    throw new Error('useCart must be used within CartProvider')
   }
   return context
 }

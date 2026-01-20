@@ -1,7 +1,7 @@
-import crypto from "crypto"
+import crypto from 'crypto'
 
 export function hashPassword(password: string): string {
-  return crypto.createHash("sha256").update(password).digest("hex")
+  return crypto.createHash('sha256').update(password).digest('hex')
 }
 
 export function verifyPassword(password: string, hash: string): boolean {
@@ -9,5 +9,5 @@ export function verifyPassword(password: string, hash: string): boolean {
 }
 
 export function generateSessionToken(): string {
-  return crypto.randomBytes(32).toString("hex")
+  return crypto.randomBytes(32).toString('hex')
 }

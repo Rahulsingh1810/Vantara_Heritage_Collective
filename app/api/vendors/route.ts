@@ -1,12 +1,12 @@
-import { sql } from "@/lib/db"
-import { type NextRequest, NextResponse } from "next/server"
+import { sql } from '@/lib/db'
+import { type NextRequest, NextResponse } from 'next/server'
 
 export async function GET() {
   try {
     const vendors = await sql`SELECT * FROM vendors ORDER BY name`
     return NextResponse.json(vendors)
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch vendors" }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to fetch vendors' }, { status: 500 })
   }
 }
 
@@ -23,6 +23,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(result[0], { status: 201 })
   } catch (error) {
-    return NextResponse.json({ error: "Failed to create vendor" }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to create vendor' }, { status: 500 })
   }
 }

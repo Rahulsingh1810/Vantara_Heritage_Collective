@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import { useEffect, useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Download, TrendingUp } from "lucide-react"
+import { useEffect, useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Download, TrendingUp } from 'lucide-react'
 import {
   LineChart,
   Line,
@@ -15,8 +15,8 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell,
-} from "recharts"
+  Cell
+} from 'recharts'
 
 interface OrderData {
   id: number
@@ -41,14 +41,14 @@ export default function AdminAnalyticsEnhanced() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch("/api/orders")
+        const response = await fetch('/api/orders')
         if (response.ok) {
           const data = await response.json()
           setOrders(data)
           processAnalytics(data)
         }
       } catch (error) {
-        console.error("Error fetching orders:", error)
+        console.error('Error fetching orders:', error)
       } finally {
         setIsLoading(false)
       }
@@ -66,7 +66,7 @@ export default function AdminAnalyticsEnhanced() {
 
     // Group sales by date
     const dateMap = new Map()
-    orderData.forEach((order) => {
+    orderData.forEach(order => {
       const date = new Date(order.created_at).toLocaleDateString()
       const current = dateMap.get(date) || { date, sales: 0, count: 0 }
       current.sales += Number.parseFloat(order.total_amount.toString())
@@ -77,7 +77,7 @@ export default function AdminAnalyticsEnhanced() {
 
     // Group sales by status
     const statusMap = new Map()
-    orderData.forEach((order) => {
+    orderData.forEach(order => {
       const current = statusMap.get(order.status) || { name: order.status, value: 0 }
       current.value += 1
       statusMap.set(order.status, current)
@@ -86,29 +86,29 @@ export default function AdminAnalyticsEnhanced() {
   }
 
   const exportToCSV = (data: any[], filename: string) => {
-    const csv = [Object.keys(data[0]).join(","), ...data.map((row) => Object.values(row).join(","))].join("\n")
-    const blob = new Blob([csv], { type: "text/csv" })
+    const csv = [Object.keys(data[0]).join(','), ...data.map(row => Object.values(row).join(','))].join('\n')
+    const blob = new Blob([csv], { type: 'text/csv' })
     const url = window.URL.createObjectURL(blob)
-    const a = document.createElement("a")
+    const a = document.createElement('a')
     a.href = url
     a.download = filename
     a.click()
   }
 
-  const COLORS = ["#8b6f47", "#d4a574", "#c89968", "#e8d4c4"]
+  const COLORS = ['#8b6f47', '#d4a574', '#c89968', '#e8d4c4']
 
   return (
     <div className="space-y-8">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <Card>
           <CardHeader>
             <CardTitle className="text-lg">Total Revenue</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-primary">${totalRevenue.toFixed(2)}</p>
-            <p className="text-sm text-muted-foreground mt-2">
-              <TrendingUp className="w-4 h-4 inline mr-1" />
+            <p className="text-primary text-3xl font-bold">${totalRevenue.toFixed(2)}</p>
+            <p className="text-muted-foreground mt-2 text-sm">
+              <TrendingUp className="mr-1 inline h-4 w-4" />
               {totalOrders} orders
             </p>
           </CardContent>
@@ -119,8 +119,8 @@ export default function AdminAnalyticsEnhanced() {
             <CardTitle className="text-lg">Total Orders</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-primary">{totalOrders}</p>
-            <p className="text-sm text-muted-foreground mt-2">All time</p>
+            <p className="text-primary text-3xl font-bold">{totalOrders}</p>
+            <p className="text-muted-foreground mt-2 text-sm">All time</p>
           </CardContent>
         </Card>
 
@@ -129,14 +129,14 @@ export default function AdminAnalyticsEnhanced() {
             <CardTitle className="text-lg">Average Order Value</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-primary">${avgOrderValue.toFixed(2)}</p>
-            <p className="text-sm text-muted-foreground mt-2">Per order</p>
+            <p className="text-primary text-3xl font-bold">${avgOrderValue.toFixed(2)}</p>
+            <p className="text-muted-foreground mt-2 text-sm">Per order</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>Sales Over Time</CardTitle>
@@ -168,7 +168,7 @@ export default function AdminAnalyticsEnhanced() {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={(entry) => entry.name}
+                  label={entry => entry.name}
                   outerRadius={100}
                   fill="#8b6f47"
                   dataKey="value"
@@ -189,45 +189,45 @@ export default function AdminAnalyticsEnhanced() {
         <CardHeader>
           <CardTitle>Export Data</CardTitle>
         </CardHeader>
-        <CardContent className="flex gap-4 flex-wrap">
+        <CardContent className="flex flex-wrap gap-4">
           <Button
             onClick={() =>
               exportToCSV(
-                orders.map((o) => ({
-                  "Order ID": o.id,
+                orders.map(o => ({
+                  'Order ID': o.id,
                   Date: new Date(o.created_at).toLocaleDateString(),
                   Customer: o.customer_name,
                   Email: o.customer_email,
                   Phone: o.customer_phone,
                   Amount: `$${o.total_amount}`,
-                  Status: o.status,
+                  Status: o.status
                 })),
-                "sales_report.csv",
+                'sales_report.csv'
               )
             }
-            className="gap-2 bg-primary"
+            className="bg-primary gap-2"
           >
-            <Download className="w-4 h-4" />
+            <Download className="h-4 w-4" />
             Export Sales Report
           </Button>
 
           <Button
             onClick={() =>
               exportToCSV(
-                [...new Map(orders.map((o) => [o.customer_email, o])).values()].map((o) => ({
+                [...new Map(orders.map(o => [o.customer_email, o])).values()].map(o => ({
                   Name: o.customer_name,
                   Email: o.customer_email,
                   Phone: o.customer_phone,
                   Address: o.customer_address,
-                  "Total Spent": `$${o.total_amount}`,
+                  'Total Spent': `$${o.total_amount}`
                 })),
-                "customer_list.csv",
+                'customer_list.csv'
               )
             }
             variant="outline"
             className="gap-2 bg-transparent"
           >
-            <Download className="w-4 h-4" />
+            <Download className="h-4 w-4" />
             Export Customer List
           </Button>
         </CardContent>

@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import type React from "react"
+import type React from 'react'
 
-import { ChevronDown } from "lucide-react"
-import { useState } from "react"
+import { ChevronDown } from 'lucide-react'
+import { useState } from 'react'
 
 interface ProductDetailsSectionProps {
   category?: string
@@ -17,77 +17,77 @@ interface ProductDetailsSectionProps {
 
 export default function ProductDetailsSection({
   category,
-  material = "Traditional Handcrafted",
-  dimensions = "Varies",
-  weight = "Varies",
-  origin = "India",
-  cultureSignificance = "This artifact represents generations of traditional Indian craftsmanship and cultural heritage.",
-  careInstructions = "Handle with care. Clean gently with a dry cloth. Avoid direct sunlight for extended periods.",
+  material = 'Traditional Handcrafted',
+  dimensions = 'Varies',
+  weight = 'Varies',
+  origin = 'India',
+  cultureSignificance = 'This artifact represents generations of traditional Indian craftsmanship and cultural heritage.',
+  careInstructions = 'Handle with care. Clean gently with a dry cloth. Avoid direct sunlight for extended periods.'
 }: ProductDetailsSectionProps) {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     specs: true,
     significance: false,
-    care: false,
+    care: false
   })
 
   const toggleSection = (section: string) => {
-    setExpandedSections((prev) => ({
+    setExpandedSections(prev => ({
       ...prev,
-      [section]: !prev[section],
+      [section]: !prev[section]
     }))
   }
 
   const Section = ({
     title,
     sectionKey,
-    children,
+    children
   }: {
     title: string
     sectionKey: string
     children: React.ReactNode
   }) => (
-    <div className="border-b border-border last:border-b-0">
+    <div className="border-border border-b last:border-b-0">
       <button
         onClick={() => toggleSection(sectionKey)}
-        className="w-full py-4 flex items-center justify-between hover:bg-muted/50 transition-colors duration-300 px-2"
+        className="hover:bg-muted/50 flex w-full items-center justify-between px-2 py-4 transition-colors duration-300"
       >
-        <h3 className="font-semibold text-lg text-foreground">{title}</h3>
+        <h3 className="text-foreground text-lg font-semibold">{title}</h3>
         <ChevronDown
-          className={`w-5 h-5 transition-transform duration-300 ${expandedSections[sectionKey] ? "rotate-180" : ""}`}
+          className={`h-5 w-5 transition-transform duration-300 ${expandedSections[sectionKey] ? 'rotate-180' : ''}`}
         />
       </button>
       {expandedSections[sectionKey] && (
-        <div className="px-4 pb-4 text-muted-foreground animate-fade-in-up">{children}</div>
+        <div className="text-muted-foreground animate-fade-in-up px-4 pb-4">{children}</div>
       )}
     </div>
   )
 
   return (
-    <div className="space-y-6 mt-12">
-      <div className="bg-card rounded-xl p-6 border border-border">
+    <div className="mt-12 space-y-6">
+      <div className="bg-card border-border rounded-xl border p-6">
         {/* Specifications */}
         <Section title="📋 Product Specifications" sectionKey="specs">
           <div className="grid grid-cols-2 gap-4">
             {category && (
               <div>
-                <p className="text-xs font-semibold text-primary mb-1 uppercase tracking-wider">Category</p>
+                <p className="text-primary mb-1 text-xs font-semibold tracking-wider uppercase">Category</p>
                 <p className="text-foreground">{category}</p>
               </div>
             )}
             <div>
-              <p className="text-xs font-semibold text-primary mb-1 uppercase tracking-wider">Material</p>
+              <p className="text-primary mb-1 text-xs font-semibold tracking-wider uppercase">Material</p>
               <p className="text-foreground">{material}</p>
             </div>
             <div>
-              <p className="text-xs font-semibold text-primary mb-1 uppercase tracking-wider">Dimensions</p>
+              <p className="text-primary mb-1 text-xs font-semibold tracking-wider uppercase">Dimensions</p>
               <p className="text-foreground">{dimensions}</p>
             </div>
             <div>
-              <p className="text-xs font-semibold text-primary mb-1 uppercase tracking-wider">Weight</p>
+              <p className="text-primary mb-1 text-xs font-semibold tracking-wider uppercase">Weight</p>
               <p className="text-foreground">{weight}</p>
             </div>
             <div className="col-span-2">
-              <p className="text-xs font-semibold text-primary mb-1 uppercase tracking-wider">Origin</p>
+              <p className="text-primary mb-1 text-xs font-semibold tracking-wider uppercase">Origin</p>
               <p className="text-foreground">{origin}</p>
             </div>
           </div>
@@ -95,10 +95,10 @@ export default function ProductDetailsSection({
 
         {/* Cultural Significance */}
         <Section title="🏛️ Cultural Significance" sectionKey="significance">
-          <p className="leading-relaxed text-sm">{cultureSignificance}</p>
-          <div className="mt-4 p-4 bg-primary/10 rounded-lg border border-primary/20">
-            <p className="text-sm font-semibold text-primary mb-2">Artisan Heritage</p>
-            <p className="text-xs text-muted-foreground">
+          <p className="text-sm leading-relaxed">{cultureSignificance}</p>
+          <div className="bg-primary/10 border-primary/20 mt-4 rounded-lg border p-4">
+            <p className="text-primary mb-2 text-sm font-semibold">Artisan Heritage</p>
+            <p className="text-muted-foreground text-xs">
               This piece is crafted using traditional techniques passed down through generations of artisans, preserving
               the authentic cultural heritage of India.
             </p>
@@ -129,12 +129,12 @@ export default function ProductDetailsSection({
       </div>
 
       {/* Heritage Badge */}
-      <div className="bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl p-6 border border-primary/30">
-        <div className="flex gap-4 items-start">
+      <div className="from-primary/20 to-accent/20 border-primary/30 rounded-xl border bg-gradient-to-r p-6">
+        <div className="flex items-start gap-4">
           <div className="text-3xl">🇮🇳</div>
           <div>
-            <p className="font-semibold text-foreground mb-1">Authentic Indian Heritage</p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-foreground mb-1 font-semibold">Authentic Indian Heritage</p>
+            <p className="text-muted-foreground text-sm">
               Every piece in our collection is carefully curated to ensure authenticity and support traditional artisans
               across India.
             </p>

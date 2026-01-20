@@ -1,12 +1,12 @@
-import { sql } from "@/lib/db"
-import { type NextRequest, NextResponse } from "next/server"
+import { sql } from '@/lib/db'
+import { type NextRequest, NextResponse } from 'next/server'
 
 export async function PUT(request: NextRequest) {
   try {
-    const userId = request.cookies.get("userId")?.value
+    const userId = request.cookies.get('userId')?.value
 
     if (!userId) {
-      return NextResponse.json({ error: "Not authenticated" }, { status: 401 })
+      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
     }
 
     const { name, phone, address, city, state, zip } = await request.json()
@@ -20,7 +20,7 @@ export async function PUT(request: NextRequest) {
 
     return NextResponse.json({ user: result[0] })
   } catch (error) {
-    console.error("Update profile error:", error)
-    return NextResponse.json({ error: "Failed to update profile" }, { status: 500 })
+    console.error('Update profile error:', error)
+    return NextResponse.json({ error: 'Failed to update profile' }, { status: 500 })
   }
 }
