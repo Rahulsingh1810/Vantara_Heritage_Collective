@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import type { Order } from "@/lib/types"
-import { ensureNumber } from "@/lib/utils"
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import type { Order } from '@/lib/types'
+import { ensureNumber } from '@/lib/utils'
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState<Order[]>([])
@@ -16,11 +16,11 @@ export default function AdminOrders() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch("/api/orders")
+      const response = await fetch('/api/orders')
       const data = await response.json()
       setOrders(data)
     } catch (error) {
-      console.error("Error fetching orders:", error)
+      console.error('Error fetching orders:', error)
     } finally {
       setLoading(false)
     }
@@ -29,21 +29,21 @@ export default function AdminOrders() {
   const updateOrderStatus = async (orderId: number, newStatus: string) => {
     try {
       const response = await fetch(`/api/orders/${orderId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus }),
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus })
       })
 
       if (response.ok) {
         fetchOrders()
       }
     } catch (error) {
-      console.error("Error updating order:", error)
+      console.error('Error updating order:', error)
     }
   }
 
   if (loading) {
-    return <div className="text-center py-12">Loading orders...</div>
+    return <div className="py-12 text-center">Loading orders...</div>
   }
 
   return (
@@ -54,19 +54,19 @@ export default function AdminOrders() {
       <CardContent className="p-0">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="border-b border-border bg-muted/50">
+            <thead className="border-border bg-muted/50 border-b">
               <tr>
-                <th className="text-left px-6 py-3 font-semibold">Order ID</th>
-                <th className="text-left px-6 py-3 font-semibold">Customer</th>
-                <th className="text-left px-6 py-3 font-semibold">Amount</th>
-                <th className="text-left px-6 py-3 font-semibold">Status</th>
-                <th className="text-left px-6 py-3 font-semibold">Date</th>
-                <th className="text-left px-6 py-3 font-semibold">Actions</th>
+                <th className="px-6 py-3 text-left font-semibold">Order ID</th>
+                <th className="px-6 py-3 text-left font-semibold">Customer</th>
+                <th className="px-6 py-3 text-left font-semibold">Amount</th>
+                <th className="px-6 py-3 text-left font-semibold">Status</th>
+                <th className="px-6 py-3 text-left font-semibold">Date</th>
+                <th className="px-6 py-3 text-left font-semibold">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <tr key={order.id} className="border-b border-border hover:bg-muted/30">
+              {orders.map(order => (
+                <tr key={order.id} className="border-border hover:bg-muted/30 border-b">
                   <td className="px-6 py-4 font-medium"># {order.id}</td>
                   <td className="px-6 py-4">
                     <div className="text-sm">
@@ -78,8 +78,8 @@ export default function AdminOrders() {
                   <td className="px-6 py-4">
                     <select
                       value={order.status}
-                      onChange={(e) => updateOrderStatus(order.id, e.target.value)}
-                      className="px-3 py-1 border border-border rounded-lg text-sm bg-background"
+                      onChange={e => updateOrderStatus(order.id, e.target.value)}
+                      className="border-border bg-background rounded-lg border px-3 py-1 text-sm"
                     >
                       <option value="pending">Pending</option>
                       <option value="processing">Processing</option>

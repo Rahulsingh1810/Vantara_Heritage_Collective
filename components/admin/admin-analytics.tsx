@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import {
   BarChart,
   Bar,
@@ -15,11 +15,11 @@ import {
   Cell,
   LineChart,
   Line,
-  Legend,
-} from "recharts"
-import { Download } from "lucide-react"
-import { ensureNumber } from "@/lib/utils"
-import { useState, useEffect } from "react"
+  Legend
+} from 'recharts'
+import { Download } from 'lucide-react'
+import { ensureNumber } from '@/lib/utils'
+import { useState, useEffect } from 'react'
 
 interface AnalyticsProps {
   orderStats: any[]
@@ -32,14 +32,14 @@ export default function AdminAnalytics({ orderStats }: AnalyticsProps) {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch("/api/orders")
+        const response = await fetch('/api/orders')
         if (response.ok) {
           const data = await response.json()
           setOrders(data)
           processDateSales(data)
         }
       } catch (error) {
-        console.error("Error fetching orders:", error)
+        console.error('Error fetching orders:', error)
       }
     }
 
@@ -48,7 +48,7 @@ export default function AdminAnalytics({ orderStats }: AnalyticsProps) {
 
   const processDateSales = (data: any[]) => {
     const dateMap = new Map()
-    data.forEach((order) => {
+    data.forEach(order => {
       const date = new Date(order.created_at).toLocaleDateString()
       const current = dateMap.get(date) || { date, revenue: 0, orders: 0 }
       current.revenue += ensureNumber(order.total_amount)
@@ -58,36 +58,33 @@ export default function AdminAnalytics({ orderStats }: AnalyticsProps) {
     setSalesByDate(Array.from(dateMap.values()).slice(-7))
   }
 
-  const chartData = orderStats.map((stat) => ({
+  const chartData = orderStats.map(stat => ({
     name: stat.status.charAt(0).toUpperCase() + stat.status.slice(1),
     orders: stat.count,
-    revenue: stat.total_revenue || 0,
+    revenue: stat.total_revenue || 0
   }))
 
-  const colors = ["#6b4423", "#8b5a2b", "#a0826d", "#bf9060", "#d4a574"]
+  const colors = ['#6b4423', '#8b5a2b', '#a0826d', '#bf9060', '#d4a574']
 
   const exportSalesReport = () => {
-    const csv = [
-      ["Date", "Orders", "Revenue"],
-      ...salesByDate.map((d) => [d.date, d.orders, `$${d.revenue.toFixed(2)}`]),
-    ]
-      .map((row) => row.join(","))
-      .join("\n")
+    const csv = [['Date', 'Orders', 'Revenue'], ...salesByDate.map(d => [d.date, d.orders, `$${d.revenue.toFixed(2)}`])]
+      .map(row => row.join(','))
+      .join('\n')
 
-    const blob = new Blob([csv], { type: "text/csv" })
+    const blob = new Blob([csv], { type: 'text/csv' })
     const url = window.URL.createObjectURL(blob)
-    const a = document.createElement("a")
+    const a = document.createElement('a')
     a.href = url
-    a.download = `sales_report_${new Date().toISOString().split("T")[0]}.csv`
+    a.download = `sales_report_${new Date().toISOString().split('T')[0]}.csv`
     a.click()
   }
 
   const exportCustomerList = () => {
-    const uniqueCustomers = Array.from(new Map(orders.map((o) => [o.customer_email, o])).values())
+    const uniqueCustomers = Array.from(new Map(orders.map(o => [o.customer_email, o])).values())
     const csv = [
-      ["Name", "Email", "Phone", "Address", "Total Orders", "Total Spent"],
-      ...uniqueCustomers.map((c) => {
-        const customerOrders = orders.filter((o) => o.customer_email === c.customer_email)
+      ['Name', 'Email', 'Phone', 'Address', 'Total Orders', 'Total Spent'],
+      ...uniqueCustomers.map(c => {
+        const customerOrders = orders.filter(o => o.customer_email === c.customer_email)
         const totalSpent = customerOrders.reduce((sum, o) => sum + ensureNumber(o.total_amount), 0)
         return [
           c.customer_name,
@@ -95,18 +92,18 @@ export default function AdminAnalytics({ orderStats }: AnalyticsProps) {
           c.customer_phone,
           c.customer_address,
           customerOrders.length,
-          `$${totalSpent.toFixed(2)}`,
+          `$${totalSpent.toFixed(2)}`
         ]
-      }),
+      })
     ]
-      .map((row) => row.join(","))
-      .join("\n")
+      .map(row => row.join(','))
+      .join('\n')
 
-    const blob = new Blob([csv], { type: "text/csv" })
+    const blob = new Blob([csv], { type: 'text/csv' })
     const url = window.URL.createObjectURL(blob)
-    const a = document.createElement("a")
+    const a = document.createElement('a')
     a.href = url
-    a.download = `customer_list_${new Date().toISOString().split("T")[0]}.csv`
+    a.download = `customer_list_${new Date().toISOString().split('T')[0]}.csv`
     a.click()
   }
 
@@ -117,7 +114,7 @@ export default function AdminAnalytics({ orderStats }: AnalyticsProps) {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Sales Over Time (Last 7 Days)</CardTitle>
           <Button onClick={exportSalesReport} size="sm" className="gap-2">
-            <Download className="w-4 h-4" />
+            <Download className="h-4 w-4" />
             Export
           </Button>
         </CardHeader>
@@ -136,7 +133,7 @@ export default function AdminAnalytics({ orderStats }: AnalyticsProps) {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Revenue by Status */}
         <Card>
           <CardHeader>
@@ -190,12 +187,12 @@ export default function AdminAnalytics({ orderStats }: AnalyticsProps) {
           <CardTitle>Order Status Summary</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {chartData.map((stat) => (
-              <div key={stat.name} className="text-center p-4 bg-muted/50 rounded-lg">
-                <p className="text-sm text-muted-foreground mb-2">{stat.name}</p>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+            {chartData.map(stat => (
+              <div key={stat.name} className="bg-muted/50 rounded-lg p-4 text-center">
+                <p className="text-muted-foreground mb-2 text-sm">{stat.name}</p>
                 <p className="text-2xl font-bold">{stat.orders}</p>
-                <p className="text-xs text-muted-foreground mt-2">${ensureNumber(stat.revenue).toFixed(2)}</p>
+                <p className="text-muted-foreground mt-2 text-xs">${ensureNumber(stat.revenue).toFixed(2)}</p>
               </div>
             ))}
           </div>
@@ -209,7 +206,7 @@ export default function AdminAnalytics({ orderStats }: AnalyticsProps) {
         </CardHeader>
         <CardContent>
           <Button onClick={exportCustomerList} className="gap-2">
-            <Download className="w-4 h-4" />
+            <Download className="h-4 w-4" />
             Export Customer List
           </Button>
         </CardContent>

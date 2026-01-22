@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 
 interface Vendor {
   id: string
@@ -17,12 +17,12 @@ export default function FeaturedVendors() {
   useEffect(() => {
     const fetchVendors = async () => {
       try {
-        const response = await fetch("/api/vendors")
+        const response = await fetch('/api/vendors')
         const data = await response.json()
         // Get only first 6 vendors for featured section
         setVendors(Array.isArray(data) ? data.slice(0, 6) : [])
       } catch (error) {
-        console.error("Failed to fetch vendors:", error)
+        console.error('Failed to fetch vendors:', error)
       } finally {
         setLoading(false)
       }
@@ -37,9 +37,9 @@ export default function FeaturedVendors() {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
+        delayChildren: 0.2
+      }
+    }
   }
 
   const itemVariants = {
@@ -47,15 +47,15 @@ export default function FeaturedVendors() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
+      transition: { duration: 0.5, ease: 'easeOut' }
+    }
   }
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {[...Array(6)].map((_, i) => (
-          <div key={i} className="h-80 bg-muted rounded-xl animate-pulse" />
+          <div key={i} className="bg-muted h-80 animate-pulse rounded-xl" />
         ))}
       </div>
     )
@@ -63,7 +63,7 @@ export default function FeaturedVendors() {
 
   if (vendors.length === 0) {
     return (
-      <div className="text-center py-12">
+      <div className="py-12 text-center">
         <p className="text-muted-foreground">No vendors available at the moment</p>
       </div>
     )
@@ -71,48 +71,48 @@ export default function FeaturedVendors() {
 
   return (
     <motion.div
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: '-100px' }}
     >
-      {vendors.map((vendor) => (
+      {vendors.map(vendor => (
         <motion.div
           key={vendor.id}
           variants={itemVariants}
-          className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer"
+          className="group relative h-80 cursor-pointer overflow-hidden rounded-2xl"
         >
           {/* Background Image */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20">
+          <div className="from-primary/20 to-accent/20 absolute inset-0 bg-gradient-to-br">
             {vendor.image_url && (
               <img
-                src={vendor.image_url || "/placeholder.svg"}
+                src={vendor.image_url || '/placeholder.svg'}
                 alt={vendor.name}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
             )}
           </div>
 
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-black/90 group-hover:via-black/50 transition-all duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-all duration-300 group-hover:from-black/90 group-hover:via-black/50" />
 
           {/* Artisan Badge */}
-          <div className="absolute top-4 right-4 bg-primary/90 px-3 py-1 rounded-full text-sm font-semibold text-white group-hover:scale-110 transition-transform duration-300">
+          <div className="bg-primary/90 absolute top-4 right-4 rounded-full px-3 py-1 text-sm font-semibold text-white transition-transform duration-300 group-hover:scale-110">
             ✨ Master Artisan
           </div>
 
           {/* Content */}
           <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-            <div className="group-hover:translate-y-0 translate-y-2 transition-transform duration-300">
-              <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">{vendor.name}</h3>
-              <p className="text-white/80 text-sm line-clamp-2 group-hover:line-clamp-none transition-all mb-3">
+            <div className="translate-y-2 transition-transform duration-300 group-hover:translate-y-0">
+              <h3 className="group-hover:text-primary mb-2 text-2xl font-bold transition-colors">{vendor.name}</h3>
+              <p className="mb-3 line-clamp-2 text-sm text-white/80 transition-all group-hover:line-clamp-none">
                 {vendor.description}
               </p>
-              <div className="flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all">
+              <div className="text-primary flex items-center gap-2 font-semibold transition-all group-hover:gap-3">
                 <span>View Collection</span>
                 <svg
-                  className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -124,7 +124,7 @@ export default function FeaturedVendors() {
           </div>
 
           {/* Hover Border */}
-          <div className="absolute inset-0 border-2 border-primary/0 group-hover:border-primary/50 rounded-2xl transition-all duration-300" />
+          <div className="border-primary/0 group-hover:border-primary/50 absolute inset-0 rounded-2xl border-2 transition-all duration-300" />
         </motion.div>
       ))}
     </motion.div>

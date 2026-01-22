@@ -36,7 +36,7 @@ export interface Order {
   customer_address: string
   customer_phone: string
   total_amount: number
-  status: "pending" | "processing" | "shipped" | "delivered" | "cancelled"
+  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
   stripe_payment_id: string
   created_at: string
   updated_at: string

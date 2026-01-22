@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import type React from "react"
+import type React from 'react'
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Check, X } from "lucide-react"
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Check, X } from 'lucide-react'
 
 interface ProfileEditorProps {
   user: {
@@ -25,7 +25,7 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [formData, setFormData] = useState(user)
-  const [error, setError] = useState("")
+  const [error, setError] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -33,25 +33,25 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
 
   const handleSave = async () => {
     setIsSaving(true)
-    setError("")
+    setError('')
 
     try {
-      const response = await fetch("/api/auth/update-profile", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/auth/update-profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: formData.name,
           phone: formData.phone,
           address: formData.address,
           city: formData.city,
           state: formData.state,
-          zip: formData.zip,
-        }),
+          zip: formData.zip
+        })
       })
 
       if (!response.ok) {
         const data = await response.json()
-        setError(data.error || "Failed to update profile")
+        setError(data.error || 'Failed to update profile')
         setIsSaving(false)
         return
       }
@@ -61,7 +61,7 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
       setIsEditing(false)
       onUpdate?.(data.user)
     } catch (err) {
-      setError("An error occurred. Please try again.")
+      setError('An error occurred. Please try again.')
     } finally {
       setIsSaving(false)
     }
@@ -70,7 +70,7 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
   const handleCancel = () => {
     setFormData(user)
     setIsEditing(false)
-    setError("")
+    setError('')
   }
 
   return (
@@ -85,22 +85,22 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
       </CardHeader>
       <CardContent className="space-y-4">
         {error && (
-          <div className="bg-destructive/10 border border-destructive/30 rounded p-3 text-sm text-destructive">
+          <div className="bg-destructive/10 border-destructive/30 text-destructive rounded border p-3 text-sm">
             {error}
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {/* Full Name */}
           <div>
-            <label className="block text-sm text-muted-foreground mb-1">Full Name</label>
+            <label className="text-muted-foreground mb-1 block text-sm">Full Name</label>
             {isEditing ? (
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="border-border focus:ring-primary w-full rounded-lg border px-3 py-2 focus:ring-2 focus:outline-none"
               />
             ) : (
               <p className="text-lg font-semibold">{formData.name}</p>
@@ -109,87 +109,87 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
 
           {/* Email */}
           <div>
-            <label className="block text-sm text-muted-foreground mb-1">Email</label>
+            <label className="text-muted-foreground mb-1 block text-sm">Email</label>
             <p className="text-lg font-semibold">{formData.email}</p>
           </div>
 
           {/* Phone */}
           <div>
-            <label className="block text-sm text-muted-foreground mb-1">Phone</label>
+            <label className="text-muted-foreground mb-1 block text-sm">Phone</label>
             {isEditing ? (
               <input
                 type="tel"
                 name="phone"
-                value={formData.phone || ""}
+                value={formData.phone || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="border-border focus:ring-primary w-full rounded-lg border px-3 py-2 focus:ring-2 focus:outline-none"
               />
             ) : (
-              <p className="text-lg font-semibold">{formData.phone || "Not provided"}</p>
+              <p className="text-lg font-semibold">{formData.phone || 'Not provided'}</p>
             )}
           </div>
 
           {/* Address */}
           <div>
-            <label className="block text-sm text-muted-foreground mb-1">Address</label>
+            <label className="text-muted-foreground mb-1 block text-sm">Address</label>
             {isEditing ? (
               <input
                 type="text"
                 name="address"
-                value={formData.address || ""}
+                value={formData.address || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="border-border focus:ring-primary w-full rounded-lg border px-3 py-2 focus:ring-2 focus:outline-none"
               />
             ) : (
-              <p className="text-lg font-semibold">{formData.address || "Not provided"}</p>
+              <p className="text-lg font-semibold">{formData.address || 'Not provided'}</p>
             )}
           </div>
 
           {/* City */}
           <div>
-            <label className="block text-sm text-muted-foreground mb-1">City</label>
+            <label className="text-muted-foreground mb-1 block text-sm">City</label>
             {isEditing ? (
               <input
                 type="text"
                 name="city"
-                value={formData.city || ""}
+                value={formData.city || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="border-border focus:ring-primary w-full rounded-lg border px-3 py-2 focus:ring-2 focus:outline-none"
               />
             ) : (
-              <p className="text-lg font-semibold">{formData.city || "Not provided"}</p>
+              <p className="text-lg font-semibold">{formData.city || 'Not provided'}</p>
             )}
           </div>
 
           {/* State */}
           <div>
-            <label className="block text-sm text-muted-foreground mb-1">State</label>
+            <label className="text-muted-foreground mb-1 block text-sm">State</label>
             {isEditing ? (
               <input
                 type="text"
                 name="state"
-                value={formData.state || ""}
+                value={formData.state || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="border-border focus:ring-primary w-full rounded-lg border px-3 py-2 focus:ring-2 focus:outline-none"
               />
             ) : (
-              <p className="text-lg font-semibold">{formData.state || "Not provided"}</p>
+              <p className="text-lg font-semibold">{formData.state || 'Not provided'}</p>
             )}
           </div>
 
           {/* ZIP */}
           <div>
-            <label className="block text-sm text-muted-foreground mb-1">ZIP Code</label>
+            <label className="text-muted-foreground mb-1 block text-sm">ZIP Code</label>
             {isEditing ? (
               <input
                 type="text"
                 name="zip"
-                value={formData.zip || ""}
+                value={formData.zip || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="border-border focus:ring-primary w-full rounded-lg border px-3 py-2 focus:ring-2 focus:outline-none"
               />
             ) : (
-              <p className="text-lg font-semibold">{formData.zip || "Not provided"}</p>
+              <p className="text-lg font-semibold">{formData.zip || 'Not provided'}</p>
             )}
           </div>
         </div>
@@ -197,11 +197,11 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
         {isEditing && (
           <div className="flex gap-3 pt-4">
             <Button onClick={handleSave} disabled={isSaving} className="gap-2">
-              <Check className="w-4 h-4" />
-              {isSaving ? "Saving..." : "Save Changes"}
+              <Check className="h-4 w-4" />
+              {isSaving ? 'Saving...' : 'Save Changes'}
             </Button>
             <Button onClick={handleCancel} variant="outline" className="gap-2 bg-transparent">
-              <X className="w-4 h-4" />
+              <X className="h-4 w-4" />
               Cancel
             </Button>
           </div>

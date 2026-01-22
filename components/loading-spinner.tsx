@@ -1,14 +1,14 @@
-"use client"
+'use client'
 
-import { motion } from "framer-motion"
+import { motion } from 'framer-motion'
 
 export default function LoadingSpinner() {
   const containerVariants = {
     animate: {
       transition: {
-        staggerChildren: 0.1,
-      },
-    },
+        staggerChildren: 0.1
+      }
+    }
   }
 
   const dotVariants = {
@@ -17,23 +17,23 @@ export default function LoadingSpinner() {
       transition: {
         duration: 1.4,
         repeat: Number.POSITIVE_INFINITY,
-        ease: "easeInOut",
-      },
-    },
+        ease: 'easeInOut'
+      }
+    }
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-amber-50 to-yellow-100 z-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-amber-50 to-yellow-100">
       <div className="text-center">
         <motion.div
-          className="flex justify-center items-center gap-2 mb-8"
+          className="mb-8 flex items-center justify-center gap-2"
           variants={containerVariants}
           animate="animate"
         >
           {[...Array(3)].map((_, i) => (
             <motion.div
               key={i}
-              className="w-4 h-4 rounded-full bg-gradient-to-r from-amber-600 to-yellow-600"
+              className="h-4 w-4 rounded-full bg-gradient-to-r from-amber-600 to-yellow-600"
               variants={dotVariants}
             />
           ))}
@@ -42,8 +42,8 @@ export default function LoadingSpinner() {
         <div className="mb-6">
           <motion.div
             animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-            className="w-16 h-16 mx-auto mb-4 rounded-full border-4 border-amber-200 border-t-amber-700"
+            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
+            className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-amber-200 border-t-amber-700"
           />
         </div>
 
@@ -51,7 +51,7 @@ export default function LoadingSpinner() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-2xl font-bold text-amber-900 mb-2"
+          className="mb-2 text-2xl font-bold text-amber-900"
         >
           Loading Heritage
         </motion.h2>

@@ -5,6 +5,7 @@ An elegant e-commerce platform for selling traditional artifacts and cultural tr
 ## Features
 
 ### Customer Features
+
 - **Product Catalog**: Browse handcrafted artifacts with detailed descriptions
 - **Advanced Filtering**: Filter by vendor, category, and price range
 - **Shopping Cart**: Add items with quantity management and persistence
@@ -12,6 +13,7 @@ An elegant e-commerce platform for selling traditional artifacts and cultural tr
 - **Responsive Design**: Works seamlessly on mobile, tablet, and desktop
 
 ### Pages
+
 - **Home**: Hero section with featured products and value propositions
 - **Products**: Full catalog with advanced filtering
 - **Product Details**: Individual product pages with stock information
@@ -20,6 +22,7 @@ An elegant e-commerce platform for selling traditional artifacts and cultural tr
 - **Contact**: Contact form and FAQ
 
 ### Admin Panel
+
 - **Product Management**: Create, update, delete products
 - **Vendor Management**: Manage artisan vendors
 - **Order Management**: Track and update order statuses
@@ -37,6 +40,7 @@ An elegant e-commerce platform for selling traditional artifacts and cultural tr
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 18+
 - npm or yarn
 - PostgreSQL database
@@ -45,17 +49,20 @@ An elegant e-commerce platform for selling traditional artifacts and cultural tr
 ### Installation
 
 1. Clone the repository
+
 ```bash
 git clone <repository-url>
 cd heritage-collective
 ```
 
 2. Install dependencies
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables
+
 ```bash
 cp .env.example .env.local
 ```
@@ -63,11 +70,13 @@ cp .env.example .env.local
 Fill in your database and Stripe credentials.
 
 4. Initialize the database
+
 ```bash
 # Run the SQL schema from scripts/01_init_schema.sql
 ```
 
 5. Run the development server
+
 ```bash
 npm run dev
 ```
@@ -101,6 +110,7 @@ Visit `http://localhost:3000` in your browser.
 ## Database Schema
 
 ### Tables
+
 - **vendors**: Artisan information
 - **categories**: Product categories
 - **products**: Product listings
@@ -112,6 +122,7 @@ See `scripts/01_init_schema.sql` for complete schema.
 ## API Routes
 
 ### Products
+
 - `GET /api/products` - List all products
 - `GET /api/products/[id]` - Get product details
 - `POST /api/products` - Create product (admin)
@@ -119,17 +130,20 @@ See `scripts/01_init_schema.sql` for complete schema.
 - `DELETE /api/products/[id]` - Delete product (admin)
 
 ### Vendors
+
 - `GET /api/vendors` - List vendors
 - `POST /api/vendors` - Create vendor (admin)
 - `PUT /api/vendors/[id]` - Update vendor (admin)
 - `DELETE /api/vendors/[id]` - Delete vendor (admin)
 
 ### Orders
+
 - `GET /api/orders` - List orders (admin)
 - `POST /api/orders` - Create order
 - `PUT /api/orders/[id]` - Update order status (admin)
 
 ### Checkout
+
 - `POST /api/checkout` - Create Stripe checkout session
 - `GET /api/health` - Health check
 
@@ -148,6 +162,7 @@ npm run build
 ## Admin Access
 
 Visit `/admin` to access the admin dashboard. Features include:
+
 - Product inventory management
 - Vendor relationship management
 - Order tracking and status updates
@@ -156,6 +171,7 @@ Visit `/admin` to access the admin dashboard. Features include:
 ## Payment Testing
 
 Use Stripe test cards during development:
+
 - **Successful payment**: 4242 4242 4242 4242
 - **Declined card**: 4000 0000 0000 0002
 

@@ -1,10 +1,10 @@
-import { sql } from "@/lib/db"
-import { type NextRequest, NextResponse } from "next/server"
+import { sql } from '@/lib/db'
+import { type NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const email = searchParams.get("email")
+    const email = searchParams.get('email')
 
     let orders
     if (email) {
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     }
     return NextResponse.json(orders)
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch orders" }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to fetch orders' }, { status: 500 })
   }
 }
 
@@ -31,6 +31,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(result[0], { status: 201 })
   } catch (error) {
-    return NextResponse.json({ error: "Failed to create order" }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to create order' }, { status: 500 })
   }
 }

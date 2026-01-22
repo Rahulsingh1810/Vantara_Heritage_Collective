@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import { useEffect, useState } from "react"
+import { motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import { useEffect, useState } from 'react'
 
 interface Stat {
   label: string
@@ -11,10 +11,10 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { label: "Satisfied Customers", value: 5000, suffix: "+" },
-  { label: "Heritage Pieces", value: 2500, suffix: "+" },
-  { label: "Artisans Supported", value: 450, suffix: "+" },
-  { label: "Years of Heritage", value: 100, suffix: "+" },
+  { label: 'Satisfied Customers', value: 5000, suffix: '+' },
+  { label: 'Heritage Pieces', value: 2500, suffix: '+' },
+  { label: 'Artisans Supported', value: 450, suffix: '+' },
+  { label: 'Years of Heritage', value: 100, suffix: '+' }
 ]
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
@@ -42,7 +42,7 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
   }, [inView, value])
 
   return (
-    <div ref={ref} className="text-5xl md:text-6xl font-bold text-accent-foreground">
+    <div ref={ref} className="text-accent-foreground text-5xl font-bold md:text-6xl">
       {count}
       {suffix}
     </div>
@@ -56,9 +56,9 @@ export default function StatsCounter() {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
+        delayChildren: 0.3
+      }
+    }
   }
 
   const itemVariants = {
@@ -66,25 +66,25 @@ export default function StatsCounter() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 },
-    },
+      transition: { duration: 0.5 }
+    }
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-24 lg:px-8">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12"
+        className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 lg:grid-cols-4"
       >
         {stats.map((stat, index) => (
-          <motion.div key={index} variants={itemVariants} className="text-center group">
+          <motion.div key={index} variants={itemVariants} className="group text-center">
             <motion.div whileHover={{ scale: 1.05 }} className="mb-4">
               <AnimatedCounter value={stat.value} suffix={stat.suffix} />
             </motion.div>
-            <p className="text-lg md:text-xl font-semibold text-accent-foreground group-hover:text-white transition-colors">
+            <p className="text-accent-foreground text-lg font-semibold transition-colors group-hover:text-white md:text-xl">
               {stat.label}
             </p>
           </motion.div>

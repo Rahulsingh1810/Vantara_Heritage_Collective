@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import ProductCardEnhanced from "./product-card-enhanced"
+import { useState } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Button } from '@/components/ui/button'
+import ProductCardEnhanced from './product-card-enhanced'
 
 export default function FeaturedProductsSlider({ products }: { products: any[] }) {
   const [current, setCurrent] = useState(0)
@@ -15,7 +15,7 @@ export default function FeaturedProductsSlider({ products }: { products: any[] }
 
   const paginate = (newDirection: number) => {
     setDirection(newDirection)
-    setCurrent((prev) => {
+    setCurrent(prev => {
       let next = prev + newDirection
       if (next < 0) next = totalPages - 1
       if (next >= totalPages) next = 0
@@ -26,18 +26,18 @@ export default function FeaturedProductsSlider({ products }: { products: any[] }
   const slideVariants = {
     enter: (direction: number) => ({
       x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
+      opacity: 0
     }),
     center: {
       zIndex: 1,
       x: 0,
-      opacity: 1,
+      opacity: 1
     },
     exit: (direction: number) => ({
       zIndex: 0,
       x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-    }),
+      opacity: 0
+    })
   }
 
   const displayedProducts = products.slice(current * itemsPerView, (current + 1) * itemsPerView)
@@ -53,10 +53,10 @@ export default function FeaturedProductsSlider({ products }: { products: any[] }
           animate="center"
           exit="exit"
           transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.5 },
+            x: { type: 'spring', stiffness: 300, damping: 30 },
+            opacity: { duration: 0.5 }
           }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
           {displayedProducts.map((product, index) => (
             <motion.div
@@ -72,15 +72,15 @@ export default function FeaturedProductsSlider({ products }: { products: any[] }
       </AnimatePresence>
 
       {/* Navigation Buttons */}
-      <div className="flex justify-center gap-4 mt-12">
+      <div className="mt-12 flex justify-center gap-4">
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-          <Button onClick={() => paginate(-1)} variant="outline" size="lg" className="rounded-full w-12 h-12 p-0">
-            <ChevronLeft className="w-5 h-5" />
+          <Button onClick={() => paginate(-1)} variant="outline" size="lg" className="h-12 w-12 rounded-full p-0">
+            <ChevronLeft className="h-5 w-5" />
           </Button>
         </motion.div>
 
         {/* Pagination Dots */}
-        <div className="flex gap-2 items-center">
+        <div className="flex items-center gap-2">
           {Array.from({ length: totalPages }).map((_, index) => (
             <motion.button
               key={index}
@@ -89,7 +89,7 @@ export default function FeaturedProductsSlider({ products }: { products: any[] }
                 setCurrent(index)
               }}
               className={`rounded-full transition-all ${
-                index === current ? "bg-primary w-8 h-3" : "bg-border w-3 h-3"
+                index === current ? 'bg-primary h-3 w-8' : 'bg-border h-3 w-3'
               }`}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.95 }}
@@ -98,8 +98,8 @@ export default function FeaturedProductsSlider({ products }: { products: any[] }
         </div>
 
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-          <Button onClick={() => paginate(1)} variant="outline" size="lg" className="rounded-full w-12 h-12 p-0">
-            <ChevronRight className="w-5 h-5" />
+          <Button onClick={() => paginate(1)} variant="outline" size="lg" className="h-12 w-12 rounded-full p-0">
+            <ChevronRight className="h-5 w-5" />
           </Button>
         </motion.div>
       </div>

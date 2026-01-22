@@ -1,40 +1,39 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import Image from "next/image"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import type { Product } from "@/type/page"  // or wherever your Product type is defined
+import { useState } from 'react'
+import Image from 'next/image'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import type { Product } from '@/type/page' // or wherever your Product type is defined
 
 type ProductImageGalleryProps = {
   product: Product
 }
 
 export default function ProductImageGallery({ product }: ProductImageGalleryProps) {
-  const images =
-    product?.productImagesCollection?.items?.map((img) => img.url) || []
+  const images = product?.productImagesCollection?.items?.map(img => img.url) || []
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
   if (images.length === 0) {
     return (
-      <div className="aspect-square bg-muted rounded-xl flex items-center justify-center text-muted-foreground">
+      <div className="bg-muted text-muted-foreground flex aspect-square items-center justify-center rounded-xl">
         No images available
       </div>
     )
   }
 
   const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+    setCurrentIndex(prev => (prev === 0 ? images.length - 1 : prev - 1))
   }
 
   const goToNext = () => {
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+    setCurrentIndex(prev => (prev === images.length - 1 ? 0 : prev + 1))
   }
 
   return (
     <div className="space-y-4">
       {/* Main Image */}
-      <div className="relative w-full aspect-square bg-muted rounded-xl overflow-hidden">
+      <div className="bg-muted relative aspect-square w-full overflow-hidden rounded-xl">
         <Image
           src={images[currentIndex]}
           alt={`${product.productTitle} image ${currentIndex + 1}`}
@@ -48,24 +47,24 @@ export default function ProductImageGallery({ product }: ProductImageGalleryProp
           <>
             <button
               onClick={goToPrevious}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 text-white p-2 rounded-full hover:bg-black/80 transition"
+              className="absolute top-1/2 left-4 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white transition hover:bg-black/80"
               aria-label="Previous image"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="h-5 w-5" />
             </button>
 
             <button
               onClick={goToNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 text-white p-2 rounded-full hover:bg-black/80 transition"
+              className="absolute top-1/2 right-4 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white transition hover:bg-black/80"
               aria-label="Next image"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="h-5 w-5" />
             </button>
           </>
         )}
 
         {/* Counter */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white px-3 py-1 rounded-full text-sm">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-sm text-white">
           {currentIndex + 1} / {images.length}
         </div>
       </div>
@@ -77,20 +76,13 @@ export default function ProductImageGallery({ product }: ProductImageGalleryProp
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`relative aspect-square rounded-lg overflow-hidden border-2 transition
-                ${
-                  currentIndex === index
-                    ? "border-primary ring-2 ring-primary/40"
-                    : "border-muted hover:border-primary/50"
-                }
-              `}
+              className={`relative aspect-square overflow-hidden rounded-lg border-2 transition ${
+                currentIndex === index
+                  ? 'border-primary ring-primary/40 ring-2'
+                  : 'border-muted hover:border-primary/50'
+              } `}
             >
-              <Image
-                src={image}
-                alt={`${product.productTitle} thumbnail ${index + 1}`}
-                fill
-                className="object-cover"
-              />
+              <Image src={image} alt={`${product.productTitle} thumbnail ${index + 1}`} fill className="object-cover" />
             </button>
           ))}
         </div>

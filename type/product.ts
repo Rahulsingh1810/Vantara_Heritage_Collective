@@ -5,7 +5,7 @@ export type IProducts = {
   productId: number
   productTitle: string
   productDescription: string
-  slug?: string
+  slug?: string //this was not there added just now
   productCulturalSignificance: string
   productCategory: string
   productCare: string

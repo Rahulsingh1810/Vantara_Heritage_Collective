@@ -6,15 +6,12 @@ import type { Metadata } from 'next'
 import AddToCartButton from '@/components/add-to-cart-button'
 import ProductImageGallery from '@/components/product-image-gallery'
 import ProductDetailsSection from '@/components/product-details-section'
-
-import fetchProductBySlug from '@/utils/queries/slugpage' // or wherever fetchProductBySlug lives now
-// If you renamed it to fetchProductByProductId earlier → change the name here
+import fetchProductBySlug from '@/utils/queries/slugpage'
+import { Product } from '@/type/page'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-
-  // ── Fetch here ──
-  const product = await fetchProductBySlug(slug) // ← using slug or id — match your field
+  const product = await fetchProductBySlug(slug)
 
   return {
     title: product ? `${product.productTitle} - The Heritage Collective` : 'Product Not Found',
@@ -25,31 +22,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  // ── Fetch here ──
   const data = await fetchProductBySlug(slug)
-
-  // Map to shape your components expect
-  // const product = {
-  //   id: cfProduct.slug || slug,
-  //   name: cfProduct.productTitle || "Unnamed Product",
-  //   description: cfProduct.productDescription || "",
-  //   image_url:
-  //     cfProduct.productImagesCollection?.items?.[0]?.url ||
-  //     "/traditional-indian-artifact.jpg",
-  //   image_urls: cfProduct.productImagesCollection?.items?.map((item: any) => item.url) || [],
-  //   price: Number.parseFloat(String(cfProduct.productPrice || "0")) || 0,
-  //   stock_quantity: 999,
-  // }
-
-  // const vendor = cfProduct.vendor || {
-  //   vendorName: "Heritage Artisan",
-  //   vendorDescription: "",
-  //   vendorLocation: "India",
-  // }
-
-  // const primaryImage = product.image_url
-
-  // rest of your JSX remains the same...
+  if (!data) {
+    notFound()
+  }
 
   return (
     <main className="min-h-screen">
@@ -71,7 +47,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
               <div className="animate-slide-in-left">
-                <ProductImageGallery product={data ?? ({} as any)} />
+                <ProductImageGallery product={data ?? ({} as Product)} />
               </div>
 
               <div className="animate-fade-in-up flex flex-col space-y-6">
@@ -123,7 +99,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
 
                   <div className="space-y-4">
                     <AddToCartButton
-                      product={data ?? ({} as any)}
+                      product={data ?? ({} as Product)}
                       disabled={!data?.productStock || data.productStock === 0}
                       className="w-full px-6 py-3 text-lg"
                     />

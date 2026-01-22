@@ -1,6 +1,5 @@
 export type IVendor = {
-      
-            vendorName : string,
-            vendorLocation : string,
-            vendorDescription: string,
-        }
+  vendorName: string
+  vendorLocation: string
+  vendorDescription: string
+}

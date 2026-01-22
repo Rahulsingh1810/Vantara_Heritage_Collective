@@ -1,11 +1,11 @@
-import type { Metadata } from "next"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Mail, Phone, MapPin } from "lucide-react"
+import type { Metadata } from 'next'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Mail, Phone, MapPin } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: "Contact Us - The Heritage Collective",
-  description: "Get in touch with us for inquiries, support, or partnership opportunities.",
+  title: 'Contact Us - The Heritage Collective',
+  description: 'Get in touch with us for inquiries, support, or partnership opportunities.'
 }
 
 export default function Contact() {
@@ -13,41 +13,41 @@ export default function Contact() {
     <main>
       {/* Hero Section */}
       <section className="bg-primary text-primary-foreground py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">Get in Touch</h1>
-          <p className="text-lg md:text-xl opacity-90 text-balance">
+        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <h1 className="mb-6 text-4xl font-bold text-balance md:text-5xl">Get in Touch</h1>
+          <p className="text-lg text-balance opacity-90 md:text-xl">
             We'd love to hear from you. Send us a message and we'll respond as soon as possible.
           </p>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+      <section className="bg-background py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 grid grid-cols-1 gap-8 lg:grid-cols-3">
             {/* Contact Info Cards */}
             <Card>
               <CardContent className="p-6 text-center">
-                <Mail className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Email</h3>
+                <Mail className="text-primary mx-auto mb-4 h-12 w-12" />
+                <h3 className="mb-2 text-lg font-semibold">Email</h3>
                 <p className="text-muted-foreground">info@heritagecollective.com</p>
-                <p className="text-muted-foreground text-sm mt-2">We respond within 24 hours</p>
+                <p className="text-muted-foreground mt-2 text-sm">We respond within 24 hours</p>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent className="p-6 text-center">
-                <Phone className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Phone</h3>
+                <Phone className="text-primary mx-auto mb-4 h-12 w-12" />
+                <h3 className="mb-2 text-lg font-semibold">Phone</h3>
                 <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                <p className="text-muted-foreground text-sm mt-2">Monday - Friday, 9AM - 6PM EST</p>
+                <p className="text-muted-foreground mt-2 text-sm">Monday - Friday, 9AM - 6PM EST</p>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent className="p-6 text-center">
-                <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Address</h3>
+                <MapPin className="text-primary mx-auto mb-4 h-12 w-12" />
+                <h3 className="mb-2 text-lg font-semibold">Address</h3>
                 <p className="text-muted-foreground">123 Heritage Lane</p>
                 <p className="text-muted-foreground text-sm">New York, NY 10001</p>
               </CardContent>
@@ -55,45 +55,45 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <div className="max-w-2xl mx-auto">
+          <div className="mx-auto max-w-2xl">
             <Card>
               <CardContent className="p-8">
-                <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
+                <h2 className="mb-6 text-2xl font-bold">Send us a Message</h2>
                 <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Name</label>
+                      <label className="mb-2 block text-sm font-medium">Name</label>
                       <input
                         type="text"
                         placeholder="Your name"
-                        className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="border-border focus:ring-primary w-full rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2">Email</label>
+                      <label className="mb-2 block text-sm font-medium">Email</label>
                       <input
                         type="email"
                         placeholder="your@email.com"
-                        className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="border-border focus:ring-primary w-full rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Subject</label>
+                    <label className="mb-2 block text-sm font-medium">Subject</label>
                     <input
                       type="text"
                       placeholder="How can we help?"
-                      className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="border-border focus:ring-primary w-full rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Message</label>
+                    <label className="mb-2 block text-sm font-medium">Message</label>
                     <textarea
                       rows={5}
                       placeholder="Tell us more about your inquiry..."
-                      className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                      className="border-border focus:ring-primary w-full resize-none rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
                     />
                   </div>
 
@@ -108,14 +108,14 @@ export default function Contact() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 md:py-24 bg-muted/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-12 text-center">Frequently Asked Questions</h2>
+      <section className="bg-muted/30 py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-12 text-center text-3xl font-bold">Frequently Asked Questions</h2>
 
           <div className="space-y-6">
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-3">What is your return policy?</h3>
+                <h3 className="mb-3 text-lg font-semibold">What is your return policy?</h3>
                 <p className="text-muted-foreground">
                   We offer a 30-day return policy on most items. Products must be in their original condition with all
                   packaging intact.
@@ -125,7 +125,7 @@ export default function Contact() {
 
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-3">How long does shipping take?</h3>
+                <h3 className="mb-3 text-lg font-semibold">How long does shipping take?</h3>
                 <p className="text-muted-foreground">
                   Domestic orders typically ship within 3-5 business days. International orders may take 10-20 business
                   days depending on destination.
@@ -135,7 +135,7 @@ export default function Contact() {
 
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-3">Are all items authentic?</h3>
+                <h3 className="mb-3 text-lg font-semibold">Are all items authentic?</h3>
                 <p className="text-muted-foreground">
                   Yes, every artifact in our collection is verified for authenticity and comes with documentation of its
                   origin and craftsmanship.
@@ -145,7 +145,7 @@ export default function Contact() {
 
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-3">Can I become a vendor?</h3>
+                <h3 className="mb-3 text-lg font-semibold">Can I become a vendor?</h3>
                 <p className="text-muted-foreground">
                   We're always looking for talented artisans and craftspeople. Please contact us at
                   partnerships@heritagecollective.com to discuss opportunities.

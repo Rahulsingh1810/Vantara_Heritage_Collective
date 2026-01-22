@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Plus, Trash2, Edit2 } from "lucide-react"
-import type { Product } from "@/lib/types"
-import { ensureNumber } from "@/lib/utils"
+import type React from 'react'
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Plus, Trash2, Edit2 } from 'lucide-react'
+import type { Product } from '@/lib/types'
+import { ensureNumber } from '@/lib/utils'
 
 interface Category {
   id: number
@@ -27,13 +27,13 @@ export default function AdminProducts() {
   const [editingId, setEditingId] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    category_id: "",
-    vendor_id: "",
-    image_url: "",
-    stock_quantity: "",
+    name: '',
+    description: '',
+    price: '',
+    category_id: '',
+    vendor_id: '',
+    image_url: '',
+    stock_quantity: ''
   })
 
   useEffect(() => {
@@ -43,9 +43,9 @@ export default function AdminProducts() {
   const fetchData = async () => {
     try {
       const [productsRes, categoriesRes, vendorsRes] = await Promise.all([
-        fetch("/api/products"),
-        fetch("/api/categories"),
-        fetch("/api/vendors"),
+        fetch('/api/products'),
+        fetch('/api/categories'),
+        fetch('/api/vendors')
       ])
 
       const productsData = await productsRes.json()
@@ -56,8 +56,8 @@ export default function AdminProducts() {
       setCategories(categoriesData)
       setVendors(vendorsData)
     } catch (error) {
-      console.error("Error fetching data:", error)
-      setError("Failed to load data")
+      console.error('Error fetching data:', error)
+      setError('Failed to load data')
     } finally {
       setLoading(false)
     }
@@ -68,62 +68,62 @@ export default function AdminProducts() {
     setError(null)
 
     if (!formData.name || !formData.price || !formData.category_id || !formData.vendor_id) {
-      setError("Please fill in all required fields")
+      setError('Please fill in all required fields')
       return
     }
 
     try {
-      const method = editingId ? "PUT" : "POST"
-      const url = editingId ? `/api/products/${editingId}` : "/api/products"
+      const method = editingId ? 'PUT' : 'POST'
+      const url = editingId ? `/api/products/${editingId}` : '/api/products'
 
       const response = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json" },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
           price: Number.parseFloat(formData.price),
           category_id: Number.parseInt(formData.category_id),
           vendor_id: Number.parseInt(formData.vendor_id),
-          stock_quantity: Number.parseInt(formData.stock_quantity),
-        }),
+          stock_quantity: Number.parseInt(formData.stock_quantity)
+        })
       })
 
       if (response.ok) {
         setFormData({
-          name: "",
-          description: "",
-          price: "",
-          category_id: "",
-          vendor_id: "",
-          image_url: "",
-          stock_quantity: "",
+          name: '',
+          description: '',
+          price: '',
+          category_id: '',
+          vendor_id: '',
+          image_url: '',
+          stock_quantity: ''
         })
         setShowForm(false)
         setEditingId(null)
         fetchData()
       } else {
         const errorData = await response.json()
-        setError(errorData.error || "Failed to save product")
+        setError(errorData.error || 'Failed to save product')
       }
     } catch (error) {
-      console.error("Error saving product:", error)
-      setError("An error occurred while saving the product")
+      console.error('Error saving product:', error)
+      setError('An error occurred while saving the product')
     }
   }
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this product?")) return
+    if (!confirm('Are you sure you want to delete this product?')) return
 
     try {
-      const response = await fetch(`/api/products/${id}`, { method: "DELETE" })
+      const response = await fetch(`/api/products/${id}`, { method: 'DELETE' })
       if (response.ok) {
         fetchData()
       } else {
-        setError("Failed to delete product")
+        setError('Failed to delete product')
       }
     } catch (error) {
-      console.error("Error deleting product:", error)
-      setError("An error occurred while deleting the product")
+      console.error('Error deleting product:', error)
+      setError('An error occurred while deleting the product')
     }
   }
 
@@ -135,7 +135,7 @@ export default function AdminProducts() {
       category_id: product.category_id.toString(),
       vendor_id: product.vendor_id.toString(),
       image_url: product.image_url,
-      stock_quantity: product.stock_quantity.toString(),
+      stock_quantity: product.stock_quantity.toString()
     })
     setEditingId(product.id)
     setShowForm(true)
@@ -143,52 +143,52 @@ export default function AdminProducts() {
   }
 
   if (loading) {
-    return <div className="text-center py-12">Loading products...</div>
+    return <div className="py-12 text-center">Loading products...</div>
   }
 
   return (
     <div className="space-y-6">
       <Card>
-        <CardHeader className="flex justify-between items-center">
+        <CardHeader className="flex items-center justify-between">
           <CardTitle>Products Management</CardTitle>
           <Button onClick={() => setShowForm(!showForm)} className="gap-2">
-            <Plus className="w-4 h-4" />
+            <Plus className="h-4 w-4" />
             Add Product
           </Button>
         </CardHeader>
 
         {showForm && (
           <CardContent className="border-t pt-6">
-            {error && <div className="mb-4 p-3 bg-destructive/10 text-destructive rounded-lg">{error}</div>}
+            {error && <div className="bg-destructive/10 text-destructive mb-4 rounded-lg p-3">{error}</div>}
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <input
                   type="text"
                   placeholder="Product Name"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="px-3 py-2 border border-border rounded-lg"
+                  onChange={e => setFormData({ ...formData, name: e.target.value })}
+                  className="border-border rounded-lg border px-3 py-2"
                   required
                 />
                 <input
                   type="number"
                   placeholder="Price"
                   value={formData.price}
-                  onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                  className="px-3 py-2 border border-border rounded-lg"
+                  onChange={e => setFormData({ ...formData, price: e.target.value })}
+                  className="border-border rounded-lg border px-3 py-2"
                   required
                   step="0.01"
                 />
 
                 <select
                   value={formData.category_id}
-                  onChange={(e) => setFormData({ ...formData, category_id: e.target.value })}
-                  className="px-3 py-2 border border-border rounded-lg"
+                  onChange={e => setFormData({ ...formData, category_id: e.target.value })}
+                  className="border-border rounded-lg border px-3 py-2"
                   required
                 >
                   <option value="">Select Category</option>
-                  {categories.map((cat) => (
+                  {categories.map(cat => (
                     <option key={cat.id} value={cat.id}>
                       {cat.name}
                     </option>
@@ -197,12 +197,12 @@ export default function AdminProducts() {
 
                 <select
                   value={formData.vendor_id}
-                  onChange={(e) => setFormData({ ...formData, vendor_id: e.target.value })}
-                  className="px-3 py-2 border border-border rounded-lg"
+                  onChange={e => setFormData({ ...formData, vendor_id: e.target.value })}
+                  className="border-border rounded-lg border px-3 py-2"
                   required
                 >
                   <option value="">Select Vendor</option>
-                  {vendors.map((vendor) => (
+                  {vendors.map(vendor => (
                     <option key={vendor.id} value={vendor.id}>
                       {vendor.name}
                     </option>
@@ -213,27 +213,27 @@ export default function AdminProducts() {
                   type="number"
                   placeholder="Stock Quantity"
                   value={formData.stock_quantity}
-                  onChange={(e) => setFormData({ ...formData, stock_quantity: e.target.value })}
-                  className="px-3 py-2 border border-border rounded-lg"
+                  onChange={e => setFormData({ ...formData, stock_quantity: e.target.value })}
+                  className="border-border rounded-lg border px-3 py-2"
                   required
                 />
                 <input
                   type="url"
                   placeholder="Image URL"
                   value={formData.image_url}
-                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  className="px-3 py-2 border border-border rounded-lg"
+                  onChange={e => setFormData({ ...formData, image_url: e.target.value })}
+                  className="border-border rounded-lg border px-3 py-2"
                 />
               </div>
               <textarea
                 placeholder="Description"
                 value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="w-full px-3 py-2 border border-border rounded-lg"
+                onChange={e => setFormData({ ...formData, description: e.target.value })}
+                className="border-border w-full rounded-lg border px-3 py-2"
                 rows={3}
               />
               <div className="flex gap-2">
-                <Button type="submit">{editingId ? "Update Product" : "Create Product"}</Button>
+                <Button type="submit">{editingId ? 'Update Product' : 'Create Product'}</Button>
                 <Button
                   type="button"
                   variant="outline"
@@ -241,13 +241,13 @@ export default function AdminProducts() {
                     setShowForm(false)
                     setEditingId(null)
                     setFormData({
-                      name: "",
-                      description: "",
-                      price: "",
-                      category_id: "",
-                      vendor_id: "",
-                      image_url: "",
-                      stock_quantity: "",
+                      name: '',
+                      description: '',
+                      price: '',
+                      category_id: '',
+                      vendor_id: '',
+                      image_url: '',
+                      stock_quantity: ''
                     })
                     setError(null)
                   }}
@@ -265,26 +265,26 @@ export default function AdminProducts() {
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="border-b border-border">
+              <thead className="border-border border-b">
                 <tr>
-                  <th className="text-left px-6 py-3 font-semibold">Name</th>
-                  <th className="text-left px-6 py-3 font-semibold">Price</th>
-                  <th className="text-left px-6 py-3 font-semibold">Stock</th>
-                  <th className="text-left px-6 py-3 font-semibold">Actions</th>
+                  <th className="px-6 py-3 text-left font-semibold">Name</th>
+                  <th className="px-6 py-3 text-left font-semibold">Price</th>
+                  <th className="px-6 py-3 text-left font-semibold">Stock</th>
+                  <th className="px-6 py-3 text-left font-semibold">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
-                  <tr key={product.id} className="border-b border-border hover:bg-muted/50">
+                {products.map(product => (
+                  <tr key={product.id} className="border-border hover:bg-muted/50 border-b">
                     <td className="px-6 py-4">{product.name}</td>
                     <td className="px-6 py-4">${ensureNumber(product.price).toFixed(2)}</td>
                     <td className="px-6 py-4">{product.stock_quantity}</td>
-                    <td className="px-6 py-4 flex gap-2">
+                    <td className="flex gap-2 px-6 py-4">
                       <Button size="sm" variant="outline" onClick={() => handleEdit(product)}>
-                        <Edit2 className="w-4 h-4" />
+                        <Edit2 className="h-4 w-4" />
                       </Button>
                       <Button size="sm" variant="destructive" onClick={() => handleDelete(product.id)}>
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="h-4 w-4" />
                       </Button>
                     </td>
                   </tr>

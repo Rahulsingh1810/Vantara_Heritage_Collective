@@ -1,5 +1,5 @@
-import { sql } from "@/lib/db"
-import { type NextRequest, NextResponse } from "next/server"
+import { sql } from '@/lib/db'
+import { type NextRequest, NextResponse } from 'next/server'
 
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -15,7 +15,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 
     return NextResponse.json(result[0])
   } catch (error) {
-    return NextResponse.json({ error: "Failed to update vendor" }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to update vendor' }, { status: 500 })
   }
 }
 
@@ -25,6 +25,6 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     await sql`DELETE FROM vendors WHERE id = ${Number.parseInt(id)}`
     return NextResponse.json({ success: true })
   } catch (error) {
-    return NextResponse.json({ error: "Failed to delete vendor" }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to delete vendor' }, { status: 500 })
   }
 }
