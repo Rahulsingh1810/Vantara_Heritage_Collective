@@ -1,10 +1,20 @@
-"use client"
-import ProductCardEnhanced from "@/components/product-card-enhanced"
-import { motion } from "framer-motion"
+'use client'
 
-export default function ProductGrid({ products }: { products: any[] }) {
+import { motion } from 'framer-motion'
+import ProductCardEnhanced from '@/components/product-card-enhanced'
+
+export type GridProduct = {
+  id: string
+  slug: string
+  title: string
+  description: string
+  image: string
+  price: number
+}
+
+export default function ProductGrid({ products }: { products: GridProduct[] }) {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 gap-8 md:grid-cols-2">
       {products.map((product, index) => (
         <motion.div
           key={product.id}
