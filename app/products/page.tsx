@@ -14,24 +14,22 @@ export const metadata: Metadata = {
   description: 'Browse our collection of traditional artifacts and heritage pieces from artisans worldwide.'
 }
 
-
-
 export default async function Products() {
   // Fetch products at build time (must be safe for static rendering)
-  let products: any[] = [];
+  let products: any[] = []
   try {
-    products = await fetchProducts();
+    products = await fetchProducts()
   } catch (e) {
-    products = [];
+    products = []
   }
 
   // Sidebar filters
   const uniqueCategories = Array.from(new Set(products.map((p: any) => p.productCategory).filter(Boolean))).map(
-    (name) => ({ id: name, name })
-  );
+    name => ({ id: name, name })
+  )
   const uniqueVendors = Array.from(new Set(products.map((p: any) => p.vendor?.vendorName).filter(Boolean))).map(
-    (name) => ({ id: name, name })
-  );
+    name => ({ id: name, name })
+  )
 
   // UI-safe mapping for all products
   const productsForGrid = products.map((p: any) => ({
@@ -42,8 +40,8 @@ export default async function Products() {
     image: p.productImagesCollection?.items?.[0]?.url ?? '/traditional-indian-artifact.jpg',
     price: Number(p.productPrice) || 0,
     category: p.productCategory,
-    vendor: p.vendor?.vendorName,
-  }));
+    vendor: p.vendor?.vendorName
+  }))
 
   return (
     <>
