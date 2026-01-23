@@ -9,7 +9,6 @@ export async function POST(req: Request) {
     return new NextResponse('Invalid payload', { status: 400 })
   }
 
-  // 1️⃣ Upsert customer
   const [customer] = (await sql`
     INSERT INTO customers (
       email, name, phone,
@@ -58,14 +57,18 @@ export async function POST(req: Request) {
     RETURNING id
   `) as { id: string }[]
 
-  // 3️⃣ Create Razorpay order
   const rpOrder = await razorpay.orders.create({
-    amount,
-    currency: 'INR',
-    receipt: orderNumber
+    amount: amount,
+    receipt: orderNumber,
+    notes: {
+      product_id: product.id,
+      product_name: product.name,
+      customer_email: email
+    },
+    partial_payment: false,
+    currency: 'INR'
   })
 
-  // 4️⃣ Save Razorpay order id
   await sql`
     UPDATE orders
     SET razorpay_order_id = ${rpOrder.id}
