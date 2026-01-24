@@ -51,7 +51,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
               </div>
 
               <div className="animate-fade-in-up flex flex-col space-y-6">
-                <div className="flex items-center gap-4">
+                {/* <div className="flex items-center gap-4">
                   <span className="bg-primary/10 text-primary inline-block rounded-full px-4 py-1.5 text-xs font-semibold tracking-wider uppercase">
                     {data?.productCategory}
                   </span>
@@ -61,7 +61,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
                     ))}
                     <span className="text-muted-foreground ml-2 text-sm">(42 reviews)</span>
                   </div>
-                </div>
+                </div> */}
 
                 <div>
                   <h1 className="text-foreground mb-4 text-5xl leading-tight font-bold text-balance md:text-6xl">

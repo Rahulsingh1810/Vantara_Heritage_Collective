@@ -20,7 +20,7 @@ export default function ProductCardEnhanced({ product }: ProductCardProps) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="block overflow-hidden rounded-lg border transition hover:shadow-lg"
+      className="block overflow-hidden rounded-lg border transition-transform duration-300 hover:scale-105 hover:shadow-lg"
     >
       <div className="bg-muted relative aspect-[4/3]">
         <Image src={product.image} alt={product.title} fill className="object-cover" />
