@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Us - The Heritage Collective',
+  title: 'About Us - Vantara Heritage Collective',
   description: 'Learn about our mission to preserve and celebrate traditional artifacts and cultural heritage.'
 }
 
@@ -27,7 +27,7 @@ export default function About() {
             <div>
               <h2 className="mb-6 text-3xl font-bold">Our Mission</h2>
               <p className="text-muted-foreground mb-4 text-lg">
-                The Heritage Collective was founded with a singular purpose: to preserve and celebrate the world's
+                Vantara Heritage Collective was founded with a singular purpose: to preserve and celebrate the world's
                 traditional artifacts and cultural treasures. We believe that every handcrafted piece tells a story of
                 heritage, skill, and cultural pride.
               </p>
@@ -281,7 +281,7 @@ export default function About() {
                 "Our journey began with a simple belief: every handcrafted artifact deserves to be celebrated and
                 preserved. As we've grown, our mission has deepened—to create meaningful connections between artisans
                 and collectors, ensuring that traditional crafts thrive for generations to come. Every purchase through
-                The Heritage Collective is an investment in cultural heritage and human dignity."
+                Vantara Heritage Collective is an investment in cultural heritage and human dignity."
               </p>
               <p className="font-semibold">— The Heritage Collective Team</p>
             </div>

@@ -59,14 +59,17 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="mb-4 font-semibold">Contact</h4>
-            <p className="text-sm opacity-90">Email: info@heritagecollective.com</p>
-            <p className="text-sm opacity-90">Phone: +1 (555) 123-4567</p>
-          </div>
+  <h4 className="mb-4 font-semibold">Contact</h4>
+  <p className="text-sm opacity-90">
+    Address: No. 33, 2nd Cross, SBM Colony, Brindavan Nagar, Mathikere, Bengaluru – 560054
+  </p>
+  <p className="mt-2 text-sm opacity-90">Phone: +91 7259311212</p>
+  <p className="mt-2 text-sm opacity-90">Email: To be created</p>
+</div>
         </div>
 
         <div className="border-primary-foreground/20 border-t pt-8 text-center text-sm opacity-90">
-          <p>&copy; 2026 The Heritage Collective. All rights reserved.</p>
+          <p>&copy; 2026 Vantara Heritage Collective. All rights reserved.</p>
         </div>
       </div>
     </footer>

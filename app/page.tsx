@@ -11,6 +11,7 @@ import HeroSectionAnimated from '@/components/hero-section-animated'
 import FeaturedVendors from '@/components/featured-vendors'
 import ContactFormPopup from '@/components/contact-form-popup'
 import { useState } from 'react'
+import HeroSectionVideo from '@/components/hero-section-video'
 
 const featuredProducts = [
   // Sample featured products data
@@ -41,6 +42,8 @@ export default async function Page() {
             alt="Vadānya Heritage Collective Logo"
             className="mx-auto mb-6 h-20 w-20 object-contain"
           />
+
+          <HeroSectionVideo />
           {/* Company Name + Tagline */}
           <h1 className="mb-2 text-4xl font-extrabold md:text-5xl">Vadānya Heritage Collective</h1>
           <h2 className="text-primary mb-6 text-xl font-semibold md:text-2xl">Regal Tradition. Timeless Curation.</h2>

@@ -15,24 +15,41 @@ type ProductCardProps = {
 }
 
 export default function ProductCardEnhanced({ product }: ProductCardProps) {
-  console.log('Rendering product card:', product)
-
   return (
-    <Link
-      href={`/products/${product.slug}`}
-      className="block overflow-hidden rounded-lg border transition-transform duration-300 hover:scale-105 hover:shadow-lg"
-    >
-      <div className="bg-muted relative aspect-[4/3]">
-        <Image src={product.image} alt={product.title} fill className="object-cover" />
-      </div>
+    <div className="group overflow-hidden rounded-lg border transition-shadow hover:shadow-lg">
+      {/* Image */}
+      <Link href={`/products/${product.slug}`} className="block">
+        <div className="bg-muted relative aspect-[4/3]">
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </div>
+      </Link>
 
-      <div className="space-y-2 p-4">
+      {/* Content */}
+      <div className="flex h-full flex-col p-4">
         <h3 className="text-lg font-semibold">{product.title}</h3>
 
-        <p className="text-muted-foreground line-clamp-2 text-sm">{product.description}</p>
+        {/* Description inside card */}
+        <p className="text-muted-foreground mt-2 line-clamp-3 text-sm">
+          {product.description}
+        </p>
 
-        <p className="text-lg font-bold">₹{product.price}</p>
+        <div className="mt-auto space-y-3">
+          <p className="text-lg font-bold">₹{product.price}</p>
+
+          {/* CTA Button */}
+          <Link
+            href={`/products/${product.slug}`}
+            className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors"
+          >
+            View Product
+          </Link>
+        </div>
       </div>
-    </Link>
+    </div>
   )
 }

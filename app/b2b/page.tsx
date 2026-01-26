@@ -70,7 +70,7 @@ export default function B2BPage() {
             transition={{ delay: 0.2 }}
             className="mb-8 text-xl opacity-90 md:text-2xl"
           >
-            Partner with The Heritage Collective for authentic traditional artifacts
+            Partner with Vantara Heritage Collective for authentic traditional artifacts
           </motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
             <Button size="lg" className="bg-background text-primary hover:bg-background/90">

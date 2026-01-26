@@ -30,10 +30,10 @@ export default function Navigation() {
             <img
               src="/logo.png"
               alt="The Heritage Collective Logo"
-              className="h-10 w-10 rounded object-contain"
-              style={{ maxWidth: '2.5rem', maxHeight: '2.5rem' }}
+              className="h-10 w-20 rounded object-contain"
+              style={{ maxWidth: '6rem', maxHeight: '6rem' }}
             />
-            <span>The Heritage Collective</span>
+            {/* <span>Vantara Heritage Collective</span> */}
           </Link>
 
           {/* Desktop Navigation */}
