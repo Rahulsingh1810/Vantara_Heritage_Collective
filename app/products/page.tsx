@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 
@@ -11,11 +10,11 @@ import fetchProducts from '@/utils/queries/page'
 
 export const metadata: Metadata = {
   title: 'Products - The Heritage Collective',
-  description: 'Browse our collection of traditional artifacts and heritage pieces from artisans worldwide.',
+  description: 'Browse our collection of traditional artifacts and heritage pieces from artisans worldwide.'
 }
 
 export default async function Products({
-  searchParams,
+  searchParams
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
@@ -28,13 +27,13 @@ export default async function Products({
     products = []
   }
 
-  const uniqueCategories = Array.from(
-    new Set(products.map((p: any) => p.productCategory).filter(Boolean))
-  ).map(name => ({ id: name, name }))
+  const uniqueCategories = Array.from(new Set(products.map((p: any) => p.productCategory).filter(Boolean))).map(
+    name => ({ id: name, name })
+  )
 
-  const uniqueVendors = Array.from(
-    new Set(products.map((p: any) => p.vendor?.vendorName).filter(Boolean))
-  ).map(name => ({ id: name, name }))
+  const uniqueVendors = Array.from(new Set(products.map((p: any) => p.vendor?.vendorName).filter(Boolean))).map(
+    name => ({ id: name, name })
+  )
 
   const productsForGrid = products.map((p: any) => ({
     id: `${p.productId}-${p.slug}`,
@@ -44,30 +43,26 @@ export default async function Products({
     image: p.productImagesCollection?.items?.[0]?.url ?? '/traditional-indian-artifact.jpg',
     price: Number(p.productPrice) || 0,
     category: p.productCategory,
-    vendor: p.vendor?.vendorName,
+    vendor: p.vendor?.vendorName
   }))
 
- 
   return (
     <>
       <DiscountBanner />
       <DiscountClaimModal />
 
       <main>
-
         <section className="bg-primary text-primary-foreground py-12 md:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl md:text-5xl font-bold text-balance">Our Collections</h1>
-            <p className="mt-4 text-lg opacity-90">
-              Discover authentic heritage pieces from master artisans
-            </p>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h1 className="text-4xl font-bold text-balance md:text-5xl">Our Collections</h1>
+            <p className="mt-4 text-lg opacity-90">Discover authentic heritage pieces from master artisans</p>
           </div>
         </section>
 
         {/* Products Section – layout & spacing from template */}
-        <section className="py-12 md:py-20 bg-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+        <section className="bg-background py-12 md:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
               {/* Filters */}
               <div className="lg:col-span-1">
                 <Suspense fallback={<div className="py-8 text-center">Loading filters...</div>}>
@@ -81,10 +76,8 @@ export default async function Products({
                   {productsForGrid.length > 0 ? (
                     <ProductGrid products={productsForGrid} />
                   ) : (
-                    <div className="flex flex-col items-center justify-center min-h-96 text-center">
-                      <p className="text-lg text-muted-foreground mb-4">
-                        No products found matching your filters.
-                      </p>
+                    <div className="flex min-h-96 flex-col items-center justify-center text-center">
+                      <p className="text-muted-foreground mb-4 text-lg">No products found matching your filters.</p>
                       <a href="/products" className="text-primary hover:underline">
                         Clear filters
                       </a>

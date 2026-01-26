@@ -12,7 +12,6 @@ import FeaturedVendors from '@/components/featured-vendors'
 import ContactFormPopup from '@/components/contact-form-popup'
 import { useState } from 'react'
 
-
 const featuredProducts = [
   // Sample featured products data
   { id: 1, name: 'Product 1', image: '/path/to/image1.jpg' },
@@ -32,38 +31,46 @@ export default async function Page() {
   return (
     <>
       {/* Home Page / Landing Page Content */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background py-16 md:py-24">
-        <div className="absolute top-0 left-0 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute right-0 bottom-0 h-96 w-96 translate-x-1/2 translate-y-1/2 rounded-full bg-accent/10 blur-3xl" />
-        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <section className="from-background via-primary/5 to-background relative overflow-hidden bg-gradient-to-b py-16 md:py-24">
+        <div className="bg-primary/10 absolute top-0 left-0 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
+        <div className="bg-accent/10 absolute right-0 bottom-0 h-96 w-96 translate-x-1/2 translate-y-1/2 rounded-full blur-3xl" />
+        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           {/* Visual Asset 1: Logo */}
-          <img src="/logo.png" alt="Vadānya Heritage Collective Logo" className="mx-auto mb-6 h-20 w-20 object-contain" />
+          <img
+            src="/logo.png"
+            alt="Vadānya Heritage Collective Logo"
+            className="mx-auto mb-6 h-20 w-20 object-contain"
+          />
           {/* Company Name + Tagline */}
           <h1 className="mb-2 text-4xl font-extrabold md:text-5xl">Vadānya Heritage Collective</h1>
-          <h2 className="mb-6 text-xl font-semibold text-primary md:text-2xl">Regal Tradition. Timeless Curation.</h2>
+          <h2 className="text-primary mb-6 text-xl font-semibold md:text-2xl">Regal Tradition. Timeless Curation.</h2>
           {/* Brief Intro */}
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground font-medium">
+          <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-lg font-medium">
             Premium heritage decor curated from enduring cultural traditions.
           </p>
           {/* Crafting Our Story */}
-          <div className="mx-auto mb-8 max-w-3xl text-base text-foreground text-left md:text-center">
-            <h3 className="mb-2 text-2xl font-bold text-primary">Crafting Our Story</h3>
+          <div className="text-foreground mx-auto mb-8 max-w-3xl text-left text-base md:text-center">
+            <h3 className="text-primary mb-2 text-2xl font-bold">Crafting Our Story</h3>
             <p className="mb-4">
-              Vadānya Heritage Collective is an homage to art that endures.<br/>
-              Born from a deep regard for India’s living craft traditions, we curate artefacts shaped by hand, guided by geography, and refined through generations of artistic devotion. Each piece echoes a legacy imprinted by the rhythm of practiced hands, the patience of process, and the wisdom of time-honoured techniques.
+              Vadānya Heritage Collective is an homage to art that endures.
+              <br />
+              Born from a deep regard for India’s living craft traditions, we curate artefacts shaped by hand, guided by
+              geography, and refined through generations of artistic devotion. Each piece echoes a legacy imprinted by
+              the rhythm of practiced hands, the patience of process, and the wisdom of time-honoured techniques.
             </p>
             <p className="mb-4">
-              Our quest is to capture the essence of GI-tagged artefacts by situating them in lived and experienced spaces. Let’s celebrate heritage art as an enduring phenomenon of experience.
+              Our quest is to capture the essence of GI-tagged artefacts by situating them in lived and experienced
+              spaces. Let’s celebrate heritage art as an enduring phenomenon of experience.
             </p>
           </div>
           {/* Transforming Spaces */}
           <div className="mx-auto max-w-2xl">
-            <h4 className="mb-2 text-lg font-semibold text-primary">Transforming Spaces</h4>
+            <h4 className="text-primary mb-2 text-lg font-semibold">Transforming Spaces</h4>
             <div className="flex flex-wrap justify-center gap-3 text-base font-medium">
-              <span className="rounded-full bg-primary/10 px-4 py-2">Statement Walls</span>
-              <span className="rounded-full bg-primary/10 px-4 py-2">Vignette Shelves</span>
-              <span className="rounded-full bg-primary/10 px-4 py-2">Elegant Surfaces</span>
-              <span className="rounded-full bg-primary/10 px-4 py-2">Soulful Landscapes</span>
+              <span className="bg-primary/10 rounded-full px-4 py-2">Statement Walls</span>
+              <span className="bg-primary/10 rounded-full px-4 py-2">Vignette Shelves</span>
+              <span className="bg-primary/10 rounded-full px-4 py-2">Elegant Surfaces</span>
+              <span className="bg-primary/10 rounded-full px-4 py-2">Soulful Landscapes</span>
             </div>
           </div>
         </div>

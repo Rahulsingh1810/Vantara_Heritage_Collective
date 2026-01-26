@@ -30,7 +30,7 @@ export default function Navigation() {
             <img
               src="/logo.png"
               alt="The Heritage Collective Logo"
-              className="h-10 w-10 object-contain rounded"
+              className="h-10 w-10 rounded object-contain"
               style={{ maxWidth: '2.5rem', maxHeight: '2.5rem' }}
             />
             <span>The Heritage Collective</span>
