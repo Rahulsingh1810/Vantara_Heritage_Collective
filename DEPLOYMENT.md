@@ -1,4 +1,4 @@
-# The Heritage Collective - Deployment Guide
+# Vandanya Heritage Collective - Deployment Guide
 
 ## Prerequisites
 

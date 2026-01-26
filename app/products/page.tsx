@@ -9,7 +9,7 @@ import DiscountClaimModal from '@/components/discount-claim-modal'
 import fetchProducts from '@/utils/queries/page'
 
 export const metadata: Metadata = {
-  title: 'Products - The Heritage Collective',
+  title: 'Products - Vandanya Heritage Collective',
   description: 'Browse our collection of traditional artifacts and heritage pieces from artisans worldwide.'
 }
 

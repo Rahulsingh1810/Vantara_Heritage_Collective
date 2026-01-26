@@ -29,11 +29,11 @@ export default function Navigation() {
           <Link href="/" className="text-primary flex items-center gap-2 text-xl font-bold">
             <img
               src="/logo.png"
-              alt="The Heritage Collective Logo"
+              alt="Vandanya Heritage Collective Logo"
               className="h-10 w-20 rounded object-contain"
               style={{ maxWidth: '6rem', maxHeight: '6rem' }}
             />
-            {/* <span>Vantara Heritage Collective</span> */}
+            {/* <span>Vandanya Heritage Collective</span> */}
           </Link>
 
           {/* Desktop Navigation */}

@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'Transforming Spaces - The Heritage Collective',
+  title: 'Transforming Spaces - Vandanya Heritage Collective',
   description: 'Discover how traditional artifacts can transform your home and spaces with authentic cultural beauty.'
 }
 

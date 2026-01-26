@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Us - Vantara Heritage Collective',
+  title: 'About Us - Vandanya Heritage Collective',
   description: 'Learn about our mission to preserve and celebrate traditional artifacts and cultural heritage.'
 }
 
@@ -12,7 +12,7 @@ export default function About() {
       {/* Hero Section */}
       <section className="bg-primary text-primary-foreground py-16 md:py-24">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="mb-6 text-4xl font-bold text-balance md:text-5xl">About The Heritage Collective</h1>
+          <h1 className="mb-6 text-4xl font-bold text-balance md:text-5xl">About Vandanya Heritage Collective</h1>
           <p className="text-lg text-balance opacity-90 md:text-xl">
             Connecting global artisans with collectors who appreciate authentic cultural treasures.
           </p>
@@ -27,7 +27,7 @@ export default function About() {
             <div>
               <h2 className="mb-6 text-3xl font-bold">Our Mission</h2>
               <p className="text-muted-foreground mb-4 text-lg">
-                Vantara Heritage Collective was founded with a singular purpose: to preserve and celebrate the world's
+                Vandanya Heritage Collective was founded with a singular purpose: to preserve and celebrate the world's
                 traditional artifacts and cultural treasures. We believe that every handcrafted piece tells a story of
                 heritage, skill, and cultural pride.
               </p>
@@ -42,7 +42,11 @@ export default function About() {
               <h2 className="mb-6 text-3xl font-bold">Our Story</h2>
               {/* Visual Asset 1 */}
               <div className="mb-6 flex justify-center">
-                <img src="/logo.png" alt="Vadānya Heritage Collective Logo" className="h-20 w-20 object-contain" />
+                 <img
+                  src="/traditional-indian-crafts.jpg"
+                  alt="Traditional Indian Crafts"
+                  className="h-auto w-full rounded-lg object-cover shadow"
+                />
               </div>
               <p className="text-muted-foreground mb-4 text-lg">
                 Vadānya Heritage Collective was conceived from an enduring belief: the most meaningful objects are
@@ -59,7 +63,7 @@ export default function About() {
                 <img
                   src="/traditional-indian-crafts.jpg"
                   alt="Traditional Indian Crafts"
-                  className="h-40 w-auto rounded-lg object-cover shadow"
+                  className="h-auto w-full rounded-lg object-cover shadow"
                 />
               </div>
               <p className="text-muted-foreground text-lg">
@@ -123,7 +127,7 @@ export default function About() {
             <div className="from-primary/10 to-accent/10 rounded-lg bg-gradient-to-r p-8">
               <h2 className="mb-6 text-3xl font-bold">Our Heritage Impact</h2>
               <p className="text-muted-foreground mb-6 text-lg">
-                Since our founding, The Heritage Collective has had a profound impact on preserving traditional crafts
+                Since our founding, Vandanya Heritage Collective has had a profound impact on preserving traditional crafts
                 and supporting artisan communities globally. Our commitment goes beyond commerce—we're builders of
                 cultural bridges.
               </p>
@@ -281,9 +285,9 @@ export default function About() {
                 "Our journey began with a simple belief: every handcrafted artifact deserves to be celebrated and
                 preserved. As we've grown, our mission has deepened—to create meaningful connections between artisans
                 and collectors, ensuring that traditional crafts thrive for generations to come. Every purchase through
-                Vantara Heritage Collective is an investment in cultural heritage and human dignity."
+                Vandanya Heritage Collective is an investment in cultural heritage and human dignity."
               </p>
-              <p className="font-semibold">— The Heritage Collective Team</p>
+              <p className="font-semibold">— Vandanya Heritage Collective Team</p>
             </div>
 
             {/* Environmental & Social Commitment */}

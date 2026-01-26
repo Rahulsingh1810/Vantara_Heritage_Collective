@@ -88,7 +88,7 @@ export default function RegisterPage() {
         <Card>
           <CardHeader className="text-center">
             <CardTitle className="mb-2 text-3xl">Create Account</CardTitle>
-            <p className="text-muted-foreground">Join The Heritage Collective community</p>
+            <p className="text-muted-foreground">Join Vandanya Heritage Collective community</p>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">

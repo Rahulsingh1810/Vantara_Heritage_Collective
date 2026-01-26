@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Brand */}
           <div>
-            <h3 className="mb-4 text-lg font-bold">The Heritage Collective</h3>
+            <h3 className="mb-4 text-lg font-bold">Vandanya Heritage Collective</h3>
             <p className="text-sm opacity-90">
               Preserving and celebrating traditional artifacts and cultural treasures.
             </p>
@@ -69,7 +69,7 @@ export default function Footer() {
         </div>
 
         <div className="border-primary-foreground/20 border-t pt-8 text-center text-sm opacity-90">
-          <p>&copy; 2026 Vantara Heritage Collective. All rights reserved.</p>
+          <p>&copy; 2026 Vandanya Heritage Collective. All rights reserved.</p>
         </div>
       </div>
     </footer>

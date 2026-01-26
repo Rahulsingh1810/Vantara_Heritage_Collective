@@ -14,7 +14,7 @@ const _geist = Geist({ subsets: ['latin'] })
 const _geistMono = Geist_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Vantara Heritage Collective - Traditional Artifacts & Cultural Treasures',
+  title: 'Vandanya Heritage Collective - Traditional Artifacts & Cultural Treasures',
   description: 'Discover authentic traditional artifacts and cultural treasures from skilled artisans worldwide',
   generator: 'quantech.pro',
   icons: {

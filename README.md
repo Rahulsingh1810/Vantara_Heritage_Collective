@@ -1,4 +1,4 @@
-# The Heritage Collective
+# Vandanya Heritage Collective
 
 An elegant e-commerce platform for selling traditional artifacts and cultural treasures from artisans worldwide.
 

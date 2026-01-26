@@ -18,7 +18,7 @@ const testimonials = [
     name: 'Marcus Johnson',
     role: 'Art Collector',
     content:
-      "I've been collecting traditional artifacts for years, and The Heritage Collective offers the finest pieces I've encountered. Highly recommended!",
+      "I've been collecting traditional artifacts for years, and Vandanya Heritage Collective offers the finest pieces I've encountered. Highly recommended!",
     rating: 5,
     image: '👨‍💼'
   },

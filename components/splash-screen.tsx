@@ -61,7 +61,7 @@ export default function SplashScreen() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-primary-foreground mb-4 text-5xl font-bold text-balance md:text-6xl"
         >
-          The Heritage Collective
+          Vandanya Heritage Collective
         </motion.h1>
 
         {/* Tagline */}

@@ -37,13 +37,13 @@ export default async function Page() {
         <div className="bg-accent/10 absolute right-0 bottom-0 h-96 w-96 translate-x-1/2 translate-y-1/2 rounded-full blur-3xl" />
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           {/* Visual Asset 1: Logo */}
-          <img
+          {/* <img
             src="/logo.png"
             alt="Vadānya Heritage Collective Logo"
             className="mx-auto mb-6 h-20 w-20 object-contain"
-          />
+          /> */}
 
-          <HeroSectionVideo />
+          {/* <HeroSectionVideo /> */}
           {/* Company Name + Tagline */}
           <h1 className="mb-2 text-4xl font-extrabold md:text-5xl">Vadānya Heritage Collective</h1>
           <h2 className="text-primary mb-6 text-xl font-semibold md:text-2xl">Regal Tradition. Timeless Curation.</h2>
