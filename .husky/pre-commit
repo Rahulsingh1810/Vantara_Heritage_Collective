@@ -1,3 +1,4 @@
 #!/bin/sh
 npx lint-staged || exit 1
 npm run format || exit 1
+npm run build || exit 1

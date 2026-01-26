@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
-
+import Link from 'next/link'
 import ProductFilters from '@/components/product-filters'
 import ProductGrid from '@/components/product-grid'
 import DiscountBanner from '@/components/discount-banner'
@@ -78,9 +78,9 @@ export default async function Products({
                   ) : (
                     <div className="flex min-h-96 flex-col items-center justify-center text-center">
                       <p className="text-muted-foreground mb-4 text-lg">No products found matching your filters.</p>
-                      <a href="/products" className="text-primary hover:underline">
+                      <Link href="/products" className="text-primary hover:underline">
                         Clear filters
-                      </a>
+                      </Link>
                     </div>
                   )}
                 </Suspense>
