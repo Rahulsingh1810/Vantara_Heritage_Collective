@@ -27,10 +27,13 @@ export default function Navigation() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="text-primary flex items-center gap-2 text-xl font-bold">
-            <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-lg">
-              ◆
-            </div>
-            The Heritage Collective
+            <img
+              src="/logo.png"
+              alt="The Heritage Collective Logo"
+              className="h-10 w-10 object-contain rounded"
+              style={{ maxWidth: '2.5rem', maxHeight: '2.5rem' }}
+            />
+            <span>The Heritage Collective</span>
           </Link>
 
           {/* Desktop Navigation */}

@@ -40,14 +40,23 @@ export default function About() {
             {/* Our Story */}
             <div>
               <h2 className="mb-6 text-3xl font-bold">Our Story</h2>
+              {/* Visual Asset 1 */}
+              <div className="flex justify-center mb-6">
+                <img src="/logo.png" alt="Vadānya Heritage Collective Logo" className="h-20 w-20 object-contain" />
+              </div>
               <p className="text-muted-foreground mb-4 text-lg">
-                What began as a passion for authentic cultural artifacts has grown into a curated platform representing
-                artisans from six continents. Our founders traveled extensively, building relationships with master
-                craftspeople and discovering the unique stories behind traditional artifacts.
+                Vadānya Heritage Collective was conceived from an enduring belief: the most meaningful objects are shaped by the stories around us.<br/>
+                To appreciate art in ways that resonate with each such tale, we looked into the historic traditions of colourful India. A resplendent picture arose with art unique and exquisite, leaving us mesmerised. The quiet strength of lineage echoed in unparalleled craftsmanship, with each artist holding a deep passion for the art passed down through generations.
               </p>
+              {/* Visual Asset 2 */}
+              <div className="flex justify-center mb-6">
+                {/* Replace with another relevant image if available */}
+                <img src="/traditional-indian-crafts.jpg" alt="Traditional Indian Crafts" className="h-40 w-auto rounded-lg object-cover shadow" />
+              </div>
               <p className="text-muted-foreground text-lg">
-                Today, we're proud to offer a carefully selected collection of authentic pieces—from ceramic pottery to
-                hand-woven textiles, from intricate metalware to stunning stone sculptures.
+                Behind every Vadānya piece lies a rhythm of making that cannot be rushed. Hands that have learned through repetition. Materials shaped by climate and geography. Techniques passed through memory. We honour this process by allowing it to accentuate modern living spaces.<br/><br/>
+                Each piece at Vadānya is chosen for its cultural provenance, material integrity, and the integrity of its making. Often GI-tagged, our collections are deliberately limited, allowing every artefact the dignity of focus.<br/><br/>
+                Vadānya blends the existence of the past and the present, where tradition is celebrated and cherished. Our collective is an invitation to live with heritage as a continuing conversation. In choosing Vadānya, you choose objects that speak softly, endure deeply, and belong both to history, and to the life you are building now.
               </p>
             </div>
 
