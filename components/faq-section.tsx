@@ -6,34 +6,49 @@ import { motion } from 'framer-motion'
 
 const faqs = [
   {
-    question: 'How do you verify the authenticity of artifacts?',
+    question: 'What does GI-tagging mean?',
     answer:
-      'Each piece is carefully vetted by our team of heritage experts. We work directly with traditional artisans and conduct thorough authentication processes to ensure every artifact meets our strict authenticity standards.'
+      'The Geographical Indication tag is given to products belonging to specific places (cities, towns, or villages) with attributes considered unique to that place. The tag reflects the distinctive cultural tradition of the place in creation of the product.'
   },
   {
-    question: 'What is your return policy?',
+    question: 'How does Vadānya source GI-tagged artefacts?',
     answer:
-      "We offer a 30-day return policy for all products in original condition. If you're not completely satisfied with your purchase, we'll provide a full refund or exchange."
+      'We source the products directly from artisans and vendors (Authorised Users) of the locale. The products are manufactured at the origin place in a craftsmanship tradition carried on by generations.'
   },
   {
-    question: 'How long does shipping typically take?',
+    question: 'Are the techniques unique to specific regions?',
     answer:
-      'Domestic orders usually arrive within 7-14 business days. International shipping takes 15-30 business days depending on location. We provide tracking information for all orders.'
+      'There are brief overlaps of the techniques, materials, and craftsmanship across a few regions, owing to cultural convergence. Nonetheless, there are some distinctive features and a lineage spanning centuries for every specific region - earning it the GI-tag in the first place.'
   },
   {
-    question: 'Do you offer bulk orders or wholesale pricing?',
+    question: 'Why do slight variations occur between pieces?',
     answer:
-      'Yes! We offer special pricing for bulk and wholesale orders. Please contact our sales team at wholesale@heritagecollective.com for more information.'
+      'Each product is carefully hand-crafted with minimal manufacturing. The variations are a result of artistic endeavours in ensuring each piece gets the time and effort it deserves.'
   },
   {
-    question: 'Are your products ethically sourced?',
+    question: 'How long does it take to create a piece?',
     answer:
-      'Absolutely. We partner exclusively with artisans and communities that follow fair trade practices and sustainable production methods. Your purchase directly supports these communities.'
+      'The woodworking process is a lengthy one - time-consuming in both the preparation stage and manufacturing stage. On average, creating a piece takes not less than ten days - so we encourage you to book the products well in advance keeping the timeline in mind.'
   },
   {
-    question: 'Can I customize or personalize artifacts?',
+    question: 'How can I stay informed about new releases?',
     answer:
-      "Many of our artisans offer customization services. Please contact us directly with your specific requests, and we'll connect you with the appropriate craftsperson."
+      'We’re coming up with several new collections over the year from various other locales. Keep an eye out on this space - or even sign up for the newsletter to receive exclusive information (and some exciting goodies!)'
+  },
+  {
+    question: 'Do you ship internationally?',
+    answer:
+      'Currently, we only ship to places in India. However, we’re expanding and will begin to ship internationally soon.'
+  },
+  {
+    question: 'What are the delivery timelines?',
+    answer:
+      'It may take from 7 to 20 days after purchase for your products to be delivered. The fastest delivery timeline (7 days) is subject to availability of products in stock.'
+  },
+  {
+    question: 'What is your returns or exchange policy?',
+    answer:
+      'We offer returns / exchange for up to seven days after your receival. To be eligible for return and refund, a video at the time of unboxing is mandatory. Returns are made only on damaged products.'
   }
 ]
 
@@ -44,8 +59,12 @@ export default function FAQSection() {
     <section className="bg-background py-16 md:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-balance md:text-4xl">Frequently Asked Questions</h2>
-          <p className="text-muted-foreground text-lg">Everything you need to know about our heritage artifacts</p>
+          <h2 className="mb-4 text-3xl font-bold text-balance md:text-4xl">
+            Understanding Our Pieces
+          </h2>
+          <p className="text-muted-foreground text-lg">
+            Frequently asked questions about our GI-tagged heritage artefacts
+          </p>
         </div>
 
         <div className="space-y-4">
@@ -55,25 +74,35 @@ export default function FAQSection() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="bg-card border-border overflow-hidden rounded-lg border"
+              className="bg-card border-border overflow-hidden rounded-xl border shadow-sm"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="hover:bg-muted/50 flex w-full items-center justify-between px-6 py-4 transition-colors"
+                className="hover:bg-muted/50 flex w-full items-center justify-between px-6 py-5 text-left transition-colors"
               >
-                <span className="text-left text-lg font-semibold">{faq.question}</span>
-                <motion.div animate={{ rotate: openIndex === index ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                  <ChevronDown className="text-primary h-5 w-5 flex-shrink-0" />
+                <span className="text-lg font-semibold leading-tight">
+                  {faq.question}
+                </span>
+                <motion.div
+                  animate={{ rotate: openIndex === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="text-primary h-6 w-6 flex-shrink-0" />
                 </motion.div>
               </button>
 
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
-                animate={{ height: openIndex === index ? 'auto' : 0, opacity: openIndex === index ? 1 : 0 }}
-                transition={{ duration: 0.3 }}
+                animate={{
+                  height: openIndex === index ? 'auto' : 0,
+                  opacity: openIndex === index ? 1 : 0,
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="overflow-hidden"
               >
-                <div className="bg-muted/30 text-muted-foreground border-border border-t px-6 py-4">{faq.answer}</div>
+                <div className="border-border border-t bg-muted/20 px-6 py-5 text-muted-foreground">
+                  {faq.answer}
+                </div>
               </motion.div>
             </motion.div>
           ))}

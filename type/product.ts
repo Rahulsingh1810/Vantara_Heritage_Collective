@@ -16,5 +16,6 @@ export type IProducts = {
   productOrigin: string
   productStock: number
   productMaterial: string
+  
   productImagesCollection: IMedia[]
 }

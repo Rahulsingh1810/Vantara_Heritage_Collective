@@ -18,7 +18,7 @@ export default function HeroSectionVideo() {
   }, [])
 
   return (
-    <section className="relative w-full h-dvh overflow-hidden flex items-center justify-center">
+    <section className="relative w-100vh h-100vh overflow-hidden flex items-center justify-center">
       {/* Video background – fills entire viewport */}
       <div className="absolute inset-0 z-0">
         <video

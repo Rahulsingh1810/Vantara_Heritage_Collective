@@ -67,19 +67,29 @@ export default async function Page() {
             </p>
           </div>
           {/* Transforming Spaces */}
-          <div className="mx-auto max-w-2xl">
-            <h4 className="text-primary mb-2 text-lg font-semibold">Transforming Spaces</h4>
-            <div className="flex flex-wrap justify-center gap-3 text-base font-medium">
-              <span className="bg-primary/10 rounded-full px-4 py-2">Statement Walls</span>
-              <span className="bg-primary/10 rounded-full px-4 py-2">Vignette Shelves</span>
-              <span className="bg-primary/10 rounded-full px-4 py-2">Elegant Surfaces</span>
-              <span className="bg-primary/10 rounded-full px-4 py-2">Soulful Landscapes</span>
-            </div>
-          </div>
+          {/* Transforming Spaces */}
+<div className="mx-auto max-w-3xl text-center">
+  <h4 className="text-primary mb-6 text-xl font-semibold">Transforming Spaces</h4>
+  <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+    {[
+      "Statement Walls",
+      "Vignette Shelves",
+      "Elegant Surfaces",
+      "Soulful Landscapes",
+    ].map((label) => (
+      <div
+        key={label}
+        className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-[var(--color-wine-red)] bg-[var(--color-wine-red)] text-center text-sm font-medium text-[var(--color-ivory)] shadow-sm transition-transform hover:scale-105 md:h-25 md:w-25 md:text-base"
+      >
+        {label}
+      </div>
+    ))}
+  </div>
+</div>
         </div>
       </section>
       {/* Hero Section Animated */}
-      <HeroSectionAnimated />
+      {/* <HeroSectionAnimated /> */}
       {/* ...existing code... */}
 
       {/* Featured Products Slider Section */}
@@ -108,9 +118,10 @@ export default async function Page() {
       <section className="from-primary/5 via-background to-accent/5 bg-gradient-to-r py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="animate-fade-in-up mb-16 text-center">
-            <h2 className="mb-3 text-3xl font-bold text-balance md:text-4xl">Meet Our Master Artisans</h2>
+            <h2 className="mb-3 text-3xl font-bold text-balance md:text-4xl">Know the Legacy</h2>
             <p className="text-muted-foreground text-lg">
-              Supporting traditional craftspeople and preserving heritage crafts
+              Discover the intricate craftsmanship of master artisans
+
             </p>
           </div>
 
@@ -189,7 +200,7 @@ export default async function Page() {
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="animate-fade-in-up mb-4 text-3xl font-bold text-white md:text-4xl">Have Questions?</h2>
           <p className="mb-8 text-lg text-white/90">
-            Get in touch with our team for custom orders, wholesale inquiries, or artisan collaborations
+           Get in touch for queries or to simply chat! 
           </p>
           <button
             onClick={() => setShowContactPopup(true)}

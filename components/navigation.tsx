@@ -22,38 +22,36 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="bg-background border-border sticky top-0 z-50 border-b">
+    <nav className="sticky top-0 z-50 border-b border-[#5a1620] bg-[#6f1c27] text-[#F5EFE6]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="text-primary flex items-center gap-2 text-xl font-bold">
+          <Link href="/" className="flex items-center gap-2 text-xl font-bold text-[#F5EFE6]">
             <img
-              src="/logo.png"
+              src="/ivoryLogo.svg"
               alt="Vandanya Heritage Collective Logo"
-              className="h-10 w-20 rounded object-contain"
-              style={{ maxWidth: '6rem', maxHeight: '6rem' }}
+              className="h-12 w-auto rounded object-contain md:h-14"
             />
-            {/* <span>Vandanya Heritage Collective</span> */}
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-8 md:flex">
-            <Link href="/" className="text-foreground hover:text-primary transition-colors">
+            <Link href="/" className="transition-colors hover:text-[#F5EFE6]/80">
               Home
             </Link>
-            <Link href="/about" className="text-foreground hover:text-primary transition-colors">
-              About
+            <Link href="/our-story" className="transition-colors hover:text-[#F5EFE6]/80">
+              Our Story
             </Link>
-            <Link href="/products" className="text-foreground hover:text-primary transition-colors">
+            <Link href="/products" className="transition-colors hover:text-[#F5EFE6]/80">
               Products
             </Link>
-            <Link href="/b2b" className="text-foreground hover:text-primary font-semibold transition-colors">
+            <Link href="/b2b" className="font-semibold transition-colors hover:text-[#F5EFE6]/80">
               B2B
             </Link>
-            <Link href="/transforming-spaces" className="text-foreground hover:text-primary transition-colors">
+            <Link href="/transforming-spaces" className="transition-colors hover:text-[#F5EFE6]/80">
               Transforming Spaces
             </Link>
-            <Link href="/contact" className="text-foreground hover:text-primary transition-colors">
+            <Link href="/contact" className="transition-colors hover:text-[#F5EFE6]/80">
               Contact
             </Link>
           </div>
@@ -67,17 +65,17 @@ export default function Navigation() {
               {user ? (
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="hover:bg-accent flex items-center gap-2 rounded-lg px-3 py-2 transition-colors"
+                  className="flex items-center gap-2 rounded-lg px-3 py-2 transition-colors hover:bg-[#5a1620]"
                 >
-                  <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F5EFE6] text-sm font-bold text-[#6f1c27]">
                     {user.name?.charAt(0).toUpperCase() || 'U'}
                   </div>
-                  <span className="text-foreground hidden text-sm font-medium sm:inline">{user.name}</span>
+                  <span className="hidden text-sm font-medium sm:inline">{user.name}</span>
                 </button>
               ) : (
                 <Link
                   href="/auth/login"
-                  className="text-foreground hover:text-primary text-sm font-medium transition-colors"
+                  className="text-sm font-medium transition-colors hover:text-[#F5EFE6]/80"
                 >
                   Sign In
                 </Link>
@@ -85,17 +83,20 @@ export default function Navigation() {
 
               {/* User Dropdown */}
               {showUserMenu && user && (
-                <div className="bg-card border-border absolute right-0 z-50 mt-2 w-56 rounded-lg border py-2 shadow-lg">
-                  <div className="border-border border-b px-4 py-3">
-                    <p className="text-foreground font-semibold">{user.name}</p>
-                    <p className="text-muted-foreground text-sm">{user.email}</p>
+                <div className="absolute right-0 z-50 mt-2 w-56 rounded-lg border border-[#5a1620] bg-[#6f1c27] py-2 shadow-lg">
+                  <div className="border-b border-[#5a1620] px-4 py-3">
+                    <p className="font-semibold">{user.name}</p>
+                    <p className="text-sm text-[#e6dccf]">{user.email}</p>
                   </div>
-                  <Link href="/dashboard" className="hover:bg-muted block px-4 py-2 transition-colors">
+                  <Link
+                    href="/dashboard"
+                    className="block px-4 py-2 transition-colors hover:bg-[#5a1620]"
+                  >
                     My Dashboard
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="hover:bg-muted text-destructive w-full px-4 py-2 text-left transition-colors"
+                    className="w-full px-4 py-2 text-left text-red-300 transition-colors hover:bg-[#5a1620]"
                   >
                     Logout
                   </button>
@@ -112,30 +113,42 @@ export default function Navigation() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="space-y-2 pb-4 md:hidden">
-            <Link href="/" className="text-foreground hover:bg-muted block rounded px-3 py-2">
-              Home
-            </Link>
-            <Link href="/about" className="text-foreground hover:bg-muted block rounded px-3 py-2">
-              About
-            </Link>
-            <Link href="/products" className="text-foreground hover:bg-muted block rounded px-3 py-2">
-              Products
-            </Link>
-            <Link href="/b2b" className="text-foreground hover:bg-muted block rounded px-3 py-2 font-semibold">
-              B2B
-            </Link>
-            <Link href="/transforming-spaces" className="text-foreground hover:bg-muted block rounded px-3 py-2">
-              Transforming Spaces
-            </Link>
-            <Link href="/contact" className="text-foreground hover:bg-muted block rounded px-3 py-2">
-              Contact
-            </Link>
-            {!user && (
-              <Link href="/auth/register" className="text-foreground hover:bg-muted block rounded px-3 py-2">
-                Create Account
+          <div className="absolute inset-0 z-40 bg-[#6f1c27] px-6 pt-20 text-[#F5EFE6] md:hidden">
+            <div className="space-y-4">
+              <Link href="/" className="block rounded px-3 py-2 text-lg hover:bg-[#5a1620]">
+                Home
               </Link>
-            )}
+              <Link href="/about" className="block rounded px-3 py-2 text-lg hover:bg-[#5a1620]">
+                About
+              </Link>
+              <Link href="/products" className="block rounded px-3 py-2 text-lg hover:bg-[#5a1620]">
+                Products
+              </Link>
+              <Link
+                href="/b2b"
+                className="block rounded px-3 py-2 text-lg font-semibold hover:bg-[#5a1620]"
+              >
+                B2B
+              </Link>
+              <Link
+                href="/transforming-spaces"
+                className="block rounded px-3 py-2 text-lg hover:bg-[#5a1620]"
+              >
+                Transforming Spaces
+              </Link>
+              <Link href="/contact" className="block rounded px-3 py-2 text-lg hover:bg-[#5a1620]">
+                Contact
+              </Link>
+
+              {!user && (
+                <Link
+                  href="/auth/register"
+                  className="block rounded px-3 py-2 text-lg hover:bg-[#5a1620]"
+                >
+                  Create Account
+                </Link>
+              )}
+            </div>
           </div>
         )}
       </div>

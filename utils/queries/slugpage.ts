@@ -33,8 +33,13 @@ export default async function fetchProductBySlug(slug: string) {
                 vendorDescription
               }
               productPrice
+              productStock
               productWeight
               productDimensions
+              productCulturalSignificance
+              productCare
+              placementsAndStylingNotes
+              InYourSpace
               productOrigin
             }
           }

@@ -31,8 +31,14 @@ export default async function fetchProducts() {
                 vendorDescription
               }
               productPrice
+              productStock
               productWeight
+
               productDimensions
+              productCulturalSignificance
+              productCare
+              placementsAndStylingNotes
+              InYourSpace
               productOrigin
             }
           }
