@@ -24,7 +24,7 @@ type ProductCardProps = {
 export default function ProductCardEnhanced({ product }: ProductCardProps) {
   return (
     <motion.div whileHover={{ y: -8 }} transition={{ duration: 0.3 }} className="group h-full">
-      <Card className="hover:border-primary bg-card flex h-full flex-col overflow-hidden border-2 pt-0 transition-colors">
+      <Card className="hover:border-[var(--color-wine-red)] bg-[var(--color-ivory)] flex h-full flex-col overflow-hidden border-2 pt-0 transition-colors">
         {/* Image Container */}
         <CardContent className="bg-muted relative flex-shrink-0 overflow-hidden p-0">
           <div className="relative h-72 w-full">
@@ -72,7 +72,7 @@ export default function ProductCardEnhanced({ product }: ProductCardProps) {
         <CardFooter className="p-5 pt-0">
           <Link href={`/products/${product.slug}`} className="w-full">
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full">
-              <Button className="w-full">
+              <Button className="bg-[var(--color-wine-red)] hover:bg-[var(--color-wine-red-dark)] text-[var(--color-ivory)] hover:text-[var(--color-wine-red)] w-full">
                 <ShoppingCart className="mr-2 h-4 w-4" />
                 View Details
               </Button>

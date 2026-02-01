@@ -55,7 +55,7 @@ export default function B2BPage() {
   return (
     <main className="bg-background">
       {/* Hero Section */}
-      <section className="from-primary to-accent text-primary-foreground bg-gradient-to-br py-20 md:py-32">
+      <section className="from-primary to-accent text-primary-foreground bg-[var(--color-wine-red)] py-20 md:py-32">
         <div className="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
           <motion.h1
             initial={{ opacity: 0, scale: 0.9 }}

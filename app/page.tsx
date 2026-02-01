@@ -130,7 +130,7 @@ export default async function Page() {
       </section>
 
       {/* Stats Counter Section */}
-      <section className="bg-accent text-accent-foreground py-16 md:py-24">
+      <section className="bg-[var(--color-wine-red)] text-[var(--color-ivory)] py-16 md:py-24">
         <StatsCounter />
       </section>
 
@@ -185,13 +185,13 @@ export default async function Page() {
       </section>
 
       {/* Testimonials Slider */}
-      <section className="bg-background py-16 md:py-24">
+      <section className="bg---colour-wine-red py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <TestimonialsSlider />
         </div>
       </section>
 
-      <section className="from-primary via-accent to-primary relative overflow-hidden bg-gradient-to-r py-16 md:py-24">
+      <section className="from-primary via-accent to-primary relative overflow-hidden bg-[var(--color-wine-red)] py-16 md:py-24">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/4 left-1/4 h-72 w-72 rounded-full bg-white mix-blend-multiply blur-xl filter" />
           <div className="absolute top-1/3 right-1/4 h-72 w-72 rounded-full bg-white mix-blend-multiply blur-xl filter" />
@@ -204,7 +204,7 @@ export default async function Page() {
           </p>
           <button
             onClick={() => setShowContactPopup(true)}
-            className="text-primary rounded-lg bg-white px-8 py-3 font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            className="text-[var(--color-ivory)] rounded-lg bg-[var(--color-wine-red)] px-8 py-3 font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
           >
             Start a Conversation
           </button>

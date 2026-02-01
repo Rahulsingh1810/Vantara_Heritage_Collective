@@ -12,7 +12,7 @@ export default function Contact() {
   return (
     <main>
       {/* Hero Section */}
-      <section className="bg-primary text-primary-foreground py-16 md:py-24">
+      <section className="bg-[var(--color-wine-red)] text-[var(--color-ivory)] py-16 md:py-24">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <h1 className="mb-6 text-4xl font-bold text-balance md:text-5xl">Get in Touch</h1>
           <p className="text-lg text-balance opacity-90 md:text-xl">

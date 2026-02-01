@@ -11,7 +11,7 @@ export default function TransformingSpaces() {
   return (
     <main>
       {/* Hero Section */}
-      <section className="from-primary/90 to-accent/80 text-primary-foreground bg-gradient-to-r py-16 md:py-24">
+      <section className="from-primary/90 to-accent/80 text-[var(--color-ivory)] bg-[var(--color-wine-red)] py-16 md:py-24">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <h1 className="mb-6 text-4xl font-bold text-balance md:text-5xl">Transforming Spaces with Heritage</h1>
           <p className="text-lg text-balance opacity-90 md:text-xl">

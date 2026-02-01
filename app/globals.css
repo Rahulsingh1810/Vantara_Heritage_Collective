@@ -5,7 +5,7 @@
 
 :root {
   /* Updated background to butterish/yellowish instead of white */
-  --background: oklch(0.94 0.08 80);
+  --background:  #F5EFE6;
   --foreground: oklch(0.15 0 0);
   /* Updated card color to warm butter tone */
   --card: oklch(0.96 0.06 85);
