@@ -1,21 +1,22 @@
 import { IMedia } from './media'
 import { IVendor } from './vendor'
 
-export type IProducts = {
-  productId: number
+export interface IProduct {
+  productId: number | string
   productTitle: string
   productDescription: string
-  slug?: string //this was not there added just now
-  productCulturalSignificance: string
+  slug: string
+  productCulturalSignificance?: string
   productCategory: string
-  productCare: string
-  vendor: IVendor
+  productCare?: string
+  vendor?: IVendor
   productPrice: number
-  productWeight: number
-  productDimensions: string
-  productOrigin: string
   productStock: number
-  productMaterial: string
-  
-  productImagesCollection: IMedia[]
+  productWeight?: number
+  productDimensions?: string
+  productOrigin?: string
+  productMaterial?: string
+  productImagesCollection?: IMedia[]
+  placementsAndStylingNotes?: string
+  inYourSpace?: string
 }

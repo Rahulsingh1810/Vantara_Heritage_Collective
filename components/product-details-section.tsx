@@ -1,7 +1,6 @@
 'use client'
 
 import type React from 'react'
-
 import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 
@@ -9,134 +8,180 @@ interface ProductDetailsSectionProps {
   category?: string
   material?: string
   dimensions?: string
-  weight?: string
+  weight?: string | number
   origin?: string
   cultureSignificance?: string
   careInstructions?: string
+  stylingNotes?: string
+  inYourSpace?: string
 }
 
 export default function ProductDetailsSection({
   category,
-  material = 'Traditional Handcrafted',
-  dimensions = 'Varies',
+  material = 'Handcrafted with traditional techniques',
+  dimensions = 'Varies by piece (please refer to images)',
   weight = 'Varies',
   origin = 'India',
-  cultureSignificance = 'This artifact represents generations of traditional Indian craftsmanship and cultural heritage.',
-  careInstructions = 'Handle with care. Clean gently with a dry cloth. Avoid direct sunlight for extended periods.'
+  cultureSignificance = 'This piece embodies generations of skilled craftsmanship and deep cultural meaning, preserving living traditions of Indian heritage.',
+  careInstructions = 'Handle gently. Dust with a soft, dry cloth. Avoid prolonged direct sunlight and moisture.',
+  stylingNotes,
+  inYourSpace,
 }: ProductDetailsSectionProps) {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     specs: true,
     significance: false,
-    care: false
+    care: false,
+    styling: false,
   })
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev => ({
       ...prev,
-      [section]: !prev[section]
+      [section]: !prev[section],
     }))
   }
 
   const Section = ({
     title,
+    icon,
     sectionKey,
-    children
+    children,
   }: {
     title: string
+    icon?: string
     sectionKey: string
     children: React.ReactNode
   }) => (
-    <div className="border-border border-b last:border-b-0">
+    <div className="border-b border-[var(--color-wine-red)]/20 last:border-b-0">
       <button
         onClick={() => toggleSection(sectionKey)}
-        className="hover:bg-muted/50 flex w-full items-center justify-between px-2 py-4 transition-colors duration-300"
+        className="flex w-full items-center justify-between py-4 px-1 text-left transition-colors hover:bg-[var(--color-wine-red)]/5"
+        aria-expanded={expandedSections[sectionKey]}
       >
-        <h3 className="text-foreground text-lg font-semibold">{title}</h3>
+        <div className="flex items-center gap-3">
+          {icon && <span className="text-xl">{icon}</span>}
+          <h3 className="text-lg font-semibold text-[var(--color-wine-red)]">
+            {title}
+          </h3>
+        </div>
         <ChevronDown
-          className={`h-5 w-5 transition-transform duration-300 ${expandedSections[sectionKey] ? 'rotate-180' : ''}`}
+          className={`h-5 w-5 text-[var(--color-wine-red)] transition-transform duration-300 ${
+            expandedSections[sectionKey] ? 'rotate-180' : ''
+          }`}
         />
       </button>
+
       {expandedSections[sectionKey] && (
-        <div className="text-muted-foreground animate-fade-in-up px-4 pb-4">{children}</div>
+        <div className="pb-5 pt-1 px-1 text-[var(--color-wine-red)]/80 animate-fade-in">
+          {children}
+        </div>
       )}
     </div>
   )
 
   return (
-    <div className="mt-12 space-y-6">
-      <div className="bg-card border-border rounded-xl border p-6">
+    <div className="mt-12 md:mt-16">
+      <div className="rounded-xl border border-[var(--color-wine-red)]/25 bg-[var(--color-ivory)]/70 backdrop-blur-sm shadow-sm overflow-hidden">
         {/* Specifications */}
-        <Section title="📋 Product Specifications" sectionKey="specs">
-          <div className="grid grid-cols-2 gap-4">
+        <Section title="Product Specifications" sectionKey="specs" icon="📋">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {category && (
               <div>
-                <p className="text-primary mb-1 text-xs font-semibold tracking-wider uppercase">Category</p>
-                <p className="text-foreground">{category}</p>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--color-wine-red)]/70">
+                  Category
+                </dt>
+                <dd className="mt-1 text-[var(--color-wine-red)]">{category}</dd>
               </div>
             )}
+
             <div>
-              <p className="text-primary mb-1 text-xs font-semibold tracking-wider uppercase">Material</p>
-              <p className="text-foreground">{material}</p>
+              <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--color-wine-red)]/70">
+                Material
+              </dt>
+              <dd className="mt-1 text-[var(--color-wine-red)]">{material}</dd>
             </div>
+
             <div>
-              <p className="text-primary mb-1 text-xs font-semibold tracking-wider uppercase">Dimensions</p>
-              <p className="text-foreground">{dimensions}</p>
+              <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--color-wine-red)]/70">
+                Dimensions
+              </dt>
+              <dd className="mt-1 text-[var(--color-wine-red)]">{dimensions}</dd>
             </div>
+
             <div>
-              <p className="text-primary mb-1 text-xs font-semibold tracking-wider uppercase">Weight</p>
-              <p className="text-foreground">{weight}</p>
+              <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--color-wine-red)]/70">
+                Weight
+              </dt>
+              <dd className="mt-1 text-[var(--color-wine-red)]">{weight}</dd>
             </div>
-            <div className="col-span-2">
-              <p className="text-primary mb-1 text-xs font-semibold tracking-wider uppercase">Origin</p>
-              <p className="text-foreground">{origin}</p>
+
+            <div className="sm:col-span-2">
+              <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--color-wine-red)]/70">
+                Origin
+              </dt>
+              <dd className="mt-1 text-[var(--color-wine-red)]">{origin}</dd>
             </div>
           </div>
         </Section>
 
         {/* Cultural Significance */}
-        <Section title="🏛️ Cultural Significance" sectionKey="significance">
+        <Section title="Cultural & Historical Significance" sectionKey="significance" icon="🏛️">
           <p className="text-sm leading-relaxed">{cultureSignificance}</p>
-          <div className="bg-primary/10 border-primary/20 mt-4 rounded-lg border p-4">
-            <p className="text-primary mb-2 text-sm font-semibold">Artisan Heritage</p>
-            <p className="text-muted-foreground text-xs">
-              This piece is crafted using traditional techniques passed down through generations of artisans, preserving
-              the authentic cultural heritage of India.
+
+          <div className="mt-5 rounded-lg bg-[var(--color-wine-red)]/5 p-5 border border-[var(--color-wine-red)]/15">
+            <p className="font-medium text-[var(--color-wine-red)] mb-2">Artisan Heritage Note</p>
+            <p className="text-sm text-[var(--color-wine-red)]/80">
+              Handcrafted using time-honored techniques passed down through generations, supporting living cultural traditions.
             </p>
           </div>
         </Section>
 
         {/* Care Instructions */}
-        <Section title="✨ Care & Maintenance" sectionKey="care">
-          <ul className="space-y-2 text-sm">
+        <Section title="Care & Maintenance" sectionKey="care" icon="✨">
+          <ul className="space-y-3 text-sm">
             <li className="flex gap-3">
-              <span className="text-primary font-bold">•</span>
+              <span className="text-[var(--color-wine-red)] font-bold mt-1">•</span>
               <span>{careInstructions}</span>
             </li>
             <li className="flex gap-3">
-              <span className="text-primary font-bold">•</span>
-              <span>Store in a cool, dry place away from moisture</span>
+              <span className="text-[var(--color-wine-red)] font-bold mt-1">•</span>
+              <span>Keep away from direct sunlight and high humidity</span>
             </li>
             <li className="flex gap-3">
-              <span className="text-primary font-bold">•</span>
-              <span>Protect from extreme temperature changes</span>
+              <span className="text-[var(--color-wine-red)] font-bold mt-1">•</span>
+              <span>Store in a stable, dry environment</span>
             </li>
             <li className="flex gap-3">
-              <span className="text-primary font-bold">•</span>
-              <span>If needed, use a soft brush to clean intricate details</span>
+              <span className="text-[var(--color-wine-red)] font-bold mt-1">•</span>
+              <span>Use soft tools only for cleaning detailed areas</span>
             </li>
           </ul>
         </Section>
+
+        {/* Optional: Styling & Placement Notes */}
+        {(stylingNotes || inYourSpace) && (
+          <Section title="Styling & Placement Ideas" sectionKey="styling" icon="🪔">
+            {stylingNotes && <p className="mb-4 text-sm leading-relaxed">{stylingNotes}</p>}
+            {inYourSpace && (
+              <div className="bg-[var(--color-wine-red)]/5 p-5 rounded-lg border border-[var(--color-wine-red)]/15">
+                <p className="font-medium text-[var(--color-wine-red)] mb-2">In Your Space</p>
+                <p className="text-sm text-[var(--color-wine-red)]/80">{inYourSpace}</p>
+              </div>
+            )}
+          </Section>
+        )}
       </div>
 
-      {/* Heritage Badge */}
-      <div className="from-primary/20 to-accent/20 border-primary/30 rounded-xl border bg-gradient-to-r p-6">
+      {/* Heritage badge / trust element */}
+      <div className="mt-8 rounded-xl border border-[var(--color-wine-red)]/20 bg-gradient-to-br from-[var(--color-ivory)] to-white/80 p-6 shadow-sm">
         <div className="flex items-start gap-4">
-          <div className="text-3xl">🇮🇳</div>
+          <div className="text-3xl flex-shrink-0">🇮🇳</div>
           <div>
-            <p className="text-foreground mb-1 font-semibold">Authentic Indian Heritage</p>
-            <p className="text-muted-foreground text-sm">
-              Every piece in our collection is carefully curated to ensure authenticity and support traditional artisans
-              across India.
+            <p className="font-semibold text-[var(--color-wine-red)] mb-1.5">
+              Authentic Indian Heritage
+            </p>
+            <p className="text-sm text-[var(--color-wine-red)]/75 leading-relaxed">
+              Each piece is thoughtfully sourced to honor and sustain traditional craftsmanship across India.
             </p>
           </div>
         </div>

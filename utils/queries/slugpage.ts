@@ -39,7 +39,7 @@ export default async function fetchProductBySlug(slug: string) {
               productCulturalSignificance
               productCare
               placementsAndStylingNotes
-              InYourSpace
+              inYourSpace
               productOrigin
             }
           }

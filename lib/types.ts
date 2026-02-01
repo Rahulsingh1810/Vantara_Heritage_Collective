@@ -1,4 +1,4 @@
-export interface Vendor {
+export interface IVendor {
   id: number
   name: string
   description: string
@@ -14,20 +14,37 @@ export interface Category {
   created_at: string
 }
 
+export type Media = {
+  sys: {
+    id: string
+  }
+  url: string
+  title?: string
+  description?: string
+  height?: number
+  width?: number
+  contentType: string
+}
+
+
 export interface Product {
-  id: number
-  name: string
+  productId: number | string
+  productTitle: string
+  productDescription: string
   slug: string
-  description: string
-  price: number
-  category_id: number
-  vendor_id: number
-  image_url: string
-  image_urls: string[]
-  stock_quantity: number
-  featured: boolean
-  created_at: string
-  updated_at: string
+  productCulturalSignificance?: string
+  productCategory: string
+  productCare?: string
+  vendor?: IVendor
+  productPrice: number
+  productStock: number
+  productWeight?: number
+  productDimensions?: string
+  productOrigin?: string
+  productMaterial?: string
+  productImagesCollection?: IMedia[]
+  placementsAndStylingNotes?: string
+  inYourSpace?: string
 }
 
 export interface Order {

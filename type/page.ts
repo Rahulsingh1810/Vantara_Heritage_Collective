@@ -29,6 +29,8 @@ export type Product = {
   productDimensions?: string
   productOrigin: string
   productMaterial: string
+  placementsAndStylingNotes: string
+  inYourSpace: string
 }
 
 export type ProductsCollection = {

@@ -15,7 +15,6 @@ export default async function fetchProducts() {
               productImagesCollection(limit: 3) {
                 items {
                   title
-                  
                   description
                   url
                   height
@@ -38,7 +37,7 @@ export default async function fetchProducts() {
               productCulturalSignificance
               productCare
               placementsAndStylingNotes
-              InYourSpace
+              inYourSpace
               productOrigin
             }
           }
