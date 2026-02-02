@@ -10,6 +10,8 @@ export type GridProduct = {
   description: string
   image: string
   price: number
+  category: string
+  vendor: string
 }
 
 export default function ProductGrid({ products }: { products: GridProduct[] }) {

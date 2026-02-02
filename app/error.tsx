@@ -11,7 +11,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
 
   return (
     <main>
-      <div className="bg-primary text-primary-foreground py-12">
+      <div className="bg-[var(--color-wine-red)] text-[var(--color-ivory)] py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold">Something went wrong</h1>
         </div>
