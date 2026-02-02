@@ -24,7 +24,7 @@ type ProductCardProps = {
 export default function ProductCardEnhanced({ product }: ProductCardProps) {
   return (
     <motion.div whileHover={{ y: -8 }} transition={{ duration: 0.3 }} className="group h-full">
-      <Card className="hover:border-[var(--color-wine-red)] bg-[var(--color-ivory)] flex h-full flex-col overflow-hidden border-2 pt-0 transition-colors">
+      <Card className="flex h-full flex-col overflow-hidden border-2 bg-[var(--color-ivory)] pt-0 transition-colors hover:border-[var(--color-wine-red)]">
         {/* Image Container */}
         <CardContent className="bg-muted relative flex-shrink-0 overflow-hidden p-0">
           <div className="relative h-[550px] w-full">
@@ -42,8 +42,8 @@ export default function ProductCardEnhanced({ product }: ProductCardProps) {
 
         {/* Content */}
         <div className="flex flex-1 flex-col p-5">
-          <Link href={`/products/${product.id}`}>
-            <h3 className="group-hover:text-primary mb-2 line-clamp-2 text-lg font-bold transition-colors">
+          <Link href={`/products/${product.slug}`}>
+            <h3 className="mb-2 line-clamp-2 text-lg font-bold transition-colors group-hover:text-[var(--color-wine-red)]">
               {product.title}
             </h3>
           </Link>
@@ -62,7 +62,11 @@ export default function ProductCardEnhanced({ product }: ProductCardProps) {
 
           {/* Price and Stock */}
           <div className="mb-4 flex items-center justify-between">
-            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-primary text-3xl font-bold">
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-3xl font-bold text-[var(--color-wine-red)]"
+            >
               ₹{ensureNumber(product.price).toFixed(2)}
             </motion.span>
           </div>
@@ -72,7 +76,7 @@ export default function ProductCardEnhanced({ product }: ProductCardProps) {
         <CardFooter className="p-5 pt-0">
           <Link href={`/products/${product.slug}`} className="w-full">
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full">
-              <Button className="bg-[var(--color-wine-red)] hover:bg-[var(--color-wine-red)]/80 text-[var(--color-ivory)] w-full">
+              <Button className="w-full bg-[var(--color-wine-red)] text-[var(--color-ivory)] hover:bg-[var(--color-wine-red)]/80">
                 <ShoppingCart className="mr-2 h-4 w-4" />
                 View Details
               </Button>
