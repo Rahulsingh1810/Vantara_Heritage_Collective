@@ -31,7 +31,7 @@ export default function SplashScreen() {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
-      className="from-primary via-accent to-primary fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[var(--color-wine-red)] backdrop-blur-lg"
+      className="from-primary via-accent to-primary fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[var(--color-wine-red)] backdrop-blur-lg opacity-60 shadow-lg"
     >
       {/* Animated Background Elements */}
       <motion.div

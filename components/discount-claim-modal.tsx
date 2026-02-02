@@ -47,7 +47,7 @@ export default function DiscountClaimModal() {
             exit={{ scale: 0.5, opacity: 0 }}
             className="fixed top-1/2 left-1/2 z-50 mx-4 w-96 max-w-full -translate-x-1/2 -translate-y-1/2 transform"
           >
-            <div className="bg-background border-primary rounded-xl border-2 p-8 shadow-2xl">
+            <div className="bg-background border-[var(--color-wine-red)] rounded-xl border-2 p-8 shadow-2xl">
               {/* Close Button */}
               <button
                 onClick={() => setIsOpen(false)}
@@ -58,7 +58,7 @@ export default function DiscountClaimModal() {
 
               {!submitted ? (
                 <>
-                  <h2 className="text-primary mb-2 text-3xl font-bold">Exclusive Offer!</h2>
+                  <h2 className="text-[var(--color-wine-red)] mb-2 text-3xl font-bold">Exclusive Offer!</h2>
                   <p className="text-muted-foreground mb-6">Get 20% off your first order</p>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
