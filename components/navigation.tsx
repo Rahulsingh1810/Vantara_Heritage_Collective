@@ -5,205 +5,136 @@ import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import CartIcon from './cart-icon'
 import { useUser } from '@/lib/user-context'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
   const { user } = useUser()
 
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' })
-      setShowUserMenu(false)
-      setIsOpen(false)
-      window.location.href = '/'
-    } catch (error) {
-      console.error('Logout error:', error)
-    }
-  }
-
   const closeMenu = () => setIsOpen(false)
 
+  const links = [
+    { label: 'Home', href: '/' },
+    { label: 'Our Story', href: '/our-story' },
+    { label: 'Products', href: '/products' },
+    { label: 'B2B', href: '/b2b' },
+    { label: 'Transforming Spaces', href: '/transforming-spaces' },
+    { label: 'Contact', href: '/contact' }
+  ]
+
   return (
-    <nav className="sticky top-0 z-50 border-b border-[var(--color-wine-red)] bg-[var(--color-wine-red)] text-[var(--color-ivory)] opacity-98 shadow-lg backdrop-blur-sm">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 text-xl font-bold">
-            <img
-              src="/ivoryLogo.svg"
-              alt="Vandanya Heritage Collective Logo"
-              className="h-12 w-auto rounded object-contain md:h-14"
-            />
-          </Link>
+    <>
+      {/* TOP BAR (DESKTOP + MOBILE SAME AS BEFORE) */}
+      <nav className="sticky top-0 z-50 border-b border-(--color-wine-red) bg-(--color-wine-red) text-(--color-ivory) shadow-lg">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            {/* Logo */}
+            <Link href="/">
+              <img src="/ivoryLogo.svg" className="h-12" />
+            </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden items-center gap-8 md:flex">
-            <Link href="/" className="transition-colors hover:text-[var(--color-ivory)]/80">
-              Home
-            </Link>
-            <Link href="/our-story" className="transition-colors hover:text-[var(--color-ivory)]/80">
-              Our Story
-            </Link>
-            <Link href="/products" className="transition-colors hover:text-[var(--color-ivory)]/80">
-              Products
-            </Link>
-            <Link href="/b2b" className="font-semibold transition-colors hover:text-[var(--color-ivory)]/80">
-              B2B
-            </Link>
-            <Link href="/transforming-spaces" className="transition-colors hover:text-[var(--color-ivory)]/80">
-              Transforming Spaces
-            </Link>
-            <Link href="/contact" className="transition-colors hover:text-[var(--color-ivory)]/80">
-              Contact
-            </Link>
-          </div>
+            {/* Desktop Navigation */}
+            <div className="hidden gap-8 md:flex">
+              {links.map(link => (
+                <Link key={link.href} href={link.href} className="transition hover:text-(--color-ivory)/80">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
 
-          {/* Cart, Auth & Mobile Menu Button */}
-          <div className="flex items-center gap-4">
-            <CartIcon />
+            {/* Right */}
+            <div className="flex items-center gap-4">
+              <CartIcon />
 
-            {/* User Menu (desktop + mobile) */}
-            <div className="relative">
+              {/* User */}
               {user ? (
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="flex items-center gap-2 rounded-lg px-3 py-2 transition-colors hover:bg-[var(--color-wine-red-dark)]"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-(--color-ivory) text-sm font-bold text-(--color-wine-red)"
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-ivory)] text-sm font-bold text-[var(--color-wine-red)]">
-                    {user.name?.charAt(0).toUpperCase() || 'U'}
-                  </div>
-                  <span className="hidden text-sm font-medium sm:inline">{user.name}</span>
+                  {user.name?.charAt(0)}
                 </button>
               ) : (
-                <Link
-                  href="/auth/login"
-                  className="text-sm font-medium transition-colors hover:text-[var(--color-ivory)]/80"
-                >
+                <Link href="/auth/login" className="text-sm">
                   Sign In
                 </Link>
               )}
 
-              {/* User Dropdown */}
-              {showUserMenu && user && (
-                <div className="absolute right-0 z-50 mt-2 w-56 rounded-lg border border-[var(--color-wine-red)] bg-[var(--color-wine-red)] py-2 shadow-xl md:shadow-2xl">
-                  <div className="border-b border-[var(--color-wine-red)] px-4 py-3">
-                    <p className="font-semibold">{user.name}</p>
-                    <p className="text-sm opacity-80">{user.email}</p>
-                  </div>
-                  <Link
-                    href="/dashboard"
-                    className="block px-4 py-2.5 transition-colors hover:bg-[var(--color-wine-red-dark)]"
-                    onClick={() => setShowUserMenu(false)}
-                  >
-                    My Dashboard
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full px-4 py-2.5 text-left text-red-200 transition-colors hover:bg-[var(--color-wine-red-dark)]"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
+              {/* Mobile Toggle */}
+              <button onClick={() => setIsOpen(true)} className="md:hidden">
+                <Menu className="h-7 w-7" />
+              </button>
             </div>
-
-            {/* Mobile menu toggle */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="-mr-2 p-2 md:hidden"
-              aria-label={isOpen ? 'Close menu' : 'Open menu'}
-            >
-              {isOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
-            </button>
           </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Full-screen Menu */}
-      <div
-        className={`fixed inset-0 z-40 flex flex-col bg-[var(--color-ivory)]/60 text-[var(--color-wine-red)] transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'} bg-opacity-60 shadow-2xl backdrop-blur-lg`}
-      >
-        {/* Header with close button */}
-        <div className="flex items-center justify-between border-b border-[var(--color-wine-red)]/20 px-6 py-5">
-          <div className="text-xl font-bold text-[var(--color-wine-red)]">Menu</div>
-          <button
-            onClick={closeMenu}
-            className="rounded-full p-2 transition-colors hover:bg-[var(--color-wine-red)]/10"
-            aria-label="Close menu"
-          >
-            <X className="h-8 w-8" />
-          </button>
-        </div>
+      {/* MOBILE SHEET */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeMenu}
+              className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+            />
 
-        {/* Navigation Links */}
-        <div className="flex-1 overflow-y-auto px-6 py-8">
-          <div className="flex flex-col gap-2 text-lg">
-            <Link
-              href="/"
-              className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
-              onClick={closeMenu}
+            {/* Bottom Sheet */}
+            <motion.div
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', damping: 22 }}
+              className="fixed right-0 bottom-0 left-0 z-50 rounded-t-3xl bg-(--color-ivory) px-6 pt-6 pb-10 shadow-2xl md:hidden"
             >
-              Home
-            </Link>
-            <Link
-              href="/our-story"
-              className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
-              onClick={closeMenu}
-            >
-              Our Story
-            </Link>
-            <Link
-              href="/products"
-              className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
-              onClick={closeMenu}
-            >
-              Products
-            </Link>
-            <Link
-              href="/b2b"
-              className="block rounded-lg px-5 py-4 font-semibold transition-colors hover:bg-[var(--color-wine-red)]/10"
-              onClick={closeMenu}
-            >
-              B2B
-            </Link>
-            <Link
-              href="/transforming-spaces"
-              className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
-              onClick={closeMenu}
-            >
-              Transforming Spaces
-            </Link>
-            <Link
-              href="/contact"
-              className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
-              onClick={closeMenu}
-            >
-              Contact
-            </Link>
+              {/* Header */}
+              <div className="mb-8 flex items-center justify-between">
+                <p className="text-lg font-bold text-(--color-wine-red)">Explore</p>
+                <button onClick={closeMenu} className="rounded-full bg-(--color-wine-red)/10 p-2">
+                  <X className="h-6 w-6 text-(--color-wine-red)" />
+                </button>
+              </div>
 
-            {/* Auth links when not logged in */}
-            {!user && (
-              <div className="mt-8 border-t border-[var(--color-wine-red)]/20 pt-8">
+              {/* Links */}
+              <div className="space-y-3">
+                {links.map((link, i) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={closeMenu}
+                      className="flex items-center justify-between rounded-xl border border-(--color-wine-red)/15 px-5 py-4 text-lg font-medium text-(--color-wine-red) transition hover:bg-(--color-wine-red) hover:text-(--color-ivory)"
+                    >
+                      {link.label}
+                      <span className="text-sm opacity-60">→</span>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              {!user && (
                 <Link
                   href="/auth/login"
-                  className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
                   onClick={closeMenu}
+                  className="mt-8 block rounded-xl bg-(--color-wine-red) px-6 py-4 text-center font-semibold text-(--color-ivory)"
                 >
                   Sign In
                 </Link>
-                <Link
-                  href="/auth/register"
-                  className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
-                  onClick={closeMenu}
-                >
-                  Create Account
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </nav>
+              )}
+
+              <p className="mt-10 text-center text-xs text-(--color-wine-red)/50">Vadānya Heritage Collective</p>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   )
 }

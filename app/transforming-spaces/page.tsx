@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
+import { DesignTipsMasterDetail } from './tips'
 
 export const metadata: Metadata = {
   title: 'Transforming Spaces - Vandanya Heritage Collective',
@@ -10,11 +11,11 @@ export const metadata: Metadata = {
 export default function TransformingSpaces() {
   return (
     <main>
-      {/* Hero Section */}
-      <section className="from-primary/90 to-accent/80 bg-[var(--color-wine-red)] py-16 text-[var(--color-ivory)] md:py-24">
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="mb-6 text-4xl font-bold text-balance md:text-5xl">Transforming Spaces with Heritage</h1>
-          <p className="text-lg text-balance opacity-90 md:text-xl">
+      {/* Hero */}
+      <section className="bg-(--color-wine-red) py-16 text-(--color-ivory) md:py-24">
+        <div className="mx-auto max-w-4xl px-4 text-center">
+          <h1 className="mb-6 text-4xl font-bold md:text-5xl">Transforming Spaces with Heritage</h1>
+          <p className="text-lg opacity-90 md:text-xl">
             Learn how to create stunning, culturally rich environments with traditional artifacts.
           </p>
         </div>
@@ -22,167 +23,83 @@ export default function TransformingSpaces() {
 
       {/* Inspiration Gallery */}
       <section className="bg-background py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-3xl font-bold text-balance text-[var(--color-wine-red)]">
-            Room Inspirations
-          </h2>
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="mb-12 text-center text-3xl font-bold text-(--color-wine-red)">Room Inspirations</h2>
 
-          <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2">
-            {/* Living Room */}
-            <Card className="overflow-hidden">
-              <CardContent className="p-0">
-                <div className="bg-muted relative h-96">
-                  <Image src="/traditional-living-room-decor.jpg" alt="Living Room" fill className="object-cover" />
-                </div>
-              </CardContent>
-              <div className="p-6">
-                <h3 className="mb-3 text-2xl font-bold">Living Room Elegance</h3>
-                <p className="mb-4 text-[var(--color-ivory)]/80">
-                  Transform your living space with a traditional rug, ceramic vases, and metal wall art that tells
-                  stories of cultural heritage.
-                </p>
-                <ul className="space-y-2 text-sm">
-                  <li>✓ Hand-woven kilim rugs for warmth</li>
-                  <li>✓ Ceramic vases as focal points</li>
-                  <li>✓ Bronze mirrors and metalware</li>
-                  <li>✓ Wooden furniture with inlay work</li>
-                </ul>
-              </div>
-            </Card>
+          <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2">
+            {[
+              {
+                img: '/traditional-living-room-decor.jpg',
+                title: 'Living Room Elegance',
+                desc: 'Transform your living space with a traditional rug, ceramic vases, and metal wall art that tells stories of cultural heritage.',
+                items: [
+                  'Hand-woven kilim rugs for warmth',
+                  'Ceramic vases as focal points',
+                  'Bronze mirrors and metalware',
+                  'Wooden furniture with inlay work'
+                ]
+              },
+              {
+                img: '/traditional-bedroom-decor.jpg',
+                title: 'Peaceful Bedroom Retreat',
+                desc: 'Create a serene bedroom sanctuary with traditional textiles, stone sculptures, and cultural artifacts.',
+                items: [
+                  'Tapestries as headboard art',
+                  'Traditional bed runners',
+                  'Stone or wooden sculptures',
+                  'Ceramic decorative accents'
+                ]
+              },
+              {
+                img: '/traditional-home-office.jpg',
+                title: 'Inspiring Home Office',
+                desc: 'Elevate your workspace with artifacts that inspire creativity and bring cultural richness.',
+                items: [
+                  'Desk accessories and organizers',
+                  'Wall art and sculptural pieces',
+                  'Traditional shelving decor',
+                  'Functional artistic pieces'
+                ]
+              },
+              {
+                img: '/traditional-entryway-decor.jpg',
+                title: 'Welcoming Entryway',
+                desc: 'Make a powerful first impression with traditional artifacts that showcase global culture.',
+                items: [
+                  'Statement sculptures and statues',
+                  'Decorative mirrors',
+                  'Console table styling',
+                  'Cultural wall hangings'
+                ]
+              }
+            ].map((room, i) => (
+              <Card
+                key={i}
+                className="overflow-hidden border border-(--color-wine-red)/15 bg-(--color-ivory) shadow-md"
+              >
+                <CardContent className="p-0">
+                  <div className="relative h-96">
+                    <Image src={room.img} alt={room.title} fill className="object-cover" />
+                  </div>
+                </CardContent>
 
-            {/* Bedroom */}
-            <Card className="overflow-hidden">
-              <CardContent className="p-0">
-                <div className="bg-muted relative h-96">
-                  <Image src="/traditional-bedroom-decor.jpg" alt="Bedroom" fill className="object-cover" />
-                </div>
-              </CardContent>
-              <div className="p-6">
-                <h3 className="mb-3 text-2xl font-bold">Peaceful Bedroom Retreat</h3>
-                <p className="mb-4 text-[var(--color-ivory)]/80">
-                  Create a serene bedroom sanctuary with traditional textiles, stone sculptures, and cultural artifacts.
-                </p>
-                <ul className="space-y-2 text-sm">
-                  <li>✓ Tapestries as headboard art</li>
-                  <li>✓ Traditional bed runners</li>
-                  <li>✓ Stone or wooden sculptures</li>
-                  <li>✓ Ceramic decorative accents</li>
-                </ul>
-              </div>
-            </Card>
+                <div className="p-8">
+                  <h3 className="mb-3 text-2xl font-bold text-(--color-wine-red)">{room.title}</h3>
+                  <p className="mb-4 text-(--color-wine-red)/75">{room.desc}</p>
 
-            {/* Home Office */}
-            <Card className="overflow-hidden">
-              <CardContent className="p-0">
-                <div className="bg-muted relative h-96">
-                  <Image src="/traditional-home-office.jpg" alt="Home Office" fill className="object-cover" />
+                  <ul className="space-y-2 text-sm text-(--color-wine-red)/80">
+                    {room.items.map((item, idx) => (
+                      <li key={idx}>✓ {item}</li>
+                    ))}
+                  </ul>
                 </div>
-              </CardContent>
-              <div className="p-6">
-                <h3 className="mb-3 text-2xl font-bold">Inspiring Home Office</h3>
-                <p className="mb-4 text-[var(--color-ivory)]/80">
-                  Elevate your workspace with artifacts that inspire creativity and bring cultural richness to your
-                  daily work environment.
-                </p>
-                <ul className="space-y-2 text-sm">
-                  <li>✓ Desk accessories and organizers</li>
-                  <li>✓ Wall art and sculptural pieces</li>
-                  <li>✓ Traditional crafted shelving decor</li>
-                  <li>✓ Functional artistic pieces</li>
-                </ul>
-              </div>
-            </Card>
-
-            {/* Entryway */}
-            <Card className="overflow-hidden">
-              <CardContent className="p-0">
-                <div className="bg-muted relative h-96">
-                  <Image src="/traditional-entryway-decor.jpg" alt="Entryway" fill className="object-cover" />
-                </div>
-              </CardContent>
-              <div className="p-6">
-                <h3 className="mb-3 text-2xl font-bold">Welcoming Entryway</h3>
-                <p className="mb-4 text-[var(--color-ivory)]/80">
-                  Make a powerful first impression with traditional artifacts that showcase your appreciation for global
-                  culture.
-                </p>
-                <ul className="space-y-2 text-sm">
-                  <li>✓ Statement sculptures and statues</li>
-                  <li>✓ Decorative mirrors</li>
-                  <li>✓ Console table styling</li>
-                  <li>✓ Cultural wall hangings</li>
-                </ul>
-              </div>
-            </Card>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Design Tips */}
-      <section className="bg-muted/30 py-16 md:py-24">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-3xl font-bold">Design Tips for Heritage Pieces</h2>
-
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="mb-3 text-xl font-bold">1. Balance Modern & Traditional</h3>
-                <p className="text-[var(--color-ivory)]/80">
-                  Mix heritage artifacts with contemporary furniture to create a harmonious blend that feels both
-                  timeless and current.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="mb-3 text-xl font-bold">2. Create Focal Points</h3>
-                <p className="text-[var(--color-ivory)]/80">
-                  Use larger pieces like rugs, sculptures, or tapestries as focal points to anchor your room's design.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="mb-3 text-xl font-bold">3. Respect Color Palettes</h3>
-                <p className="text-[var(--color-ivory)]/80">
-                  Traditional artifacts often have rich, warm colors. Ensure they complement your existing color scheme.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="mb-3 text-xl font-bold">4. Tell a Story</h3>
-                <p className="text-[var(--color-ivory)]/80">
-                  Each piece has a history. Display your artifacts in ways that highlight their cultural significance
-                  and craftsmanship.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="mb-3 text-xl font-bold">5. Layer Your Decor</h3>
-                <p className="text-[var(--color-ivory)]/80">
-                  Combine different sizes and types of artifacts to create depth and visual interest in your space.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="mb-3 text-xl font-bold">6. Light It Well</h3>
-                <p className="text-[var(--color-ivory)]/80">
-                  Proper lighting highlights the details and beauty of traditional artifacts, creating ambiance and
-                  showcase.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <DesignTipsMasterDetail />
     </main>
   )
 }

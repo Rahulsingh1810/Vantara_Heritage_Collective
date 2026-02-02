@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Star } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import type { Metadata } from 'next'
 import AddToCartButton from '@/components/add-to-cart-button'
 import ProductImageGallery from '@/components/product-image-gallery'
@@ -21,21 +21,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-
   const data = await fetchProductBySlug(slug)
-  if (!data) {
-    notFound()
-  }
+
+  if (!data) notFound()
 
   return (
-    <main className="min-h-screen">
-      <Suspense fallback={<div className="py-20 text-center">Loading product details...</div>}>
-        {/* Breadcrumb */}
-        <div className="border-border sticky top-0 z-40 border-b bg-[var(--color-wine-red)]">
-          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+    <main className="bg-background min-h-screen">
+      <Suspense fallback={<div className="py-20 text-center text-[var(--color-wine-red)]/70">Loading product…</div>}>
+        {/* Sticky breadcrumb */}
+        <div className="sticky top-0 z-40 border-b border-[var(--color-wine-red)]/20 bg-[var(--color-wine-red)]">
+          <div className="mx-auto max-w-7xl px-4 py-4">
             <Link
               href="/products"
-              className="hover:text-accent flex items-center gap-2 font-medium text-[var(--color-ivory)] transition-colors duration-300"
+              className="flex items-center gap-2 text-sm font-medium text-[var(--color-ivory)] hover:underline"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Products
@@ -43,115 +41,85 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
           </div>
         </div>
 
-        <section className="bg-background py-8 md:py-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-              <div className="animate-slide-in-left">
-                <ProductImageGallery product={data ?? ({} as Product)} />
-              </div>
+        {/* Main */}
+        <section className="py-12 md:py-20">
+          <div className="mx-auto max-w-7xl px-4">
+            <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
+              {/* Gallery */}
+              <ProductImageGallery product={data ?? ({} as Product)} />
 
-              <div className="animate-fade-in-up flex flex-col space-y-6">
-                {/* <div className="flex items-center gap-4">
-                  <span className="bg-primary/10 text-primary inline-block rounded-full px-4 py-1.5 text-xs font-semibold tracking-wider uppercase">
-                    {data?.productCategory}
-                  </span>
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="fill-primary text-primary h-4 w-4" />
-                    ))}
-                    <span className="text-muted-foreground ml-2 text-sm">(42 reviews)</span>
-                  </div>
-                </div> */}
-
+              {/* Product Info */}
+              <div className="flex flex-col space-y-8">
+                {/* Title + description */}
                 <div>
-                  <h1 className="text-foreground mb-4 text-5xl leading-tight font-bold text-balance md:text-6xl">
-                    {data?.productTitle}
+                  <h1 className="mb-4 text-4xl leading-tight font-bold text-[var(--color-wine-red)] md:text-5xl">
+                    {data.productTitle}
                   </h1>
-                  <p className="text-muted-foreground text-lg">{data?.productDescription}</p>
+
+                  <p className="text-lg leading-relaxed text-[var(--color-wine-red)]/70">{data.productDescription}</p>
                 </div>
 
-                {data?.vendor && (
-                  <div className="border-border rounded-xl border bg-[var(--color-ivory)] p-6 transition-shadow duration-300 hover:shadow-lg">
-                    <p className="text-muted-foreground mb-1 text-sm">Crafted by</p>
-                    <h3 className="text-foreground mb-2 text-xl font-bold">{data.vendor.vendorName}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{data.vendor.vendorDescription}</p>
-                    <div className="border-border mt-4 border-t pt-4">
-                      <p className="text-xs font-semibold tracking-wider text-[var(--color-wine-red)] uppercase">
-                        {data.vendor.vendorLocation}
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                <div className="rounded-xl border border-[var(--color-wine-red)]/20 bg-gradient-to-r from-[var(--color-wine-red)]/5 to-[var(--color-ivory)]/5 p-8">
-                  <div className="mb-6 flex items-baseline gap-4">
-                    <span className="text-5xl font-bold text-[var(--color-wine-red)]">
-                      ₹{data?.productPrice.toFixed(2)}
+                {/* Price box */}
+                <div className="rounded-2xl border border-[var(--color-wine-red)]/20 bg-[var(--color-ivory)] p-8 shadow-sm">
+                  <div className="mb-6 flex flex-wrap items-center gap-4">
+                    <span className="text-4xl font-bold text-[var(--color-wine-red)]">
+                      ₹{data.productPrice.toFixed(2)}
                     </span>
+
                     <span
-                      className={`rounded-full px-3 py-1 text-lg font-semibold ${
-                        data?.productStock && data?.productStock > 0
+                      className={`rounded-full px-4 py-1 text-sm font-semibold ${
+                        data.productStock && data.productStock > 0
                           ? 'bg-green-100 text-green-700'
                           : 'bg-red-100 text-red-700'
                       }`}
                     >
-                      {data?.productStock && data?.productStock > 0 ? `${data?.productStock} in stock` : 'Out of stock'}
+                      {data.productStock && data.productStock > 0 ? `${data.productStock} in stock` : 'Out of stock'}
                     </span>
                   </div>
 
-                  <div className="space-y-4">
-                    <AddToCartButton
-                      product={data ?? ({} as Product)}
-                      disabled={!data?.productStock || data.productStock === 0}
-                      className="w-full px-6 py-3 text-lg"
-                    />
+                  <AddToCartButton
+                    product={data ?? ({} as Product)}
+                    disabled={!data.productStock || data.productStock === 0}
+                    className="w-full rounded-xl px-6 py-3 text-lg"
+                  />
 
-                    {data?.productStock === 0 && (
-                      <p className="text-muted-foreground bg-muted rounded-lg p-4 text-center text-sm">
-                        This item is currently out of stock. Please check back soon or inquire for custom orders.
-                      </p>
-                    )}
-                  </div>
+                  {data.productStock === 0 && (
+                    <p className="mt-4 rounded-lg bg-[var(--color-wine-red)]/5 p-4 text-center text-sm text-[var(--color-wine-red)]/70">
+                      This item is currently unavailable. Please check back soon or inquire for custom orders.
+                    </p>
+                  )}
                 </div>
 
+                {/* Trust badges */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="border-border rounded-lg border bg-[var(--color-ivory)] p-4 text-center">
-                    <p className="mb-1 text-2xl">✓</p>
+                  <div className="rounded-xl border border-[var(--color-wine-red)]/20 bg-[var(--color-ivory)] p-5 text-center shadow-sm">
+                    <p className="mb-2 text-2xl">✓</p>
                     <p className="text-xs font-semibold text-[var(--color-wine-red)] uppercase">Authentic</p>
-                    <p className="text-muted-foreground text-xs">Verified Original</p>
+                    <p className="mt-1 text-xs text-[var(--color-wine-red)]/70">Verified Original</p>
                   </div>
-                  <div className="border-border rounded-lg border bg-[var(--color-ivory)] p-4 text-center">
-                    <p className="mb-1 text-2xl">🚚</p>
+
+                  <div className="rounded-xl border border-[var(--color-wine-red)]/20 bg-[var(--color-ivory)] p-5 text-center shadow-sm">
+                    <p className="mb-2 text-2xl">🚚</p>
                     <p className="text-xs font-semibold text-[var(--color-wine-red)] uppercase">Secure Shipping</p>
-                    <p className="text-muted-foreground text-xs">Insured Delivery</p>
+                    <p className="mt-1 text-xs text-[var(--color-wine-red)]/70">Insured Delivery</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <ProductDetailsSection
-              category={data?.productCategory}
-              material={data?.productMaterial}
-              dimensions={data?.productDimensions}
-              weight={data?.productWeight}
-              origin={data?.productOrigin}
-              cultureSignificance={data?.productCulturalSignificance}
-              careInstructions={data?.productCare}
-              stylingNotes={data?.placementsAndStylingNotes}
-              inYourSpace={data?.inYourSpace}
-            />
-          </div>
-        </section>
-
-        <section className="border-border border-t bg-[var(--color-ivory)] py-16 md:py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-foreground mb-4 text-4xl font-bold">Discover More Treasures</h2>
-            <p className="text-muted-foreground mb-12">Explore our curated collection of authentic Indian artifacts</p>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-              <div className="from-primary/10 to-accent/10 border-primary/20 flex min-h-64 flex-col items-center justify-center rounded-xl border bg-gradient-to-br p-8 text-center">
-                <p className="mb-4 text-4xl">🎨</p>
-                <p className="text-muted-foreground">More items from this collection coming soon...</p>
-              </div>
+            {/* Details accordion */}
+            <div className="mt-16">
+              <ProductDetailsSection
+                category={data.productCategory}
+                material={data.productMaterial}
+                dimensions={data.productDimensions}
+                weight={data.productWeight}
+                origin={data.productOrigin}
+                cultureSignificance={data.productCulturalSignificance}
+                careInstructions={data.productCare}
+                stylingNotes={data.placementsAndStylingNotes}
+                inYourSpace={data.inYourSpace}
+              />
             </div>
           </div>
         </section>

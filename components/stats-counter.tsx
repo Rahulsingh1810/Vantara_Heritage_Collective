@@ -42,7 +42,7 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
   }, [inView, value])
 
   return (
-    <div ref={ref} className="text-accent-foreground text-5xl font-bold md:text-6xl">
+    <div ref={ref} className="text-5xl font-bold text-(--color-ivory) md:text-6xl">
       {count}
       {suffix}
     </div>
@@ -84,9 +84,7 @@ export default function StatsCounter() {
             <motion.div whileHover={{ scale: 1.05 }} className="mb-4">
               <AnimatedCounter value={stat.value} suffix={stat.suffix} />
             </motion.div>
-            <p className="text-accent-foreground text-lg font-semibold transition-colors group-hover:text-white md:text-xl">
-              {stat.label}
-            </p>
+            <p className="text-lg font-semibold text-(--color-ivory)/70 md:text-xl">{stat.label}</p>
           </motion.div>
         ))}
       </motion.div>

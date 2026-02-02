@@ -52,35 +52,48 @@ export default async function Products({
       <DiscountClaimModal />
 
       <main>
-        <section className="bg-[var(--color-wine-red)] py-12 text-[var(--color-ivory)] md:py-16">
+        {/* Hero */}
+        <section className="bg-(--color-wine-red) py-12 text-(--color-ivory) md:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h1 className="text-center text-4xl font-bold text-balance md:text-5xl">Our Collections</h1>
-            <p className="mt-4 text-center text-lg text-[var(--color-ivory)]/70 opacity-90">
+            <h1 className="text-center text-4xl font-bold md:text-5xl">Our Collections</h1>
+            <p className="mt-4 text-center text-lg text-(--color-ivory)/80">
               Discover authentic heritage pieces from master artisans
             </p>
           </div>
         </section>
 
-        {/* Products Section – layout & spacing from template */}
+        {/* Products */}
         <section className="bg-background py-12 md:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-5">
               {/* Filters */}
               <div className="lg:col-span-1">
-                <Suspense fallback={<div className="py-8 text-center">Loading filters...</div>}>
-                  <ProductFilters categories={uniqueCategories} vendors={uniqueVendors} />
-                </Suspense>
+                <div className="sticky top-24">
+                  <Suspense
+                    fallback={<div className="py-8 text-center text-(--color-wine-red)/70">Loading filters…</div>}
+                  >
+                    <ProductFilters categories={uniqueCategories} vendors={uniqueVendors} />
+                  </Suspense>
+                </div>
               </div>
 
-              {/* Product Grid */}
+              {/* Grid */}
               <div className="lg:col-span-4">
-                <Suspense fallback={<div className="py-16 text-center">Loading products...</div>}>
+                <Suspense
+                  fallback={<div className="py-16 text-center text-(--color-wine-red)/70">Loading products…</div>}
+                >
                   {productsForGrid.length > 0 ? (
                     <ProductGrid products={productsForGrid} />
                   ) : (
                     <div className="flex min-h-96 flex-col items-center justify-center text-center">
-                      <p className="text-muted-foreground mb-4 text-lg">No products found matching your filters.</p>
-                      <Link href="/products" className="text-primary hover:underline">
+                      <p className="mb-4 text-lg text-(--color-wine-red)/70">
+                        No products found matching your filters.
+                      </p>
+
+                      <Link
+                        href="/products"
+                        className="font-medium text-(--color-wine-red) underline underline-offset-4"
+                      >
                         Clear filters
                       </Link>
                     </div>

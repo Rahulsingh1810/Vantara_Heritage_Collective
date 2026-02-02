@@ -1,8 +1,8 @@
 'use client'
 
-import type React from 'react'
-import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronDown } from 'lucide-react'
 
 interface ProductDetailsSectionProps {
   category?: string
@@ -10,8 +10,6 @@ interface ProductDetailsSectionProps {
   dimensions?: string
   weight?: string | number
   origin?: string
-  cultureSignificance?: string
-  careInstructions?: string
   stylingNotes?: string
   inYourSpace?: string
 }
@@ -22,161 +20,169 @@ export default function ProductDetailsSection({
   dimensions = 'Varies by piece (please refer to images)',
   weight = 'Varies',
   origin = 'India',
-  cultureSignificance = 'This piece embodies generations of skilled craftsmanship and deep cultural meaning, preserving living traditions of Indian heritage.',
-  careInstructions = 'Handle gently. Dust with a soft, dry cloth. Avoid prolonged direct sunlight and moisture.',
   stylingNotes,
   inYourSpace
 }: ProductDetailsSectionProps) {
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
-    specs: true,
-    significance: false,
-    care: false,
-    styling: false
-  })
+  const sections = [
+    {
+      title: 'Product Specifications',
+      content: (
+        <div className="grid grid-cols-1 gap-6 text-sm sm:grid-cols-2">
+          {category && (
+            <div>
+              <p className="text-xs text-(--color-wine-red)/60 uppercase">Category</p>
+              <p>{category}</p>
+            </div>
+          )}
 
-  const toggleSection = (section: string) => {
-    setExpandedSections(prev => ({
-      ...prev,
-      [section]: !prev[section]
-    }))
-  }
+          <div>
+            <p className="text-xs text-(--color-wine-red)/60 uppercase">Material</p>
+            <p>{material}</p>
+          </div>
 
-  const Section = ({
-    title,
-    icon,
-    sectionKey,
-    children
-  }: {
-    title: string
-    icon?: string
-    sectionKey: string
-    children: React.ReactNode
-  }) => (
-    <div className="border-b border-[var(--color-wine-red)]/20 last:border-b-0">
-      <button
-        onClick={() => toggleSection(sectionKey)}
-        className="flex w-full items-center justify-between px-1 py-4 text-left transition-colors hover:bg-[var(--color-wine-red)]/5"
-        aria-expanded={expandedSections[sectionKey]}
-      >
-        <div className="flex items-center gap-3">
-          {icon && <span className="text-xl">{icon}</span>}
-          <h3 className="text-lg font-semibold text-[var(--color-wine-red)]">{title}</h3>
+          <div>
+            <p className="text-xs text-(--color-wine-red)/60 uppercase">Dimensions</p>
+            <p>{dimensions}</p>
+          </div>
+
+          <div>
+            <p className="text-xs text-(--color-wine-red)/60 uppercase">Weight</p>
+            <p>{weight}</p>
+          </div>
+
+          <div className="sm:col-span-2">
+            <p className="text-xs text-(--color-wine-red)/60 uppercase">Origin</p>
+            <p>{origin}</p>
+          </div>
         </div>
-        <ChevronDown
-          className={`h-5 w-5 text-[var(--color-wine-red)] transition-transform duration-300 ${
-            expandedSections[sectionKey] ? 'rotate-180' : ''
-          }`}
-        />
-      </button>
+      )
+    },
+    {
+      title: 'Care & Longevity',
+      content: (
+        <ul className="space-y-3 text-sm">
+          <li>✓ Avoid direct sunlight & humidity</li>
+          <li>✓ Store in dry environments</li>
+          <li>✓ Clean gently with soft tools</li>
+        </ul>
+      )
+    },
+    {
+      title: 'Styling & Placement',
+      content: (
+        <>
+          {stylingNotes && <p className="mb-4 text-sm">{stylingNotes}</p>}
 
-      {expandedSections[sectionKey] && (
-        <div className="animate-fade-in px-1 pt-1 pb-5 text-[var(--color-wine-red)]/80">{children}</div>
-      )}
-    </div>
-  )
+          {inYourSpace && (
+            <div className="rounded-xl bg-(--color-wine-red)/5 p-4 text-sm">
+              <p className="mb-1 font-medium text-(--color-wine-red)">In Your Space</p>
+              <p>{inYourSpace}</p>
+            </div>
+          )}
+        </>
+      )
+    }
+  ]
+
+  const [active, setActive] = useState(0)
 
   return (
-    <div className="mt-12 md:mt-16">
-      <div className="overflow-hidden rounded-xl border border-[var(--color-wine-red)]/25 bg-[var(--color-ivory)]/70 shadow-sm backdrop-blur-sm">
-        {/* Specifications */}
-        <Section title="Product Specifications" sectionKey="specs" icon="📋">
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            {category && (
-              <div>
-                <dt className="text-xs font-semibold tracking-wide text-[var(--color-wine-red)]/70 uppercase">
-                  Category
-                </dt>
-                <dd className="mt-1 text-[var(--color-wine-red)]">{category}</dd>
-              </div>
-            )}
+    <section className="mt-20">
+      <h2 className="mb-12 text-center text-3xl font-bold text-(--color-wine-red)">Product Details</h2>
 
-            <div>
-              <dt className="text-xs font-semibold tracking-wide text-[var(--color-wine-red)]/70 uppercase">
-                Material
-              </dt>
-              <dd className="mt-1 text-[var(--color-wine-red)]">{material}</dd>
-            </div>
+      {/* DESKTOP MASTER / SLAVE */}
+      <div className="hidden gap-12 md:grid md:grid-cols-3">
+        {/* MASTER */}
+        <div className="space-y-4">
+          {sections.map((s, i) => (
+            <motion.button
+              key={i}
+              onClick={() => setActive(i)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className={`relative w-full rounded-2xl border p-6 text-left transition ${
+                active === i
+                  ? 'bg-linear-to-br from-(--color-wine-red) to-[#5a0018] text-(--color-ivory) shadow-xl'
+                  : 'border-(--color-wine-red)/20 bg-(--color-ivory) text-(--color-wine-red) hover:shadow-md'
+              }`}
+            >
+              <span className="text-lg font-semibold">{s.title}</span>
 
-            <div>
-              <dt className="text-xs font-semibold tracking-wide text-[var(--color-wine-red)]/70 uppercase">
-                Dimensions
-              </dt>
-              <dd className="mt-1 text-[var(--color-wine-red)]">{dimensions}</dd>
-            </div>
+              {active === i && (
+                <motion.div
+                  layoutId="active-dot"
+                  className="absolute top-4 right-4 h-2 w-2 rounded-full bg-(--color-ivory)"
+                />
+              )}
+            </motion.button>
+          ))}
+        </div>
 
-            <div>
-              <dt className="text-xs font-semibold tracking-wide text-[var(--color-wine-red)]/70 uppercase">Weight</dt>
-              <dd className="mt-1 text-[var(--color-wine-red)]">{weight}</dd>
-            </div>
+        {/* SLAVE */}
+        <div className="md:col-span-2">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35 }}
+              className="rounded-3xl border border-(--color-wine-red)/20 bg-(--color-ivory) p-12 shadow-xl"
+            >
+              <h3 className="mb-6 text-3xl font-bold text-(--color-wine-red)">{sections[active].title}</h3>
 
-            <div className="sm:col-span-2">
-              <dt className="text-xs font-semibold tracking-wide text-[var(--color-wine-red)]/70 uppercase">Origin</dt>
-              <dd className="mt-1 text-[var(--color-wine-red)]">{origin}</dd>
-            </div>
-          </div>
-        </Section>
-
-        {/* Cultural Significance */}
-        {/* <Section title="Cultural & Historical Significance" sectionKey="significance" icon="🏛️">
-          <p className="text-sm leading-relaxed">{cultureSignificance}</p>
-
-          <div className="mt-5 rounded-lg border border-[var(--color-wine-red)]/15 bg-[var(--color-wine-red)]/5 p-5">
-            <p className="mb-2 font-medium text-[var(--color-wine-red)]">Artisan Heritage Note</p>
-            <p className="text-sm text-[var(--color-wine-red)]/80">
-              Handcrafted using time-honored techniques passed down through generations, supporting living cultural
-              traditions.
-            </p>
-          </div>
-        </Section> */}
-
-        {/* Care Instructions */}
-        <Section title="Care & Longevity" sectionKey="care" icon="✨">
-          <ul className="space-y-3 text-sm">
-            {/* <li className="flex gap-3">
-              <span className="mt-1 font-bold text-[var(--color-wine-red)]">•</span>
-              <span>{careInstructions}</span>
-            </li> */}
-            <li className="flex gap-3">
-              <span className="mt-1 font-bold text-[var(--color-wine-red)]">•</span>
-              <span>Keep away from direct sunlight and high humidity</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="mt-1 font-bold text-[var(--color-wine-red)]">•</span>
-              <span>Store in a stable, dry environment</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="mt-1 font-bold text-[var(--color-wine-red)]">•</span>
-              <span>Use soft tools only for cleaning detailed areas</span>
-            </li>
-          </ul>
-        </Section>
-
-        {/* Optional: Styling & Placement Notes */}
-        {(stylingNotes || inYourSpace) && (
-          <Section title="Styling & Placement Ideas" sectionKey="styling" icon="🪔">
-            {stylingNotes && <p className="mb-4 text-sm leading-relaxed">{stylingNotes}</p>}
-            {inYourSpace && (
-              <div className="rounded-lg border border-[var(--color-wine-red)]/15 bg-[var(--color-wine-red)]/5 p-5">
-                <p className="mb-2 font-medium text-[var(--color-wine-red)]">In Your Space</p>
-                <p className="text-sm text-[var(--color-wine-red)]/80">{inYourSpace}</p>
-              </div>
-            )}
-          </Section>
-        )}
-      </div>
-
-      {/* Heritage badge / trust element */}
-      <div className="mt-8 rounded-xl border border-[var(--color-wine-red)]/20 bg-gradient-to-br from-[var(--color-ivory)] to-white/80 p-6 shadow-sm">
-        <div className="flex items-start gap-4">
-          <div className="flex-shrink-0 text-3xl">🇮🇳</div>
-          <div>
-            <p className="mb-1.5 font-semibold text-[var(--color-wine-red)]">Authentic Indian Heritage</p>
-            <p className="text-sm leading-relaxed text-[var(--color-wine-red)]/75">
-              Each piece is thoughtfully sourced to honor and sustain traditional craftsmanship across India.
-            </p>
-          </div>
+              <div className="text-(--color-wine-red)/75">{sections[active].content}</div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
-    </div>
+
+      {/* MOBILE ACCORDION */}
+      <div className="space-y-4 md:hidden">
+        {sections.map((s, i) => {
+          const open = active === i
+
+          return (
+            <div
+              key={i}
+              className="overflow-hidden rounded-2xl border border-(--color-wine-red)/20 bg-[var(--color-ivory)]"
+            >
+              <button
+                onClick={() => setActive(open ? -1 : i)}
+                className="flex w-full items-center justify-between px-6 py-5 text-left"
+              >
+                <span className="font-semibold text-(--color-wine-red)">{s.title ?? ''}</span>
+
+                <motion.div animate={{ rotate: open ? 180 : 0 }}>
+                  <ChevronDown className="h-5 w-5 text-(--color-wine-red)" />
+                </motion.div>
+              </button>
+
+              <AnimatePresence>
+                {open && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6 text-sm text-(--color-wine-red)/75">{s.content}</div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Heritage */}
+      <div className="mt-12 rounded-2xl border border-(--color-wine-red)/20 bg-(--color-ivory) p-6 shadow-sm">
+        <p className="font-semibold text-[var(--color-wine-red)]">🇮🇳 Authentic Indian Heritage</p>
+        <p className="mt-2 text-sm text-[var(--color-wine-red)]/70">
+          Each piece is thoughtfully sourced to honor and sustain traditional craftsmanship across India.
+        </p>
+      </div>
+    </section>
   )
 }

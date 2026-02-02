@@ -17,11 +17,7 @@ export default function ProductFilters({ categories, vendors }: { categories: an
 
   const handleFilterChange = (key: string, value: string | null) => {
     const params = new URLSearchParams(searchParams)
-    if (value) {
-      params.set(key, value)
-    } else {
-      params.delete(key)
-    }
+    value ? params.set(key, value) : params.delete(key)
     router.push(`/products?${params.toString()}`)
   }
 
@@ -32,102 +28,55 @@ export default function ProductFilters({ categories, vendors }: { categories: an
     router.push(`/products?${params.toString()}`)
   }
 
-  const clearFilters = () => {
-    router.push('/products')
-  }
+  const clearFilters = () => router.push('/products')
 
   return (
     <div className="space-y-6">
-      {/* Toggle Button */}
-      <Button variant="outline" onClick={() => setIsOpen(!isOpen)} className="w-full lg:hidden">
+      {/* Mobile Toggle */}
+      <Button
+        variant="outline"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full border-(--color-wine-red)/30 bg-(--color-ivory) text-(--color-wine-red) lg:hidden"
+      >
         <ChevronDown className={`mr-2 h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         {isOpen ? 'Hide Filters' : 'Show Filters'}
       </Button>
 
-      {/* Filters Container */}
       {isOpen && (
         <div className="space-y-6">
-          {/* Clear Filters Button */}
+          {/* Clear */}
           {(selectedCategory || selectedVendor || minPrice !== '0' || maxPrice !== '1000') && (
-            <Button variant="outline" onClick={clearFilters} className="w-full bg-transparent">
+            <Button
+              variant="outline"
+              onClick={clearFilters}
+              className="w-full border-(--color-wine-red)/30 bg-(--color-ivory) text-(--color-wine-red)"
+            >
               <X className="mr-2 h-4 w-4" />
               Clear Filters
             </Button>
           )}
 
-          {/* Category Filter */}
-          <Card>
+          {/* Category */}
+          <Card className="border border-(--color-wine-red)/20 bg-(--color-ivory) shadow-sm">
             <CardHeader>
-              <CardTitle className="text-lg">Category</CardTitle>
+              <CardTitle className="text-lg text-(--color-wine-red)">Category</CardTitle>
             </CardHeader>
+
             <CardContent className="space-y-3">
               {categories.map(category => (
-                <label key={category.id} className="flex cursor-pointer items-center gap-3">
+                <label
+                  key={category.id}
+                  className="flex cursor-pointer items-center gap-3 text-sm text-(--color-wine-red)"
+                >
                   <input
                     type="checkbox"
                     checked={selectedCategory === String(category.id)}
                     onChange={e => handleFilterChange('category', e.target.checked ? String(category.id) : null)}
-                    className="accent-primary h-4 w-4 rounded"
+                    className="h-4 w-4 accent-(--color-wine-red)"
                   />
-                  <span className="text-sm">{category.name}</span>
+                  {category.name}
                 </label>
               ))}
-            </CardContent>
-          </Card>
-
-          {/* Vendor Filter */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Vendor</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {vendors.map(vendor => (
-                <label key={vendor.id} className="flex cursor-pointer items-center gap-3">
-                  <input
-                    type="checkbox"
-                    checked={selectedVendor === String(vendor.id)}
-                    onChange={e => handleFilterChange('vendor', e.target.checked ? String(vendor.id) : null)}
-                    className="accent-primary h-4 w-4 rounded"
-                  />
-                  <span className="text-sm">{vendor.name}</span>
-                </label>
-              ))}
-            </CardContent>
-          </Card>
-
-          {/* Price Range Filter */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Price Range</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <label className="text-sm font-medium">Min Price: ${minPrice}</label>
-                <input
-                  type="range"
-                  min="0"
-                  max="1000"
-                  step="10"
-                  value={minPrice}
-                  onChange={e => setMinPrice(e.target.value)}
-                  className="w-full"
-                />
-              </div>
-              <div>
-                <label className="text-sm font-medium">Max Price: ${maxPrice}</label>
-                <input
-                  type="range"
-                  min="0"
-                  max="1000"
-                  step="10"
-                  value={maxPrice}
-                  onChange={e => setMaxPrice(e.target.value)}
-                  className="w-full"
-                />
-              </div>
-              <Button onClick={handlePriceChange} className="w-full" size="sm">
-                Apply Price Filter
-              </Button>
             </CardContent>
           </Card>
         </div>

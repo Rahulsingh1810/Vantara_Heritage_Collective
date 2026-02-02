@@ -7,19 +7,18 @@ export default function SplashScreen() {
   const [isVisible, setIsVisible] = useState(true)
 
   useEffect(() => {
-    // Check if splash screen has already been shown in this session
-    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash')
+    const today = new Date().toDateString()
+    const lastSeen = localStorage.getItem('hasSeenSplash')
 
-    if (hasSeenSplash) {
+    if (lastSeen === today) {
       setIsVisible(false)
       return
     }
 
-    // Show splash screen for 3 seconds
     const timer = setTimeout(() => {
       setIsVisible(false)
-      sessionStorage.setItem('hasSeenSplash', 'true')
-    }, 3000)
+      localStorage.setItem('hasSeenSplash', today)
+    }, 2500)
 
     return () => clearTimeout(timer)
   }, [])
@@ -30,67 +29,64 @@ export default function SplashScreen() {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.6 }}
-      className="from-primary via-accent to-primary fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[var(--color-wine-red)] backdrop-blur-lg opacity-60 shadow-lg"
+      transition={{ duration: 0.5 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[var(--color-wine-red)]"
     >
-      {/* Animated Background Elements */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
-        className="absolute inset-0 opacity-10"
-      >
-        <div className="bg-primary-foreground absolute top-10 left-10 h-40 w-40 rounded-full blur-3xl" />
-        <div className="bg-accent-foreground absolute right-10 bottom-10 h-40 w-40 rounded-full blur-3xl" />
-      </motion.div>
+      {/* Soft ambient blobs (mobile-safe) */}
+      <div className="pointer-events-none absolute inset-0 opacity-15">
+        <div className="absolute top-16 left-12 h-48 w-48 rounded-full bg-white blur-3xl" />
+        <div className="absolute right-10 bottom-20 h-48 w-48 rounded-full bg-white blur-3xl" />
+      </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center">
-        {/* Icon */}
-        <motion.div
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-          className="mb-8 text-8xl"
-        >
-          <img src="/ivorylogo.svg" alt="Vandanya Heritage Collective Logo" className="mx-auto h-42 w-42" />
-        </motion.div>
+      <div className="relative z-10 flex flex-col items-center px-6 text-center">
+        {/* Logo */}
+        <motion.img
+          src="/ivoryLogo.svg"
+          alt="Vandanya Logo"
+          initial={{ scale: 0.85, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="mb-6 h-28 w-28 object-contain md:h-36 md:w-36"
+        />
 
-        {/* Brand Name */}
+        {/* Brand */}
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-4 text-5xl font-bold text-balance text-[var(--color-ivory)] md:text-6xl"
+          transition={{ delay: 0.15 }}
+          className="mb-3 max-w-xs text-2xl leading-tight font-bold text-[var(--color-ivory)] md:max-w-none md:text-4xl"
         >
           Vandanya Heritage Collective
         </motion.h1>
 
         {/* Tagline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-12 text-xl text-balance text-[var(--color-ivory)]/80 md:text-2xl"
+          transition={{ delay: 0.3 }}
+          className="mb-10 text-sm tracking-wide text-[var(--color-ivory)]/80 md:text-lg"
         >
           Discover Authentic Heritage Artifacts
         </motion.p>
 
-        {/* Loading Indicator */}
+        {/* Minimal loader */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex justify-center gap-2"
+          transition={{ delay: 0.45 }}
+          className="flex gap-2"
         >
           {[0, 1, 2].map(i => (
-            <motion.div
+            <motion.span
               key={i}
-              animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+              animate={{ opacity: [0.3, 1, 0.3] }}
               transition={{
-                duration: 1.5,
-                repeat: Number.POSITIVE_INFINITY,
+                duration: 1.2,
+                repeat: Infinity,
                 delay: i * 0.2
               }}
-              className="bg-primary-foreground h-3 w-3 rounded-full"
+              className="h-2 w-2 rounded-full bg-[var(--color-ivory)]"
             />
           ))}
         </motion.div>

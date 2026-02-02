@@ -1,7 +1,6 @@
 'use client'
 
 import type React from 'react'
-
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
@@ -37,49 +36,69 @@ export default function DiscountClaimModal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 z-40 bg-black/50"
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
           />
 
           {/* Modal */}
           <motion.div
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.5, opacity: 0 }}
-            className="fixed top-1/2 left-1/2 z-50 mx-4 w-96 max-w-full -translate-x-1/2 -translate-y-1/2 transform"
+            initial={{ opacity: 0, y: 40, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 40, scale: 0.96 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            className="fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 px-4"
           >
-            <div className="bg-background border-[var(--color-wine-red)] rounded-xl border-2 p-8 shadow-2xl">
-              {/* Close Button */}
+            <div className="relative rounded-3xl border border-(--color-wine-red)/25 bg-(--color-ivory) p-10 shadow-2xl">
+              {/* Close */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-muted-foreground hover:text-foreground absolute top-4 right-4 transition-colors"
+                className="absolute top-5 right-5 rounded-full p-1 text-(--color-wine-red)/60 hover:bg-(--color-wine-red)/10 hover:text-(--color-wine-red)"
               >
                 <X className="h-5 w-5" />
               </button>
 
               {!submitted ? (
                 <>
-                  <h2 className="text-[var(--color-wine-red)] mb-2 text-3xl font-bold">Exclusive Offer!</h2>
-                  <p className="text-muted-foreground mb-6">Get 20% off your first order</p>
+                  {/* Header */}
+                  <h2 className="mb-2 text-3xl font-bold text-(--color-wine-red)">Exclusive Offer</h2>
 
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <p className="mb-8 text-(--color-wine-red)/70">
+                    Enjoy <span className="font-semibold">20% off</span> your first order — straight to your inbox.
+                  </p>
+
+                  {/* Form */}
+                  <form onSubmit={handleSubmit} className="space-y-5">
                     <input
                       type="email"
                       placeholder="Enter your email"
                       value={email}
                       onChange={e => setEmail(e.target.value)}
                       required
-                      className="border-border bg-background focus:ring-primary w-full rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
+                      className="w-full rounded-xl border border-(--color-wine-red)/25 bg-(--color-ivory) px-4 py-3 text-(--color-wine-red) placeholder:text-(--color-wine-red)/40 focus:ring-2 focus:ring-(--color-wine-red)/40 focus:outline-none"
                     />
-                    <Button type="submit" className="w-full" size="lg">
+
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full rounded-xl bg-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90"
+                    >
                       Claim My 20% Discount
                     </Button>
                   </form>
+
+                  {/* Trust note */}
+                  <p className="mt-6 text-center text-xs text-(--color-wine-red)/60">
+                    We respect your privacy. No spam — unsubscribe anytime.
+                  </p>
                 </>
               ) : (
-                <div className="py-6 text-center">
+                <div className="py-10 text-center">
                   <div className="mb-4 text-5xl">🎉</div>
-                  <h3 className="text-primary mb-2 text-2xl font-bold">Success!</h3>
-                  <p className="text-muted-foreground">Check your email for the discount code</p>
+
+                  <h3 className="mb-2 text-2xl font-bold text-(--color-wine-red)">You’re all set!</h3>
+
+                  <p className="text-sm text-(--color-wine-red)/70">
+                    Check your email for your exclusive discount code.
+                  </p>
                 </div>
               )}
             </div>

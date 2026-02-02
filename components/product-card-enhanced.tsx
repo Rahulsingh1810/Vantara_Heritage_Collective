@@ -23,60 +23,57 @@ type ProductCardProps = {
 
 export default function ProductCardEnhanced({ product }: ProductCardProps) {
   return (
-    <motion.div whileHover={{ y: -8 }} transition={{ duration: 0.3 }} className="group h-full">
-      <Card className="flex h-full flex-col overflow-hidden border-2 bg-[var(--color-ivory)] pt-0 transition-colors hover:border-[var(--color-wine-red)]">
-        {/* Image Container */}
-        <CardContent className="bg-muted relative flex-shrink-0 overflow-hidden p-0">
-          <div className="relative h-[550px] w-full">
+    <motion.div whileHover={{ y: -10 }} transition={{ duration: 0.35 }} className="group h-full">
+      <Card className="flex h-full flex-col overflow-hidden rounded-2xl border border-(--color-wine-red)/20 bg-(--color-ivory) pt-0 shadow-sm transition-all hover:shadow-xl">
+        {/* Image */}
+        <CardContent className="relative overflow-hidden p-0">
+          <div className="relative aspect-2/3 w-full overflow-hidden">
             <Image
               src={product.image}
               alt={product.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
             />
 
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            {/* Soft overlay */}
+            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </div>
         </CardContent>
 
-        {/* Content */}
-        <div className="flex flex-1 flex-col p-5">
+        {/* Body */}
+        <div className="flex flex-1 flex-col p-6">
           <Link href={`/products/${product.slug}`}>
-            <h3 className="mb-2 line-clamp-2 text-lg font-bold text-[var(--color-wine-red)]/80 transition-colors group-hover:text-[var(--color-wine-red)]">
+            <h3 className="mb-2 line-clamp-2 text-lg font-semibold tracking-tight text-(--color-wine-red) transition group-hover:underline">
               {product.title}
             </h3>
           </Link>
 
-          <p className="text-muted-foreground mb-4 line-clamp-2 flex-1 text-sm">{product.description}</p>
+          <p className="mb-4 line-clamp-2 flex-1 text-sm text-(--color-wine-red)/70">{product.description}</p>
 
-          {/* Category/Vendor */}
-          <div className="mb-4 flex gap-2">
-            <span className="bg-muted text-muted-foreground rounded-full px-3 py-1 text-xs">
+          {/* Pills */}
+          <div className="mb-5 flex flex-wrap gap-2">
+            <span className="rounded-full border border-(--color-wine-red)/20 bg-(--color-wine-red)/5 px-3 py-1 text-xs text-(--color-wine-red)">
               {product.category || 'Artifact'}
             </span>
-            <span className="bg-accent/10 text-accent rounded-full px-3 py-1 text-xs">
+
+            <span className="rounded-full border border-(--color-wine-red)/20 bg-(--color-wine-red)/5 px-3 py-1 text-xs text-(--color-wine-red)">
               {product.vendor || 'Heritage'}
             </span>
           </div>
 
-          {/* Price and Stock */}
-          <div className="mb-4 flex items-center justify-between">
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-3xl font-bold text-[var(--color-wine-red)]"
-            >
+          {/* Price */}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <span className="text-2xl font-bold text-(--color-wine-red)">
               ₹{ensureNumber(product.price).toFixed(2)}
-            </motion.span>
-          </div>
+            </span>
+          </motion.div>
         </div>
 
-        {/* Footer */}
-        <CardFooter className="p-5 pt-0">
+        {/* CTA */}
+        <CardFooter className="p-6 pt-0">
           <Link href={`/products/${product.slug}`} className="w-full">
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full">
-              <Button className="w-full bg-[var(--color-wine-red)] text-[var(--color-ivory)] hover:bg-[var(--color-wine-red)]/80">
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Button className="w-full rounded-xl bg-(--color-wine-red) text-(--color-ivory) shadow hover:bg-(--color-wine-red)/90">
                 <ShoppingCart className="mr-2 h-4 w-4" />
                 View Details
               </Button>
