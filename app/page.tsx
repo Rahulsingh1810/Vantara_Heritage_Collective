@@ -12,6 +12,8 @@ import FeaturedVendors from '@/components/featured-vendors'
 import ContactFormPopup from '@/components/contact-form-popup'
 import { useState } from 'react'
 import HeroSectionVideo from '@/components/hero-section-video'
+import fetchProducts from '@/utils/queries/page'
+
 
 const featuredProducts = [
   // Sample featured products data
@@ -29,6 +31,8 @@ export default async function Page() {
 
   // const products = await fetchProductBySlug("Vase-rahul");
   // console.log("products",products);
+
+
   return (
     <>
       {/* Home Page / Landing Page Content */}
@@ -45,15 +49,15 @@ export default async function Page() {
 
           {/* <HeroSectionVideo /> */}
           {/* Company Name + Tagline */}
-          <h1 className="mb-2 text-4xl font-extrabold md:text-5xl">Vadānya Heritage Collective</h1>
-          <h2 className="text-primary mb-6 text-xl font-semibold md:text-2xl">Regal Tradition. Timeless Curation.</h2>
+          <h1 className="mb-2 text-4xl font-extrabold md:text-5xl text-[var(--color-wine-red)]">Vadānya Heritage Collective</h1>
+          <h2 className=" mb-6 text-xl font-semibold md:text-2xl text-[var(--color-wine-red)]/80">Regal Tradition. Timeless Curation.</h2>
           {/* Brief Intro */}
           <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-lg font-medium">
             Premium heritage decor curated from enduring cultural traditions.
           </p>
           {/* Crafting Our Story */}
           <div className="text-foreground mx-auto mb-8 max-w-3xl text-left text-base md:text-center">
-            <h3 className="text-primary mb-2 text-2xl font-bold">Crafting Our Story</h3>
+            <h3 className="text-[var(--color-wine-red)] mb-2 text-2xl font-bold">Crafting Our Story</h3>
             <p className="mb-4">
               Vadānya Heritage Collective is an homage to art that endures.
               <br />
@@ -69,7 +73,7 @@ export default async function Page() {
           {/* Transforming Spaces */}
           {/* Transforming Spaces */}
 <div className="mx-auto max-w-3xl text-center">
-  <h4 className="text-primary mb-6 text-xl font-semibold">Transforming Spaces</h4>
+  <h4 className="text-[var(--color-wine-red)] mb-6 text-xl font-semibold">Transforming Spaces</h4>
   <div className="flex flex-wrap justify-center gap-4 md:gap-6">
     {[
       "Statement Walls",
@@ -93,39 +97,43 @@ export default async function Page() {
       {/* ...existing code... */}
 
       {/* Featured Products Slider Section */}
-      <section className="bg-background overflow-hidden py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="animate-fade-in-up mb-12 flex items-end justify-between">
-            <div>
-              <h2 className="mb-3 text-3xl font-bold text-balance md:text-4xl">Featured Collections</h2>
-              <p className="text-muted-foreground">Explore our curated selection of authentic heritage pieces</p>
-            </div>
-            <Link href="/products" className="hidden md:inline">
-              <Button variant="outline">View All</Button>
-            </Link>
-          </div>
+      <section className="bg-background py-16 md:py-24">
+           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+             <div className="animate-fade-in-up mb-12 flex flex-col items-center justify-center">
+      <h2 className="mb-3 text-3xl text-center font-bold text-balance md:text-4xl text-[var(--color-wine-red)]">
+        Featured Collections
+      </h2>
+      <p className="text-muted-foreground text-center">
+        Explore our curated selection of authentic heritage pieces
+      </p>
+      <Link href="/products" className="mt-4">
+        <Button variant="outline">View All</Button>
+      </Link>
+           </div>
 
-          <FeaturedProductsSlider products={featuredProducts} />
+  
+    <ProductShowcaseCarousel products={featuredProducts.slice(0, 4)} />
 
-          <div className="mt-8 text-center md:hidden">
-            <Link href="/products">
-              <Button>View All Products</Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+    <div className="mt-8 text-center md:hidden">
+      <Link href="/products">
+        <Button>View All Products</Button>
+      </Link>
+    </div>
+  </div>
+</section>
+
 
       <section className="from-primary/5 via-background to-accent/5 bg-gradient-to-r py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="animate-fade-in-up mb-16 text-center">
-            <h2 className="mb-3 text-3xl font-bold text-balance md:text-4xl">Know the Legacy</h2>
+            <h2 className="mb-3 text-3xl font-bold text-balance md:text-4xl text-[var(--color-wine-red)]">Know the Legacy</h2>
             <p className="text-muted-foreground text-lg">
               Discover the intricate craftsmanship of master artisans
 
             </p>
           </div>
 
-          <FeaturedVendors />
+          {/* <FeaturedVendors /> */}
         </div>
       </section>
 
@@ -138,7 +146,7 @@ export default async function Page() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
             <div className="animate-fade-in-up">
-              <h2 className="mb-6 text-4xl font-bold">The Art of Tradition</h2>
+              <h2 className="mb-6 text-4xl text-[var(--color-wine-red)] font-bold">The Art of Tradition</h2>
               <p className="text-muted-foreground mb-6 text-lg">
                 Each artifact in our collection represents centuries of cultural heritage and skilled craftsmanship. Our
                 mission is to preserve these traditions while supporting artisan communities.
@@ -156,7 +164,7 @@ export default async function Page() {
                 ))}
               </ul>
             </div>
-            <div className="from-primary/20 to-accent/20 animate-float relative h-80 overflow-hidden rounded-2xl bg-gradient-to-br">
+            <div className="from-primary/20 to-accent/20 relative h-80 overflow-hidden rounded-2xl bg-gradient-to-br">
               <img
                 src="/traditional-indian-crafts.jpg"
                 alt="Artisan craftsmanship"
@@ -170,7 +178,7 @@ export default async function Page() {
       {/* Product Showcase Carousel */}
       <section className="bg-background py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="animate-fade-in-up mb-12 text-center text-3xl font-bold text-balance md:text-4xl">
+          <h2 className="animate-fade-in-up mb-12 text-center text-3xl font-bold text-balance text-[var(--color-wine-red)] md:text-4xl">
             Artisan Stories
           </h2>
           <ProductShowcaseCarousel products={featuredProducts.slice(0, 4)} />

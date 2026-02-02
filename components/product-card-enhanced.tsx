@@ -27,7 +27,7 @@ export default function ProductCardEnhanced({ product }: ProductCardProps) {
       <Card className="hover:border-[var(--color-wine-red)] bg-[var(--color-ivory)] flex h-full flex-col overflow-hidden border-2 pt-0 transition-colors">
         {/* Image Container */}
         <CardContent className="bg-muted relative flex-shrink-0 overflow-hidden p-0">
-          <div className="relative h-72 w-full">
+          <div className="relative h-[550px] w-full">
             <Image
               src={product.image}
               alt={product.title}

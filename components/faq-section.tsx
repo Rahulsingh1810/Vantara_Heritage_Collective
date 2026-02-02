@@ -59,10 +59,10 @@ export default function FAQSection() {
     <section className="bg-background py-16 md:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-balance md:text-4xl">
+          <h2 className="mb-4 text-3xl font-bold text-[var(--color-wine-red)] text-balance md:text-4xl">
             Understanding Our Pieces
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground  text-lg">
             Frequently asked questions about our GI-tagged heritage artefacts
           </p>
         </div>

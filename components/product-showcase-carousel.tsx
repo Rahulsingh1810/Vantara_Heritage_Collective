@@ -39,19 +39,19 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="from-primary/20 via-background to-accent/20 border-primary/30 relative overflow-hidden rounded-2xl border-2 bg-gradient-to-br"
+      className="from-[var(--color-wine-red)]/20 via-background to-[var(--color-wine-red)]/20 border-primary/30 relative overflow-hidden rounded-2xl border-2 bg-[var(--color-wine-red)]/10"
     >
       {/* Background animated elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
-          className="bg-primary/10 absolute -top-40 -right-40 h-80 w-80 rounded-full blur-3xl"
+          className="bg-[var(--color-wine-red)]/10 absolute -top-40 -right-40 h-80 w-80 rounded-full blur-3xl"
         />
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 25, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
-          className="bg-accent/10 absolute -bottom-40 -left-40 h-80 w-80 rounded-full blur-3xl"
+          className="bg-[var(--color-wine-red)]/10 absolute -bottom-40 -left-40 h-80 w-80 rounded-full blur-3xl"
         />
       </div>
 
