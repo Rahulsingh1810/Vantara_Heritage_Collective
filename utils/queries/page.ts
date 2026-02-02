@@ -12,7 +12,7 @@ export default async function fetchProducts() {
               productTitle
               productDescription
               slug
-              productImagesCollection(limit: 3) {
+              productImagesCollection(limit: 1) {
                 items {
                   title
                   description

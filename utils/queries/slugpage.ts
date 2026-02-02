@@ -14,7 +14,7 @@ export default async function fetchProductBySlug(slug: string) {
               slug
               productStock
               productMaterial
-              productImagesCollection(limit: 3) {
+              productImagesCollection(limit: 20) {
                 items {
                   title
                   

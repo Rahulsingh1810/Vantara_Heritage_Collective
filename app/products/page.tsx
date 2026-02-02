@@ -54,8 +54,8 @@ export default async function Products({
       <main>
         <section className="bg-[var(--color-wine-red)] py-12 text-[var(--color-ivory)] md:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl font-bold text-balance md:text-5xl">Our Collections</h1>
-            <p className="mt-4 text-lg text-[var(--color-ivory)]/70 opacity-90">
+            <h1 className="text-center text-4xl font-bold text-balance md:text-5xl">Our Collections</h1>
+            <p className="mt-4 text-center text-lg text-[var(--color-ivory)]/70 opacity-90">
               Discover authentic heritage pieces from master artisans
             </p>
           </div>

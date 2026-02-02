@@ -23,7 +23,9 @@ export default function TransformingSpaces() {
       {/* Inspiration Gallery */}
       <section className="bg-background py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-3xl font-bold text-balance">Room Inspirations</h2>
+          <h2 className="mb-12 text-center text-3xl font-bold text-balance text-[var(--color-wine-red)]">
+            Room Inspirations
+          </h2>
 
           <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2">
             {/* Living Room */}
@@ -35,7 +37,7 @@ export default function TransformingSpaces() {
               </CardContent>
               <div className="p-6">
                 <h3 className="mb-3 text-2xl font-bold">Living Room Elegance</h3>
-                <p className="text-muted-foreground mb-4">
+                <p className="mb-4 text-[var(--color-ivory)]/80">
                   Transform your living space with a traditional rug, ceramic vases, and metal wall art that tells
                   stories of cultural heritage.
                 </p>
@@ -57,7 +59,7 @@ export default function TransformingSpaces() {
               </CardContent>
               <div className="p-6">
                 <h3 className="mb-3 text-2xl font-bold">Peaceful Bedroom Retreat</h3>
-                <p className="text-muted-foreground mb-4">
+                <p className="mb-4 text-[var(--color-ivory)]/80">
                   Create a serene bedroom sanctuary with traditional textiles, stone sculptures, and cultural artifacts.
                 </p>
                 <ul className="space-y-2 text-sm">
@@ -78,7 +80,7 @@ export default function TransformingSpaces() {
               </CardContent>
               <div className="p-6">
                 <h3 className="mb-3 text-2xl font-bold">Inspiring Home Office</h3>
-                <p className="text-muted-foreground mb-4">
+                <p className="mb-4 text-[var(--color-ivory)]/80">
                   Elevate your workspace with artifacts that inspire creativity and bring cultural richness to your
                   daily work environment.
                 </p>
@@ -100,7 +102,7 @@ export default function TransformingSpaces() {
               </CardContent>
               <div className="p-6">
                 <h3 className="mb-3 text-2xl font-bold">Welcoming Entryway</h3>
-                <p className="text-muted-foreground mb-4">
+                <p className="mb-4 text-[var(--color-ivory)]/80">
                   Make a powerful first impression with traditional artifacts that showcase your appreciation for global
                   culture.
                 </p>
@@ -125,7 +127,7 @@ export default function TransformingSpaces() {
             <Card>
               <CardContent className="p-6">
                 <h3 className="mb-3 text-xl font-bold">1. Balance Modern & Traditional</h3>
-                <p className="text-muted-foreground">
+                <p className="text-[var(--color-ivory)]/80">
                   Mix heritage artifacts with contemporary furniture to create a harmonious blend that feels both
                   timeless and current.
                 </p>
@@ -135,7 +137,7 @@ export default function TransformingSpaces() {
             <Card>
               <CardContent className="p-6">
                 <h3 className="mb-3 text-xl font-bold">2. Create Focal Points</h3>
-                <p className="text-muted-foreground">
+                <p className="text-[var(--color-ivory)]/80">
                   Use larger pieces like rugs, sculptures, or tapestries as focal points to anchor your room's design.
                 </p>
               </CardContent>
@@ -144,7 +146,7 @@ export default function TransformingSpaces() {
             <Card>
               <CardContent className="p-6">
                 <h3 className="mb-3 text-xl font-bold">3. Respect Color Palettes</h3>
-                <p className="text-muted-foreground">
+                <p className="text-[var(--color-ivory)]/80">
                   Traditional artifacts often have rich, warm colors. Ensure they complement your existing color scheme.
                 </p>
               </CardContent>
@@ -153,7 +155,7 @@ export default function TransformingSpaces() {
             <Card>
               <CardContent className="p-6">
                 <h3 className="mb-3 text-xl font-bold">4. Tell a Story</h3>
-                <p className="text-muted-foreground">
+                <p className="text-[var(--color-ivory)]/80">
                   Each piece has a history. Display your artifacts in ways that highlight their cultural significance
                   and craftsmanship.
                 </p>
@@ -163,7 +165,7 @@ export default function TransformingSpaces() {
             <Card>
               <CardContent className="p-6">
                 <h3 className="mb-3 text-xl font-bold">5. Layer Your Decor</h3>
-                <p className="text-muted-foreground">
+                <p className="text-[var(--color-ivory)]/80">
                   Combine different sizes and types of artifacts to create depth and visual interest in your space.
                 </p>
               </CardContent>
@@ -172,7 +174,7 @@ export default function TransformingSpaces() {
             <Card>
               <CardContent className="p-6">
                 <h3 className="mb-3 text-xl font-bold">6. Light It Well</h3>
-                <p className="text-muted-foreground">
+                <p className="text-[var(--color-ivory)]/80">
                   Proper lighting highlights the details and beauty of traditional artifacts, creating ambiance and
                   showcase.
                 </p>

@@ -30,8 +30,8 @@ export default function Contact() {
               <CardContent className="p-6 text-center">
                 <Mail className="text-primary mx-auto mb-4 h-12 w-12" />
                 <h3 className="mb-2 text-lg font-semibold">Email</h3>
-                <p className="text-muted-foreground">To be created</p>
-                <p className="text-muted-foreground mt-2 text-sm">We respond within 24 hours</p>
+                <p className="text-[var(--color-ivory)]">To be created</p>
+                <p className="mt-2 text-sm text-[var(--color-ivory)]/80">We respond within 24 hours</p>
               </CardContent>
             </Card>
 
@@ -39,8 +39,8 @@ export default function Contact() {
               <CardContent className="p-6 text-center">
                 <Phone className="text-primary mx-auto mb-4 h-12 w-12" />
                 <h3 className="mb-2 text-lg font-semibold">Phone</h3>
-                <p className="text-muted-foreground">+91 7259311212</p>
-                <p className="text-muted-foreground mt-2 text-sm">Monday – Saturday, 9AM – 6PM IST</p>
+                <p className="text-[var(--color-ivory)]">+91 7259311212</p>
+                <p className="mt-2 text-sm text-[var(--color-ivory)]/80">Monday – Saturday, 9AM – 6PM IST</p>
               </CardContent>
             </Card>
 
@@ -48,8 +48,8 @@ export default function Contact() {
               <CardContent className="p-6 text-center">
                 <MapPin className="text-primary mx-auto mb-4 h-12 w-12" />
                 <h3 className="mb-2 text-lg font-semibold">Address</h3>
-                <p className="text-muted-foreground">No. 33, 2nd Cross, SBM Colony</p>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-[var(--color-ivory)]">No. 33, 2nd Cross, SBM Colony</p>
+                <p className="text-sm text-[var(--color-ivory)]/80">
                   Brindavan Nagar, Mathikere,
                   <br />
                   Bengaluru – 560054
@@ -120,7 +120,7 @@ export default function Contact() {
             <Card>
               <CardContent className="p-6">
                 <h3 className="mb-3 text-lg font-semibold">What is your return policy?</h3>
-                <p className="text-muted-foreground">
+                <p className="text-[var(--color-ivory)]/80">
                   We offer a 30-day return policy on most items. Products must be in their original condition with all
                   packaging intact.
                 </p>
@@ -130,7 +130,7 @@ export default function Contact() {
             <Card>
               <CardContent className="p-6">
                 <h3 className="mb-3 text-lg font-semibold">How long does shipping take?</h3>
-                <p className="text-muted-foreground">
+                <p className="text-[var(--color-ivory)]/80">
                   Domestic orders typically ship within 3-5 business days. International orders may take 10-20 business
                   days depending on destination.
                 </p>
@@ -140,7 +140,7 @@ export default function Contact() {
             <Card>
               <CardContent className="p-6">
                 <h3 className="mb-3 text-lg font-semibold">Are all items authentic?</h3>
-                <p className="text-muted-foreground">
+                <p className="text-[var(--color-ivory)]/80">
                   Yes, every artifact in our collection is verified for authenticity and comes with documentation of its
                   origin and craftsmanship.
                 </p>
@@ -150,7 +150,7 @@ export default function Contact() {
             <Card>
               <CardContent className="p-6">
                 <h3 className="mb-3 text-lg font-semibold">Can I become a vendor?</h3>
-                <p className="text-muted-foreground">
+                <p className="text-[var(--color-ivory)]/80">
                   We're always looking for talented artisans and craftspeople. Please contact us at
                   partnerships@heritagecollective.com to discuss opportunities.
                 </p>

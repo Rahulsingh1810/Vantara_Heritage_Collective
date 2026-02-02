@@ -83,7 +83,9 @@ export default function B2BPage() {
       {/* Benefits Section */}
       <section className="bg-background py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-4xl font-bold">Why Choose Our B2B Program?</h2>
+          <h2 className="mb-12 text-center text-4xl font-bold text-[var(--color-wine-red)]">
+            Why Choose Our B2B Program?
+          </h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: Package, title: 'Bulk Discounts', desc: 'Up to 25% off on wholesale orders' },
@@ -94,9 +96,9 @@ export default function B2BPage() {
               <motion.div key={i} {...fadeIn} transition={{ delay: i * 0.1 }}>
                 <Card className="hover:border-primary h-full transition-colors">
                   <CardContent className="pt-8 text-center">
-                    <item.icon className="text-primary mx-auto mb-4 h-12 w-12" />
+                    <item.icon className="mx-auto mb-4 h-12 w-12 text-[var(--color-ivory)]" />
                     <h3 className="mb-2 text-xl font-bold">{item.title}</h3>
-                    <p className="text-muted-foreground">{item.desc}</p>
+                    <p className="text-[var(--color-ivory)]/80">{item.desc}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -108,7 +110,7 @@ export default function B2BPage() {
       {/* Pricing Tiers */}
       <section className="bg-muted py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-4xl font-bold">Wholesale Pricing Tiers</h2>
+          <h2 className="mb-12 text-center text-4xl font-bold text-[var(--color-wine-red)]">Wholesale Pricing Tiers</h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {pricingTiers.map((tier, i) => (
               <motion.div
@@ -120,7 +122,7 @@ export default function B2BPage() {
                 <Card className={`h-full border-2 ${i === 1 ? 'border-primary' : 'border-border'}`}>
                   <CardHeader className="from-primary/10 to-accent/10 bg-gradient-to-br">
                     <CardTitle className="text-2xl">{tier.name}</CardTitle>
-                    <p className="text-muted-foreground mt-2 text-sm">Orders of {tier.minOrder} units</p>
+                    <p className="mt-2 text-sm text-[var(--color-ivory)]/80">Orders of {tier.minOrder} units</p>
                   </CardHeader>
                   <CardContent className="pt-6">
                     <div className="text-primary mb-6 text-4xl font-bold">{tier.discount} Off</div>
@@ -144,7 +146,7 @@ export default function B2BPage() {
       {/* Registration Form */}
       <section className="bg-background py-20">
         <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-4 text-center text-4xl font-bold">Register Your Business</h2>
+          <h2 className="mb-4 text-center text-4xl font-bold text-[var(--color-wine-red)]">Register Your Business</h2>
           <p className="text-muted-foreground mb-12 text-center">
             Join hundreds of retailers and wholesalers already partnering with us
           </p>

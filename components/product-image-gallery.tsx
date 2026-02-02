@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import type { Product } from '@/type/page' // or wherever your Product type is defined
+import type { Product } from '@/type/page'
 
 type ProductImageGalleryProps = {
   product: Product
@@ -11,7 +11,6 @@ type ProductImageGalleryProps = {
 
 export default function ProductImageGallery({ product }: ProductImageGalleryProps) {
   const images = product?.productImagesCollection?.items?.map(img => img.url) || []
-
   const [currentIndex, setCurrentIndex] = useState(0)
 
   if (images.length === 0) {
@@ -42,7 +41,7 @@ export default function ProductImageGallery({ product }: ProductImageGalleryProp
           className="object-cover transition-transform duration-500 hover:scale-105"
         />
 
-        {/* Navigation */}
+        {/* Navigation Arrows */}
         {images.length > 1 && (
           <>
             <button
@@ -69,18 +68,18 @@ export default function ProductImageGallery({ product }: ProductImageGalleryProp
         </div>
       </div>
 
-      {/* Thumbnails */}
+      {/* Scrollable Thumbnails */}
       {images.length > 1 && (
-        <div className="grid grid-cols-5 gap-3">
+        <div className="scrollbar-hide flex gap-3 overflow-x-auto pb-2">
           {images.map((image, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`relative aspect-square overflow-hidden rounded-lg border-2 transition ${
+              className={`relative h-20 min-w-[80px] overflow-hidden rounded-lg border-2 transition ${
                 currentIndex === index
                   ? 'border-primary ring-primary/40 ring-2'
                   : 'border-muted hover:border-primary/50'
-              } `}
+              }`}
             >
               <Image src={image} alt={`${product.productTitle} thumbnail ${index + 1}`} fill className="object-cover" />
             </button>

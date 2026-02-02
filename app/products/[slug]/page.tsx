@@ -31,11 +31,11 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
     <main className="min-h-screen">
       <Suspense fallback={<div className="py-20 text-center">Loading product details...</div>}>
         {/* Breadcrumb */}
-        <div className="bg-card border-border sticky top-0 z-40 border-b">
+        <div className="border-border sticky top-0 z-40 border-b bg-[var(--color-wine-red)]">
           <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
             <Link
               href="/products"
-              className="text-primary hover:text-accent flex items-center gap-2 font-medium transition-colors duration-300"
+              className="hover:text-accent flex items-center gap-2 font-medium text-[var(--color-ivory)] transition-colors duration-300"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Products
@@ -71,21 +71,23 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
                 </div>
 
                 {data?.vendor && (
-                  <div className="bg-card border-border rounded-xl border p-6 transition-shadow duration-300 hover:shadow-lg">
+                  <div className="border-border rounded-xl border bg-[var(--color-ivory)] p-6 transition-shadow duration-300 hover:shadow-lg">
                     <p className="text-muted-foreground mb-1 text-sm">Crafted by</p>
                     <h3 className="text-foreground mb-2 text-xl font-bold">{data.vendor.vendorName}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{data.vendor.vendorDescription}</p>
                     <div className="border-border mt-4 border-t pt-4">
-                      <p className="text-primary text-xs font-semibold tracking-wider uppercase">
+                      <p className="text-xs font-semibold tracking-wider text-[var(--color-wine-red)] uppercase">
                         {data.vendor.vendorLocation}
                       </p>
                     </div>
                   </div>
                 )}
 
-                <div className="from-primary/5 to-accent/5 border-primary/20 rounded-xl border bg-gradient-to-r p-8">
+                <div className="rounded-xl border border-[var(--color-wine-red)]/20 bg-gradient-to-r from-[var(--color-wine-red)]/5 to-[var(--color-ivory)]/5 p-8">
                   <div className="mb-6 flex items-baseline gap-4">
-                    <span className="text-primary text-5xl font-bold">₹{data?.productPrice.toFixed(2)}</span>
+                    <span className="text-5xl font-bold text-[var(--color-wine-red)]">
+                      ₹{data?.productPrice.toFixed(2)}
+                    </span>
                     <span
                       className={`rounded-full px-3 py-1 text-lg font-semibold ${
                         data?.productStock && data?.productStock > 0
@@ -113,14 +115,14 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-card border-border rounded-lg border p-4 text-center">
+                  <div className="border-border rounded-lg border bg-[var(--color-ivory)] p-4 text-center">
                     <p className="mb-1 text-2xl">✓</p>
-                    <p className="text-primary text-xs font-semibold uppercase">Authentic</p>
+                    <p className="text-xs font-semibold text-[var(--color-wine-red)] uppercase">Authentic</p>
                     <p className="text-muted-foreground text-xs">Verified Original</p>
                   </div>
-                  <div className="bg-card border-border rounded-lg border p-4 text-center">
+                  <div className="border-border rounded-lg border bg-[var(--color-ivory)] p-4 text-center">
                     <p className="mb-1 text-2xl">🚚</p>
-                    <p className="text-primary text-xs font-semibold uppercase">Secure Shipping</p>
+                    <p className="text-xs font-semibold text-[var(--color-wine-red)] uppercase">Secure Shipping</p>
                     <p className="text-muted-foreground text-xs">Insured Delivery</p>
                   </div>
                 </div>
@@ -141,7 +143,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
           </div>
         </section>
 
-        <section className="bg-card border-border border-t py-16 md:py-24">
+        <section className="border-border border-t bg-[var(--color-ivory)] py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 className="text-foreground mb-4 text-4xl font-bold">Discover More Treasures</h2>
             <p className="text-muted-foreground mb-12">Explore our curated collection of authentic Indian artifacts</p>

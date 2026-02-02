@@ -117,7 +117,7 @@ export default function ProductDetailsSection({
         </Section>
 
         {/* Cultural Significance */}
-        <Section title="Cultural & Historical Significance" sectionKey="significance" icon="🏛️">
+        {/* <Section title="Cultural & Historical Significance" sectionKey="significance" icon="🏛️">
           <p className="text-sm leading-relaxed">{cultureSignificance}</p>
 
           <div className="mt-5 rounded-lg border border-[var(--color-wine-red)]/15 bg-[var(--color-wine-red)]/5 p-5">
@@ -127,15 +127,15 @@ export default function ProductDetailsSection({
               traditions.
             </p>
           </div>
-        </Section>
+        </Section> */}
 
         {/* Care Instructions */}
-        <Section title="Care & Maintenance" sectionKey="care" icon="✨">
+        <Section title="Care & Longevity" sectionKey="care" icon="✨">
           <ul className="space-y-3 text-sm">
-            <li className="flex gap-3">
+            {/* <li className="flex gap-3">
               <span className="mt-1 font-bold text-[var(--color-wine-red)]">•</span>
               <span>{careInstructions}</span>
-            </li>
+            </li> */}
             <li className="flex gap-3">
               <span className="mt-1 font-bold text-[var(--color-wine-red)]">•</span>
               <span>Keep away from direct sunlight and high humidity</span>
