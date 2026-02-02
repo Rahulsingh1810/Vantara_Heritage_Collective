@@ -25,19 +25,19 @@ export default function ProductDetailsSection({
   cultureSignificance = 'This piece embodies generations of skilled craftsmanship and deep cultural meaning, preserving living traditions of Indian heritage.',
   careInstructions = 'Handle gently. Dust with a soft, dry cloth. Avoid prolonged direct sunlight and moisture.',
   stylingNotes,
-  inYourSpace,
+  inYourSpace
 }: ProductDetailsSectionProps) {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     specs: true,
     significance: false,
     care: false,
-    styling: false,
+    styling: false
   })
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev => ({
       ...prev,
-      [section]: !prev[section],
+      [section]: !prev[section]
     }))
   }
 
@@ -45,7 +45,7 @@ export default function ProductDetailsSection({
     title,
     icon,
     sectionKey,
-    children,
+    children
   }: {
     title: string
     icon?: string
@@ -55,14 +55,12 @@ export default function ProductDetailsSection({
     <div className="border-b border-[var(--color-wine-red)]/20 last:border-b-0">
       <button
         onClick={() => toggleSection(sectionKey)}
-        className="flex w-full items-center justify-between py-4 px-1 text-left transition-colors hover:bg-[var(--color-wine-red)]/5"
+        className="flex w-full items-center justify-between px-1 py-4 text-left transition-colors hover:bg-[var(--color-wine-red)]/5"
         aria-expanded={expandedSections[sectionKey]}
       >
         <div className="flex items-center gap-3">
           {icon && <span className="text-xl">{icon}</span>}
-          <h3 className="text-lg font-semibold text-[var(--color-wine-red)]">
-            {title}
-          </h3>
+          <h3 className="text-lg font-semibold text-[var(--color-wine-red)]">{title}</h3>
         </div>
         <ChevronDown
           className={`h-5 w-5 text-[var(--color-wine-red)] transition-transform duration-300 ${
@@ -72,22 +70,20 @@ export default function ProductDetailsSection({
       </button>
 
       {expandedSections[sectionKey] && (
-        <div className="pb-5 pt-1 px-1 text-[var(--color-wine-red)]/80 animate-fade-in">
-          {children}
-        </div>
+        <div className="animate-fade-in px-1 pt-1 pb-5 text-[var(--color-wine-red)]/80">{children}</div>
       )}
     </div>
   )
 
   return (
     <div className="mt-12 md:mt-16">
-      <div className="rounded-xl border border-[var(--color-wine-red)]/25 bg-[var(--color-ivory)]/70 backdrop-blur-sm shadow-sm overflow-hidden">
+      <div className="overflow-hidden rounded-xl border border-[var(--color-wine-red)]/25 bg-[var(--color-ivory)]/70 shadow-sm backdrop-blur-sm">
         {/* Specifications */}
         <Section title="Product Specifications" sectionKey="specs" icon="📋">
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {category && (
               <div>
-                <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--color-wine-red)]/70">
+                <dt className="text-xs font-semibold tracking-wide text-[var(--color-wine-red)]/70 uppercase">
                   Category
                 </dt>
                 <dd className="mt-1 text-[var(--color-wine-red)]">{category}</dd>
@@ -95,30 +91,26 @@ export default function ProductDetailsSection({
             )}
 
             <div>
-              <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--color-wine-red)]/70">
+              <dt className="text-xs font-semibold tracking-wide text-[var(--color-wine-red)]/70 uppercase">
                 Material
               </dt>
               <dd className="mt-1 text-[var(--color-wine-red)]">{material}</dd>
             </div>
 
             <div>
-              <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--color-wine-red)]/70">
+              <dt className="text-xs font-semibold tracking-wide text-[var(--color-wine-red)]/70 uppercase">
                 Dimensions
               </dt>
               <dd className="mt-1 text-[var(--color-wine-red)]">{dimensions}</dd>
             </div>
 
             <div>
-              <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--color-wine-red)]/70">
-                Weight
-              </dt>
+              <dt className="text-xs font-semibold tracking-wide text-[var(--color-wine-red)]/70 uppercase">Weight</dt>
               <dd className="mt-1 text-[var(--color-wine-red)]">{weight}</dd>
             </div>
 
             <div className="sm:col-span-2">
-              <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--color-wine-red)]/70">
-                Origin
-              </dt>
+              <dt className="text-xs font-semibold tracking-wide text-[var(--color-wine-red)]/70 uppercase">Origin</dt>
               <dd className="mt-1 text-[var(--color-wine-red)]">{origin}</dd>
             </div>
           </div>
@@ -128,10 +120,11 @@ export default function ProductDetailsSection({
         <Section title="Cultural & Historical Significance" sectionKey="significance" icon="🏛️">
           <p className="text-sm leading-relaxed">{cultureSignificance}</p>
 
-          <div className="mt-5 rounded-lg bg-[var(--color-wine-red)]/5 p-5 border border-[var(--color-wine-red)]/15">
-            <p className="font-medium text-[var(--color-wine-red)] mb-2">Artisan Heritage Note</p>
+          <div className="mt-5 rounded-lg border border-[var(--color-wine-red)]/15 bg-[var(--color-wine-red)]/5 p-5">
+            <p className="mb-2 font-medium text-[var(--color-wine-red)]">Artisan Heritage Note</p>
             <p className="text-sm text-[var(--color-wine-red)]/80">
-              Handcrafted using time-honored techniques passed down through generations, supporting living cultural traditions.
+              Handcrafted using time-honored techniques passed down through generations, supporting living cultural
+              traditions.
             </p>
           </div>
         </Section>
@@ -140,19 +133,19 @@ export default function ProductDetailsSection({
         <Section title="Care & Maintenance" sectionKey="care" icon="✨">
           <ul className="space-y-3 text-sm">
             <li className="flex gap-3">
-              <span className="text-[var(--color-wine-red)] font-bold mt-1">•</span>
+              <span className="mt-1 font-bold text-[var(--color-wine-red)]">•</span>
               <span>{careInstructions}</span>
             </li>
             <li className="flex gap-3">
-              <span className="text-[var(--color-wine-red)] font-bold mt-1">•</span>
+              <span className="mt-1 font-bold text-[var(--color-wine-red)]">•</span>
               <span>Keep away from direct sunlight and high humidity</span>
             </li>
             <li className="flex gap-3">
-              <span className="text-[var(--color-wine-red)] font-bold mt-1">•</span>
+              <span className="mt-1 font-bold text-[var(--color-wine-red)]">•</span>
               <span>Store in a stable, dry environment</span>
             </li>
             <li className="flex gap-3">
-              <span className="text-[var(--color-wine-red)] font-bold mt-1">•</span>
+              <span className="mt-1 font-bold text-[var(--color-wine-red)]">•</span>
               <span>Use soft tools only for cleaning detailed areas</span>
             </li>
           </ul>
@@ -163,8 +156,8 @@ export default function ProductDetailsSection({
           <Section title="Styling & Placement Ideas" sectionKey="styling" icon="🪔">
             {stylingNotes && <p className="mb-4 text-sm leading-relaxed">{stylingNotes}</p>}
             {inYourSpace && (
-              <div className="bg-[var(--color-wine-red)]/5 p-5 rounded-lg border border-[var(--color-wine-red)]/15">
-                <p className="font-medium text-[var(--color-wine-red)] mb-2">In Your Space</p>
+              <div className="rounded-lg border border-[var(--color-wine-red)]/15 bg-[var(--color-wine-red)]/5 p-5">
+                <p className="mb-2 font-medium text-[var(--color-wine-red)]">In Your Space</p>
                 <p className="text-sm text-[var(--color-wine-red)]/80">{inYourSpace}</p>
               </div>
             )}
@@ -175,12 +168,10 @@ export default function ProductDetailsSection({
       {/* Heritage badge / trust element */}
       <div className="mt-8 rounded-xl border border-[var(--color-wine-red)]/20 bg-gradient-to-br from-[var(--color-ivory)] to-white/80 p-6 shadow-sm">
         <div className="flex items-start gap-4">
-          <div className="text-3xl flex-shrink-0">🇮🇳</div>
+          <div className="flex-shrink-0 text-3xl">🇮🇳</div>
           <div>
-            <p className="font-semibold text-[var(--color-wine-red)] mb-1.5">
-              Authentic Indian Heritage
-            </p>
-            <p className="text-sm text-[var(--color-wine-red)]/75 leading-relaxed">
+            <p className="mb-1.5 font-semibold text-[var(--color-wine-red)]">Authentic Indian Heritage</p>
+            <p className="text-sm leading-relaxed text-[var(--color-wine-red)]/75">
               Each piece is thoughtfully sourced to honor and sustain traditional craftsmanship across India.
             </p>
           </div>

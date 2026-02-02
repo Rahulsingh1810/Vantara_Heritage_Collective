@@ -127,17 +127,17 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
               </div>
             </div>
 
-           <ProductDetailsSection
-  category={data?.productCategory}
-  material={data?.productMaterial}
-  dimensions={data?.productDimensions}
-  weight={data?.productWeight}
-  origin={data?.productOrigin}
-  cultureSignificance={data?.productCulturalSignificance}
-  careInstructions={data?.productCare}
-  stylingNotes={data?.placementsAndStylingNotes}
-  inYourSpace={data?.inYourSpace}
-/>
+            <ProductDetailsSection
+              category={data?.productCategory}
+              material={data?.productMaterial}
+              dimensions={data?.productDimensions}
+              weight={data?.productWeight}
+              origin={data?.productOrigin}
+              cultureSignificance={data?.productCulturalSignificance}
+              careInstructions={data?.productCare}
+              stylingNotes={data?.placementsAndStylingNotes}
+              inYourSpace={data?.inYourSpace}
+            />
           </div>
         </section>
 

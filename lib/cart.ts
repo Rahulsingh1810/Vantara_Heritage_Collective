@@ -1,10 +1,8 @@
 // Cart management utilities
 import type { CartItem } from './types'
 
-
 const CART_STORAGE_KEY = 'heritage_cart_slugs'
 const CONTENTFUL_CREDENTIALS_KEY = 'contentful_credentials'
-
 
 // Cart now stores array of { slug, quantity }
 export function getCart(): { slug: string; quantity: number }[] {

@@ -14,7 +14,6 @@ import { useState } from 'react'
 import HeroSectionVideo from '@/components/hero-section-video'
 import fetchProducts from '@/utils/queries/page'
 
-
 const featuredProducts = [
   // Sample featured products data
   { id: 1, name: 'Product 1', image: '/path/to/image1.jpg' },
@@ -32,7 +31,6 @@ export default async function Page() {
   // const products = await fetchProductBySlug("Vase-rahul");
   // console.log("products",products);
 
-
   return (
     <>
       {/* Home Page / Landing Page Content */}
@@ -49,15 +47,19 @@ export default async function Page() {
 
           {/* <HeroSectionVideo /> */}
           {/* Company Name + Tagline */}
-          <h1 className="mb-2 text-4xl font-extrabold md:text-5xl text-[var(--color-wine-red)]">Vadānya Heritage Collective</h1>
-          <h2 className=" mb-6 text-xl font-semibold md:text-2xl text-[var(--color-wine-red)]/80">Regal Tradition. Timeless Curation.</h2>
+          <h1 className="mb-2 text-4xl font-extrabold text-[var(--color-wine-red)] md:text-5xl">
+            Vadānya Heritage Collective
+          </h1>
+          <h2 className="mb-6 text-xl font-semibold text-[var(--color-wine-red)]/80 md:text-2xl">
+            Regal Tradition. Timeless Curation.
+          </h2>
           {/* Brief Intro */}
           <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-lg font-medium">
             Premium heritage decor curated from enduring cultural traditions.
           </p>
           {/* Crafting Our Story */}
           <div className="text-foreground mx-auto mb-8 max-w-3xl text-left text-base md:text-center">
-            <h3 className="text-[var(--color-wine-red)] mb-2 text-2xl font-bold">Crafting Our Story</h3>
+            <h3 className="mb-2 text-2xl font-bold text-[var(--color-wine-red)]">Crafting Our Story</h3>
             <p className="mb-4">
               Vadānya Heritage Collective is an homage to art that endures.
               <br />
@@ -72,24 +74,19 @@ export default async function Page() {
           </div>
           {/* Transforming Spaces */}
           {/* Transforming Spaces */}
-<div className="mx-auto max-w-3xl text-center">
-  <h4 className="text-[var(--color-wine-red)] mb-6 text-xl font-semibold">Transforming Spaces</h4>
-  <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-    {[
-      "Statement Walls",
-      "Vignette Shelves",
-      "Elegant Surfaces",
-      "Soulful Landscapes",
-    ].map((label) => (
-      <div
-        key={label}
-        className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-[var(--color-wine-red)] bg-[var(--color-wine-red)] text-center text-sm font-medium text-[var(--color-ivory)] shadow-sm transition-transform hover:scale-105 md:h-25 md:w-25 md:text-base"
-      >
-        {label}
-      </div>
-    ))}
-  </div>
-</div>
+          <div className="mx-auto max-w-3xl text-center">
+            <h4 className="mb-6 text-xl font-semibold text-[var(--color-wine-red)]">Transforming Spaces</h4>
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+              {['Statement Walls', 'Vignette Shelves', 'Elegant Surfaces', 'Soulful Landscapes'].map(label => (
+                <div
+                  key={label}
+                  className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-[var(--color-wine-red)] bg-[var(--color-wine-red)] text-center text-sm font-medium text-[var(--color-ivory)] shadow-sm transition-transform hover:scale-105 md:h-25 md:w-25 md:text-base"
+                >
+                  {label}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
       {/* Hero Section Animated */}
@@ -98,39 +95,36 @@ export default async function Page() {
 
       {/* Featured Products Slider Section */}
       <section className="bg-background py-16 md:py-24">
-           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-             <div className="animate-fade-in-up mb-12 flex flex-col items-center justify-center">
-      <h2 className="mb-3 text-3xl text-center font-bold text-balance md:text-4xl text-[var(--color-wine-red)]">
-        Featured Collections
-      </h2>
-      <p className="text-muted-foreground text-center">
-        Explore our curated selection of authentic heritage pieces
-      </p>
-      <Link href="/products" className="mt-4">
-        <Button variant="outline">View All</Button>
-      </Link>
-           </div>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="animate-fade-in-up mb-12 flex flex-col items-center justify-center">
+            <h2 className="mb-3 text-center text-3xl font-bold text-balance text-[var(--color-wine-red)] md:text-4xl">
+              Featured Collections
+            </h2>
+            <p className="text-muted-foreground text-center">
+              Explore our curated selection of authentic heritage pieces
+            </p>
+            <Link href="/products" className="mt-4">
+              <Button variant="outline">View All</Button>
+            </Link>
+          </div>
 
-  
-    <ProductShowcaseCarousel products={featuredProducts.slice(0, 4)} />
+          <ProductShowcaseCarousel products={featuredProducts.slice(0, 4)} />
 
-    <div className="mt-8 text-center md:hidden">
-      <Link href="/products">
-        <Button>View All Products</Button>
-      </Link>
-    </div>
-  </div>
-</section>
-
+          <div className="mt-8 text-center md:hidden">
+            <Link href="/products">
+              <Button>View All Products</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <section className="from-primary/5 via-background to-accent/5 bg-gradient-to-r py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="animate-fade-in-up mb-16 text-center">
-            <h2 className="mb-3 text-3xl font-bold text-balance md:text-4xl text-[var(--color-wine-red)]">Know the Legacy</h2>
-            <p className="text-muted-foreground text-lg">
-              Discover the intricate craftsmanship of master artisans
-
-            </p>
+            <h2 className="mb-3 text-3xl font-bold text-balance text-[var(--color-wine-red)] md:text-4xl">
+              Know the Legacy
+            </h2>
+            <p className="text-muted-foreground text-lg">Discover the intricate craftsmanship of master artisans</p>
           </div>
 
           {/* <FeaturedVendors /> */}
@@ -138,7 +132,7 @@ export default async function Page() {
       </section>
 
       {/* Stats Counter Section */}
-      <section className="bg-[var(--color-wine-red)] text-[var(--color-ivory)] py-16 md:py-24">
+      <section className="bg-[var(--color-wine-red)] py-16 text-[var(--color-ivory)] md:py-24">
         <StatsCounter />
       </section>
 
@@ -146,7 +140,7 @@ export default async function Page() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
             <div className="animate-fade-in-up">
-              <h2 className="mb-6 text-4xl text-[var(--color-wine-red)] font-bold">The Art of Tradition</h2>
+              <h2 className="mb-6 text-4xl font-bold text-[var(--color-wine-red)]">The Art of Tradition</h2>
               <p className="text-muted-foreground mb-6 text-lg">
                 Each artifact in our collection represents centuries of cultural heritage and skilled craftsmanship. Our
                 mission is to preserve these traditions while supporting artisan communities.
@@ -207,12 +201,10 @@ export default async function Page() {
 
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="animate-fade-in-up mb-4 text-3xl font-bold text-white md:text-4xl">Have Questions?</h2>
-          <p className="mb-8 text-lg text-white/90">
-           Get in touch for queries or to simply chat! 
-          </p>
+          <p className="mb-8 text-lg text-white/90">Get in touch for queries or to simply chat!</p>
           <button
             onClick={() => setShowContactPopup(true)}
-            className="text-[var(--color-ivory)] rounded-lg bg-[var(--color-wine-red)] px-8 py-3 font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            className="rounded-lg bg-[var(--color-wine-red)] px-8 py-3 font-bold text-[var(--color-ivory)] transition-all duration-300 hover:scale-105 hover:shadow-2xl"
           >
             Start a Conversation
           </button>

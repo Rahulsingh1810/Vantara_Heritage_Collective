@@ -26,7 +26,6 @@ export type Media = {
   contentType: string
 }
 
-
 export interface Product {
   productId: number | string
   productTitle: string

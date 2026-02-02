@@ -109,10 +109,10 @@ export default function Navigation() {
             </div>
 
             {/* Mobile menu toggle */}
-            <button 
-              onClick={() => setIsOpen(!isOpen)} 
-              className="md:hidden p-2 -mr-2"
-              aria-label={isOpen ? "Close menu" : "Open menu"}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="-mr-2 p-2 md:hidden"
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
               {isOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
             </button>
@@ -122,20 +122,14 @@ export default function Navigation() {
 
       {/* Mobile Full-screen Menu */}
       <div
-        className={`
-          fixed inset-0 z-40 flex flex-col bg-[var(--color-ivory)] text-[var(--color-wine-red)] 
-          transition-transform duration-300 ease-in-out md:hidden
-          ${isOpen ? 'translate-x-0' : 'translate-x-full'}
-        `}
+        className={`fixed inset-0 z-40 flex flex-col bg-[var(--color-ivory)] text-[var(--color-wine-red)] transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'} `}
       >
         {/* Header with close button */}
         <div className="flex items-center justify-between border-b border-[var(--color-wine-red)]/20 px-6 py-5">
-          <div className="text-xl font-bold text-[var(--color-wine-red)]">
-            Menu
-          </div>
-          <button 
+          <div className="text-xl font-bold text-[var(--color-wine-red)]">Menu</div>
+          <button
             onClick={closeMenu}
-            className="rounded-full p-2 hover:bg-[var(--color-wine-red)]/10 transition-colors"
+            className="rounded-full p-2 transition-colors hover:bg-[var(--color-wine-red)]/10"
             aria-label="Close menu"
           >
             <X className="h-8 w-8" />
@@ -145,44 +139,44 @@ export default function Navigation() {
         {/* Navigation Links */}
         <div className="flex-1 overflow-y-auto px-6 py-8">
           <div className="flex flex-col gap-2 text-lg">
-            <Link 
-              href="/" 
-              className="block rounded-lg px-5 py-4 hover:bg-[var(--color-wine-red)]/10 transition-colors"
+            <Link
+              href="/"
+              className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
               onClick={closeMenu}
             >
               Home
             </Link>
-            <Link 
-              href="/our-story" 
-              className="block rounded-lg px-5 py-4 hover:bg-[var(--color-wine-red)]/10 transition-colors"
+            <Link
+              href="/our-story"
+              className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
               onClick={closeMenu}
             >
               Our Story
             </Link>
-            <Link 
-              href="/products" 
-              className="block rounded-lg px-5 py-4 hover:bg-[var(--color-wine-red)]/10 transition-colors"
+            <Link
+              href="/products"
+              className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
               onClick={closeMenu}
             >
               Products
             </Link>
-            <Link 
-              href="/b2b" 
-              className="block rounded-lg px-5 py-4 font-semibold hover:bg-[var(--color-wine-red)]/10 transition-colors"
+            <Link
+              href="/b2b"
+              className="block rounded-lg px-5 py-4 font-semibold transition-colors hover:bg-[var(--color-wine-red)]/10"
               onClick={closeMenu}
             >
               B2B
             </Link>
-            <Link 
-              href="/transforming-spaces" 
-              className="block rounded-lg px-5 py-4 hover:bg-[var(--color-wine-red)]/10 transition-colors"
+            <Link
+              href="/transforming-spaces"
+              className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
               onClick={closeMenu}
             >
               Transforming Spaces
             </Link>
-            <Link 
-              href="/contact" 
-              className="block rounded-lg px-5 py-4 hover:bg-[var(--color-wine-red)]/10 transition-colors"
+            <Link
+              href="/contact"
+              className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
               onClick={closeMenu}
             >
               Contact
@@ -191,16 +185,16 @@ export default function Navigation() {
             {/* Auth links when not logged in */}
             {!user && (
               <div className="mt-8 border-t border-[var(--color-wine-red)]/20 pt-8">
-                <Link 
+                <Link
                   href="/auth/login"
-                  className="block rounded-lg px-5 py-4 hover:bg-[var(--color-wine-red)]/10 transition-colors"
+                  className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
                   onClick={closeMenu}
                 >
                   Sign In
                 </Link>
-                <Link 
+                <Link
                   href="/auth/register"
-                  className="block rounded-lg px-5 py-4 hover:bg-[var(--color-wine-red)]/10 transition-colors"
+                  className="block rounded-lg px-5 py-4 transition-colors hover:bg-[var(--color-wine-red)]/10"
                   onClick={closeMenu}
                 >
                   Create Account

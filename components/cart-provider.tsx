@@ -26,7 +26,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     // Load cart from localStorage
     const savedCart = getCart()
     // Transform savedCart to match CartItem structure if needed
-    const transformedCart = savedCart.map((item: any) => 
+    const transformedCart = savedCart.map((item: any) =>
       item.product ? item : { product: { id: item.slug }, quantity: item.quantity }
     )
     setCart(transformedCart)
@@ -44,19 +44,23 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
 
     setCart(newCart)
-    saveCart(newCart.map(item => ({
-      slug: item.product.slug,
-      quantity: item.quantity
-    })))
+    saveCart(
+      newCart.map(item => ({
+        slug: item.product.slug,
+        quantity: item.quantity
+      }))
+    )
   }
 
   const handleRemoveFromCart = (productId: number) => {
     const newCart = cart.filter(item => item.product.id !== productId)
     setCart(newCart)
-    saveCart(newCart.map(item => ({
-      slug: item.product.slug,
-      quantity: item.quantity
-    })))
+    saveCart(
+      newCart.map(item => ({
+        slug: item.product.slug,
+        quantity: item.quantity
+      }))
+    )
   }
 
   const handleUpdateQuantity = (productId: number, quantity: number) => {
@@ -68,10 +72,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const newCart = cart.map(item => (item.product.id === productId ? { ...item, quantity } : item))
 
     setCart(newCart)
-    saveCart(newCart.map(item => ({
-      slug: item.product.slug,
-      quantity: item.quantity
-    })))
+    saveCart(
+      newCart.map(item => ({
+        slug: item.product.slug,
+        quantity: item.quantity
+      }))
+    )
   }
 
   const handleClearCart = () => {

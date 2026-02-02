@@ -76,7 +76,9 @@ export default function TestimonialsSlider() {
     <section className="bg-card border-border border-t py-16 md:py-24">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-balance text-[var(--color-wine-red)] md:text-4xl">What Our Customers Say</h2>
+          <h2 className="mb-4 text-3xl font-bold text-balance text-[var(--color-wine-red)] md:text-4xl">
+            What Our Customers Say
+          </h2>
           <p className="text-muted-foreground text-lg">
             Join thousands of satisfied customers who love our heritage artifacts
           </p>

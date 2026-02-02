@@ -5,7 +5,7 @@
 
 :root {
   /* Updated background to butterish/yellowish instead of white */
-  --background:  #F5EFE6;
+  --background: #f5efe6;
   --foreground: oklch(0.15 0 0);
   /* Updated card color to warm butter tone */
   --card: oklch(0.96 0.06 85);
@@ -43,7 +43,7 @@
   --sidebar-ring: oklch(0.708 0 0);
   /* Brand colors for global usage */
   --color-wine-red: #6f1c27;
-  --color-ivory: #F5EFE6;
+  --color-ivory: #f5efe6;
 }
 
 .dark {

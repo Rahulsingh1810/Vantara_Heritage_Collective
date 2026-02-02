@@ -12,7 +12,7 @@ export default function Contact() {
   return (
     <main>
       {/* Hero Section */}
-      <section className="bg-[var(--color-wine-red)] text-[var(--color-ivory)] py-16 md:py-24">
+      <section className="bg-[var(--color-wine-red)] py-16 text-[var(--color-ivory)] md:py-24">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <h1 className="mb-6 text-4xl font-bold text-balance md:text-5xl">Get in Touch</h1>
           <p className="text-lg text-balance opacity-90 md:text-xl">
@@ -26,40 +26,36 @@ export default function Contact() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-16 grid grid-cols-1 gap-8 lg:grid-cols-3">
             {/* Contact Info Cards */}
-           <Card>
-  <CardContent className="p-6 text-center">
-    <Mail className="text-primary mx-auto mb-4 h-12 w-12" />
-    <h3 className="mb-2 text-lg font-semibold">Email</h3>
-    <p className="text-muted-foreground">To be created</p>
-    <p className="text-muted-foreground mt-2 text-sm">We respond within 24 hours</p>
-  </CardContent>
-</Card>
-
+            <Card>
+              <CardContent className="p-6 text-center">
+                <Mail className="text-primary mx-auto mb-4 h-12 w-12" />
+                <h3 className="mb-2 text-lg font-semibold">Email</h3>
+                <p className="text-muted-foreground">To be created</p>
+                <p className="text-muted-foreground mt-2 text-sm">We respond within 24 hours</p>
+              </CardContent>
+            </Card>
 
             <Card>
-  <CardContent className="p-6 text-center">
-    <Phone className="text-primary mx-auto mb-4 h-12 w-12" />
-    <h3 className="mb-2 text-lg font-semibold">Phone</h3>
-    <p className="text-muted-foreground">+91 7259311212</p>
-    <p className="text-muted-foreground mt-2 text-sm">Monday – Saturday, 9AM – 6PM IST</p>
-  </CardContent>
-</Card>
-
+              <CardContent className="p-6 text-center">
+                <Phone className="text-primary mx-auto mb-4 h-12 w-12" />
+                <h3 className="mb-2 text-lg font-semibold">Phone</h3>
+                <p className="text-muted-foreground">+91 7259311212</p>
+                <p className="text-muted-foreground mt-2 text-sm">Monday – Saturday, 9AM – 6PM IST</p>
+              </CardContent>
+            </Card>
 
             <Card>
-  <CardContent className="p-6 text-center">
-    <MapPin className="text-primary mx-auto mb-4 h-12 w-12" />
-    <h3 className="mb-2 text-lg font-semibold">Address</h3>
-    <p className="text-muted-foreground">
-      No. 33, 2nd Cross, SBM Colony
-    </p>
-    <p className="text-muted-foreground text-sm">
-      Brindavan Nagar, Mathikere,<br />
-      Bengaluru – 560054
-    </p>
-  </CardContent>
-</Card>
-
+              <CardContent className="p-6 text-center">
+                <MapPin className="text-primary mx-auto mb-4 h-12 w-12" />
+                <h3 className="mb-2 text-lg font-semibold">Address</h3>
+                <p className="text-muted-foreground">No. 33, 2nd Cross, SBM Colony</p>
+                <p className="text-muted-foreground text-sm">
+                  Brindavan Nagar, Mathikere,
+                  <br />
+                  Bengaluru – 560054
+                </p>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Contact Form */}

@@ -51,7 +51,7 @@ export default function SplashScreen() {
           transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
           className="mb-8 text-8xl"
         >
-          <img src="/ivorylogo.svg" alt="Vandanya Heritage Collective Logo" className="w-42 h-42 mx-auto" />
+          <img src="/ivorylogo.svg" alt="Vandanya Heritage Collective Logo" className="mx-auto h-42 w-42" />
         </motion.div>
 
         {/* Brand Name */}
@@ -59,7 +59,7 @@ export default function SplashScreen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-[var(--color-ivory)] mb-4 text-5xl font-bold text-balance md:text-6xl"
+          className="mb-4 text-5xl font-bold text-balance text-[var(--color-ivory)] md:text-6xl"
         >
           Vandanya Heritage Collective
         </motion.h1>
@@ -69,7 +69,7 @@ export default function SplashScreen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-[var(--color-ivory)]/80 mb-12 text-xl text-balance md:text-2xl"
+          className="mb-12 text-xl text-balance text-[var(--color-ivory)]/80 md:text-2xl"
         >
           Discover Authentic Heritage Artifacts
         </motion.p>

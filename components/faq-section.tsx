@@ -59,10 +59,10 @@ export default function FAQSection() {
     <section className="bg-background py-16 md:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-[var(--color-wine-red)] text-balance md:text-4xl">
+          <h2 className="mb-4 text-3xl font-bold text-balance text-[var(--color-wine-red)] md:text-4xl">
             Understanding Our Pieces
           </h2>
-          <p className="text-muted-foreground  text-lg">
+          <p className="text-muted-foreground text-lg">
             Frequently asked questions about our GI-tagged heritage artefacts
           </p>
         </div>
@@ -80,13 +80,8 @@ export default function FAQSection() {
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="hover:bg-muted/50 flex w-full items-center justify-between px-6 py-5 text-left transition-colors"
               >
-                <span className="text-lg font-semibold leading-tight">
-                  {faq.question}
-                </span>
-                <motion.div
-                  animate={{ rotate: openIndex === index ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <span className="text-lg leading-tight font-semibold">{faq.question}</span>
+                <motion.div animate={{ rotate: openIndex === index ? 180 : 0 }} transition={{ duration: 0.3 }}>
                   <ChevronDown className="text-primary h-6 w-6 flex-shrink-0" />
                 </motion.div>
               </button>
@@ -95,14 +90,12 @@ export default function FAQSection() {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{
                   height: openIndex === index ? 'auto' : 0,
-                  opacity: openIndex === index ? 1 : 0,
+                  opacity: openIndex === index ? 1 : 0
                 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="overflow-hidden"
               >
-                <div className="border-border border-t bg-muted/20 px-6 py-5 text-muted-foreground">
-                  {faq.answer}
-                </div>
+                <div className="border-border bg-muted/20 text-muted-foreground border-t px-6 py-5">{faq.answer}</div>
               </motion.div>
             </motion.div>
           ))}
