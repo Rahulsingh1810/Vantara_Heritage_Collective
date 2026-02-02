@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Footer() {
@@ -5,9 +6,19 @@ export default function Footer() {
     <footer className="mt-20 bg-[var(--color-wine-red)] text-[var(--color-ivory)]">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-4">
+          
           {/* Brand */}
           <div>
-            <h3 className="mb-4 text-lg font-bold">Vandanya Heritage Collective</h3>
+            <Link href="/" className="inline-block">
+              <Image
+                src="/ivoryLogo.svg" // or /logo.svg
+                alt="Vandanya Heritage Collective Logo"
+                width={140}
+                height={60}
+                className="mb-4 object-contain"
+                priority
+              />
+            </Link>
             <p className="text-sm opacity-90">
               Preserving and celebrating traditional artifacts and cultural treasures.
             </p>
