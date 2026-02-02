@@ -43,7 +43,7 @@ export default function ProductCardEnhanced({ product }: ProductCardProps) {
         {/* Content */}
         <div className="flex flex-1 flex-col p-5">
           <Link href={`/products/${product.slug}`}>
-            <h3 className="mb-2 line-clamp-2 text-lg font-bold transition-colors group-hover:text-[var(--color-wine-red)]">
+            <h3 className="mb-2 line-clamp-2 text-lg font-bold text-[var(--color-wine-red)]/80 transition-colors group-hover:text-[var(--color-wine-red)]">
               {product.title}
             </h3>
           </Link>

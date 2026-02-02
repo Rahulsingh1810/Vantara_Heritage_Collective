@@ -25,7 +25,7 @@ export default function Navigation() {
   const closeMenu = () => setIsOpen(false)
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-[var(--color-wine-red)] bg-[var(--color-wine-red)] text-[var(--color-ivory)]">
+    <nav className="sticky top-0 z-50 border-b border-[var(--color-wine-red)] bg-[var(--color-wine-red)] text-[var(--color-ivory)] opacity-98 shadow-lg backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -122,7 +122,7 @@ export default function Navigation() {
 
       {/* Mobile Full-screen Menu */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col bg-[var(--color-ivory)] text-[var(--color-wine-red)] transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'} `}
+        className={`fixed inset-0 z-40 flex flex-col bg-[var(--color-ivory)]/60 text-[var(--color-wine-red)] transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'} bg-opacity-60 shadow-2xl backdrop-blur-lg`}
       >
         {/* Header with close button */}
         <div className="flex items-center justify-between border-b border-[var(--color-wine-red)]/20 px-6 py-5">
