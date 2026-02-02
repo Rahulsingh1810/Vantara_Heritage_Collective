@@ -13,7 +13,7 @@ export default function About() {
       {/* Hero Section */}
       <section className=" text-primary-foreground py-5 md:py-5">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="mb-6 text-4xl font-bold text-balance md:text-5xl">Our Story</h1>
+          <h1 className="mb-6 text-4xl font-bold text-balance text-[var(--color-wine-red)] md:text-5xl">Our Story</h1>
         </div>
       </section>
 
@@ -67,12 +67,12 @@ export default function About() {
 
             {/* Our Curation Process – Card Grid Layout */}
             <div className="space-y-10">
-              <h2 className="text-3xl font-bold text-center md:text-left">Our Curation Process</h2>
+              <h2 className="text-3xl font-bold text-center text-[var(--color-wine-red)]/90 md:text-left">Our Curation Process</h2>
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <Card className="border-border bg-background shadow-sm transition-all hover:shadow-md">
                   <CardContent className="p-6">
-                    <h3 className="mb-3 text-lg font-semibold text-primary">
+                    <h3 className="mb-3 text-lg font-semibold text-[var(--color-wine-red)]/80">
                       Finding Craft at the Source
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
@@ -85,7 +85,7 @@ export default function About() {
 
                 <Card className="border-border bg-background shadow-sm transition-all hover:shadow-md">
                   <CardContent className="p-6">
-                    <h3 className="mb-3 text-lg font-semibold text-primary">
+                    <h3 className="mb-3 text-lg font-semibold text-[var(--color-wine-red)]/80">
                       Honouring the Pace of Making
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
@@ -98,7 +98,7 @@ export default function About() {
 
                 <Card className="border-border bg-background shadow-sm transition-all hover:shadow-md">
                   <CardContent className="p-6">
-                    <h3 className="mb-3 text-lg font-semibold text-primary">
+                    <h3 className="mb-3 text-lg font-semibold text-[var(--color-wine-red)]/80">
                       Curating with Intent
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
@@ -111,7 +111,7 @@ export default function About() {
 
                 <Card className="border-border bg-background shadow-sm transition-all hover:shadow-md">
                   <CardContent className="p-6">
-                    <h3 className="mb-3 text-lg font-semibold text-primary">
+                    <h3 className="mb-3 text-lg font-semibold text-[var(--color-wine-red)]/80">
                       Heritage in Contemporary Living
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
@@ -126,19 +126,19 @@ export default function About() {
 
             {/* A Note from the Collective */}
             <div className="from-primary/5 to-accent/5 border-border rounded-xl border bg-gradient-to-br p-8 md:p-10">
-              <h2 className="mb-6 text-3xl font-bold">A Note from the Collective</h2>
+              <h2 className="mb-6 text-3xl text-[var(--color-wine-red)] font-bold">A Note from the Collective</h2>
               <p className="text-muted-foreground mb-6 text-lg leading-relaxed italic">
                 Vadānya was born from the conviction that long-standing handcrafted artefacts were more than relics of
                 the past. Their stories deserved to be etched in the present and find echoes in spaces filled with warmth
                 and love. In welcoming these artefacts into your space, you’re essentially gathering a piece of history
                 cherished and perfected over centuries.
               </p>
-              <p className="font-semibold text-right">— Vadānya Heritage Collective</p>
+              <p className="font-semibold text-[var(--color-wine-red)]/90 text-right">— Vadānya Heritage Collective</p>
             </div>
 
             {/* Environmental & Social Commitment – Blended */}
             <div className="space-y-10">
-              <h2 className="text-3xl font-bold text-center md:text-left">
+              <h2 className="text-3xl font-bold text-center text-[var(--color-wine-red)] md:text-left">
                 Environmental & Social Commitment
               </h2>
 
@@ -158,25 +158,25 @@ export default function About() {
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-10">
                 <div className="space-y-6 rounded-xl border border-border bg-muted/30 p-7">
-                  <h3 className="text-xl font-semibold text-primary">
+                  <h3 className="text-xl font-semibold text-[var(--color-wine-red)]/80">
                     Respect for Regional Craft Ecosystems
                   </h3>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3">
-                      <span className="mt-1 text-primary text-xl font-bold">✓</span>
+                      <span className="mt-1 text-[var(--color-wine-red)] text-xl font-bold">✓</span>
                       <span>
                         We source directly from origin locales, supporting living craft traditions without disrupting
                         regional balance
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="mt-1 text-primary text-xl font-bold">✓</span>
+                      <span className="mt-1 text-[var(--color-wine-red)] text-xl font-bold">✓</span>
                       <span>
                         Materials are chosen with awareness of seasonal availability and local ecological cycles
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="mt-1 text-primary text-xl font-bold">✓</span>
+                      <span className="mt-1 text-[var(--color-wine-red)] text-xl font-bold">✓</span>
                       <span>
                         Partnerships respect the natural rhythm and capacity of each craft community
                       </span>
@@ -185,24 +185,24 @@ export default function About() {
                 </div>
 
                 <div className="space-y-6 rounded-xl border border-border bg-muted/30 p-7">
-                  <h3 className="text-xl font-semibold text-primary">
+                  <h3 className="text-xl font-semibold text-[var(--color-wine-red)]/80">
                     Conscious & Evolving Approach
                   </h3>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3">
-                      <span className="mt-1 text-primary text-xl font-bold">✓</span>
+                      <span className="mt-1 text-[var(--color-wine-red)] text-xl font-bold">✓</span>
                       <span>
                         Use of sustainable, traditionally appropriate materials wherever possible
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="mt-1 text-primary text-xl font-bold">✓</span>
+                      <span className="mt-1 text-[var(--color-wine-red)] text-xl font-bold">✓</span>
                       <span>
                         Minimal packaging — 100% recyclable or reusable whenever feasible
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="mt-1 text-primary text-xl font-bold">✓</span>
+                      <span className="mt-1 text-[var(--color-wine-red)] text-xl font-bold">✓</span>
                       <span>
                         Ongoing dialogue with artisans to evolve practices that honour both heritage and the future
                       </span>
@@ -212,7 +212,7 @@ export default function About() {
               </div>
 
               <div className="mt-10 text-center md:text-left">
-                <p className="text-lg font-medium italic text-primary/90">
+                <p className="text-lg font-medium italic text-[var(--color-wine-red)]/80">
                   We choose integrity-led curation over volume-driven commerce — because true heritage cannot be
                   mass-produced, and meaningful sustainability begins with restraint.
                 </p>
