@@ -115,7 +115,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
                 dimensions={data.productDimensions}
                 weight={data.productWeight}
                 origin={data.productOrigin}
-                cultureSignificance={data.productCulturalSignificance}
+                culturalSignificance={data.productCulturalSignificance}
                 careInstructions={data.productCare}
                 stylingNotes={data.placementsAndStylingNotes}
                 inYourSpace={data.inYourSpace}

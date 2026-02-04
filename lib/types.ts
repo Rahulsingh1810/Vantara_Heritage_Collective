@@ -41,7 +41,7 @@ export interface Product {
   productDimensions?: string
   productOrigin?: string
   productMaterial?: string
-  productImagesCollection?: IMedia[]
+  productImagesCollection?: Media[]
   placementsAndStylingNotes?: string
   inYourSpace?: string
 }
@@ -75,7 +75,7 @@ export interface CartProduct {
   productPrice: number
   productImagesCollection?: any
   productStock: number
-  productImage?: string | null
+  productImage: string | null
 }
 
 export interface CartItem {

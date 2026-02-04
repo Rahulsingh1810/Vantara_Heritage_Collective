@@ -6,7 +6,7 @@ export default async function getProductsBySlugs(slugs: string[]) {
 
   const query = `
     query {
-      productCollection(where: { slug_in: [${slugFilter}] }, limit: ${slugs.length}) {
+      productsCollection(where: { slug_in: [${slugFilter}] }, limit: ${slugs.length}) {
         items {
           productId
           slug
@@ -25,5 +25,5 @@ export default async function getProductsBySlugs(slugs: string[]) {
 
   const { data } = await graphQlClient<{ data: any }>(query, ['cart-products'])
 
-  return data.productCollection.items
+  return data.productsCollection.items
 }

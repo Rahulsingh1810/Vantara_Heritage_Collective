@@ -4,6 +4,7 @@ import type React from 'react'
 import { createContext, useContext, useState, useEffect } from 'react'
 import type { CartItem } from '@/lib/types'
 import { getCart, saveCart, getCartTotal } from '@/lib/cart'
+import getProductsBySlugs from '@/utils/queries/getProductsBySlugs'
 
 interface CartContextType {
   cart: CartItem[]
@@ -35,26 +36,28 @@ useEffect(() => {
       const slugs = savedCart.map((item: any) => item.slug)
       const products = await getProductsBySlugs(slugs)
 
-      const hydratedCart = savedCart.map((item: any) => {
-        const product = products.find((p: any) => p.slug === item.slug)
+      const hydratedCart = savedCart
+        .map((item: any) => {
+          const product = products.find((p: any) => p.slug === item.slug)
 
-        if (!product) return null
+          if (!product) return null
 
-        return {
+          return {
             product: {
               id: product.productId,
               slug: product.slug,
               productTitle: product.productTitle,
               productPrice: product.productPrice,
               productStock: product.productStock,
-              image:
+              productImage:
                 product.productImagesCollection?.items?.[0]?.url
                   ? product.productImagesCollection.items[0].url
                   : '/traditional-indian-artifact.jpg',
             },
-          quantity: item.quantity
-        }
-      }).filter(Boolean)
+            quantity: item.quantity
+          }
+        })
+        .filter((item): item is CartItem => item !== null)
 
       setCart(hydratedCart)
     } catch (err) {
