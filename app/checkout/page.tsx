@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft } from 'lucide-react'
 import { ensureNumber } from '@/lib/utils'
 
 export default function CheckoutPage() {
@@ -84,14 +83,14 @@ export default function CheckoutPage() {
 
                 <CardContent className="space-y-6">
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    {['email', 'name', 'address'].map(field => (
+                    {(['email', 'name', 'address'] as const).map(field => (
                       <div key={field}>
                         <label className="mb-2 block text-sm font-medium text-(--color-wine-red) capitalize">
                           {field}
                         </label>
                         <input
                           name={field}
-                          value={(formData as any)[field]}
+                          value={formData[field]}
                           onChange={handleChange}
                           className={inputClass}
                           required
@@ -100,14 +99,14 @@ export default function CheckoutPage() {
                     ))}
 
                     <div className="grid gap-4 md:grid-cols-3">
-                      {['city', 'state', 'zip'].map(field => (
+                      {(['city', 'state', 'zip'] as const).map(field => (
                         <div key={field}>
                           <label className="mb-2 block text-sm font-medium text-(--color-wine-red) capitalize">
                             {field}
                           </label>
                           <input
                             name={field}
-                            value={(formData as any)[field]}
+                            value={formData[field]}
                             onChange={handleChange}
                             className={inputClass}
                             required
