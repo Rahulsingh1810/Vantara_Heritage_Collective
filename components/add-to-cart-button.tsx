@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { ShoppingCart } from 'lucide-react'
-import { useCart } from '@/components/cart-provider'
+import { useCart } from '@/components/cart'
 import { useState } from 'react'
 import type { Product } from '@/type/page'
 
@@ -16,16 +16,19 @@ export default function AddToCartButton({ product, disabled = false, className }
   const { addToCart } = useCart()
   const [quantity, setQuantity] = useState(1)
 
-const handleAddToCart = () => {
-  const normalizedProduct = {
-    ...product,
-    id: product.productId,   // ✅ map Contentful → cart format
+  const handleAddToCart = () => {
+    const normalizedProduct = {
+      id: typeof product.productId === 'string' ? parseInt(product.productId, 10) : product.productId,
+      slug: product.slug,
+      productTitle: product.productTitle,
+      productPrice: product.productPrice,
+      productStock: product.productStock,
+      productImage: product.productImagesCollection?.items?.[0]?.url || '/traditional-indian-artifact.jpg'
+    }
+
+    addToCart(normalizedProduct, quantity)
+    setQuantity(1)
   }
-
-  addToCart(normalizedProduct, quantity)
-  setQuantity(1)
-}
-
 
   if (disabled) {
     return (
@@ -48,7 +51,7 @@ const handleAddToCart = () => {
         <span className="w-8 text-center font-medium">{quantity}</span>
 
         <button
-          onClick={() => setQuantity(q => Math.min(product.productStock, q + 1))}
+          onClick={() => setQuantity(q => Math.min(product.productStock ?? 99, q + 1))}
           className="border-border hover:bg-muted rounded border px-3 py-2"
         >
           +

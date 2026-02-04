@@ -2,7 +2,7 @@
 
 import type React from 'react'
 import { useState, type FormEvent } from 'react'
-import { useCart } from '@/components/cart-provider'
+import { useCart } from '@/components/cart'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -24,28 +24,8 @@ export default function CheckoutPage() {
     phone: ''
   })
 
-  if (cart.length === 0) {
-    return (
-      <main>
-        <div className="bg-primary text-primary-foreground py-12">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl font-bold">Checkout</h1>
-          </div>
-        </div>
-        <section className="bg-background py-20">
-          <div className="mx-auto max-w-3xl px-4 text-center">
-            <p className="text-muted-foreground mb-8 text-lg">Your cart is empty. Add items before checking out.</p>
-            <Link href="/products">
-              <Button size="lg">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Products
-              </Button>
-            </Link>
-          </div>
-        </section>
-      </main>
-    )
-  }
+  const inputClass =
+    'w-full rounded-lg border border-(--color-wine-red)/25 bg-(--color-ivory) px-4 py-2 text-(--color-wine-red) placeholder:text-(--color-wine-red)/50 focus:border-(--color-wine-red) focus:ring-2 focus:ring-(--color-wine-red)/40 focus:outline-none'
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -55,170 +35,114 @@ export default function CheckoutPage() {
     e.preventDefault()
     setIsLoading(true)
 
-    try {
-      // Create order in database
-      const orderResponse = await fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          customer_email: formData.email,
-          customer_name: formData.name,
-          customer_address: `${formData.address}, ${formData.city}, ${formData.state} ${formData.zip}`,
-          customer_phone: formData.phone,
-          total_amount: total
-        })
+    const orderResponse = await fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        customer_email: formData.email,
+        customer_name: formData.name,
+        customer_address: `${formData.address}, ${formData.city}, ${formData.state} ${formData.zip}`,
+        customer_phone: formData.phone,
+        total_amount: total
       })
+    })
 
-      if (!orderResponse.ok) {
-        throw new Error('Failed to create order')
-      }
+    const order = await orderResponse.json()
 
-      const order = await orderResponse.json()
+    setOrderCreated(true)
+    clearCart()
 
-      // Initialize Stripe and create payment session
-      setOrderCreated(true)
-      clearCart()
-
-      // Redirect to success page after a delay
-      setTimeout(() => {
-        window.location.href = `/success?orderId=${order.id}`
-      }, 1500)
-    } catch (error) {
-      console.error('Checkout error:', error)
-      setIsLoading(false)
-    }
+    setTimeout(() => {
+      window.location.href = `/success?orderId=${order.id}`
+    }, 1200)
   }
 
-  // Order confirmation message
   if (orderCreated) {
     return (
-      <div className="bg-background flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <div className="mb-4 text-6xl">✓</div>
-          <p className="text-xl font-semibold">Order Confirmed!</p>
-          <p className="text-muted-foreground mt-2">Redirecting...</p>
-        </div>
-      </div>
+      <div className="flex min-h-screen items-center justify-center text-(--color-wine-red)">✓ Order Confirmed</div>
     )
   }
 
   return (
     <main>
       {/* Header */}
-      <div className="bg-primary text-primary-foreground py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold">Checkout</h1>
+      <div className="bg-(--color-wine-red) py-14 text-(--color-ivory)">
+        <div className="mx-auto max-w-7xl px-4">
+          <h1 className="text-4xl font-bold tracking-wide">Checkout</h1>
         </div>
       </div>
 
-      {/* Checkout Content */}
-      <section className="bg-background py-12 md:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-            {/* Checkout Form */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid gap-10 lg:grid-cols-3">
+            {/* FORM */}
             <div className="lg:col-span-2">
-              <Card>
+              <Card className="border border-(--color-wine-red)/20 bg-(--color-ivory) shadow-xl">
                 <CardHeader>
-                  <CardTitle>Shipping Information</CardTitle>
+                  <CardTitle className="text-(--color-wine-red)">Shipping Information</CardTitle>
                 </CardHeader>
-                <CardContent>
+
+                <CardContent className="space-y-6">
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Email */}
-                    <div>
-                      <label className="mb-2 block text-sm font-medium">Email Address</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="border-border focus:ring-primary w-full rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
-                        required
-                      />
-                    </div>
-
-                    {/* Full Name */}
-                    <div>
-                      <label className="mb-2 block text-sm font-medium">Full Name</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="border-border focus:ring-primary w-full rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
-                        required
-                      />
-                    </div>
-
-                    {/* Address */}
-                    <div>
-                      <label className="mb-2 block text-sm font-medium">Street Address</label>
-                      <input
-                        type="text"
-                        name="address"
-                        value={formData.address}
-                        onChange={handleChange}
-                        className="border-border focus:ring-primary w-full rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
-                        required
-                      />
-                    </div>
-
-                    {/* City, State, Zip */}
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                      <div>
-                        <label className="mb-2 block text-sm font-medium">City</label>
+                    {['email', 'name', 'address'].map(field => (
+                      <div key={field}>
+                        <label className="mb-2 block text-sm font-medium text-(--color-wine-red) capitalize">
+                          {field}
+                        </label>
                         <input
-                          type="text"
-                          name="city"
-                          value={formData.city}
+                          name={field}
+                          value={(formData as any)[field]}
                           onChange={handleChange}
-                          className="border-border focus:ring-primary w-full rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
+                          className={inputClass}
                           required
                         />
                       </div>
-                      <div>
-                        <label className="mb-2 block text-sm font-medium">State</label>
-                        <input
-                          type="text"
-                          name="state"
-                          value={formData.state}
-                          onChange={handleChange}
-                          className="border-border focus:ring-primary w-full rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="mb-2 block text-sm font-medium">ZIP Code</label>
-                        <input
-                          type="text"
-                          name="zip"
-                          value={formData.zip}
-                          onChange={handleChange}
-                          className="border-border focus:ring-primary w-full rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
-                          required
-                        />
-                      </div>
+                    ))}
+
+                    <div className="grid gap-4 md:grid-cols-3">
+                      {['city', 'state', 'zip'].map(field => (
+                        <div key={field}>
+                          <label className="mb-2 block text-sm font-medium text-(--color-wine-red) capitalize">
+                            {field}
+                          </label>
+                          <input
+                            name={field}
+                            value={(formData as any)[field]}
+                            onChange={handleChange}
+                            className={inputClass}
+                            required
+                          />
+                        </div>
+                      ))}
                     </div>
 
-                    {/* Phone */}
                     <div>
-                      <label className="mb-2 block text-sm font-medium">Phone Number</label>
+                      <label className="mb-2 block text-sm font-medium text-(--color-wine-red)">Phone</label>
                       <input
-                        type="tel"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="border-border focus:ring-primary w-full rounded-lg border px-4 py-2 focus:ring-2 focus:outline-none"
+                        className={inputClass}
                         required
                       />
                     </div>
 
-                    {/* Checkout Button */}
                     <div className="flex gap-4 pt-6">
-                      <Button type="submit" size="lg" className="flex-1" disabled={isLoading}>
-                        {isLoading ? 'Processing...' : 'Complete Order'}
+                      <Button
+                        type="submit"
+                        size="lg"
+                        disabled={isLoading}
+                        className="flex-1 bg-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90"
+                      >
+                        Complete Order
                       </Button>
+
                       <Link href="/cart" className="flex-1">
-                        <Button type="button" variant="outline" size="lg" className="w-full bg-transparent">
+                        <Button
+                          size="lg"
+                          variant="outline"
+                          className="w-full border-(--color-wine-red) text-(--color-wine-red)"
+                        >
                           Back to Cart
                         </Button>
                       </Link>
@@ -228,59 +152,50 @@ export default function CheckoutPage() {
               </Card>
             </div>
 
-            {/* Order Summary */}
-            <div>
-              <Card className="sticky top-20">
-                <CardHeader>
-                  <CardTitle>Order Summary</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {/* Items */}
-                  <div className="border-border max-h-96 space-y-3 overflow-y-auto border-b pb-4">
-                    {cart.map(item => (
-                      <div key={item.product.id} className="flex gap-3">
-                        <div className="bg-muted relative h-12 w-12 flex-shrink-0 rounded">
-                          <Image
-                            src={item.product.image_url || '/placeholder.svg?height=48&width=48&query=artifact'}
-                            alt={item.product.name}
-                            fill
-                            className="rounded object-cover"
-                          />
-                        </div>
-                        <div className="flex-1">
-                          <p className="line-clamp-1 text-sm font-medium">{item.product.name}</p>
-                          <p className="text-muted-foreground text-xs">Qty: {item.quantity}</p>
-                        </div>
-                        <div className="text-right text-sm font-medium">
-                          ${(ensureNumber(item.product.price) * item.quantity).toFixed(2)}
-                        </div>
-                      </div>
-                    ))}
+            {/* ORDER SUMMARY */}
+            <Card className="sticky top-24 overflow-hidden border border-(--color-wine-red)/20 bg-(--color-ivory) shadow-xl">
+              <div className="border-b border-(--color-wine-red)/15 bg-(--color-wine-red)/5 px-6 py-4">
+                <h3 className="font-semibold tracking-wide text-(--color-wine-red)">Order Summary</h3>
+              </div>
+
+              <CardContent className="space-y-6 p-6">
+                {cart.map(item => (
+                  <div
+                    key={item.product.id}
+                    className="flex items-center gap-4 rounded-lg border border-(--color-wine-red)/10 bg-white/40 p-3"
+                  >
+                    <div className="relative h-14 w-14 overflow-hidden rounded">
+                      <Image src={item.product.productImage} alt="" fill className="object-cover" />
+                    </div>
+
+                    <div className="flex-1 text-(--color-wine-red)">
+                      <p className="text-sm font-medium">{item.product.productTitle}</p>
+                      <p className="text-xs opacity-70">Qty {item.quantity}</p>
+                    </div>
+
+                    <span className="text-sm text-(--color-wine-red)">
+                      ₹{(item.product.productPrice * item.quantity).toFixed(2)}
+                    </span>
+                  </div>
+                ))}
+
+                <div className="space-y-3 border-t border-(--color-wine-red)/20 pt-4 text-(--color-wine-red)">
+                  <div className="flex justify-between text-sm opacity-80">
+                    <span>Subtotal</span>
+                    <span>₹{ensureNumber(total).toFixed(2)}</span>
                   </div>
 
-                  {/* Totals */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Subtotal</span>
-                      <span>${ensureNumber(total).toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Shipping</span>
-                      <span>Calculated</span>
-                    </div>
-                    <div className="border-border flex justify-between border-t pt-2 text-lg font-bold">
-                      <span>Total</span>
-                      <span className="text-primary">${ensureNumber(total).toFixed(2)}</span>
-                    </div>
+                  <div className="flex justify-between text-lg font-semibold">
+                    <span>Total</span>
+                    <span>₹{ensureNumber(total).toFixed(2)}</span>
                   </div>
+                </div>
 
-                  {/* Security Info */}
-                  <div className="text-muted-foreground border-border border-t pt-4 text-center text-xs">
-                    <p className="mb-2">✓ Secure Order Processing</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+                <div className="rounded-lg bg-(--color-wine-red)/5 py-3 text-center text-xs text-(--color-wine-red)">
+                  ✓ Secure checkout
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

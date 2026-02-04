@@ -1,6 +1,6 @@
 'use client'
 
-import { useCart } from '@/components/cart-provider'
+import { useCart } from '@/components/cart'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import Image from 'next/image'
@@ -11,24 +11,24 @@ export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, total, clearCart, isLoaded } = useCart()
 
   if (!isLoaded) {
-    return <div className="py-20 text-center text-[var(--color-wine-red)]">Loading cart…</div>
+    return <div className="py-20 text-center text-(--color-wine-red)">Loading cart…</div>
   }
 
   if (cart.length === 0) {
     return (
       <main>
-        <div className="w-full bg-[var(--color-wine-red)] py-12">
-          <div className="mx-auto max-w-7xl px-4 text-[var(--color-ivory)]">
+        <div className="w-full bg-(--color-wine-red) py-12">
+          <div className="mx-auto max-w-7xl px-4 text-(--color-ivory)">
             <h1 className="text-4xl font-bold">Shopping Cart</h1>
           </div>
         </div>
 
         <section className="bg-background py-20">
           <div className="mx-auto max-w-3xl px-4 text-center">
-            <p className="mb-8 text-lg text-[var(--color-wine-red)]/70">Your cart is empty</p>
+            <p className="mb-8 text-lg text-(--color-wine-red)/70">Your cart is empty</p>
 
             <Link href="/products">
-              <Button size="lg" className="bg-[var(--color-wine-red)] text-[var(--color-ivory)] hover:bg-[var(--color-wine-red)]/90">
+              <Button size="lg" className="bg-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Continue Shopping
               </Button>
@@ -42,7 +42,7 @@ export default function CartPage() {
   return (
     <main>
       {/* Header */}
-      <div className="bg-[var(--color-wine-red)] py-12 text-[var(--color-ivory)]">
+      <div className="bg-(--color-wine-red) py-12 text-(--color-ivory)">
         <div className="mx-auto max-w-7xl px-4">
           <h1 className="text-4xl font-bold">Shopping Cart</h1>
           <p className="mt-2 opacity-90">{cart.length} items in your cart</p>
@@ -56,7 +56,10 @@ export default function CartPage() {
             {/* Items */}
             <div className="space-y-6 lg:col-span-2">
               {cart.map(item => (
-                <Card key={item.product.id} className="border border-[var(--color-wine-red)]/15 bg-[var(--color-ivory)] shadow-md">
+                <Card
+                  key={item.product.id}
+                  className="border border-[var(--color-wine-red)]/15 bg-[var(--color-ivory)] shadow-md"
+                >
                   <CardContent className="p-8">
                     <div className="flex gap-6">
                       {/* Image */}
@@ -87,9 +90,7 @@ export default function CartPage() {
                               −
                             </button>
 
-                            <span className="px-3 font-semibold text-[var(--color-wine-red)]">
-                              {item.quantity}
-                            </span>
+                            <span className="px-3 font-semibold text-[var(--color-wine-red)]">{item.quantity}</span>
 
                             <button
                               onClick={() => updateQuantity(item.product.id, item.quantity + 1)}

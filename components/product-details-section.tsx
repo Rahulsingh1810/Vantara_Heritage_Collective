@@ -178,8 +178,8 @@ export default function ProductDetailsSection({
 
       {/* Heritage */}
       <div className="mt-12 rounded-2xl border border-(--color-wine-red)/20 bg-(--color-ivory) p-6 shadow-sm">
-        <p className="font-semibold text-[var(--color-wine-red)]">🇮🇳 Authentic Indian Heritage</p>
-        <p className="mt-2 text-sm text-[var(--color-wine-red)]/70">
+        <p className="font-semibold text-(--color-wine-red)">🇮🇳 Authentic Indian Heritage</p>
+        <p className="mt-2 text-sm text-(--color-wine-red)/70">
           Each piece is thoughtfully sourced to honor and sustain traditional craftsmanship across India.
         </p>
       </div>
