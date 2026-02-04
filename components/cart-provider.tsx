@@ -22,35 +22,83 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([])
   const [isLoaded, setIsLoaded] = useState(false)
 
-  useEffect(() => {
-    // Load cart from localStorage
-    const savedCart = getCart()
-    // Transform savedCart to match CartItem structure if needed
-    const transformedCart = savedCart.map((item: any) =>
-      item.product ? item : { product: { id: item.slug }, quantity: item.quantity }
-    )
-    setCart(transformedCart)
-    setIsLoaded(true)
-  }, [])
+useEffect(() => {
+  async function loadCart() {
+    const savedCart = getCart() // [{ slug, quantity }]
 
-  const handleAddToCart = (product: any, quantity: number) => {
-    const newCart = [...cart]
-    const existingItem = newCart.find(item => item.product.id === product.id)
-
-    if (existingItem) {
-      existingItem.quantity += quantity
-    } else {
-      newCart.push({ product, quantity })
+    if (!savedCart.length) {
+      setIsLoaded(true)
+      return
     }
 
-    setCart(newCart)
+    try {
+      const slugs = savedCart.map((item: any) => item.slug)
+      const products = await getProductsBySlugs(slugs)
+
+      const hydratedCart = savedCart.map((item: any) => {
+        const product = products.find((p: any) => p.slug === item.slug)
+
+        if (!product) return null
+
+        return {
+            product: {
+              id: product.productId,
+              slug: product.slug,
+              productTitle: product.productTitle,
+              productPrice: product.productPrice,
+              productStock: product.productStock,
+              image:
+                product.productImagesCollection?.items?.[0]?.url
+                  ? product.productImagesCollection.items[0].url
+                  : '/traditional-indian-artifact.jpg',
+            },
+          quantity: item.quantity
+        }
+      }).filter(Boolean)
+
+      setCart(hydratedCart)
+    } catch (err) {
+      console.error('Failed to hydrate cart:', err)
+      setCart([])
+    } finally {
+      setIsLoaded(true)
+    }
+  }
+
+  loadCart()
+}, [])
+
+
+ const handleAddToCart = (product: any, quantity: number) => {
+  setCart(prevCart => {
+    const existingItem = prevCart.find(item => item.product.id === product.id)
+
+    let updatedCart
+
+    if (existingItem) {
+      updatedCart = prevCart.map(item =>
+        item.product.id === product.id
+          ? {
+              ...item,
+              quantity: Math.min(item.quantity + quantity, product.productStock ?? 99)
+            }
+          : item
+      )
+    } else {
+      updatedCart = [...prevCart, { product, quantity }]
+    }
+
     saveCart(
-      newCart.map(item => ({
+      updatedCart.map(item => ({
         slug: item.product.slug,
         quantity: item.quantity
       }))
     )
-  }
+
+    return updatedCart
+  })
+}
+
 
   const handleRemoveFromCart = (productId: number) => {
     const newCart = cart.filter(item => item.product.id !== productId)

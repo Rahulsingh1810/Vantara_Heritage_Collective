@@ -16,10 +16,16 @@ export default function AddToCartButton({ product, disabled = false, className }
   const { addToCart } = useCart()
   const [quantity, setQuantity] = useState(1)
 
-  const handleAddToCart = () => {
-    addToCart(product, quantity)
-    setQuantity(1)
+const handleAddToCart = () => {
+  const normalizedProduct = {
+    ...product,
+    id: product.productId,   // ✅ map Contentful → cart format
   }
+
+  addToCart(normalizedProduct, quantity)
+  setQuantity(1)
+}
+
 
   if (disabled) {
     return (

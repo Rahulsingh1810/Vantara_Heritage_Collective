@@ -68,7 +68,17 @@ export interface OrderItem {
   created_at: string
 }
 
+export interface CartProduct {
+  id: number
+  slug: string
+  productTitle: string
+  productPrice: number
+  productImagesCollection?: any
+  productStock: number
+  productImage?: string | null
+}
+
 export interface CartItem {
-  product: Product
+  product: CartProduct
   quantity: number
 }
