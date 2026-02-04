@@ -84,7 +84,7 @@ export default function ProductDetailsSection({
     }
   ]
 
-  const [active, setActive] = useState(0)
+  const [active, setActive] = useState<number | null>(0)
 
   return (
     <section className="mt-20">
@@ -119,22 +119,20 @@ export default function ProductDetailsSection({
         </div>
 
         {/* SLAVE */}
-        <div className="md:col-span-2">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.35 }}
-              className="rounded-3xl border border-(--color-wine-red)/20 bg-(--color-ivory) p-12 shadow-xl"
-            >
-              <h3 className="mb-6 text-3xl font-bold text-(--color-wine-red)">{sections[active].title}</h3>
+        {active !== null && (
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.35 }}
+            className="rounded-3xl border border-(--color-wine-red)/20 bg-(--color-ivory) p-12 shadow-xl"
+          >
+            <h3 className="mb-6 text-3xl font-bold text-(--color-wine-red)">{sections[active].title}</h3>
 
-              <div className="text-(--color-wine-red)/75">{sections[active].content}</div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            <div className="text-(--color-wine-red)/75">{sections[active].content}</div>
+          </motion.div>
+        )}
       </div>
 
       {/* MOBILE ACCORDION */}
@@ -148,7 +146,7 @@ export default function ProductDetailsSection({
               className="overflow-hidden rounded-2xl border border-(--color-wine-red)/20 bg-[var(--color-ivory)]"
             >
               <button
-                onClick={() => setActive(open ? -1 : i)}
+                onClick={() => setActive(open ? null : i)}
                 className="flex w-full items-center justify-between px-6 py-5 text-left"
               >
                 <span className="font-semibold text-(--color-wine-red)">{s.title ?? ''}</span>
