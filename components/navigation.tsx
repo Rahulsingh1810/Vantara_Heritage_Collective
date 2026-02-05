@@ -18,7 +18,7 @@ export default function Navigation() {
     { label: 'Home', href: '/' },
     { label: 'Our Story', href: '/our-story' },
     { label: 'Products', href: '/products' },
-    { label: 'B2B', href: '/b2b' },
+    // { label: 'B2B', href: '/b2b' },
     { label: 'Transforming Spaces', href: '/transforming-spaces' },
     { label: 'Contact', href: '/contact' }
   ]

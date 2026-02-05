@@ -64,7 +64,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
                   <div className="mb-6 flex flex-wrap items-center gap-4">
                     <span className="text-4xl font-bold text-(--color-wine-red)">₹{data.productPrice.toFixed(2)}</span>
 
-                    <span
+                    {/* <span
                       className={`rounded-full px-4 py-1 text-sm font-semibold ${
                         data.productStock && data.productStock > 0
                           ? 'bg-green-100 text-green-700'
@@ -72,7 +72,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
                       }`}
                     >
                       {data.productStock && data.productStock > 0 ? `${data.productStock} in stock` : 'Out of stock'}
-                    </span>
+                    </span> */}
                   </div>
 
                   <AddToCartButton
@@ -89,7 +89,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
                 </div>
 
                 {/* Trust badges */}
-                <div className="grid grid-cols-2 gap-4">
+                {/* <div className="grid grid-cols-2 gap-4">
                   <div className="rounded-xl border border-(--color-wine-red)/20 bg-(--color-ivory) p-5 text-center shadow-sm">
                     <p className="mb-2 text-2xl">✓</p>
                     <p className="text-xs font-semibold text-(--color-wine-red) uppercase">Authentic</p>
@@ -101,7 +101,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
                     <p className="text-xs font-semibold text-(--color-wine-red) uppercase">Secure Shipping</p>
                     <p className="mt-1 text-xs text-(--color-wine-red)/70">Insured Delivery</p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
 
