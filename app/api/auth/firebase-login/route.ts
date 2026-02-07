@@ -10,21 +10,24 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing idToken' }, { status: 400 })
     }
 
-    // Verify Firebase ID token
     const decoded = await getAuth(app).verifyIdToken(idToken)
     const { uid, email, name } = decoded
+
     if (!email) {
       return NextResponse.json({ error: 'No email in Firebase token' }, { status: 400 })
     }
 
-    // Find or create user in your DB
-    let users = await sql`SELECT id, email, name FROM users WHERE email = ${email}`
+    //Find user by Firebase UID
+    let users = await sql`
+      SELECT id, email, name FROM users WHERE firebase_uid = ${uid}
+    `
     let user
+
     if (users.length === 0) {
-      // Register new user
+      // Create new user
       const result = await sql`
-        INSERT INTO users (email, name, password_hash)
-        VALUES (${email}, ${name || ''}, ${''})
+        INSERT INTO users (firebase_uid, email, name)
+        VALUES (${uid}, ${email}, ${name || ''})
         RETURNING id, email, name
       `
       user = result[0]
@@ -32,7 +35,6 @@ export async function POST(request: NextRequest) {
       user = users[0]
     }
 
-    // Set session cookie
     const response = NextResponse.json({ user }, { status: 200 })
     response.cookies.set('userId', user.id.toString(), {
       httpOnly: true,
@@ -40,6 +42,7 @@ export async function POST(request: NextRequest) {
       sameSite: 'lax',
       maxAge: 60 * 60 * 24 * 7
     })
+
     return response
   } catch (error) {
     console.error('Firebase login error:', error)
