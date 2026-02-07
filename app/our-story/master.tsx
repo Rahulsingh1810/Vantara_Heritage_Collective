@@ -32,9 +32,7 @@ export default function CurationMasterDetail() {
 
   return (
     <section className="mt-20">
-      <h2 className="mb-14 text-center text-3xl font-bold text-(--color-wine-red) md:text-left">
-        Our Curation Process
-      </h2>
+      <h2 className="mb-14 text-center text-3xl font-bold text-(--color-wine-red)">Our Curation Process</h2>
 
       {/* DESKTOP */}
       <div className="hidden gap-14 md:grid md:grid-cols-3">
@@ -81,9 +79,9 @@ export default function CurationMasterDetail() {
 
               <p className="mb-6 text-lg leading-relaxed text-(--color-wine-red)/75">{steps[active].body}</p>
 
-              <div className="rounded-xl bg-(--color-wine-red)/5 p-5">
+              {/* <div className="rounded-xl bg-(--color-wine-red)/5 p-5">
                 <p className="text-sm font-medium text-(--color-wine-red)">{steps[active].highlight}</p>
-              </div>
+              </div> */}
             </motion.div>
           </AnimatePresence>
         </div>

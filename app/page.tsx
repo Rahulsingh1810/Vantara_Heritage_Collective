@@ -80,9 +80,9 @@ export default function Page() {
       </section>
 
       {/* STATS */}
-      <section className="bg-(--color-wine-red) py-20 text-(--color-ivory)">
+      {/* <section className="bg-(--color-wine-red) py-20 text-(--color-ivory)">
         <StatsCounter />
-      </section>
+      </section> */}
 
       {/* ART OF TRADITION */}
       <section className="bg-(--color-ivory) py-24">
@@ -131,16 +131,14 @@ export default function Page() {
         <div className="pointer-events-none absolute inset-0 bg-[url('/noise.png')] opacity-[0.04]" />
 
         <div className="relative mx-auto max-w-3xl px-4 text-center">
-          <span className="mb-4 inline-block text-sm tracking-widest text-(--color-ivory)/70 uppercase">
+          {/* <span className="mb-4 inline-block text-sm tracking-widest text-(--color-ivory)/70 uppercase">
             Let’s Talk Heritage
-          </span>
+          </span> */}
 
-          <h2 className="mb-6 text-4xl leading-tight font-bold text-(--color-ivory) md:text-5xl">
-            Have Questions or Ideas?
-          </h2>
+          <h2 className="mb-6 text-4xl leading-tight font-bold text-(--color-ivory) md:text-5xl">Have Questions?</h2>
 
           <p className="mx-auto mb-10 max-w-xl text-lg text-(--color-ivory)/80">
-            Whether you’re exploring heritage decor or seeking custom pieces — we’d love to hear from you.
+            Get in touch for queries or to simply chat!
           </p>
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -156,7 +154,7 @@ export default function Page() {
             </button>
 
             {/* Secondary soft CTA */}
-            <span className="text-sm text-(--color-ivory)/70">Typically replies within 24 hours</span>
+            {/* <span className="text-sm text-(--color-ivory)/70">Typically replies within 24 hours</span> */}
           </div>
 
           {/* Decorative divider */}

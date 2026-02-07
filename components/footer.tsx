@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="mt-20 bg-[var(--color-wine-red)] text-[var(--color-ivory)]">
+    <footer className="bg-[var(--color-wine-red)] text-[var(--color-ivory)]">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Brand */}
@@ -79,7 +79,7 @@ export default function Footer() {
         </div>
 
         <div className="border-primary-foreground/20 border-t pt-8 text-center text-sm opacity-90">
-          <p>&copy; 2026 Vandanya Heritage Collective. All rights reserved.</p>
+          <p>&copy; 2026 Vadānya Heritage Collective. All rights reserved.</p>
         </div>
       </div>
     </footer>

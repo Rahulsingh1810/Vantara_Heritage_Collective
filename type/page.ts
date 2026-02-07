@@ -13,6 +13,7 @@ export type Vendor = {
 }
 
 export type Product = {
+  slug: string
   productId: string
   productTitle: string
   productDescription?: string
