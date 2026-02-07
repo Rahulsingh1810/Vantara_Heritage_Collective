@@ -42,7 +42,7 @@ export default function LoginPage() {
       }
 
       await refetchUser()
-      router.push('/dashboard')
+      router.push('/products')
     } catch (err) {
       setError('An error occurred. Please try again.')
     } finally {
@@ -59,7 +59,7 @@ export default function LoginPage() {
       const idToken = await result.user.getIdToken()
       await firebaseLogin(idToken) // this sets the cookie via backend
       await refetchUser()
-      router.push('/dashboard')
+      router.push('/products')
     } catch (err: any) {
       setError(
         err.code === 'auth/popup-closed-by-user' ? 'Sign-in was cancelled' : 'Google sign-in failed. Please try again.'

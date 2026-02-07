@@ -72,7 +72,7 @@ export default function RegisterPage() {
 
     try {
       await signInWithGoogle()
-      router.push('/dashboard')
+      router.push('/products')
     } catch (err: any) {
       setError(
         err.code === 'auth/popup-closed-by-user' ? 'Sign-up was cancelled' : 'Google sign-up failed. Please try again.'
