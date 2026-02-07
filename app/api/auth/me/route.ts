@@ -10,7 +10,20 @@ export async function GET(request: NextRequest) {
     }
 
     const users = await sql`
-      SELECT id, email, name, phone, address, city, state, zip FROM users WHERE id = ${Number.parseInt(userId)}
+      SELECT
+        u.id,
+        u.email,
+        u.name,
+        c.phone,
+        c.address_line1,
+        c.address_line2,
+        c.city,
+        c.state,
+        c.pincode,
+        c.country
+      FROM users u
+      LEFT JOIN customers c ON c.user_id = u.id
+      WHERE u.id = ${userId}
     `
 
     if (users.length === 0) {
