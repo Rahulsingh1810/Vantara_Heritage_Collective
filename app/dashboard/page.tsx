@@ -10,24 +10,24 @@ import ProfileEditor from '@/components/profile-editor'
 import { ensureNumber } from '@/lib/utils'
 
 interface User {
-  id: number
+  id: string
   email: string
   name: string
   phone?: string
-  address?: string
+  address_line1?: string
+  address_line2?: string
   city?: string
   state?: string
-  zip?: string
+  pincode?: string
+  country?: string
 }
 
 interface Order {
-  id: number
-  customer_name: string
-  customer_email: string
-  customer_phone: string
-  customer_address: string
+  id: string
+  order_number: string
   total_amount: number
   status: string
+  payment_status: string
   created_at: string
 }
 
@@ -38,148 +38,119 @@ export default function DashboardPage() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('/api/auth/me')
+        const res = await fetch('/api/auth/me')
+        if (!res.ok) return router.push('/auth/login')
 
-        if (!response.ok) {
-          router.push('/auth/login')
-          return
-        }
-
-        const data = await response.json()
+        const data = await res.json()
         setUser(data.user)
 
-        // Fetch user's orders
-        const ordersResponse = await fetch(`/api/orders?email=${data.user.email}`)
-        if (ordersResponse.ok) {
-          const ordersData = await ordersResponse.json()
+        const ordersRes = await fetch('/api/orders')
+        if (ordersRes.ok) {
+          const ordersData = await ordersRes.json()
           setOrders(ordersData)
         }
-      } catch (error) {
-        console.error('Error fetching user data:', error)
+      } catch (err) {
+        console.error(err)
         router.push('/auth/login')
       } finally {
         setIsLoading(false)
       }
     }
 
-    fetchUserData()
+    fetchData()
   }, [router])
 
   const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' })
-      router.push('/')
-    } catch (error) {
-      console.error('Logout error:', error)
-    }
+    await fetch('/api/auth/logout', { method: 'POST' })
+    router.push('/')
   }
 
-  if (isLoading) {
-    return (
-      <main className="bg-background min-h-screen py-12">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="text-center">Loading...</div>
-        </div>
-      </main>
-    )
-  }
-
-  if (!user) {
-    return null
-  }
+  if (isLoading) return <div className="p-12 text-center">Loading...</div>
+  if (!user) return null
 
   return (
     <main className="bg-background min-h-screen py-12">
       <div className="mx-auto max-w-6xl px-4">
-        {/* Header */}
+
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-4xl font-bold">My Dashboard</h1>
-          <Button variant="outline" onClick={handleLogout} className="gap-2 bg-transparent">
-            <LogOut className="h-4 w-4" />
-            Logout
+          <Button variant="outline" onClick={handleLogout} className="gap-2">
+            <LogOut className="h-4 w-4" /> Logout
           </Button>
         </div>
 
-        {/* User Profile & Stats */}
-        <div className="mb-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
-          <div className="lg:col-span-2">{user && <ProfileEditor user={user} onUpdate={setUser} />}</div>
+        <div className="mb-8 grid gap-6 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            <ProfileEditor user={user} onUpdate={setUser} />
+          </div>
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Account Stats</CardTitle>
+              <CardTitle>Account Stats</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center">
-                <p className="text-primary text-3xl font-bold">{orders.length}</p>
-                <p className="text-muted-foreground">Total Orders</p>
+            <CardContent className="space-y-4 text-center">
+              <div>
+                <p className="text-(--color-ivory) text-3xl font-bold">{orders.length}</p>
+                <p className="text-(--color-ivory)/70">Total Orders</p>
               </div>
-              <div className="border-t pt-4 text-center">
-                <p className="text-primary text-2xl font-bold">
-                  ${orders.reduce((sum, order) => sum + ensureNumber(order.total_amount), 0).toFixed(2)}
+              <div className="border-t pt-4">
+                <p className="text-(--color-ivory) text-2xl font-bold">
+                  ₹{orders.reduce((sum, o) => sum + Number(o.total_amount), 0).toFixed(2)}
                 </p>
-                <p className="text-muted-foreground">Total Spent</p>
+                <p className="text-(--color-ivory)/70">Total Spent</p>
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Order History */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <ShoppingBag className="h-5 w-5" />
-              Order History
+              <ShoppingBag className="h-5 w-5" /> Order History
             </CardTitle>
           </CardHeader>
           <CardContent>
             {orders.length === 0 ? (
               <div className="py-12 text-center">
-                <ShoppingBag className="text-muted-foreground mx-auto mb-4 h-12 w-12 opacity-50" />
-                <p className="text-muted-foreground mb-4">No orders yet</p>
-                <Link href="/products">
-                  <Button>Start Shopping</Button>
-                </Link>
+                <ShoppingBag className="text-(--color-ivory)/50 mx-auto mb-4 h-12 w-12 opacity-50" />
+                <p className="text-(--color-ivory)/70 mb-4">No orders yet</p>
+                <Link href="/products"><Button>Start Shopping</Button></Link>
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-border border-b">
-                      <th className="px-4 py-3 text-left font-semibold">Order ID</th>
-                      <th className="px-4 py-3 text-left font-semibold">Date</th>
-                      <th className="px-4 py-3 text-left font-semibold">Total</th>
-                      <th className="px-4 py-3 text-left font-semibold">Status</th>
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="px-4 py-3 text-left">Order #</th>
+                    <th className="px-4 py-3 text-left">Date</th>
+                    <th className="px-4 py-3 text-left">Total</th>
+                    <th className="px-4 py-3 text-left">Payment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.map(order => (
+                    <tr key={order.id} className="border-b hover:bg-muted">
+                      <td className="px-4 py-3">#{order.order_number}</td>
+                      <td className="px-4 py-3">{new Date(order.created_at).toLocaleDateString()}</td>
+                      <td className="px-4 py-3 font-semibold">₹{ensureNumber(order.total_amount).toFixed(2)}</td>
+                      <td className="px-4 py-3">
+                        <span className={`rounded-full px-3 py-1 text-sm font-medium ${
+                          order.payment_status === 'paid'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-yellow-100 text-yellow-800'
+                        }`}>
+                          {order.payment_status}
+                        </span>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {orders.map(order => (
-                      <tr key={order.id} className="border-border hover:bg-muted border-b transition">
-                        <td className="px-4 py-3">#{order.id}</td>
-                        <td className="px-4 py-3">{new Date(order.created_at).toLocaleDateString()}</td>
-                        <td className="px-4 py-3 font-semibold">${ensureNumber(order.total_amount).toFixed(2)}</td>
-                        <td className="px-4 py-3">
-                          <span
-                            className={`rounded-full px-3 py-1 text-sm font-medium ${
-                              order.status === 'completed'
-                                ? 'bg-green-100 text-green-800'
-                                : order.status === 'pending'
-                                  ? 'bg-yellow-100 text-yellow-800'
-                                  : 'bg-gray-100 text-gray-800'
-                            }`}
-                          >
-                            {order.status}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             )}
           </CardContent>
         </Card>
+
       </div>
     </main>
   )

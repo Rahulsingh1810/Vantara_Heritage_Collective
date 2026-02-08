@@ -8,9 +8,27 @@ import ContactFormPopup from '@/components/contact-form-popup'
 import { useState } from 'react'
 
 const featuredProducts = [
-  { id: 1, name: 'All Products', image: '/traditional-indian-crafts.jpg' },
-  { id: 2, name: 'Signature Pieces', image: '/traditional-bedroom-decor.jpg' },
-  { id: 3, name: 'Best Sellers', image: '/traditional-home-office.jpg' },
+  {
+    id: 'products',
+    name: 'All Products',
+    slug: '/products',
+    description: 'Bespoke artefacts from traditional ateliers',
+    image_url: '/traditional-indian-crafts.jpg'
+  },
+  {
+    id: 'signature-pieces',
+    name: 'Signature Pieces',
+    slug: '/signature-pieces',
+    description: 'Defining aesthetics with icons of lineage.',
+    image_url: '/traditional-bedroom-decor.jpg'
+  },
+  {
+    id: 'best-sellers',
+    name: 'Best Sellers',
+    slug: '/best-sellers',
+    description: 'Heirlooms with enduring admiration.',
+    image_url: '/traditional-home-office.jpg'
+  }
 ]
 
 export default function Page() {
@@ -19,37 +37,61 @@ export default function Page() {
   return (
     <>
       {/* ================= SECTION 1 — CRAFTING OUR STORY ================= */}
-      <section className="bg-(--color-ivory) py-16 text-center">
-        <div className="mx-auto max-w-4xl px-4">
-          <h1 className="mb-4 text-4xl font-extrabold text-(--color-wine-red) md:text-5xl">
-            Vadānya Heritage Collective
-          </h1>
-          <h2 className="mb-6 text-xl font-semibold text-(--color-wine-red)/80">
-            Regal Tradition. Timeless Curation.
-          </h2>
+      <section className="bg-(--color-ivory) py-24">
+        <div className="mx-auto max-w-7xl px-4">
 
-          <h3 className="mb-4 text-2xl font-bold text-(--color-wine-red)">
-            Crafting Our Story
-          </h3>
+          {/* Brand Header */}
+          <div className="mb-16 text-center">
+            <h1 className="mb-3 text-4xl font-extrabold text-(--color-wine-red) md:text-5xl">
+              Vadānya Heritage Collective
+            </h1>
+            <h2 className="text-lg font-semibold tracking-wide text-(--color-wine-red)/80">
+              Regal Tradition. Timeless Curation.
+            </h2>
+          </div>
 
-          <p className="mx-auto max-w-3xl text-lg text-(--color-wine-red)/75">
-            Vadānya Heritage Collective is an homage to art that endures. Born from a deep regard for India’s living
-            craft traditions, we curate artefacts shaped by hand, guided by geography, and refined through generations.
-          </p>
+          {/* Story Layout */}
+          <div className="grid items-center gap-12 md:grid-cols-2">
+            <div>
+              <h3 className="mb-4 text-2xl font-bold text-(--color-wine-red)">
+                Crafting Our Story
+              </h3>
+
+              <p className="mb-6 text-(--color-wine-red)/70">
+                Vadānya Heritage Collective is an homage to art that endures. Born from a deep regard for India’s living
+                craft traditions, we curate artefacts shaped by hand, guided by geography, and refined through generations.
+              </p>
+
+              <ul className="space-y-3 text-(--color-wine-red)/80">
+                <li>✓ Handcrafted by master artisans</li>
+                <li>✓ Preserving centuries-old techniques</li>
+                <li>✓ Celebrating cultural storytelling through design</li>
+              </ul>
+            </div>
+
+            <img
+              src="/traditional-indian-crafts.jpg"
+              alt="Indian heritage craftsmanship"
+              className="rounded-3xl h-90 w-full object-cover shadow-xl"
+            />
+          </div>
         </div>
       </section>
 
       {/* ================= SECTION 2 — FEATURED COLLECTION ================= */}
       <section className="bg-background py-16 text-center">
         <div className="mx-auto max-w-7xl px-4">
-          <h2 className="mb-3 text-3xl font-bold text-(--color-wine-red)">Featured Collections</h2>
-          <p className="mb-8 text-(--color-wine-red)/70">Explore curated heritage pieces</p>
+          <h2 className="mb-3 text-3xl font-bold text-(--color-wine-red)">
+            Featured Collections
+          </h2>
+          <p className="mb-8 text-(--color-wine-red)/70">
+            Explore curated heritage pieces
+          </p>
 
           <ProductShowcaseCarousel products={featuredProducts} />
-
           <Link href="/products">
             <Button variant="outline" className="mt-8 border-(--color-wine-red) text-(--color-wine-red)">
-              View All
+              Step into heritage
             </Button>
           </Link>
         </div>

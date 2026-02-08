@@ -6,7 +6,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import { ensureNumber } from '@/lib/utils'
 
 export default function ProductShowcaseCarousel({ products }: { products: any[] }) {
   const [current, setCurrent] = useState(0)
@@ -39,78 +38,54 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="via-background border-primary/30 relative overflow-hidden rounded-2xl border-2 bg-[var(--color-wine-red)]/10 from-[var(--color-wine-red)]/20 to-[var(--color-wine-red)]/20"
+      className="relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-[var(--color-wine-red)]/10"
     >
-      {/* Background animated elements */}
+      {/* Animated background glow */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
           className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-[var(--color-wine-red)]/10 blur-3xl"
         />
         <motion.div
           animate={{ rotate: -360 }}
-          transition={{ duration: 25, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
           className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-[var(--color-wine-red)]/10 blur-3xl"
         />
       </div>
 
-      <div className="relative grid min-h-[500px] grid-cols-1 items-center gap-8 p-8 md:gap-12 md:p-16 lg:grid-cols-2">
-        {/* Image Section */}
-        <motion.div variants={itemVariants} className="relative h-96 min-h-96 overflow-hidden rounded-xl lg:h-full">
-          <div className="relative h-full w-full">
-            <Image
-              src={currentProduct?.image_url || '/placeholder.svg?height=400&width=400&query=heritage+artifact'}
-              alt={currentProduct?.name}
-              fill
-              className="rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          </div>
-
-          {/* Floating Badge */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="bg-background/90 border-primary/50 absolute bottom-4 left-4 rounded-lg border px-4 py-3 backdrop-blur-md"
-          >
-            
-          </motion.div>
+      <div className="relative grid min-h-[500px] grid-cols-1 items-center gap-8 p-8 md:p-16 lg:grid-cols-2">
+        {/* Image */}
+        <motion.div variants={itemVariants} className="relative h-96 overflow-hidden rounded-xl lg:h-full">
+          <Image
+            src={currentProduct?.image_url}
+            alt={currentProduct?.name}
+            fill
+            className="rounded-xl object-cover"
+          />
         </motion.div>
 
-        {/* Content Section */}
+        {/* Content */}
         <motion.div variants={itemVariants} className="space-y-6">
           <div>
-            
+            <h3 className="mb-4 text-4xl font-bold text-foreground md:text-5xl">
+              {currentProduct?.name}
+            </h3>
 
-            <h3 className="text-foreground mb-4 text-4xl font-bold md:text-5xl">{currentProduct?.name}</h3>
-
-            <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
-              {currentProduct?.description || 'A beautiful piece of traditional craftsmanship'}
+            <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
+              {currentProduct?.description}
             </p>
           </div>
 
-          {/* Stats */}
-          <motion.div variants={containerVariants} className="border-border grid grid-cols-2 gap-4 border-y py-6">
-            <motion.div variants={itemVariants}>
-              <p className="text-primary text-3xl font-bold">${ensureNumber(currentProduct?.price).toFixed(2)}</p>
-              
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <p className="text-accent text-3xl font-bold">{currentProduct?.stock_quantity}</p>
-              <p className="text-muted-foreground text-sm">Available</p>
-            </motion.div>
-          </motion.div>
-
-          {/* CTA Button */}
+          {/* CTA */}
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href={`/products/${currentProduct?.id}`}>
+            <Link href={currentProduct?.slug}>
               <Button size="lg" className="group w-full md:w-fit">
-                Explore This Piece
+                Explore Collection
                 <motion.span
                   className="ml-2 inline-block"
                   animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
                 >
                   <ArrowRight className="h-5 w-5" />
                 </motion.span>
@@ -120,23 +95,18 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
         </motion.div>
       </div>
 
-      {/* Carousel Indicators */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="absolute right-8 bottom-8 left-8 flex justify-center gap-3 md:justify-start"
-      >
+      {/* Indicators */}
+      <div className="absolute bottom-8 left-8 right-8 flex justify-center gap-3 md:justify-start">
         {products.map((_, index) => (
-          <motion.button
+          <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`h-2 rounded-full transition-all ${index === current ? 'bg-primary w-8' : 'bg-border w-2'}`}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.95 }}
+            className={`h-2 rounded-full transition-all ${
+              index === current ? 'w-8 bg-primary' : 'w-2 bg-border'
+            }`}
           />
         ))}
-      </motion.div>
+      </div>
     </motion.div>
   )
 }
