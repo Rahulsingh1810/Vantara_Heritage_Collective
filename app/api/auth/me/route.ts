@@ -1,15 +1,18 @@
+import { NextResponse } from 'next/server'
+import { getServerSessionUser } from '@/lib/auth-server'
 import { sql } from '@/lib/db'
-import { type NextRequest, NextResponse } from 'next/server'
 
-export async function GET(request: NextRequest) {
+export const dynamic = 'force-dynamic'
+
+export async function GET() {
   try {
-    const userId = request.cookies.get('userId')?.value
+    const user = await getServerSessionUser()
 
-    if (!userId) {
+    if (!user) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
     }
 
-    const users = await sql`
+    const rows = await sql`
       SELECT
         u.id,
         u.email,
@@ -23,14 +26,10 @@ export async function GET(request: NextRequest) {
         c.country
       FROM users u
       LEFT JOIN customers c ON c.user_id = u.id
-      WHERE u.id = ${userId}
+      WHERE u.id = ${user.id}
     `
 
-    if (users.length === 0) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 })
-    }
-
-    return NextResponse.json({ user: users[0] })
+    return NextResponse.json({ user: rows[0] })
   } catch (error) {
     console.error('Error fetching user:', error)
     return NextResponse.json({ error: 'Failed to fetch user' }, { status: 500 })

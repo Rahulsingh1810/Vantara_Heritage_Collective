@@ -1,6 +1,7 @@
 import { initializeApp, cert, getApps, App } from 'firebase-admin/app'
+import { getAuth } from 'firebase-admin/auth'
 
-let app: App | undefined
+let app: App
 
 if (!getApps().length) {
   app = initializeApp({
@@ -14,4 +15,4 @@ if (!getApps().length) {
   app = getApps()[0]
 }
 
-export default app
+export const adminAuth = getAuth(app)

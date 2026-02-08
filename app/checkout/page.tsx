@@ -1,8 +1,10 @@
 'use client'
 
 import type React from 'react'
-import { useState, type FormEvent } from 'react'
+import { useState, useEffect, type FormEvent } from 'react'
 import { useCart } from '@/components/cart'
+import { useUser } from '@/lib/user-context'
+import LoginModal from '@/components/login-modal'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -11,8 +13,12 @@ import { ensureNumber } from '@/lib/utils'
 
 export default function CheckoutPage() {
   const { cart, total, clearCart } = useCart()
+  const { user, isLoading: userLoading } = useUser()
+
   const [isLoading, setIsLoading] = useState(false)
   const [orderCreated, setOrderCreated] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
+
   const [formData, setFormData] = useState({
     email: '',
     name: '',
@@ -26,39 +32,90 @@ export default function CheckoutPage() {
   const inputClass =
     'w-full rounded-lg border border-(--color-wine-red)/25 bg-(--color-ivory) px-4 py-2 text-(--color-wine-red) placeholder:text-(--color-wine-red)/50 focus:border-(--color-wine-red) focus:ring-2 focus:ring-(--color-wine-red)/40 focus:outline-none'
 
+  // 🔐 Show login modal automatically
+  useEffect(() => {
+    if (!userLoading && !user) setShowLogin(true)
+  }, [user, userLoading])
+
+  // 🧠 Fetch saved customer profile
+  useEffect(() => {
+    const fetchCustomer = async () => {
+      if (!user) return
+      const res = await fetch('/api/customer/me')
+      if (!res.ok) return
+      const data = await res.json()
+
+      setFormData(prev => ({
+        ...prev,
+        email: user.email || '',
+        name: data.name || '',
+        phone: data.phone || '',
+        address: data.address_line1 || '',
+        city: data.city || '',
+        state: data.state || '',
+        zip: data.pincode || ''
+      }))
+    }
+
+    fetchCustomer()
+  }, [user])
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+
+    if (!user) return setShowLogin(true)
+
     setIsLoading(true)
 
-    const orderResponse = await fetch('/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        customer_email: formData.email,
-        customer_name: formData.name,
-        customer_address: `${formData.address}, ${formData.city}, ${formData.state} ${formData.zip}`,
-        customer_phone: formData.phone,
-        total_amount: total
+    try {
+      // 💾 Save customer profile (DB format)
+      await fetch('/api/customer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          address_line1: formData.address,
+          address_line2: '',
+          city: formData.city,
+          state: formData.state,
+          pincode: formData.zip,
+          country: 'India'
+        })
       })
-    })
 
-    const order = await orderResponse.json()
+      // 🧾 Create order
+      const orderResponse = await fetch('/api/orders', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    items: cart,
+    total_amount: total
+  })
+})
 
-    setOrderCreated(true)
-    clearCart()
+      const order = await orderResponse.json()
 
-    setTimeout(() => {
-      window.location.href = `/success?orderId=${order.id}`
-    }, 1200)
+      setOrderCreated(true)
+      clearCart()
+
+      setTimeout(() => {
+        window.location.href = `/success?orderId=${order.id}`
+      }, 1200)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   if (orderCreated) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-(--color-wine-red)">✓ Order Confirmed</div>
+      <div className="flex min-h-screen items-center justify-center text-(--color-wine-red)">
+        ✓ Order Confirmed
+      </div>
     )
   }
 
@@ -130,7 +187,7 @@ export default function CheckoutPage() {
                       <Button
                         type="submit"
                         size="lg"
-                        disabled={isLoading}
+                        disabled={isLoading || !user}
                         className="flex-1 bg-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90"
                       >
                         Complete Order
@@ -198,6 +255,8 @@ export default function CheckoutPage() {
           </div>
         </div>
       </section>
+
+      {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
     </main>
   )
 }
