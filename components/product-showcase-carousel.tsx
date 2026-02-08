@@ -74,21 +74,14 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
             transition={{ delay: 0.3 }}
             className="bg-background/90 border-primary/50 absolute bottom-4 left-4 rounded-lg border px-4 py-3 backdrop-blur-md"
           >
-            <p className="text-primary text-sm font-semibold">Featured Artisan Piece</p>
+            
           </motion.div>
         </motion.div>
 
         {/* Content Section */}
         <motion.div variants={itemVariants} className="space-y-6">
           <div>
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="bg-primary/20 text-primary mb-4 inline-block rounded-full px-4 py-2 text-sm font-semibold"
-            >
-              {currentProduct?.category_name || 'Heritage Artifact'}
-            </motion.span>
+            
 
             <h3 className="text-foreground mb-4 text-4xl font-bold md:text-5xl">{currentProduct?.name}</h3>
 
@@ -101,7 +94,7 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
           <motion.div variants={containerVariants} className="border-border grid grid-cols-2 gap-4 border-y py-6">
             <motion.div variants={itemVariants}>
               <p className="text-primary text-3xl font-bold">${ensureNumber(currentProduct?.price).toFixed(2)}</p>
-              <p className="text-muted-foreground text-sm">Premium Price</p>
+              
             </motion.div>
             <motion.div variants={itemVariants}>
               <p className="text-accent text-3xl font-bold">{currentProduct?.stock_quantity}</p>
