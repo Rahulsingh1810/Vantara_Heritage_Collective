@@ -6,48 +6,19 @@ import { signInWithGoogle } from '@/lib/auth-client'
 import { firebaseLogin } from '@/lib/firebase-login'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { AlertCircle, Globe, LogIn, X } from 'lucide-react'
+import { Globe, X } from 'lucide-react'
 
-export default function LoginModal({ onClose }: { onClose: () => void }) {
+interface LoginModalProps {
+  onClose: () => void
+}
+
+export default function LoginModal({ onClose }: LoginModalProps) {
   const { refetchUser } = useUser()
-  const [formData, setFormData] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [googleLoading, setGoogleLoading] = useState(false)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    setIsLoading(true)
-
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      })
-
-      if (!response.ok) {
-        const data = await response.json()
-        setError(data.error || 'Login failed')
-        return
-      }
-
-      await refetchUser()
-      onClose() // close modal after login
-    } catch {
-      setError('An error occurred. Please try again.')
-    } finally {
-      setIsLoading(false)
-    }
-  }
 
   const handleGoogleSignIn = async () => {
-    setGoogleLoading(true)
+    setIsLoading(true)
     setError('')
 
     try {
@@ -56,81 +27,70 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
       await firebaseLogin(idToken)
       await refetchUser()
       onClose()
-    } catch {
-      setError('Google sign-in failed.')
+    } catch (err: any) {
+      const message =
+        err.code === 'auth/popup-closed-by-user'
+          ? 'Sign-in was cancelled'
+          : 'Google sign-in failed. Please try again.'
+      setError(message)
     } finally {
-      setGoogleLoading(false)
+      setIsLoading(false)
     }
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
       <div className="relative w-full max-w-md">
-        <button onClick={onClose} className="absolute -top-10 right-0 text-white">
-          <X />
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute -top-12 right-1 text-(--color-ivory)/80 hover:text-(--color-ivory) transition-colors"
+          aria-label="Close login modal"
+        >
+          <X className="h-8 w-8" />
         </button>
 
-        <Card>
-          <CardHeader className="text-center">
-            <CardTitle className="text-3xl">Welcome Back</CardTitle>
-            <p className="text-muted-foreground">Sign in to continue checkout</p>
+        <Card className="border-(--color-wine-red)/30 bg-(--color-ivory) shadow-lg">
+          <CardHeader className="text-center pb-2">
+            <CardTitle className="text-3xl font-serif text-(--color-wine-red)">
+              Welcome Back
+            </CardTitle>
+            <p className="mt-2 text-(--color-wine-red)/70">
+              Sign in to your Heritage Collective account
+            </p>
           </CardHeader>
 
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {error && (
-                <div className="bg-destructive/10 border-destructive/30 flex gap-3 rounded-lg border p-4">
-                  <AlertCircle className="text-destructive mt-0.5 h-5 w-5" />
-                  <p className="text-destructive text-sm">{error}</p>
-                </div>
-              )}
-
-              <div>
-                <label className="mb-2 block text-sm font-medium">Email</label>
-                <input
-                  name="email"
-                  type="email"
-                  onChange={handleChange}
-                  className="border-border w-full rounded-lg border px-4 py-2"
-                  required
-                />
+          <CardContent className="pt-6 space-y-8">
+            {error && (
+              <div className="rounded-lg bg-red-50/80 border border-red-200 p-4 text-sm text-red-800">
+                {error}
               </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-medium">Password</label>
-                <input
-                  name="password"
-                  type="password"
-                  onChange={handleChange}
-                  className="border-border w-full rounded-lg border px-4 py-2"
-                  required
-                />
-              </div>
-
-              <Button type="submit" className="w-full gap-2" disabled={isLoading}>
-                <LogIn className="h-4 w-4" />
-                {isLoading ? 'Signing in...' : 'Sign In'}
-              </Button>
-            </form>
-
-            <div className="relative my-6">
-              <div className="absolute inset-0 flex items-center">
-                <span className="border-border w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card text-muted-foreground px-2">Or continue with</span>
-              </div>
-            </div>
+            )}
 
             <Button
-              variant="outline"
-              className="w-full gap-2"
+              size="lg"
+              className="w-full gap-3 bg-(--color-wine-red) hover:bg-(--color-wine-red)/90 text-(--color-ivory) font-medium shadow-sm"
               onClick={handleGoogleSignIn}
-              disabled={googleLoading}
+              disabled={isLoading}
             >
               <Globe className="h-5 w-5" />
-              {googleLoading ? 'Connecting...' : 'Sign in with Google'}
+              {isLoading ? 'Connecting...' : 'Sign in with Google'}
             </Button>
+
+            <p className="text-center text-sm text-(--color-wine-red)/70">
+              Don't have an account?{' '}
+              <a
+                href="/auth/register"
+                className="font-medium text-(--color-wine-red) hover:underline"
+                onClick={(e) => {
+                  e.preventDefault()
+                  onClose()
+                  window.location.href = '/auth/register'
+                }}
+              >
+                Create one
+              </a>
+            </p>
           </CardContent>
         </Card>
       </div>
