@@ -41,6 +41,7 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
       const response = await fetch('/api/customer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({
           name: formData.name,
           phone: formData.phone,
@@ -49,22 +50,19 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
           city: formData.city,
           state: formData.state,
           pincode: formData.pincode,
-          country: formData.country || 'India'
-        })
+          country: formData.country || 'India',
+        }),
       })
 
       if (!response.ok) {
         const data = await response.json()
-        setError(data.error || 'Failed to update profile')
-        setIsSaving(false)
-        return
+        throw new Error(data.error || 'Failed to update profile')
       }
 
-      const updatedUser = { ...formData }
       setIsEditing(false)
-      onUpdate?.(updatedUser)
-    } catch {
-      setError('An error occurred. Please try again.')
+      onUpdate?.({ ...formData })
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.')
     } finally {
       setIsSaving(false)
     }
@@ -77,90 +75,190 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
   }
 
   return (
-    <Card>
-      <CardHeader className="flex items-center justify-between">
-        <CardTitle>Profile Information</CardTitle>
+    <Card className="border-(--color-wine-red)/30 bg-(--color-ivory) shadow-sm">
+      <CardHeader className="flex flex-row items-center justify-between pb-6">
+        <CardTitle className="text-(--color-wine-red)">Profile Information</CardTitle>
         {!isEditing && (
-          <Button onClick={() => setIsEditing(true)} variant="outline" className='text-(--color-wine-red)' size="sm">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsEditing(true)}
+            className="border-(--color-wine-red) text-(--color-wine-red) hover:bg-(--color-wine-red) hover:text-(--color-ivory)"
+          >
             Edit
           </Button>
         )}
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent>
         {error && (
-          <div className="bg-destructive/10 border-destructive/30 text-destructive rounded border p-3 text-sm">
+          <div className="mb-6 rounded border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
             {error}
           </div>
         )}
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {/* Name */}
-          <Field label="Full Name" value={formData.name} editing={isEditing}>
-            <input name="name" value={formData.name} onChange={handleChange} className="input" />
-          </Field>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {/* Left column */}
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">
+                Full Name
+              </label>
+              {isEditing ? (
+                <input
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                />
+              ) : (
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
+                  {formData.name}
+                </p>
+              )}
+            </div>
 
-          {/* Email (read only) */}
-          <Field label="Email" value={formData.email} editing={false} />
+            <div>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">
+                Phone
+              </label>
+              {isEditing ? (
+                <input
+                  name="phone"
+                  value={formData.phone || ''}
+                  onChange={handleChange}
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                />
+              ) : (
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
+                  {formData.phone || 'Not provided'}
+                </p>
+              )}
+            </div>
 
-          {/* Phone */}
-          <Field label="Phone" value={formData.phone} editing={isEditing}>
-            <input name="phone" value={formData.phone || ''} onChange={handleChange} className="input" />
-          </Field>
+            <div>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">
+                Address Line 2
+              </label>
+              {isEditing ? (
+                <input
+                  name="address_line2"
+                  value={formData.address_line2 || ''}
+                  onChange={handleChange}
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                />
+              ) : (
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
+                  {formData.address_line2 || 'Not provided'}
+                </p>
+              )}
+            </div>
 
-          {/* Address Line 1 */}
-          <Field label="Address Line 1" value={formData.address_line1} editing={isEditing}>
-            <input name="address_line1" value={formData.address_line1 || ''} onChange={handleChange} className="input" />
-          </Field>
+            <div>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">
+                State
+              </label>
+              {isEditing ? (
+                <input
+                  name="state"
+                  value={formData.state || ''}
+                  onChange={handleChange}
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                />
+              ) : (
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
+                  {formData.state || 'Not provided'}
+                </p>
+              )}
+            </div>
+          </div>
 
-          {/* Address Line 2 */}
-          <Field label="Address Line 2" value={formData.address_line2} editing={isEditing}>
-            <input name="address_line2" value={formData.address_line2 || ''} onChange={handleChange} className="input" />
-          </Field>
+          {/* Right column */}
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">
+                Email
+              </label>
+              <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
+                {formData.email}
+              </p>
+            </div>
 
-          {/* City */}
-          <Field label="City" value={formData.city} editing={isEditing}>
-            <input name="city" value={formData.city || ''} onChange={handleChange} className="input" />
-          </Field>
+            <div>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">
+                Address Line 1
+              </label>
+              {isEditing ? (
+                <input
+                  name="address_line1"
+                  value={formData.address_line1 || ''}
+                  onChange={handleChange}
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                />
+              ) : (
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
+                  {formData.address_line1 || 'Not provided'}
+                </p>
+              )}
+            </div>
 
-          {/* State */}
-          <Field label="State" value={formData.state} editing={isEditing}>
-            <input name="state" value={formData.state || ''} onChange={handleChange} className="input" />
-          </Field>
+            <div>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">
+                City
+              </label>
+              {isEditing ? (
+                <input
+                  name="city"
+                  value={formData.city || ''}
+                  onChange={handleChange}
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                />
+              ) : (
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
+                  {formData.city || 'Not provided'}
+                </p>
+              )}
+            </div>
 
-          {/* Pincode */}
-          <Field label="Pincode" value={formData.pincode} editing={isEditing}>
-            <input name="pincode" value={formData.pincode || ''} onChange={handleChange} className="input" />
-          </Field>
+            <div>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">
+                Pincode
+              </label>
+              {isEditing ? (
+                <input
+                  name="pincode"
+                  value={formData.pincode || ''}
+                  onChange={handleChange}
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                />
+              ) : (
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
+                  {formData.pincode || 'Not provided'}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
 
         {isEditing && (
-          <div className="flex gap-3 pt-4">
-            <Button onClick={handleSave} disabled={isSaving} className="gap-2">
-              <Check className="h-4 w-4" />
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Button
+              onClick={handleSave}
+              disabled={isSaving}
+              className="bg-(--color-wine-red) hover:bg-(--color-wine-red)/90 min-w-[140px]"
+            >
               {isSaving ? 'Saving...' : 'Save Changes'}
             </Button>
-            <Button onClick={handleCancel} variant="outline" className="gap-2">
-              <X className="h-4 w-4" />
+            <Button
+              variant="outline"
+              onClick={handleCancel}
+              className="border-(--color-wine-red) text-(--color-wine-red) hover:bg-(--color-wine-red) hover:text-(--color-ivory) min-w-[140px]"
+            >
               Cancel
             </Button>
           </div>
         )}
       </CardContent>
     </Card>
-  )
-}
-
-/* Reusable Field wrapper */
-function Field({ label, value, editing, children }: any) {
-  return (
-    <div>
-      <label className="text-(--color-ivory)/70 mb-1 block text-sm">{label}</label>
-      {editing && children ? (
-        children
-      ) : (
-        <p className="text-lg font-semibold">{value || 'Not provided'}</p>
-      )}
-    </div>
   )
 }
