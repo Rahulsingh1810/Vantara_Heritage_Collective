@@ -33,15 +33,9 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
   }
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      className="relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-[var(--color-wine-red)]/10"
-    >
+    <div className="relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-[var(--color-wine-red)]/10">
       {/* Animated background glow */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
@@ -54,7 +48,7 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
         />
       </div>
 
-      <div className="relative grid min-h-[500px] grid-cols-1 items-center gap-8 p-8 md:p-16 lg:grid-cols-2">
+      <div className="relative grid min-h-[500px] grid-cols-1 items-center gap-8 p-8 pb-20 md:p-16 md:pb-24 lg:grid-cols-2">
         {/* Image */}
         <motion.div variants={itemVariants} className="relative h-96 overflow-hidden rounded-xl lg:h-full">
           <Image
@@ -79,7 +73,7 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
 
           {/* CTA */}
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href={currentProduct?.slug}>
+            <Link href={currentProduct?.slug || '#'}>
               <Button size="lg" className="group w-full md:w-fit">
                 Explore Collection
                 <motion.span
@@ -95,18 +89,21 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
         </motion.div>
       </div>
 
-      {/* Indicators */}
-      <div className="absolute bottom-8 left-8 right-8 flex justify-center gap-3 md:justify-start">
+      {/* Indicators - now positioned at the very bottom */}
+      <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-3 px-8 md:justify-start md:px-16">
         {products.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`h-2 rounded-full transition-all ${
-              index === current ? 'w-8 bg-primary' : 'w-2 bg-border'
+            aria-label={`Go to slide ${index + 1}`}
+            className={`h-2.5 rounded-full transition-all duration-300 ${
+              index === current
+                ? 'w-10 bg-(--color-wine-red)'
+                : 'w-2.5 bg-muted/60 hover:bg-muted'
             }`}
           />
         ))}
       </div>
-    </motion.div>
+    </div>
   )
 }
