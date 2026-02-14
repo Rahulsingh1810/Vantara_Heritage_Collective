@@ -47,14 +47,17 @@ export interface Product {
 }
 
 export interface Order {
-  id: number
-  customer_email: string
-  customer_name: string
-  customer_address: string
-  customer_phone: string
+  id: string
+  customer_id: string
+  order_number: string
+  razorpay_order_id: string | null
   total_amount: number
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
-  stripe_payment_id: string
+  currency: string
+  status: 'created' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
+  payment_status: 'pending' | 'paid' | 'failed'
+  address: Record<string, string>
+  tracking_number: string | null
+  courier_name: string | null
   created_at: string
   updated_at: string
 }
