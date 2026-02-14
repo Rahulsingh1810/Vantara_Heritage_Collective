@@ -42,7 +42,7 @@ export default function Navigation() {
       // Clear server-side session cookie
       const res = await fetch('/api/auth/logout', {
         method: 'POST',
-        credentials: 'include',
+        credentials: 'include'
       })
 
       if (!res.ok) {
@@ -63,7 +63,7 @@ export default function Navigation() {
     { label: 'Our Story', href: '/our-story' },
     { label: 'Products', href: '/products' },
     { label: 'Transforming Spaces', href: '/transforming-spaces' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'Contact', href: '/contact' }
   ]
 
   return (
@@ -79,12 +79,8 @@ export default function Navigation() {
 
             {/* Desktop Links */}
             <div className="hidden gap-8 md:flex">
-              {links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="transition hover:text-(--color-ivory)/80"
-                >
+              {links.map(link => (
+                <Link key={link.href} href={link.href} className="transition hover:text-(--color-ivory)/80">
                   {link.label}
                 </Link>
               ))}
@@ -116,7 +112,7 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -8, scale: 0.95 }}
                         transition={{ duration: 0.12 }}
-                        className="absolute right-0 top-full z-50 mt-2 w-44 rounded-md border border-(--color-wine-red)/20 bg-(--color-ivory) py-1 shadow-lg"
+                        className="absolute top-full right-0 z-50 mt-2 w-44 rounded-md border border-(--color-wine-red)/20 bg-(--color-ivory) py-1 shadow-lg"
                       >
                         <button
                           onClick={handleLogout}
@@ -210,9 +206,7 @@ export default function Navigation() {
                 </Link>
               )}
 
-              <p className="mt-10 text-center text-xs text-(--color-wine-red)/50">
-                Vadānya Heritage Collective
-              </p>
+              <p className="mt-10 text-center text-xs text-(--color-wine-red)/50">Vadānya Heritage Collective</p>
             </motion.div>
           </>
         )}

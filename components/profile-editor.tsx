@@ -50,8 +50,8 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
           city: formData.city,
           state: formData.state,
           pincode: formData.pincode,
-          country: formData.country || 'India',
-        }),
+          country: formData.country || 'India'
+        })
       })
 
       if (!response.ok) {
@@ -92,7 +92,7 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
 
       <CardContent>
         {error && (
-          <div className="mb-6 rounded border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
+          <div className="border-destructive/30 bg-destructive/10 text-destructive mb-6 rounded border p-4 text-sm">
             {error}
           </div>
         )}
@@ -101,51 +101,41 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
           {/* Left column */}
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">
-                Full Name
-              </label>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">Full Name</label>
               {isEditing ? (
                 <input
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
                 />
               ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
-                  {formData.name}
-                </p>
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.name}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">
-                Phone
-              </label>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">Phone</label>
               {isEditing ? (
                 <input
                   name="phone"
                   value={formData.phone || ''}
                   onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
                 />
               ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
-                  {formData.phone || 'Not provided'}
-                </p>
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.phone || 'Not provided'}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">
-                Address Line 2
-              </label>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">Address Line 2</label>
               {isEditing ? (
                 <input
                   name="address_line2"
                   value={formData.address_line2 || ''}
                   onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
                 />
               ) : (
                 <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
@@ -155,20 +145,16 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">
-                State
-              </label>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">State</label>
               {isEditing ? (
                 <input
                   name="state"
                   value={formData.state || ''}
                   onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
                 />
               ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
-                  {formData.state || 'Not provided'}
-                </p>
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.state || 'Not provided'}</p>
               )}
             </div>
           </div>
@@ -176,24 +162,18 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
           {/* Right column */}
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">
-                Email
-              </label>
-              <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
-                {formData.email}
-              </p>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">Email</label>
+              <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.email}</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">
-                Address Line 1
-              </label>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">Address Line 1</label>
               {isEditing ? (
                 <input
                   name="address_line1"
                   value={formData.address_line1 || ''}
                   onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
                 />
               ) : (
                 <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
@@ -203,38 +183,30 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">
-                City
-              </label>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">City</label>
               {isEditing ? (
                 <input
                   name="city"
                   value={formData.city || ''}
                   onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
                 />
               ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
-                  {formData.city || 'Not provided'}
-                </p>
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.city || 'Not provided'}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">
-                Pincode
-              </label>
+              <label className="block text-sm font-medium text-(--color-wine-red)/70">Pincode</label>
               {isEditing ? (
                 <input
                   name="pincode"
                   value={formData.pincode || ''}
                   onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:outline-none focus:ring-1 focus:ring-(--color-wine-red)"
+                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
                 />
               ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
-                  {formData.pincode || 'Not provided'}
-                </p>
+                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.pincode || 'Not provided'}</p>
               )}
             </div>
           </div>
@@ -245,14 +217,14 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
             <Button
               onClick={handleSave}
               disabled={isSaving}
-              className="bg-(--color-wine-red) hover:bg-(--color-wine-red)/90 min-w-[140px]"
+              className="min-w-[140px] bg-(--color-wine-red) hover:bg-(--color-wine-red)/90"
             >
               {isSaving ? 'Saving...' : 'Save Changes'}
             </Button>
             <Button
               variant="outline"
               onClick={handleCancel}
-              className="border-(--color-wine-red) text-(--color-wine-red) hover:bg-(--color-wine-red) hover:text-(--color-ivory) min-w-[140px]"
+              className="min-w-[140px] border-(--color-wine-red) text-(--color-wine-red) hover:bg-(--color-wine-red) hover:text-(--color-ivory)"
             >
               Cancel
             </Button>

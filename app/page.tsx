@@ -6,6 +6,7 @@ import ProductShowcaseCarousel from '@/components/product-showcase-carousel'
 import FAQSection from '@/components/faq-section'
 import ContactFormPopup from '@/components/contact-form-popup'
 import { useState } from 'react'
+import HeroSectionVideo from '@/components/hero-section-video'
 
 const featuredProducts = [
   {
@@ -13,21 +14,21 @@ const featuredProducts = [
     name: 'All Products',
     slug: '/products',
     description: 'Bespoke artefacts from traditional ateliers',
-    image_url: '/traditional-indian-crafts.jpg'
+    image_url: '/ES- Thumbnail.png'
   },
   {
     id: 'signature-pieces',
     name: 'Signature Pieces',
     slug: '/signature-pieces',
     description: 'Defining aesthetics with icons of lineage.',
-    image_url: '/traditional-bedroom-decor.jpg'
+    image_url: '/SL - Thumbnail.png'
   },
   {
     id: 'best-sellers',
     name: 'Best Sellers',
     slug: '/best-sellers',
     description: 'Heirlooms with enduring admiration.',
-    image_url: '/traditional-home-office.jpg'
+    image_url: '/VS - Thumbnail.png'
   }
 ]
 
@@ -36,10 +37,10 @@ export default function Page() {
 
   return (
     <>
+      <HeroSectionVideo />
       {/* ================= SECTION 1 — CRAFTING OUR STORY ================= */}
       <section className="bg-(--color-ivory) py-24">
         <div className="mx-auto max-w-7xl px-4">
-
           {/* Brand Header */}
           <div className="mb-16 text-center">
             <h1 className="mb-3 text-4xl font-extrabold text-(--color-wine-red) md:text-5xl">
@@ -53,13 +54,12 @@ export default function Page() {
           {/* Story Layout */}
           <div className="grid items-center gap-12 md:grid-cols-2">
             <div>
-              <h3 className="mb-4 text-2xl font-bold text-(--color-wine-red)">
-                Crafting Our Story
-              </h3>
+              <h3 className="mb-4 text-2xl font-bold text-(--color-wine-red)">Crafting Our Story</h3>
 
               <p className="mb-6 text-(--color-wine-red)/70">
                 Vadānya Heritage Collective is an homage to art that endures. Born from a deep regard for India’s living
-                craft traditions, we curate artefacts shaped by hand, guided by geography, and refined through generations.
+                craft traditions, we curate artefacts shaped by hand, guided by geography, and refined through
+                generations.
               </p>
 
               <ul className="space-y-3 text-(--color-wine-red)/80">
@@ -72,7 +72,7 @@ export default function Page() {
             <img
               src="/traditional-indian-crafts.jpg"
               alt="Indian heritage craftsmanship"
-              className="rounded-3xl h-90 w-full object-cover shadow-xl"
+              className="h-90 w-full rounded-3xl object-cover shadow-xl"
             />
           </div>
         </div>
@@ -81,16 +81,12 @@ export default function Page() {
       {/* ================= SECTION 2 — FEATURED COLLECTION ================= */}
       <section className="bg-background py-16 text-center">
         <div className="mx-auto max-w-7xl px-4">
-          <h2 className="mb-3 text-3xl font-bold text-(--color-wine-red)">
-            Featured Collections
-          </h2>
-          <p className="mb-8 text-(--color-wine-red)/70">
-            Explore curated heritage pieces
-          </p>
+          <h2 className="mb-3 text-3xl font-bold text-(--color-wine-red)">Featured Collections</h2>
+          <p className="mb-8 text-(--color-wine-red)/70">Explore curated heritage pieces</p>
 
           <ProductShowcaseCarousel products={featuredProducts} />
           <Link href="/products">
-            <Button variant="outline" className="mt-8 border-(--color-wine-red) text-(--color-wine-red)">
+            <Button variant="outline" className="mt-8 border-(--color-wine-red) text-(--color-ivory)">
               Step into heritage
             </Button>
           </Link>
@@ -101,18 +97,14 @@ export default function Page() {
       <section className="bg-(--color-ivory) py-12 text-center">
         <div className="mx-auto max-w-3xl px-4">
           <h3 className="mb-4 text-2xl font-bold text-(--color-wine-red)">Know the Legacy</h3>
-          <p className="text-lg text-(--color-wine-red)/70">
-            Explore curations to own a piece of the legacy
-          </p>
+          <p className="text-lg text-(--color-wine-red)/70">Explore curations to own a piece of the legacy</p>
         </div>
       </section>
 
       {/* ================= SECTION 4 — TRANSFORMING SPACES ================= */}
       <section className="bg-background py-16">
         <div className="mx-auto max-w-5xl px-4 text-center">
-          <h4 className="mb-12 text-xl font-semibold tracking-wide text-(--color-wine-red)">
-            Transforming Spaces
-          </h4>
+          <h4 className="mb-12 text-xl font-semibold tracking-wide text-(--color-wine-red)">Transforming Spaces</h4>
 
           <div className="flex flex-wrap justify-center gap-6 md:gap-10">
             {['Statement Walls', 'Vignette Shelves', 'Elegant Surfaces', 'Soulful Landscapes'].map(label => (
@@ -137,9 +129,7 @@ export default function Page() {
       {/* ================= SECTION 6 — CTA ================= */}
       <section className="relative overflow-hidden bg-(--color-wine-red) py-20 text-center">
         <div className="mx-auto max-w-3xl px-4">
-          <h2 className="mb-6 text-4xl font-bold text-(--color-ivory) md:text-5xl">
-            Have Questions?
-          </h2>
+          <h2 className="mb-6 text-4xl font-bold text-(--color-ivory) md:text-5xl">Have Questions?</h2>
 
           <p className="mx-auto mb-10 max-w-xl text-lg text-(--color-ivory)/80">
             Get in touch for queries or to simply chat!

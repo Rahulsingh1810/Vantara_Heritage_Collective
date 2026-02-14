@@ -33,9 +33,9 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
   }
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-[var(--color-wine-red)]/10">
+    <div className="relative overflow-hidden rounded-2xl border-2 border-(--color-wine-red)/30 bg-(--color-wine-red)/10">
       {/* Animated background glow */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
@@ -51,24 +51,15 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
       <div className="relative grid min-h-[500px] grid-cols-1 items-center gap-8 p-8 pb-20 md:p-16 md:pb-24 lg:grid-cols-2">
         {/* Image */}
         <motion.div variants={itemVariants} className="relative h-96 overflow-hidden rounded-xl lg:h-full">
-          <Image
-            src={currentProduct?.image_url}
-            alt={currentProduct?.name}
-            fill
-            className="rounded-xl object-cover"
-          />
+          <Image src={currentProduct?.image_url} alt={currentProduct?.name} fill className="rounded-xl object-cover" />
         </motion.div>
 
         {/* Content */}
         <motion.div variants={itemVariants} className="space-y-6">
           <div>
-            <h3 className="mb-4 text-4xl font-bold text-foreground md:text-5xl">
-              {currentProduct?.name}
-            </h3>
+            <h3 className="mb-4 text-4xl font-bold text-(--color-wine-red) md:text-5xl">{currentProduct?.name}</h3>
 
-            <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
-              {currentProduct?.description}
-            </p>
+            <p className="mb-6 text-lg leading-relaxed text-(--color-wine-red)/80">{currentProduct?.description}</p>
           </div>
 
           {/* CTA */}
@@ -90,16 +81,14 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
       </div>
 
       {/* Indicators - now positioned at the very bottom */}
-      <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-3 px-8 md:justify-start md:px-16">
+      <div className="absolute right-0 bottom-6 left-0 flex justify-center gap-3 px-8 md:justify-start md:px-16">
         {products.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrent(index)}
             aria-label={`Go to slide ${index + 1}`}
             className={`h-2.5 rounded-full transition-all duration-300 ${
-              index === current
-                ? 'w-10 bg-(--color-wine-red)'
-                : 'w-2.5 bg-muted/60 hover:bg-muted'
+              index === current ? 'w-10 bg-(--color-wine-red)' : 'bg-muted/60 hover:bg-muted w-2.5'
             }`}
           />
         ))}

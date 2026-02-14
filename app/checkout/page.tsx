@@ -90,13 +90,13 @@ export default function CheckoutPage() {
 
       // 🧾 Create order
       const orderResponse = await fetch('/api/orders', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    items: cart,
-    total_amount: total
-  })
-})
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: cart,
+          total_amount: total
+        })
+      })
 
       const order = await orderResponse.json()
 
@@ -113,9 +113,7 @@ export default function CheckoutPage() {
 
   if (orderCreated) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-(--color-wine-red)">
-        ✓ Order Confirmed
-      </div>
+      <div className="flex min-h-screen items-center justify-center text-(--color-wine-red)">✓ Order Confirmed</div>
     )
   }
 

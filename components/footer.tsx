@@ -28,13 +28,13 @@ export default function Footer() {
             <h4 className="mb-4 font-semibold">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about" className="transition-opacity hover:opacity-80">
-                  About Us
+                <Link href="/our-story" className="transition-opacity hover:opacity-80">
+                  Our Story
                 </Link>
               </li>
               <li>
                 <Link href="/products" className="transition-opacity hover:opacity-80">
-                  Shop
+                  Products
                 </Link>
               </li>
               <li>
@@ -50,18 +50,13 @@ export default function Footer() {
             <h4 className="mb-4 font-semibold">Information</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/faq" className="transition-opacity hover:opacity-80">
-                  FAQs
+                <Link href="/privacy-policy" className="transition-opacity hover:opacity-80">
+                  Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/shipping" className="transition-opacity hover:opacity-80">
-                  Shipping Info
-                </Link>
-              </li>
-              <li>
-                <Link href="/returns" className="transition-opacity hover:opacity-80">
-                  Returns
+                <Link href="/shipping-returns" className="transition-opacity hover:opacity-80">
+                  Shipping & Returns
                 </Link>
               </li>
             </ul>

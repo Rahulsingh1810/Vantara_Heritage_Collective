@@ -29,9 +29,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
       onClose()
     } catch (err: any) {
       const message =
-        err.code === 'auth/popup-closed-by-user'
-          ? 'Sign-in was cancelled'
-          : 'Google sign-in failed. Please try again.'
+        err.code === 'auth/popup-closed-by-user' ? 'Sign-in was cancelled' : 'Google sign-in failed. Please try again.'
       setError(message)
     } finally {
       setIsLoading(false)
@@ -39,37 +37,31 @@ export default function LoginModal({ onClose }: LoginModalProps) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
       <div className="relative w-full max-w-md">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute -top-12 right-1 text-(--color-ivory)/80 hover:text-(--color-ivory) transition-colors"
+          className="absolute -top-12 right-1 text-(--color-ivory)/80 transition-colors hover:text-(--color-ivory)"
           aria-label="Close login modal"
         >
           <X className="h-8 w-8" />
         </button>
 
         <Card className="border-(--color-wine-red)/30 bg-(--color-ivory) shadow-lg">
-          <CardHeader className="text-center pb-2">
-            <CardTitle className="text-3xl font-serif text-(--color-wine-red)">
-              Welcome Back
-            </CardTitle>
-            <p className="mt-2 text-(--color-wine-red)/70">
-              Sign in to your Heritage Collective account
-            </p>
+          <CardHeader className="pb-2 text-center">
+            <CardTitle className="font-serif text-3xl text-(--color-wine-red)">Welcome Back</CardTitle>
+            <p className="mt-2 text-(--color-wine-red)/70">Sign in to your Heritage Collective account</p>
           </CardHeader>
 
-          <CardContent className="pt-6 space-y-8">
+          <CardContent className="space-y-8 pt-6">
             {error && (
-              <div className="rounded-lg bg-red-50/80 border border-red-200 p-4 text-sm text-red-800">
-                {error}
-              </div>
+              <div className="rounded-lg border border-red-200 bg-red-50/80 p-4 text-sm text-red-800">{error}</div>
             )}
 
             <Button
               size="lg"
-              className="w-full gap-3 bg-(--color-wine-red) hover:bg-(--color-wine-red)/90 text-(--color-ivory) font-medium shadow-sm"
+              className="w-full gap-3 bg-(--color-wine-red) font-medium text-(--color-ivory) shadow-sm hover:bg-(--color-wine-red)/90"
               onClick={handleGoogleSignIn}
               disabled={isLoading}
             >
@@ -82,7 +74,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
               <a
                 href="/auth/register"
                 className="font-medium text-(--color-wine-red) hover:underline"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault()
                   onClose()
                   window.location.href = '/auth/register'
