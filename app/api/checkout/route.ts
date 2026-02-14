@@ -5,6 +5,6 @@ export async function POST(request: NextRequest) {
   // and payments are handled via Razorpay modal + /api/checkout/success
   return NextResponse.json({
     success: false,
-    message: 'Use /api/orders to create orders with Razorpay payment',
+    message: 'Use /api/orders to create orders with Razorpay payment'
   })
 }

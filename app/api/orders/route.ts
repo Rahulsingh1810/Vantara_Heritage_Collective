@@ -22,10 +22,7 @@ export async function POST(req: Request) {
     `
     const customer = customers[0]
     if (!customer) {
-      return NextResponse.json(
-        { error: 'Customer profile missing' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Customer profile missing' }, { status: 400 })
     }
 
     const orderNumber = `ORD_${Date.now()}`
@@ -53,7 +50,7 @@ export async function POST(req: Request) {
           city: customer.city,
           state: customer.state,
           pincode: customer.pincode,
-          country: customer.country,
+          country: customer.country
         })}
       )
       RETURNING id
@@ -99,15 +96,13 @@ export async function POST(req: Request) {
           customer.city,
           customer.state,
           customer.pincode,
-          customer.country,
+          customer.country
         ]
           .filter(Boolean)
           .join(', ')
       : 'N/A'
 
-    const productSlugs = items
-      .map((item: any) => item.product.slug || item.product.id)
-      .join(', ')
+    const productSlugs = items.map((item: any) => item.product.slug || item.product.id).join(', ')
 
     const rpOrder = await getRazorpay().orders.create({
       amount: amountInPaise,
@@ -123,8 +118,8 @@ export async function POST(req: Request) {
         total_items: String(items.reduce((sum: number, i: any) => sum + i.quantity, 0)),
         items_summary: itemsSummary.substring(0, 256),
         product_slugs: productSlugs.substring(0, 256),
-        amount_inr: `₹${(amountInPaise / 100).toFixed(2)}`,
-      },
+        amount_inr: `₹${(amountInPaise / 100).toFixed(2)}`
+      }
     })
 
     // 5️⃣ Save Razorpay order ID on our order
@@ -144,8 +139,8 @@ export async function POST(req: Request) {
       prefill: {
         name: customer.name,
         email: user.email,
-        contact: customer.phone,
-      },
+        contact: customer.phone
+      }
     })
   } catch (err) {
     console.error('Order creation failed:', err)

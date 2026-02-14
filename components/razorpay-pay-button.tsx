@@ -38,7 +38,7 @@ interface RazorpayPayButtonProps {
 }
 
 function loadRazorpayScript(): Promise<boolean> {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     if (typeof window !== 'undefined' && window.Razorpay) {
       resolve(true)
       return
@@ -59,7 +59,7 @@ export default function RazorpayPayButton({
   onBeforePayment,
   disabled = false,
   className = '',
-  children,
+  children
 }: RazorpayPayButtonProps) {
   const [isProcessing, setIsProcessing] = useState(false)
   const [scriptLoaded, setScriptLoaded] = useState(false)
@@ -97,8 +97,8 @@ export default function RazorpayPayButton({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items,
-          total_amount: totalAmount,
-        }),
+          total_amount: totalAmount
+        })
       })
 
       if (!orderRes.ok) {
@@ -134,8 +134,8 @@ export default function RazorpayPayButton({
               body: JSON.stringify({
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature,
-              }),
+                razorpay_signature: response.razorpay_signature
+              })
             })
 
             const result = await verifyRes.json()
@@ -148,9 +148,7 @@ export default function RazorpayPayButton({
               onFailure?.('verification_failed')
             }
           } catch {
-            toast.error(
-              'Could not verify payment. If money was deducted, it will be reconciled automatically.'
-            )
+            toast.error('Could not verify payment. If money was deducted, it will be reconciled automatically.')
             onFailure?.('verification_error')
           } finally {
             setIsProcessing(false)
@@ -159,12 +157,10 @@ export default function RazorpayPayButton({
         modal: {
           ondismiss: () => {
             setIsProcessing(false)
-            toast.info(
-              'Payment cancelled. If you already completed the payment, it will be updated automatically.'
-            )
+            toast.info('Payment cancelled. If you already completed the payment, it will be updated automatically.')
             onFailure?.('dismissed')
-          },
-        },
+          }
+        }
       }
 
       const rzp = new window.Razorpay(options)
@@ -185,13 +181,7 @@ export default function RazorpayPayButton({
   }, [items, totalAmount, onSuccess, onFailure, onBeforePayment, scriptLoaded])
 
   return (
-    <Button
-      type="button"
-      size="lg"
-      disabled={disabled || isProcessing}
-      onClick={handlePayment}
-      className={className}
-    >
+    <Button type="button" size="lg" disabled={disabled || isProcessing} onClick={handlePayment} className={className}>
       {isProcessing ? 'Processing...' : children || '\uD83D\uDD12 Pay Now'}
     </Button>
   )

@@ -23,12 +23,12 @@ export default function SuccessPage() {
 
     if (orderId) {
       fetch(`/api/orders/${orderId}`)
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           setOrderDetails(data)
           setLoading(false)
         })
-        .catch((error) => {
+        .catch(error => {
           console.error('Error fetching order:', error)
           setLoading(false)
         })
@@ -54,12 +54,8 @@ export default function SuccessPage() {
           >
             <div className="text-8xl">🎉</div>
           </motion.div>
-          <h1 className="text-4xl font-bold tracking-wide text-balance md:text-5xl">
-            Thank You for Your Order!
-          </h1>
-          <p className="mt-4 text-lg opacity-80">
-            Your heritage artifacts are on their way
-          </p>
+          <h1 className="text-4xl font-bold tracking-wide text-balance md:text-5xl">Thank You for Your Order!</h1>
+          <p className="mt-4 text-lg opacity-80">Your heritage artifacts are on their way</p>
         </div>
       </motion.div>
 
@@ -80,20 +76,15 @@ export default function SuccessPage() {
             >
               <CheckCircle className="mx-auto mb-6 h-24 w-24 text-(--color-wine-red)" />
             </motion.div>
-            <h2 className="mb-4 text-3xl font-bold text-(--color-wine-red) md:text-4xl">
-              Order Confirmed
-            </h2>
-            <p className="text-lg text-(--color-wine-red)/70 text-balance">
-              Thank you for supporting traditional artisans and cultural
-              heritage!
+            <h2 className="mb-4 text-3xl font-bold text-(--color-wine-red) md:text-4xl">Order Confirmed</h2>
+            <p className="text-lg text-balance text-(--color-wine-red)/70">
+              Thank you for supporting traditional artisans and cultural heritage!
             </p>
           </motion.div>
 
           {/* Order Details */}
           {loading ? (
-            <div className="py-12 text-center text-(--color-wine-red)">
-              Loading order details...
-            </div>
+            <div className="py-12 text-center text-(--color-wine-red)">Loading order details...</div>
           ) : orderDetails ? (
             <motion.div
               initial={{ y: 20, opacity: 0 }}
@@ -102,56 +93,39 @@ export default function SuccessPage() {
             >
               <Card className="mb-8 border-2 border-(--color-wine-red)/30 bg-white shadow-xl">
                 <CardHeader className="bg-(--color-wine-red)/5">
-                  <CardTitle className="text-2xl text-(--color-wine-red)">
-                    Order Details
-                  </CardTitle>
+                  <CardTitle className="text-2xl text-(--color-wine-red)">Order Details</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4 pt-6">
                   <div className="flex justify-between border-b border-(--color-wine-red)/15 py-3">
-                    <span className="text-(--color-wine-red)/60">
-                      Order Number
-                    </span>
+                    <span className="text-(--color-wine-red)/60">Order Number</span>
                     <span className="text-lg font-bold text-(--color-wine-red)">
                       {orderDetails.order_number || `#${orderDetails.id}`}
                     </span>
                   </div>
                   <div className="flex justify-between border-b border-(--color-wine-red)/15 py-3">
-                    <span className="text-(--color-wine-red)/60">
-                      Order Date
-                    </span>
+                    <span className="text-(--color-wine-red)/60">Order Date</span>
                     <span className="font-medium text-(--color-wine-red)">
-                      {new Date(orderDetails.created_at).toLocaleDateString(
-                        'en-IN',
-                        {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        }
-                      )}
+                      {new Date(orderDetails.created_at).toLocaleDateString('en-IN', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
                     </span>
                   </div>
                   {orderDetails.customer_name && (
                     <div className="flex justify-between border-b border-(--color-wine-red)/15 py-3">
-                      <span className="text-(--color-wine-red)/60">
-                        Customer
-                      </span>
-                      <span className="font-medium text-(--color-wine-red)">
-                        {orderDetails.customer_name}
-                      </span>
+                      <span className="text-(--color-wine-red)/60">Customer</span>
+                      <span className="font-medium text-(--color-wine-red)">{orderDetails.customer_name}</span>
                     </div>
                   )}
                   <div className="flex justify-between border-b border-(--color-wine-red)/15 py-3">
-                    <span className="text-(--color-wine-red)/60">
-                      Payment Status
-                    </span>
+                    <span className="text-(--color-wine-red)/60">Payment Status</span>
                     <span className="rounded-full bg-(--color-wine-red)/10 px-3 py-1 text-sm font-semibold text-(--color-wine-red) capitalize">
                       {orderDetails.payment_status || 'paid'}
                     </span>
                   </div>
                   <div className="flex justify-between rounded-lg bg-(--color-wine-red)/5 px-4 py-4">
-                    <span className="font-semibold text-(--color-wine-red)/70">
-                      Total Amount
-                    </span>
+                    <span className="font-semibold text-(--color-wine-red)/70">Total Amount</span>
                     <span className="text-3xl font-bold text-(--color-wine-red)">
                       ₹{ensureNumber(orderDetails.total_amount).toFixed(2)}
                     </span>
@@ -169,27 +143,25 @@ export default function SuccessPage() {
           >
             <Card className="mb-8 border border-(--color-wine-red)/20 bg-white shadow-lg">
               <CardContent className="p-8">
-                <h3 className="mb-6 text-xl font-bold text-(--color-wine-red) text-balance">
-                  What Happens Next?
-                </h3>
+                <h3 className="mb-6 text-xl font-bold text-balance text-(--color-wine-red)">What Happens Next?</h3>
                 <ul className="space-y-4">
                   {[
                     {
                       icon: Mail,
-                      text: "We've sent a confirmation email with all order details",
+                      text: "We've sent a confirmation email with all order details"
                     },
                     {
                       icon: Package,
-                      text: 'Your order is being carefully packed by our team',
+                      text: 'Your order is being carefully packed by our team'
                     },
                     {
                       icon: Truck,
-                      text: 'Tracking information will be sent as soon as it ships',
+                      text: 'Tracking information will be sent as soon as it ships'
                     },
                     {
                       icon: MapPin,
-                      text: 'Delivery typically within 7-14 business days domestically',
-                    },
+                      text: 'Delivery typically within 7-14 business days domestically'
+                    }
                   ].map((step, i) => (
                     <motion.li
                       key={i}
@@ -199,9 +171,7 @@ export default function SuccessPage() {
                       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-(--color-wine-red)/10">
                         <step.icon className="h-5 w-5 text-(--color-wine-red)" />
                       </span>
-                      <span className="self-center text-sm text-(--color-wine-red)">
-                        {step.text}
-                      </span>
+                      <span className="self-center text-sm text-(--color-wine-red)">{step.text}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -217,11 +187,7 @@ export default function SuccessPage() {
             className="flex flex-col gap-4 sm:flex-row"
           >
             <Link href="/products" className="flex-1">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full"
-              >
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full">
                 <Button
                   size="lg"
                   className="w-full bg-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90"
@@ -231,11 +197,7 @@ export default function SuccessPage() {
               </motion.div>
             </Link>
             <Link href="/" className="flex-1">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full"
-              >
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full">
                 <Button
                   variant="outline"
                   size="lg"

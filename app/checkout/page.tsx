@@ -27,7 +27,7 @@ export default function CheckoutPage() {
     city: '',
     state: '',
     zip: '',
-    phone: '',
+    phone: ''
   })
 
   const inputClass =
@@ -46,7 +46,7 @@ export default function CheckoutPage() {
       if (!res.ok) return
       const data = await res.json()
 
-      setFormData((prev) => ({
+      setFormData(prev => ({
         ...prev,
         email: user.email || '',
         name: data.name || '',
@@ -54,7 +54,7 @@ export default function CheckoutPage() {
         address: data.address_line1 || '',
         city: data.city || '',
         state: data.state || '',
-        zip: data.pincode || '',
+        zip: data.pincode || ''
       }))
     }
 
@@ -95,8 +95,8 @@ export default function CheckoutPage() {
           city: formData.city,
           state: formData.state,
           pincode: formData.zip,
-          country: 'India',
-        }),
+          country: 'India'
+        })
       })
       return true
     } catch {
@@ -138,14 +138,12 @@ export default function CheckoutPage() {
             <div className="lg:col-span-2">
               <Card className="border border-(--color-wine-red)/20 bg-(--color-ivory) shadow-xl">
                 <CardHeader>
-                  <CardTitle className="text-(--color-wine-red)">
-                    Shipping Information
-                  </CardTitle>
+                  <CardTitle className="text-(--color-wine-red)">Shipping Information</CardTitle>
                 </CardHeader>
 
                 <CardContent className="space-y-6">
                   <div className="space-y-6">
-                    {(['email', 'name', 'address'] as const).map((field) => (
+                    {(['email', 'name', 'address'] as const).map(field => (
                       <div key={field}>
                         <label className="mb-2 block text-sm font-medium text-(--color-wine-red) capitalize">
                           {field}
@@ -161,7 +159,7 @@ export default function CheckoutPage() {
                     ))}
 
                     <div className="grid gap-4 md:grid-cols-3">
-                      {(['city', 'state', 'zip'] as const).map((field) => (
+                      {(['city', 'state', 'zip'] as const).map(field => (
                         <div key={field}>
                           <label className="mb-2 block text-sm font-medium text-(--color-wine-red) capitalize">
                             {field}
@@ -178,9 +176,7 @@ export default function CheckoutPage() {
                     </div>
 
                     <div>
-                      <label className="mb-2 block text-sm font-medium text-(--color-wine-red)">
-                        Phone
-                      </label>
+                      <label className="mb-2 block text-sm font-medium text-(--color-wine-red)">Phone</label>
                       <input
                         name="phone"
                         value={formData.phone}
@@ -199,9 +195,7 @@ export default function CheckoutPage() {
                         disabled={!user || cart.length === 0 || !isFormValid || savingCustomer}
                         className="flex-1 bg-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90"
                       >
-                        {savingCustomer
-                          ? 'Saving...'
-                          : `🔒 Pay ₹${ensureNumber(total).toFixed(2)}`}
+                        {savingCustomer ? 'Saving...' : `🔒 Pay ₹${ensureNumber(total).toFixed(2)}`}
                       </RazorpayPayButton>
 
                       <Link href="/cart" className="flex-1">
@@ -222,30 +216,21 @@ export default function CheckoutPage() {
             {/* ORDER SUMMARY */}
             <Card className="sticky top-24 overflow-hidden border border-(--color-wine-red)/20 bg-(--color-ivory) shadow-xl">
               <div className="border-b border-(--color-wine-red)/15 bg-(--color-wine-red)/5 px-6 py-4">
-                <h3 className="font-semibold tracking-wide text-(--color-wine-red)">
-                  Order Summary
-                </h3>
+                <h3 className="font-semibold tracking-wide text-(--color-wine-red)">Order Summary</h3>
               </div>
 
               <CardContent className="space-y-6 p-6">
-                {cart.map((item) => (
+                {cart.map(item => (
                   <div
                     key={item.product.id}
                     className="flex items-center gap-4 rounded-lg border border-(--color-wine-red)/10 bg-white/40 p-3"
                   >
                     <div className="relative h-14 w-14 overflow-hidden rounded">
-                      <Image
-                        src={item.product.productImage || ''}
-                        alt=""
-                        fill
-                        className="object-cover"
-                      />
+                      <Image src={item.product.productImage || ''} alt="" fill className="object-cover" />
                     </div>
 
                     <div className="flex-1 text-(--color-wine-red)">
-                      <p className="text-sm font-medium">
-                        {item.product.productTitle}
-                      </p>
+                      <p className="text-sm font-medium">{item.product.productTitle}</p>
                       <p className="text-xs opacity-70">Qty {item.quantity}</p>
                     </div>
 

@@ -1,10 +1,7 @@
 import { NextResponse } from 'next/server'
 import { sql } from '@/lib/db'
 
-export async function GET(
-  req: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
 
@@ -38,13 +35,10 @@ export async function GET(
     return NextResponse.json({
       ...order,
       total_amount: totalInRupees,
-      items,
+      items
     })
   } catch (error) {
     console.error('Error fetching order:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch order' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed to fetch order' }, { status: 500 })
   }
 }
