@@ -1,6 +1,7 @@
 import crypto from 'crypto'
 import { sql } from '@/lib/db'
 import { type NextRequest, NextResponse } from 'next/server'
+import { sendOrderConfirmationEmails } from '@/lib/order-emails'
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,10 +9,7 @@ export async function POST(request: NextRequest) {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = body
 
     if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
-      return NextResponse.json(
-        { error: 'Missing payment details' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Missing payment details' }, { status: 400 })
     }
 
     // 1️⃣ Verify the Razorpay payment signature
@@ -21,16 +19,17 @@ export async function POST(request: NextRequest) {
       .digest('hex')
 
     if (generatedSignature !== razorpay_signature) {
-      return NextResponse.json(
-        { error: 'Invalid payment signature' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Invalid payment signature' }, { status: 400 })
     }
 
-    // 2️⃣ Find the order by razorpay_order_id
+    // 2️⃣ Find the order + customer details
     const orders = await sql`
-      SELECT id, total_amount FROM orders
-      WHERE razorpay_order_id = ${razorpay_order_id}
+      SELECT o.*, c.name as customer_name, c.phone as customer_phone,
+             u.email as customer_email
+      FROM orders o
+      LEFT JOIN customers c ON o.customer_id = c.id
+      LEFT JOIN users u ON c.user_id = u.id
+      WHERE o.razorpay_order_id = ${razorpay_order_id}
       LIMIT 1
     `
 
@@ -76,12 +75,45 @@ export async function POST(request: NextRequest) {
       `
     }
 
+    // 5️⃣ Fetch order items for email
+    const items = await sql`
+      SELECT product_name, product_url, quantity, unit_price
+      FROM order_items WHERE order_id = ${order.id}
+    `
+
+    // 6️⃣ Parse address
+    let addressStr = 'N/A'
+    try {
+      const addr = typeof order.address === 'string' ? JSON.parse(order.address) : order.address
+      addressStr = [
+        addr.name,
+        addr.address_line1,
+        addr.address_line2,
+        addr.city,
+        addr.state,
+        addr.pincode,
+        addr.country
+      ]
+        .filter(Boolean)
+        .join(', ')
+    } catch {}
+
+    // 7️⃣ Send confirmation emails (fire-and-forget)
+    sendOrderConfirmationEmails({
+      orderNumber: order.order_number,
+      orderId: order.id,
+      customerName: order.customer_name || 'Customer',
+      customerEmail: order.customer_email || '',
+      customerPhone: order.customer_phone || '',
+      shippingAddress: addressStr,
+      items: items as any[],
+      totalAmount: Number(order.total_amount),
+      paymentId: razorpay_payment_id
+    })
+
     return NextResponse.json({ success: true, orderId: order.id })
   } catch (error) {
     console.error('Success verification error:', error)
-    return NextResponse.json(
-      { error: 'Failed to verify payment' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed to verify payment' }, { status: 500 })
   }
 }
