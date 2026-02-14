@@ -15,6 +15,7 @@ interface RazorpayPayButtonProps {
   items: Array<{
     product: {
       id: number | string
+      slug?: string
       productTitle: string
       productPrice: number
       productImage: string | null
@@ -116,7 +117,7 @@ export default function RazorpayPayButton({
         key: orderData.key,
         amount: orderData.amount,
         currency: orderData.currency,
-        name: 'Vantara Heritage Collective',
+        name: 'Vadānya Heritage Collective',
         description: 'Purchase of Heritage Artifacts',
         order_id: orderData.razorpayOrderId,
         prefill: orderData.prefill,
