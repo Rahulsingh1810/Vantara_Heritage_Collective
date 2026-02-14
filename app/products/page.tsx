@@ -5,13 +5,14 @@ import ProductGrid from '@/components/product-grid'
 import DiscountBanner from '@/components/discount-banner'
 import DiscountClaimModal from '@/components/discount-claim-modal'
 import FiltersSidebarToggle from '@/components/filter-sidebar-toggle'
-
 import fetchProducts from '@/utils/queries/page'
 
 export const metadata: Metadata = {
   title: 'Products - Vandanya Heritage Collective',
   description: 'Browse our collection of traditional artifacts and heritage pieces from artisans worldwide.'
 }
+
+export const dynamic = 'force-static'
 
 export default async function Products({
   searchParams

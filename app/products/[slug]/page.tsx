@@ -8,6 +8,7 @@ import ProductImageGallery from '@/components/product-image-gallery'
 import ProductDetailsSection from '@/components/product-details-section'
 import fetchProductBySlug from '@/utils/queries/slugpage'
 import { Product } from '@/type/page'
+import fetchProducts from '@/utils/queries/page'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
@@ -17,6 +18,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: product ? `${product.productTitle} - Vandanya Heritage Collective` : 'Product Not Found',
     description: product?.productDescription?.substring(0, 160) || ''
   }
+}
+
+export const dynamic = 'force-static'
+
+export async function generateStaticParams() {
+  const products = await fetchProducts()
+
+  return products.map(product => ({
+    slug: product.slug
+  }))
 }
 
 export default async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) {
