@@ -186,27 +186,25 @@ export default function SuccessPage() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="flex flex-col gap-4 sm:flex-row"
           >
-            <Link href="/products" className="flex-1">
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full">
-                <Button
-                  size="lg"
-                  className="w-full bg-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90"
-                >
-                  Continue Shopping
-                </Button>
-              </motion.div>
-            </Link>
-            <Link href="/" className="flex-1">
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full border-(--color-wine-red) bg-transparent text-(--color-wine-red)"
-                >
-                  Back to Home
-                </Button>
-              </motion.div>
-            </Link>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1">
+              <Button
+                asChild
+                size="lg"
+                className="w-full bg-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90"
+              >
+                <Link href="/products">Continue Shopping</Link>
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1">
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="w-full border-(--color-wine-red) bg-transparent text-(--color-wine-red)"
+              >
+                <Link href="/">Back to Home</Link>
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
       </section>
