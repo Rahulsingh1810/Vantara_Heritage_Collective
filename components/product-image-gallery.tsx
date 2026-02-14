@@ -38,7 +38,7 @@ export default function ProductImageGallery({ product }: ProductImageGalleryProp
           alt={`${product.productTitle} image ${currentIndex + 1}`}
           fill
           priority
-          className="object-cover transition-transform duration-500 hover:scale-105"
+          className="h-28 object-cover transition-transform duration-500 hover:scale-105"
         />
 
         {/* Navigation Arrows */}

@@ -48,8 +48,8 @@ export default async function Products({
 
   return (
     <>
-      <DiscountBanner />
-      <DiscountClaimModal />
+      {/* <DiscountBanner />
+      <DiscountClaimModal /> */}
 
       <main>
         {/* Hero */}

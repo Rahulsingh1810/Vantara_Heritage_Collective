@@ -83,7 +83,7 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
             variant="outline"
             size="sm"
             onClick={() => setIsEditing(true)}
-            className="border-(--color-wine-red) text-(--color-wine-red) hover:bg-(--color-wine-red) hover:text-(--color-ivory)"
+            className="border-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red) hover:text-(--color-ivory)"
           >
             Edit
           </Button>

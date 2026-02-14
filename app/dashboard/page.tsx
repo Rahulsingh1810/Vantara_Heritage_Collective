@@ -90,7 +90,7 @@ export default function DashboardPage() {
           <Button
             variant="outline"
             onClick={handleLogout}
-            className="gap-2 border-(--color-wine-red) text-(--color-wine-red) hover:bg-(--color-wine-red) hover:text-(--color-ivory)"
+            className="gap-2 border-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red) hover:text-(--color-ivory)"
           >
             <LogOut className="h-4 w-4" />
             Logout

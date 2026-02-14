@@ -126,7 +126,7 @@ export default function CartPage() {
                 <Button
                   variant="outline"
                   onClick={clearCart}
-                  className="border-(--color-wine-red)/30 text-(--color-wine-red) hover:bg-(--color-wine-red)/10"
+                  className="border-(--color-wine-red)/30 text-(--color-ivory) hover:bg-(--color-wine-red)/90"
                 >
                   Clear Cart
                 </Button>
@@ -168,7 +168,7 @@ export default function CartPage() {
                   <Link href="/products">
                     <Button
                       variant="outline"
-                      className="w-full border-(--color-wine-red)/30 text-(--color-wine-red) hover:bg-(--color-wine-red)/10"
+                      className="mt-4 w-full border-(--color-wine-red)/30 text-(--color-ivory) hover:bg-(--color-wine-red)/90"
                     >
                       Continue Shopping
                     </Button>
