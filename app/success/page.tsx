@@ -208,8 +208,6 @@ export default function SuccessPage() {
           </motion.div>
         </div>
       </section>
-
-      <ContactFormPopup />
     </main>
   )
 }
