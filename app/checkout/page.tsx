@@ -5,6 +5,7 @@ import { useState, useEffect, type FormEvent } from 'react'
 import { useCart } from '@/components/cart'
 import { useUser } from '@/lib/user-context'
 import LoginModal from '@/components/login-modal'
+import RazorpayPayButton from '@/components/razorpay-pay-button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -15,9 +16,9 @@ export default function CheckoutPage() {
   const { cart, total, clearCart } = useCart()
   const { user, isLoading: userLoading } = useUser()
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [orderCreated, setOrderCreated] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
+  const [orderSuccess, setOrderSuccess] = useState(false)
+  const [savingCustomer, setSavingCustomer] = useState(false)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -26,18 +27,18 @@ export default function CheckoutPage() {
     city: '',
     state: '',
     zip: '',
-    phone: ''
+    phone: '',
   })
 
   const inputClass =
     'w-full rounded-lg border border-(--color-wine-red)/25 bg-(--color-ivory) px-4 py-2 text-(--color-wine-red) placeholder:text-(--color-wine-red)/50 focus:border-(--color-wine-red) focus:ring-2 focus:ring-(--color-wine-red)/40 focus:outline-none'
 
-  // 🔐 Show login modal automatically
+  // Show login modal automatically
   useEffect(() => {
     if (!userLoading && !user) setShowLogin(true)
   }, [user, userLoading])
 
-  // 🧠 Fetch saved customer profile
+  // Fetch saved customer profile
   useEffect(() => {
     const fetchCustomer = async () => {
       if (!user) return
@@ -45,7 +46,7 @@ export default function CheckoutPage() {
       if (!res.ok) return
       const data = await res.json()
 
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         email: user.email || '',
         name: data.name || '',
@@ -53,7 +54,7 @@ export default function CheckoutPage() {
         address: data.address_line1 || '',
         city: data.city || '',
         state: data.state || '',
-        zip: data.pincode || ''
+        zip: data.pincode || '',
       }))
     }
 
@@ -64,15 +65,25 @@ export default function CheckoutPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+  // Validate form fields
+  const isFormValid =
+    formData.email &&
+    formData.name &&
+    formData.address &&
+    formData.city &&
+    formData.state &&
+    formData.zip &&
+    formData.phone
 
-    if (!user) return setShowLogin(true)
+  // Save customer profile before triggering Razorpay (called by RazorpayPayButton wrapper)
+  const saveCustomerBeforePayment = async () => {
+    if (!user) {
+      setShowLogin(true)
+      return false
+    }
 
-    setIsLoading(true)
-
+    setSavingCustomer(true)
     try {
-      // 💾 Save customer profile (DB format)
       await fetch('/api/customer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -84,36 +95,30 @@ export default function CheckoutPage() {
           city: formData.city,
           state: formData.state,
           pincode: formData.zip,
-          country: 'India'
-        })
+          country: 'India',
+        }),
       })
-
-      // 🧾 Create order
-      const orderResponse = await fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          items: cart,
-          total_amount: total
-        })
-      })
-
-      const order = await orderResponse.json()
-
-      setOrderCreated(true)
-      clearCart()
-
-      setTimeout(() => {
-        window.location.href = `/success?orderId=${order.id}`
-      }, 1200)
+      return true
+    } catch {
+      return false
     } finally {
-      setIsLoading(false)
+      setSavingCustomer(false)
     }
   }
 
-  if (orderCreated) {
+  const handlePaymentSuccess = (orderId: string) => {
+    setOrderSuccess(true)
+    clearCart()
+    setTimeout(() => {
+      window.location.href = `/success?orderId=${orderId}`
+    }, 1200)
+  }
+
+  if (orderSuccess) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-(--color-wine-red)">✓ Order Confirmed</div>
+      <div className="flex min-h-screen items-center justify-center text-(--color-wine-red)">
+        ✓ Payment Successful — Redirecting...
+      </div>
     )
   }
 
@@ -133,12 +138,14 @@ export default function CheckoutPage() {
             <div className="lg:col-span-2">
               <Card className="border border-(--color-wine-red)/20 bg-(--color-ivory) shadow-xl">
                 <CardHeader>
-                  <CardTitle className="text-(--color-wine-red)">Shipping Information</CardTitle>
+                  <CardTitle className="text-(--color-wine-red)">
+                    Shipping Information
+                  </CardTitle>
                 </CardHeader>
 
                 <CardContent className="space-y-6">
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    {(['email', 'name', 'address'] as const).map(field => (
+                  <div className="space-y-6">
+                    {(['email', 'name', 'address'] as const).map((field) => (
                       <div key={field}>
                         <label className="mb-2 block text-sm font-medium text-(--color-wine-red) capitalize">
                           {field}
@@ -154,7 +161,7 @@ export default function CheckoutPage() {
                     ))}
 
                     <div className="grid gap-4 md:grid-cols-3">
-                      {(['city', 'state', 'zip'] as const).map(field => (
+                      {(['city', 'state', 'zip'] as const).map((field) => (
                         <div key={field}>
                           <label className="mb-2 block text-sm font-medium text-(--color-wine-red) capitalize">
                             {field}
@@ -171,7 +178,9 @@ export default function CheckoutPage() {
                     </div>
 
                     <div>
-                      <label className="mb-2 block text-sm font-medium text-(--color-wine-red)">Phone</label>
+                      <label className="mb-2 block text-sm font-medium text-(--color-wine-red)">
+                        Phone
+                      </label>
                       <input
                         name="phone"
                         value={formData.phone}
@@ -182,14 +191,18 @@ export default function CheckoutPage() {
                     </div>
 
                     <div className="flex gap-4 pt-6">
-                      <Button
-                        type="submit"
-                        size="lg"
-                        disabled={isLoading || !user}
+                      <RazorpayPayButton
+                        items={cart}
+                        totalAmount={total}
+                        onSuccess={handlePaymentSuccess}
+                        onBeforePayment={saveCustomerBeforePayment}
+                        disabled={!user || cart.length === 0 || !isFormValid || savingCustomer}
                         className="flex-1 bg-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90"
                       >
-                        Complete Order
-                      </Button>
+                        {savingCustomer
+                          ? 'Saving...'
+                          : `🔒 Pay ₹${ensureNumber(total).toFixed(2)}`}
+                      </RazorpayPayButton>
 
                       <Link href="/cart" className="flex-1">
                         <Button
@@ -201,7 +214,7 @@ export default function CheckoutPage() {
                         </Button>
                       </Link>
                     </div>
-                  </form>
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -209,21 +222,30 @@ export default function CheckoutPage() {
             {/* ORDER SUMMARY */}
             <Card className="sticky top-24 overflow-hidden border border-(--color-wine-red)/20 bg-(--color-ivory) shadow-xl">
               <div className="border-b border-(--color-wine-red)/15 bg-(--color-wine-red)/5 px-6 py-4">
-                <h3 className="font-semibold tracking-wide text-(--color-wine-red)">Order Summary</h3>
+                <h3 className="font-semibold tracking-wide text-(--color-wine-red)">
+                  Order Summary
+                </h3>
               </div>
 
               <CardContent className="space-y-6 p-6">
-                {cart.map(item => (
+                {cart.map((item) => (
                   <div
                     key={item.product.id}
                     className="flex items-center gap-4 rounded-lg border border-(--color-wine-red)/10 bg-white/40 p-3"
                   >
                     <div className="relative h-14 w-14 overflow-hidden rounded">
-                      <Image src={item.product.productImage} alt="" fill className="object-cover" />
+                      <Image
+                        src={item.product.productImage || ''}
+                        alt=""
+                        fill
+                        className="object-cover"
+                      />
                     </div>
 
                     <div className="flex-1 text-(--color-wine-red)">
-                      <p className="text-sm font-medium">{item.product.productTitle}</p>
+                      <p className="text-sm font-medium">
+                        {item.product.productTitle}
+                      </p>
                       <p className="text-xs opacity-70">Qty {item.quantity}</p>
                     </div>
 
@@ -246,7 +268,7 @@ export default function CheckoutPage() {
                 </div>
 
                 <div className="rounded-lg bg-(--color-wine-red)/5 py-3 text-center text-xs text-(--color-wine-red)">
-                  ✓ Secure checkout
+                  🔒 Secured by Razorpay
                 </div>
               </CardContent>
             </Card>
