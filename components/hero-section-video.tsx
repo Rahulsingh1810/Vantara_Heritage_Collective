@@ -30,6 +30,7 @@ export default function HeroSectionVideo() {
           autoPlay
           loop
           muted
+          preload="true"
           playsInline
           onLoadedData={() => setIsLoaded(true)}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${

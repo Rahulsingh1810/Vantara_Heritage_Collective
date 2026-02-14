@@ -18,7 +18,7 @@ export default function SplashScreen() {
     const timer = setTimeout(() => {
       setIsVisible(false)
       localStorage.setItem('hasSeenSplash', today)
-    }, 2500)
+    }, 3000)
 
     return () => clearTimeout(timer)
   }, [])
