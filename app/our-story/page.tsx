@@ -25,7 +25,7 @@ export default function About() {
             {/* STORY */}
             <div className="space-y-10">
               <div className="relative h-137.5 w-full overflow-hidden rounded-2xl shadow-xl">
-                <Image src="/traditional-indian-crafts.jpg" alt="Artisan at work" fill className="object-cover" />
+                <Image src="/Crafting Our Story Image.png" alt="Artisan at work" fill className="object-cover" />
               </div>
 
               <p className="text-lg leading-relaxed text-(--color-wine-red)">
