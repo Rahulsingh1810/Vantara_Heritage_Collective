@@ -74,7 +74,7 @@ export default function Navigation() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link href="/">
-              <img src="/ivoryLogo.svg" className="h-12" alt="Vadānya Heritage Collective" />
+              <img src="/Ivory.png" className="h-12" alt="Vadānya Heritage Collective" />
             </Link>
 
             {/* Desktop Links */}

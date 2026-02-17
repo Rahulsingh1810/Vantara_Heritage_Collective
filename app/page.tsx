@@ -107,13 +107,21 @@ export default function Page() {
           <h4 className="mb-12 text-xl font-semibold tracking-wide text-(--color-wine-red)">Transforming Spaces</h4>
 
           <div className="flex flex-wrap justify-center gap-6 md:gap-10">
-            {['Statement Walls', 'Vignette Shelves', 'Elegant Surfaces', 'Soulful Landscapes'].map(label => (
-              <div key={label} className="group relative">
+            {[
+              { label: 'Statement Walls', slug: 'statement-walls' },
+              { label: 'Vignette Shelves', slug: 'vignette-shelves' },
+              { label: 'Elegant Surfaces', slug: 'elegant-surfaces' },
+              { label: 'Soulful Landscapes', slug: 'soulful-landscapes' }
+            ].map(item => (
+              <Link key={item.slug} href={`/transforming-spaces/${item.slug}`} className="group relative">
+                {/* Glow effect on hover */}
                 <div className="absolute inset-0 rounded-full bg-(--color-wine-red)/20 opacity-0 blur-xl transition group-hover:opacity-100" />
+
+                {/* Circle button */}
                 <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-(--color-wine-red) text-center text-xs font-semibold tracking-wide text-(--color-ivory) shadow-lg transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl md:h-32 md:w-32 md:text-sm">
-                  <span className="px-3 leading-tight">{label}</span>
+                  <span className="px-3 leading-tight">{item.label}</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

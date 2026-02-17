@@ -10,7 +10,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="inline-block">
               <Image
-                src="/ivoryLogo.svg" // or /logo.svg
+                src="/Ivory.png" // or /logo.svg
                 alt="Vandanya Heritage Collective Logo"
                 width={140}
                 height={60}

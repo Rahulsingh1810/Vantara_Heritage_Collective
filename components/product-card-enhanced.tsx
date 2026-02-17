@@ -51,7 +51,7 @@ export default function ProductCardEnhanced({ product }: ProductCardProps) {
           <p className="mb-4 line-clamp-2 flex-1 text-sm text-(--color-wine-red)/70">{product.description}</p>
 
           {/* Pills */}
-          <div className="mb-5 flex flex-wrap gap-2">
+          {/* <div className="mb-5 flex flex-wrap gap-2">
             <span className="rounded-full border border-(--color-wine-red)/20 bg-(--color-wine-red)/5 px-3 py-1 text-xs text-(--color-wine-red)">
               {product.category || 'Artifact'}
             </span>
@@ -59,7 +59,7 @@ export default function ProductCardEnhanced({ product }: ProductCardProps) {
             <span className="rounded-full border border-(--color-wine-red)/20 bg-(--color-wine-red)/5 px-3 py-1 text-xs text-(--color-wine-red)">
               {product.vendor || 'Heritage'}
             </span>
-          </div>
+          </div> */}
 
           {/* Price */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
