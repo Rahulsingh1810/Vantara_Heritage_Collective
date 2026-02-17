@@ -59,14 +59,11 @@ export default function Page() {
               <p className="mb-6 text-(--color-wine-red)/70">
                 Vadānya Heritage Collective is an homage to art that endures. Born from a deep regard for India’s living
                 craft traditions, we curate artefacts shaped by hand, guided by geography, and refined through
-                generations.
+                generations of artistic devotion. Each piece echoes a legacy imprinted by the rhythm of practiced hands,
+                the patience of process, and the wisdom of time-honoured techniques. Our quest is to capture the essence
+                of GI-tagged artefacts by situating them in lived and experienced spaces. Let’s celebrate heritage art
+                as an enduring phenomenon of experience.
               </p>
-
-              <ul className="space-y-3 text-(--color-wine-red)/80">
-                <li>✓ Handcrafted by master artisans</li>
-                <li>✓ Preserving centuries-old techniques</li>
-                <li>✓ Celebrating cultural storytelling through design</li>
-              </ul>
             </div>
 
             <img
