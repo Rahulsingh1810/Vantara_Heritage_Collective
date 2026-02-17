@@ -18,9 +18,7 @@ export default function Footer() {
                 priority
               />
             </Link>
-            <p className="text-sm opacity-90">
-              Preserving and celebrating traditional artifacts and cultural treasures.
-            </p>
+            <p className="text-sm opacity-90">Reimagining cultural treasures in iconic living spaces</p>
           </div>
 
           {/* Quick Links */}

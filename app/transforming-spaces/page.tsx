@@ -12,10 +12,8 @@ export default function TransformingSpacesPage() {
       {/* Hero – keep as is */}
       <section className="bg-(--color-wine-red) py-16 text-(--color-ivory) md:py-24">
         <div className="mx-auto max-w-4xl px-4 text-center">
-          <h1 className="mb-6 text-4xl font-bold md:text-5xl">Transforming Spaces with Vandanya</h1>
-          <p className="text-lg opacity-90 md:text-xl">
-            Learn how to create stunning, culturally rich environments with traditional artifacts.
-          </p>
+          <h1 className="mb-6 text-4xl font-bold md:text-5xl">Transforming Spaces</h1>
+          <p className="text-lg opacity-90 md:text-xl">Create stunning spaces with these artefact moodboards</p>
         </div>
       </section>
 

@@ -42,7 +42,7 @@ export default function SplashScreen() {
       <div className="relative z-10 flex flex-col items-center px-6 text-center">
         {/* Logo */}
         <motion.img
-          src="/ivoryLogo.svg"
+          src="/Ivory.png"
           alt="Vandanya Logo"
           initial={{ scale: 0.85, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}

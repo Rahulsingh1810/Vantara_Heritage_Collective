@@ -79,7 +79,6 @@ export default function Page() {
       <section className="bg-background py-16 text-center">
         <div className="mx-auto max-w-7xl px-4">
           <h2 className="mb-3 text-3xl font-bold text-(--color-wine-red)">Featured Collections</h2>
-          <p className="mb-8 text-(--color-wine-red)/70">Explore curated heritage pieces</p>
 
           <ProductShowcaseCarousel products={featuredProducts} />
           <Link href="/products">
