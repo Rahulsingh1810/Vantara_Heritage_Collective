@@ -202,7 +202,7 @@ export default function CheckoutPage() {
                         <Button
                           size="lg"
                           variant="outline"
-                          className="w-full border-(--color-wine-red) text-(--color-wine-red)"
+                          className="w-full border-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90"
                         >
                           Back to Cart
                         </Button>

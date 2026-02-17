@@ -5,8 +5,7 @@ import ProductFilters from '@/components/product-filters'
 import ProductGrid from '@/components/product-grid'
 import DiscountBanner from '@/components/discount-banner'
 import DiscountClaimModal from '@/components/discount-claim-modal'
-
-import fetchProducts from '@/utils/queries/page'
+import fetchBestSellerProducts from '@/utils/queries/best-sellers'
 
 export const metadata: Metadata = {
   title: 'Products - Vandanya Heritage Collective',
@@ -22,9 +21,10 @@ export default async function Products({
 
   let products: any[] = []
   try {
-    products = await fetchProducts()
+    products = await fetchBestSellerProducts() // ← updated call
   } catch (e) {
     products = []
+    console.error('Failed to fetch signature products:', e)
   }
 
   const uniqueCategories = Array.from(new Set(products.map((p: any) => p.productCategory).filter(Boolean))).map(
@@ -48,8 +48,8 @@ export default async function Products({
 
   return (
     <>
-      <DiscountBanner />
-      <DiscountClaimModal />
+      {/* <DiscountBanner />
+      <DiscountClaimModal /> */}
 
       <main>
         {/* Hero */}
