@@ -73,7 +73,7 @@ export async function POST(req: Request) {
           ${order.id},
           ${String(item.product.id)},
           ${item.product.productTitle},
-          ${item.product.productImage || ''},
+          ${item.product.slug ? `${process.env.NEXT_PUBLIC_SITE_URL || ''}/products/${item.product.slug}` : ''},
           ${item.quantity},
           ${unitPriceInPaise}
         )

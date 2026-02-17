@@ -18,9 +18,14 @@ export default function SuccessPage() {
   const [orderDetails, setOrderDetails] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
+  // Clear cart once on mount — clearCart is intentionally excluded from deps
+  // because it is not memoized and would cause an infinite re-render loop
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     clearCart()
+  }, [])
 
+  useEffect(() => {
     if (orderId) {
       fetch(`/api/orders/${orderId}`)
         .then(res => res.json())
@@ -35,7 +40,7 @@ export default function SuccessPage() {
     } else {
       setLoading(false)
     }
-  }, [orderId, clearCart])
+  }, [orderId])
 
   return (
     <main>

@@ -60,7 +60,7 @@ function buildCustomerEmail(data: OrderEmailData): string {
 
     <!-- Header -->
     <div style="background-color: #722F37; padding: 40px 32px; text-align: center;">
-      <h1 style="margin: 0; color: #faf7f2; font-size: 28px; font-weight: 700; letter-spacing: 2px;">VANTARA</h1>
+      <h1 style="margin: 0; color: #faf7f2; font-size: 28px; font-weight: 700; letter-spacing: 2px;">VADĀNYA</h1>
       <p style="margin: 6px 0 0; color: #faf7f2; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.85;">Heritage Collective</p>
     </div>
 
@@ -143,7 +143,7 @@ function buildCustomerEmail(data: OrderEmailData): string {
     <!-- Footer -->
     <div style="background-color: #722F37; padding: 28px 32px; text-align: center;">
       <p style="margin: 0; color: #faf7f2; font-size: 13px; opacity: 0.85;">Need help? Reply to this email or contact us</p>
-      <p style="margin: 8px 0 0; color: #faf7f2; font-size: 11px; opacity: 0.6;">© ${new Date().getFullYear()} Vantara Heritage Collective</p>
+      <p style="margin: 8px 0 0; color: #faf7f2; font-size: 11px; opacity: 0.6;">© ${new Date().getFullYear()} Vadānya Heritage Collective</p>
     </div>
   </div>
 </body>
@@ -256,7 +256,7 @@ function buildOwnerEmail(data: OrderEmailData): string {
 
     <!-- Footer -->
     <div style="background-color: #1a1a2e; padding: 20px 32px; text-align: center;">
-      <p style="margin: 0; color: #a0a0c0; font-size: 11px;">Vantara Heritage Collective — Order Notification</p>
+      <p style="margin: 0; color: #a0a0c0; font-size: 11px;">Vadānya Heritage Collective — Order Notification</p>
     </div>
   </div>
 </body>
@@ -272,7 +272,7 @@ export async function sendOrderConfirmationEmails(data: OrderEmailData): Promise
     await transporter.sendMail({
       from: `"${process.env.EMAIL_NAME}" <${process.env.EMAIL}>`,
       to: data.customerEmail,
-      subject: `Order Confirmed — ${data.orderNumber} | Vantara Heritage Collective`,
+      subject: `Order Confirmed — ${data.orderNumber} | Vadānya Heritage Collective`,
       html: buildCustomerEmail(data)
     })
 
