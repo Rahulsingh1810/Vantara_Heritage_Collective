@@ -25,7 +25,7 @@ export default async function RoomDetailPage({ params }: Props) {
 
         {/* Main Image */}
         <div className="relative mb-10 aspect-[16/9] w-full overflow-hidden rounded-3xl shadow-2xl">
-          <Image src={room.mainImg} alt={room.title} fill className="object-cover" priority />
+          <Image src={room.mainImg} alt={room.title} fill className="object-fill" priority />
         </div>
 
         {/* Content */}

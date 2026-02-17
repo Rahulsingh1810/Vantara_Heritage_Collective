@@ -66,9 +66,9 @@ export default async function Products({
         {/* Products */}
         <section className="bg-background py-12 md:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-5">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-4">
               {/* Filters */}
-              <div className="lg:col-span-1">
+              {/* <div className="lg:col-span-1">
                 <div className="sticky top-24">
                   <Suspense
                     fallback={<div className="py-8 text-center text-(--color-wine-red)/70">Loading filters…</div>}
@@ -76,7 +76,7 @@ export default async function Products({
                     <ProductFilters categories={uniqueCategories} vendors={uniqueVendors} />
                   </Suspense>
                 </div>
-              </div>
+              </div> */}
 
               {/* Grid */}
               <div className="lg:col-span-4">

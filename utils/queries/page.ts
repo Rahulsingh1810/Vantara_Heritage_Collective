@@ -10,6 +10,8 @@ export default async function fetchProducts() {
             items {
               productId
               productTitle
+              featured
+              bestSellers
               productDescription
               slug
               productImagesCollection(limit: 1) {

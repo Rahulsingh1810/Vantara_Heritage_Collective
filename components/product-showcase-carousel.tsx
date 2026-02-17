@@ -51,7 +51,7 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
       <div className="relative grid min-h-[500px] grid-cols-1 items-center gap-8 p-8 pb-20 md:p-16 md:pb-24 lg:grid-cols-2">
         {/* Image */}
         <motion.div variants={itemVariants} className="relative h-96 overflow-hidden rounded-xl lg:h-full">
-          <Image src={currentProduct?.image_url} alt={currentProduct?.name} fill className="rounded-xl object-cover" />
+          <Image src={currentProduct?.image_url} alt={currentProduct?.name} fill className="rounded-xl object-fill" />
         </motion.div>
 
         {/* Content */}

@@ -14,21 +14,21 @@ const featuredProducts = [
     name: 'All Products',
     slug: '/products',
     description: 'Bespoke artefacts from traditional ateliers',
-    image_url: '/ES- Thumbnail.png'
+    image_url: '/All Products - Thumbnail.jpg'
   },
   {
     id: 'signature-pieces',
     name: 'Signature Pieces',
     slug: '/signature-pieces',
     description: 'Defining aesthetics with icons of lineage.',
-    image_url: '/SL - Thumbnail.png'
+    image_url: '/Signature Pieces - Thumbnail.jpg'
   },
   {
     id: 'best-sellers',
     name: 'Best Sellers',
     slug: '/best-sellers',
     description: 'Heirlooms with enduring admiration.',
-    image_url: '/VS - Thumbnail.png'
+    image_url: '/Bestsellers - Thumbnail.jpg'
   }
 ]
 
@@ -70,8 +70,8 @@ export default function Page() {
             </div>
 
             <img
-              src="/traditional-indian-crafts.jpg"
-              alt="Indian heritage craftsmanship"
+              src="/Crafting Our Story Image.png"
+              alt="Crafting Our Story Image"
               className="h-90 w-full rounded-3xl object-cover shadow-xl"
             />
           </div>
@@ -97,7 +97,7 @@ export default function Page() {
       <section className="bg-(--color-ivory) py-12 text-center">
         <div className="mx-auto max-w-3xl px-4">
           <h3 className="mb-4 text-2xl font-bold text-(--color-wine-red)">Know the Legacy</h3>
-          <p className="text-lg text-(--color-wine-red)/70">Explore curations to own a piece of the legacy</p>
+          <p className="text-lg text-(--color-wine-red)/70">Discover the intricate craftsmanship of master artisans</p>
         </div>
       </section>
 
