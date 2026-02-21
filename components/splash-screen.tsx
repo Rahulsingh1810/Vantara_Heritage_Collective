@@ -57,7 +57,7 @@ export default function SplashScreen() {
           transition={{ delay: 0.15 }}
           className="mb-3 max-w-xs text-2xl leading-tight font-bold text-[var(--color-ivory)] md:max-w-none md:text-4xl"
         >
-          Vandanya Heritage Collective
+          Vadanya Heritage Collective
         </motion.h1>
 
         {/* Tagline */}
