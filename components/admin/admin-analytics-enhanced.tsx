@@ -67,7 +67,7 @@ export default function AdminAnalyticsEnhanced() {
     // Group sales by date
     const dateMap = new Map()
     orderData.forEach(order => {
-      const date = new Date(order.created_at).toLocaleDateString()
+      const date = new Date(order.created_at).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })
       const current = dateMap.get(date) || { date, sales: 0, count: 0 }
       current.sales += Number.parseFloat(order.total_amount.toString())
       current.count += 1
@@ -195,7 +195,7 @@ export default function AdminAnalyticsEnhanced() {
               exportToCSV(
                 orders.map(o => ({
                   'Order ID': o.id,
-                  Date: new Date(o.created_at).toLocaleDateString(),
+                  Date: new Date(o.created_at).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' }),
                   Customer: o.customer_name,
                   Email: o.customer_email,
                   Phone: o.customer_phone,

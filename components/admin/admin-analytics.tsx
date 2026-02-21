@@ -49,7 +49,7 @@ export default function AdminAnalytics({ orderStats }: AnalyticsProps) {
   const processDateSales = (data: any[]) => {
     const dateMap = new Map()
     data.forEach(order => {
-      const date = new Date(order.created_at).toLocaleDateString()
+      const date = new Date(order.created_at).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })
       const current = dateMap.get(date) || { date, revenue: 0, orders: 0 }
       current.revenue += ensureNumber(order.total_amount)
       current.orders += 1

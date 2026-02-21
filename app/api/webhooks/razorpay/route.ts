@@ -103,8 +103,8 @@ export async function POST(req: Request) {
             .join(', ')
         } catch {}
 
-        // Send confirmation emails (fire-and-forget)
-        sendOrderConfirmationEmails({
+        // Send confirmation emails (awaited so serverless doesn't exit early)
+        await sendOrderConfirmationEmails({
           orderNumber: order.order_number,
           orderId: orderId,
           customerName: order.customer_name || p.email || 'Customer',

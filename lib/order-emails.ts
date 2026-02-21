@@ -80,7 +80,7 @@ function buildCustomerEmail(data: OrderEmailData): string {
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #9a5a60; font-size: 13px;">Date</td>
-          <td style="padding: 8px 0; color: #722F37; text-align: right; font-size: 14px;">${new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
+          <td style="padding: 8px 0; color: #722F37; text-align: right; font-size: 14px;">${new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Kolkata' })}</td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #9a5a60; font-size: 13px;">Total Items</td>
@@ -164,7 +164,7 @@ function buildOwnerEmail(data: OrderEmailData): string {
     <!-- Header -->
     <div style="background-color: #1a1a2e; padding: 24px 32px;">
       <h1 style="margin: 0; color: #ffffff; font-size: 20px;">🛒 New Order Received!</h1>
-      <p style="margin: 6px 0 0; color: #a0a0c0; font-size: 13px;">${new Date().toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}</p>
+      <p style="margin: 6px 0 0; color: #a0a0c0; font-size: 13px;">${new Date().toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short', timeZone: 'Asia/Kolkata' })}</p>
     </div>
 
     <!-- Quick Stats -->

@@ -113,7 +113,8 @@ export default function SuccessPage() {
                       {new Date(orderDetails.created_at).toLocaleDateString('en-IN', {
                         year: 'numeric',
                         month: 'long',
-                        day: 'numeric'
+                        day: 'numeric',
+                        timeZone: 'Asia/Kolkata'
                       })}
                     </span>
                   </div>
