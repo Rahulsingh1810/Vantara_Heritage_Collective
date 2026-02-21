@@ -155,7 +155,9 @@ export default function DashboardPage() {
                         className="border-b border-(--color-wine-red)/20 hover:bg-(--color-wine-red)/5"
                       >
                         <td className="px-4 py-4">#{order.order_number}</td>
-                        <td className="px-4 py-4">{new Date(order.created_at).toLocaleDateString()}</td>
+                        <td className="px-4 py-4">
+                          {new Date(order.created_at).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}
+                        </td>
                         <td className="px-4 py-4 font-medium">₹{ensureNumber(order.total_amount).toFixed(2)}</td>
                         <td className="px-4 py-4">
                           <span

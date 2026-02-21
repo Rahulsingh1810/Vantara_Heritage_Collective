@@ -2,6 +2,7 @@
 
 import type React from 'react'
 import { useState, useEffect, type FormEvent } from 'react'
+import { useRouter } from 'next/navigation'
 import { useCart } from '@/components/cart'
 import { useUser } from '@/lib/user-context'
 import LoginModal from '@/components/login-modal'
@@ -11,8 +12,10 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ensureNumber } from '@/lib/utils'
+import { CheckCircle, Loader2 } from 'lucide-react'
 
 export default function CheckoutPage() {
+  const router = useRouter()
   const { cart, total, clearCart } = useCart()
   const { user, isLoading: userLoading } = useUser()
 
@@ -109,15 +112,18 @@ export default function CheckoutPage() {
   const handlePaymentSuccess = (orderId: string) => {
     setOrderSuccess(true)
     clearCart()
-    setTimeout(() => {
-      window.location.href = `/success?orderId=${orderId}`
-    }, 1200)
+    router.push(`/success?orderId=${orderId}`)
   }
 
   if (orderSuccess) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-(--color-wine-red)">
-        ✓ Payment Successful — Redirecting...
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-(--color-ivory)">
+        <CheckCircle className="h-16 w-16 text-(--color-wine-red)" />
+        <h2 className="text-2xl font-bold text-(--color-wine-red)">Payment Successful!</h2>
+        <div className="flex items-center gap-2 text-(--color-wine-red)/70">
+          <Loader2 className="h-5 w-5 animate-spin" />
+          <span>Redirecting to your order...</span>
+        </div>
       </div>
     )
   }

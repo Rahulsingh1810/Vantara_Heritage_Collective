@@ -88,7 +88,9 @@ export default function AdminOrders() {
                       <option value="cancelled">Cancelled</option>
                     </select>
                   </td>
-                  <td className="px-6 py-4 text-sm">{new Date(order.created_at).toLocaleDateString()}</td>
+                  <td className="px-6 py-4 text-sm">
+                    {new Date(order.created_at).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}
+                  </td>
                   <td className="px-6 py-4">
                     <Button size="sm" variant="outline">
                       View Details
