@@ -13,8 +13,6 @@ export const metadata: Metadata = {
   description: 'Browse our collection of traditional artifacts and heritage pieces from artisans worldwide.'
 }
 
-export const dynamic = 'force-static'
-
 export default async function Products({
   searchParams
 }: {

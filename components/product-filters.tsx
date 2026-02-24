@@ -8,35 +8,19 @@ import { X } from 'lucide-react'
 export default function ProductFilters() {
   const router = useRouter()
   const searchParams = useSearchParams()
-
   const activeFilter = searchParams.get('filter')
 
   const handleFilterChange = (value: string | null) => {
     const params = new URLSearchParams(searchParams)
     params.delete('filter')
-
-    if (value) {
-      params.set('filter', value)
-    }
-
+    if (value) params.set('filter', value)
     router.push(`/products?${params.toString()}`)
   }
 
-  const clearFilters = () => {
-    router.push('/products')
-  }
-
-  const filterOptions = [
-    { id: 'all', label: 'All Products', value: null },
-    { id: 'channapatna', label: 'Hues of Channapatna', value: 'origin:Hues of Channapatna' },
-    { id: 'bidar', label: 'Regal Bidar', value: 'origin:Regal Bidar' },
-    { id: 'bestsellers', label: 'Bestsellers', value: 'bestsellers' },
-    { id: 'signature', label: 'Signature Pieces', value: 'featured' }
-  ] as const
+  const clearFilters = () => router.push('/products')
 
   return (
     <div className="space-y-6">
-      {/* Clear filters button - shown when filter is active */}
       {activeFilter && (
         <Button
           variant="outline"
@@ -48,28 +32,72 @@ export default function ProductFilters() {
         </Button>
       )}
 
-      {/* Filter card */}
       <Card className="border border-(--color-wine-red)/20 bg-(--color-ivory) shadow-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-lg text-(--color-wine-red)">Discover</CardTitle>
         </CardHeader>
 
-        <CardContent className="space-y-4">
-          {filterOptions.map(option => (
-            <label
-              key={option.id}
-              className="flex cursor-pointer items-center gap-3 text-sm text-(--color-wine-red) transition-colors hover:text-(--color-wine-red)/80"
-            >
-              <input
-                type="radio"
-                name="product-filter"
-                checked={activeFilter === option.value || (!activeFilter && option.value === null)}
-                onChange={() => handleFilterChange(option.value)}
-                className="h-4 w-4 accent-(--color-wine-red)"
-              />
-              <span>{option.label}</span>
-            </label>
-          ))}
+        <CardContent className="space-y-1">
+          {/* All Products */}
+          <label className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-2 text-sm font-medium text-(--color-wine-red) transition-colors hover:bg-(--color-wine-red)/5">
+            <input
+              type="radio"
+              name="product-filter"
+              checked={!activeFilter}
+              onChange={() => handleFilterChange(null)}
+              className="h-4 w-4 accent-(--color-wine-red)"
+            />
+            <span>All Products</span>
+          </label>
+
+          {/* Origins — visually grouped as sub-items under All Products */}
+          <div className="ml-4 space-y-1 border-l border-(--color-wine-red)/20 pl-3">
+            {[
+              { id: 'channapatna', label: 'Hues of Channapatna', value: 'origin:Hues of Channapatna' },
+              { id: 'bidar', label: 'Regal Bidar', value: 'origin:Regal Bidar' }
+            ].map(option => (
+              <label
+                key={option.id}
+                className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-1.5 text-sm text-(--color-wine-red)/80 transition-colors hover:bg-(--color-wine-red)/5 hover:text-(--color-wine-red)"
+              >
+                <input
+                  type="radio"
+                  name="product-filter"
+                  checked={activeFilter === option.value}
+                  onChange={() => handleFilterChange(option.value)}
+                  className="h-3.5 w-3.5 accent-(--color-wine-red)"
+                />
+                <span>{option.label}</span>
+              </label>
+            ))}
+          </div>
+
+          {/* Divider */}
+          <div className="my-2 border-t border-(--color-wine-red)/10" />
+
+          {/* Bestsellers */}
+          <label className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-2 text-sm font-medium text-(--color-wine-red) transition-colors hover:bg-(--color-wine-red)/5">
+            <input
+              type="radio"
+              name="product-filter"
+              checked={activeFilter === 'bestsellers'}
+              onChange={() => handleFilterChange('bestsellers')}
+              className="h-4 w-4 accent-(--color-wine-red)"
+            />
+            <span>Bestsellers</span>
+          </label>
+
+          {/* Signature Pieces */}
+          <label className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-2 text-sm font-medium text-(--color-wine-red) transition-colors hover:bg-(--color-wine-red)/5">
+            <input
+              type="radio"
+              name="product-filter"
+              checked={activeFilter === 'featured'}
+              onChange={() => handleFilterChange('featured')}
+              className="h-4 w-4 accent-(--color-wine-red)"
+            />
+            <span>Signature Pieces</span>
+          </label>
         </CardContent>
       </Card>
     </div>
