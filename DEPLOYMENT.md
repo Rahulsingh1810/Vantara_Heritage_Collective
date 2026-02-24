@@ -1,4 +1,4 @@
-# Vandanya Heritage Collective - Deployment Guide
+# Vadānya Heritage Collective - Deployment Guide
 
 ## Prerequisites
 

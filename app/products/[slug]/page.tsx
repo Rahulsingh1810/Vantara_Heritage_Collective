@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const product = await getProduct(slug)
 
   return {
-    title: product ? `${product.productTitle} - Vandanya Heritage Collective` : 'Product Not Found',
+    title: product ? `${product.productTitle} - Vadānya Heritage Collective` : 'Product Not Found',
     description: product?.productDescription?.substring(0, 160) || ''
   }
 }

@@ -24,8 +24,8 @@ export default function About() {
           <div className="space-y-24">
             {/* STORY */}
             <div className="space-y-10">
-              <div className="relative h-137.5 w-full overflow-hidden rounded-2xl shadow-xl">
-                <Image src="/Crafting Our Story Image.png" alt="Artisan at work" fill className="object-cover" />
+              <div className="relative h-180 w-full overflow-hidden rounded-2xl shadow-xl">
+                <Image src="/Crafting Our Story Image.png" alt="Artisan at work" fill className="object-fit" />
               </div>
 
               <p className="text-lg leading-relaxed text-(--color-wine-red)">
@@ -39,8 +39,8 @@ export default function About() {
                 for the art passed down through generations.
               </p>
 
-              <div className="relative h-137.5 w-full overflow-hidden rounded-2xl shadow-xl">
-                <Image src="/traditional-indian-crafts.jpg" alt="Artisan at work" fill className="object-cover" />
+              <div className="relative h-180 w-full overflow-hidden rounded-2xl shadow-xl">
+                <Image src="/Crafting Our Story Image 2.png" alt="Artisan at work" fill className="object-fit" />
               </div>
 
               <p className="text-lg leading-relaxed text-(--color-wine-red)">
@@ -82,28 +82,26 @@ export default function About() {
               </h2>
 
               <p className="text-lg leading-relaxed text-(--color-wine-red)">
-                At Vadānya, our relationship with the earth and its keepers is foundational. We are guided by material
-                integrity and time-honoured processes rather than speed or scale.
-                <br />
-                <br />
-                By maintaining deliberately limited collections, we consciously avoid excess — allowing each piece the
-                dignity it deserves while reducing pressure on artisans and natural resources.
+                At Vadānya, tradition translates to sustainability. Our products are all sourced with a conscientious
+                approach, encouraged by us and imbued by our artisans alike. From ensuring effective use of byproducts
+                to biodegradable packaging, we always strive to infuse sustainability in all our endeavours.
               </p>
 
               <div className="bg-muted/30 rounded-2xl border border-(--color-wine-red)/20 p-8">
                 <ul className="space-y-4 text-lg text-(--color-wine-red)/75">
-                  <li>✓ Guided by material integrity and traditional processes</li>
-                  <li>✓ Limited collections to avoid excess and overproduction</li>
-                  <li>✓ Respect for regional craft ecosystems</li>
-                  <li>✓ Conscious, evolving approach to sustainability</li>
-                  <li>✓ Integrity-led curation over volume-driven commerce</li>
+                  <li>
+                    ✓ Each artefact is crafted using natural materials, honouring time-tested, bountiful traditions
+                    rooted in the land.
+                  </li>
+                  <li>
+                    ✓ Production processes are carefully managed so that byproducts are reused, repurposed, or treated
+                    resourcefully wherever possible.
+                  </li>
+                  <li>
+                    ✓ All packaging is paper-based and fully recyclable, reducing plastic use and environmental impact.
+                  </li>
                 </ul>
               </div>
-
-              <p className="text-center text-lg text-(--color-wine-red)/80 italic">
-                We choose integrity-led curation over volume-driven commerce — because true heritage cannot be mass
-                produced.
-              </p>
             </div>
           </div>
         </div>

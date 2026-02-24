@@ -9,7 +9,7 @@ import FiltersSidebarToggle from '@/components/filter-sidebar-toggle'
 import fetchProducts from '@/utils/queries/page'
 
 export const metadata: Metadata = {
-  title: 'Products - Vandanya Heritage Collective',
+  title: 'Products - Vadānya Heritage Collective',
   description: 'Browse our collection of traditional artifacts and heritage pieces from artisans worldwide.'
 }
 

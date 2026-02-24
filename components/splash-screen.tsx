@@ -43,7 +43,7 @@ export default function SplashScreen() {
         {/* Logo */}
         <motion.img
           src="/Ivory.png"
-          alt="Vandanya Logo"
+          alt="Vadānya Logo"
           initial={{ scale: 0.85, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6 }}
@@ -57,7 +57,7 @@ export default function SplashScreen() {
           transition={{ delay: 0.15 }}
           className="mb-3 max-w-xs text-2xl leading-tight font-bold text-[var(--color-ivory)] md:max-w-none md:text-4xl"
         >
-          Vadanya Heritage Collective
+          Vadānya Heritage Collective
         </motion.h1>
 
         {/* Tagline */}

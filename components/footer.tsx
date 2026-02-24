@@ -11,7 +11,7 @@ export default function Footer() {
             <Link href="/" className="inline-block">
               <Image
                 src="/Ivory.png" // or /logo.svg
-                alt="Vandanya Heritage Collective Logo"
+                alt="Vadānya Heritage Collective Logo"
                 width={140}
                 height={60}
                 className="mb-4 object-contain"

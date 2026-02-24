@@ -68,7 +68,7 @@ export default function B2BPage() {
             transition={{ delay: 0.2 }}
             className="mb-10 text-xl opacity-90"
           >
-            Partner with Vandanya Heritage Collective for authentic traditional artifacts
+            Partner with Vadānya Heritage Collective for authentic traditional artifacts
           </motion.p>
 
           <Button size="lg" className="bg-(--color-ivory) text-(--color-wine-red) hover:bg-(--color-ivory)/90">
