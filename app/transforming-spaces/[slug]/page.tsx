@@ -24,7 +24,7 @@ export default async function RoomDetailPage({ params }: Props) {
         </a>
 
         {/* Main Image */}
-        <div className="relative mb-10 aspect-[16/9] w-full overflow-hidden rounded-3xl shadow-2xl">
+        <div className="relative mb-10 h-160 w-full overflow-hidden rounded-3xl shadow-2xl">
           <Image src={room.mainImg} alt={room.title} fill className="object-fill" priority />
         </div>
 
@@ -32,7 +32,7 @@ export default async function RoomDetailPage({ params }: Props) {
         <div className="mx-auto max-w-3xl">
           <h1 className="mb-6 text-4xl font-bold text-(--color-wine-red) md:text-5xl">{room.title}</h1>
 
-          <p className="mb-10 text-lg leading-relaxed text-(--color-wine-red)/80">{room.thumbnailText}</p>
+          {/* <p className="mb-10 text-lg leading-relaxed text-(--color-wine-red)/80">{room.thumbnailText}</p> */}
 
           <div className="my-10 h-px bg-(--color-wine-red)/20" />
 

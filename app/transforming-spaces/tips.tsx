@@ -6,58 +6,70 @@ import { ChevronDown } from 'lucide-react'
 
 const tips = [
   {
-    title: 'Balance Modern & Traditional',
-    body: 'Mix heritage artifacts with contemporary furniture to create a harmonious blend that feels both timeless and current.',
-    perfectFor: ['Living Rooms', 'Open Layout Homes'],
-    rooms: ['Living Area', 'Dining Space'],
+    title: 'Balance Modern and Traditional',
+    body: 'Create a dialogue between eras to make spaces feel grounded and current.',
+    perfectFor: ['Modern Living Spaces', 'Contemporary Homes'],
+    rooms: ['Living Room', 'Open Layouts'],
     checklist: [
-      'Pair clean-lined sofas with handcrafted accents',
-      'Use neutral furniture to highlight heritage colors',
-      'Limit statement pieces to 2–3 per room'
+      'Choose accent pieces in modern-day living spaces that stand out in the room',
+      'Pair vivid and bright artefacts with neutral furniture to bring contrast',
+      'Combine bright pieces with minimal decor or soft pieces with layered decor'
     ]
   },
   {
     title: 'Create Focal Points',
-    body: 'Use larger pieces like rugs, sculptures, or tapestries as focal points to anchor your room design.',
-    perfectFor: ['Entryways', 'Feature Walls'],
-    rooms: ['Hallway', 'Living Area'],
+    body: 'Draw attention to artefacts from around the space.',
+    perfectFor: ['Feature Walls', 'Statement Corners'],
+    rooms: ['Living Room', 'Entryways'],
     checklist: [
-      'Place focal items at eye level',
-      'Avoid competing statement pieces',
-      'Use lighting to highlight hero artifacts'
+      'Position statement pieces where they naturally command attention and anchor the room',
+      'Allow for visual space and avoid clutter',
+      'Use diffused spotlights to subtly highlight form and texture'
     ]
   },
   {
-    title: 'Respect Color Palettes',
-    body: 'Traditional artifacts often have rich, warm tones. Ensure they complement your existing color scheme.',
-    perfectFor: ['Warm Interiors', 'Earthy Homes'],
-    rooms: ['Bedroom', 'Living Room'],
+    title: 'Respect Colour Palettes',
+    body: 'Create harmony with different hues and splashes of colour.',
+    perfectFor: ['Warm Interiors', 'Curated Spaces'],
+    rooms: ['Bedrooms', 'Living Areas'],
     checklist: [
-      'Repeat artifact colors in cushions or throws',
-      'Avoid overly bright modern shades',
-      'Stick to 2–3 dominant tones'
+      'Identify the dominant undertone in the room before introducing heritage colours',
+      'Use artefacts to either complement or intentionally contrast the palette',
+      'Place artefacts against a colour block to add a dramatic touch'
     ]
   },
   {
     title: 'Tell a Story',
-    body: 'Each piece has history. Display artifacts in ways that highlight craftsmanship and cultural significance.',
-    perfectFor: ['Collectors', 'Art Lovers'],
-    rooms: ['Study', 'Gallery Walls'],
-    checklist: ['Group items by theme or origin', 'Add small description cards', 'Use shelves to narrate a journey']
+    body: 'Every piece is a talking point — let it be known.',
+    perfectFor: ['Collectors', 'Art Enthusiasts'],
+    rooms: ['Study Rooms', 'Gallery Walls'],
+    checklist: [
+      'Group artefacts that share a material, origin, or mood',
+      'Mix varying heights and proportions to create movement',
+      'Use different spaces intentionally to situate different pieces'
+    ]
   },
   {
     title: 'Layer Your Decor',
-    body: 'Combine different sizes and textures to add depth and visual interest to your space.',
-    perfectFor: ['Minimal Homes', 'Large Rooms'],
-    rooms: ['Living Area', 'Bedrooms'],
-    checklist: ['Mix heights and materials', 'Add soft textiles for warmth', 'Avoid flat, single-level layouts']
+    body: 'Build depth through thoughtful arrangement.',
+    perfectFor: ['Minimal Homes', 'Spacious Interiors'],
+    rooms: ['Living Areas', 'Bedrooms'],
+    checklist: [
+      'Combine statement pieces with softer accents to add dimension',
+      'Balance with clashing contrast for a bold look',
+      'Avoid overcrowding and adopt a more fluid approach'
+    ]
   },
   {
     title: 'Light It Well',
-    body: 'Good lighting enhances details and creates atmosphere around heritage pieces.',
-    perfectFor: ['Display Areas', 'Evening Spaces'],
+    body: 'Let each artefact shine and shimmer with pride.',
+    perfectFor: ['Display Areas', 'Evening Ambience'],
     rooms: ['Entryways', 'Corners'],
-    checklist: ['Use warm spotlights', 'Avoid harsh overhead lighting', 'Add lamps for mood layering']
+    checklist: [
+      'Use warm lighting to bring out natural tones and textures',
+      'Avoid harsh overhead lights that flatten detail',
+      'Allow shadows to add depth and sculptural character'
+    ]
   }
 ]
 
@@ -117,7 +129,7 @@ export function DesignTipsMasterDetail() {
                 <p className="mb-6 text-lg leading-relaxed text-(--color-wine-red)/75">{tips[active].body}</p>
 
                 {/* Perfect For */}
-                <div className="mb-6">
+                {/* <div className="mb-6">
                   <p className="mb-2 font-medium text-(--color-wine-red)">Perfect For</p>
                   <div className="flex flex-wrap gap-2">
                     {tips[active].perfectFor.map((tag, i) => (
@@ -129,13 +141,13 @@ export function DesignTipsMasterDetail() {
                       </span>
                     ))}
                   </div>
-                </div>
+                </div> */}
 
                 {/* Rooms */}
-                <div className="mb-8">
+                {/* <div className="mb-8">
                   <p className="mb-2 font-medium text-(--color-wine-red)">Suggested Rooms</p>
                   <p className="text-sm text-(--color-wine-red)/70">{tips[active].rooms.join(' • ')}</p>
-                </div>
+                </div> */}
 
                 <div className="my-8 h-px bg-(--color-wine-red)/15" />
 

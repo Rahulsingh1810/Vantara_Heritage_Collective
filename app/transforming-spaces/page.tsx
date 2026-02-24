@@ -22,7 +22,7 @@ export default function TransformingSpacesPage() {
         <div className="mx-auto max-w-7xl px-4">
           <h2 className="mb-12 text-center text-3xl font-bold text-(--color-wine-red)">Room Inspirations</h2>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2">
             {rooms.map(room => (
               <Link
                 key={room.slug}
@@ -40,9 +40,7 @@ export default function TransformingSpacesPage() {
 
                 <div className="p-6">
                   <h3 className="mb-3 text-xl font-bold text-(--color-wine-red)">{room.title}</h3>
-                  <p className="line-clamp-4 text-sm leading-relaxed text-(--color-wine-red)/75">
-                    {room.thumbnailText}
-                  </p>
+                  <p className="text-sm leading-relaxed text-(--color-wine-red)/75">{room.thumbnailText}</p>
                 </div>
               </Link>
             ))}
