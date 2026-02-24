@@ -36,7 +36,7 @@ export default function RegisterPage() {
         <Card className="border-(--color-wine-red)/30 bg-(--color-ivory) shadow-lg">
           <CardHeader className="pb-2 text-center">
             <CardTitle className="font-serif text-3xl text-(--color-wine-red)">Join the Collective</CardTitle>
-            <p className="mt-2 text-(--color-wine-red)/70">Create your Heritage Collective account</p>
+            <p className="mt-2 text-(--color-wine-red)/70">Create your Vadānya Heritage Collective account</p>
           </CardHeader>
 
           <CardContent className="space-y-8 pt-6">
