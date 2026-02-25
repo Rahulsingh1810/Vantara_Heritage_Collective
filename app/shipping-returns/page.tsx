@@ -1,3 +1,5 @@
+export const dynamic = 'force-static'
+
 export default function ShippingReturnsPage() {
   return (
     <section className="min-h-screen bg-(--color-ivory) py-24">

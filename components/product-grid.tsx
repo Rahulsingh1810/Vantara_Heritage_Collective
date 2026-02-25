@@ -1,5 +1,6 @@
 'use client'
 
+import { memo } from 'react'
 import { motion } from 'framer-motion'
 import ProductCardEnhanced from '@/components/product-card-enhanced'
 
@@ -12,9 +13,12 @@ export type GridProduct = {
   price: number
   category: string
   vendor: string
+  bestSellers?: boolean
+  featured?: boolean
+  productOrigin?: string
 }
 
-export default function ProductGrid({ products }: { products: GridProduct[] }) {
+function ProductGrid({ products }: { products: GridProduct[] }) {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 gap-8 md:grid-cols-2">
       {products.map((product, index) => (
@@ -30,3 +34,5 @@ export default function ProductGrid({ products }: { products: GridProduct[] }) {
     </motion.div>
   )
 }
+
+export default memo(ProductGrid)

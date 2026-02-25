@@ -1,23 +1,21 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
+import { memo } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { X } from 'lucide-react'
 
-export default function ProductFilters() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const activeFilter = searchParams.get('filter')
+type ProductFiltersProps = {
+  activeFilter: string | null
+  onFilterChange: (value: string | null) => void
+}
 
+function ProductFilters({ activeFilter, onFilterChange }: ProductFiltersProps) {
   const handleFilterChange = (value: string | null) => {
-    const params = new URLSearchParams(searchParams)
-    params.delete('filter')
-    if (value) params.set('filter', value)
-    router.push(`/products?${params.toString()}`)
+    onFilterChange(value)
   }
 
-  const clearFilters = () => router.push('/products')
+  const clearFilters = () => onFilterChange(null)
 
   return (
     <div className="space-y-6">
@@ -103,3 +101,5 @@ export default function ProductFilters() {
     </div>
   )
 }
+
+export default memo(ProductFilters)

@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import CurationMasterDetail from './master'
 import Image from 'next/image'
 
+export const dynamic = 'force-static'
+
 export const metadata: Metadata = {
   title: 'About Us - Vadānya Heritage Collective',
   description:

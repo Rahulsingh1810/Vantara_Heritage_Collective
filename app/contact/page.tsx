@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Mail, Phone, MapPin } from 'lucide-react'
 
+export const dynamic = 'force-static'
+
 export const metadata: Metadata = {
   title: 'Contact Us - Vadānya Heritage Collective',
   description: 'Get in touch with us for inquiries, support, or partnership opportunities.'

@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { rooms } from '@/lib/transforming-data' // adjust path
+import { rooms } from '@/lib/transforming-data'
+
+export const dynamic = 'force-static'
 
 interface Props {
   params: Promise<{ slug: string }>

@@ -65,7 +65,7 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
           {/* CTA */}
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link href={currentProduct?.slug || '#'}>
-              <Button size="lg" className="group w-full md:w-fit">
+              <Button size="lg" className="group w-full cursor-pointer md:w-fit">
                 Explore Collection
                 <motion.span
                   className="ml-2 inline-block"

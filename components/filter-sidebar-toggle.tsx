@@ -4,7 +4,12 @@ import { useState } from 'react'
 import ProductFilters from '@/components/product-filters'
 import { ChevronDown } from 'lucide-react'
 
-export default function FiltersSidebarToggle() {
+type FiltersSidebarToggleProps = {
+  activeFilter: string | null
+  onFilterChange: (value: string | null) => void
+}
+
+export default function FiltersSidebarToggle({ activeFilter, onFilterChange }: FiltersSidebarToggleProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -20,7 +25,7 @@ export default function FiltersSidebarToggle() {
 
       {/* Filters content - always visible on lg+, toggled on mobile */}
       <div className={`${open ? 'block' : 'hidden'} sticky top-24 lg:block`}>
-        <ProductFilters />
+        <ProductFilters activeFilter={activeFilter} onFilterChange={onFilterChange} />
       </div>
     </div>
   )
