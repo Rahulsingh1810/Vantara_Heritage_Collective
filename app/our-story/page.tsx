@@ -26,7 +26,7 @@ export default function About() {
           <div className="space-y-24">
             {/* STORY */}
             <div className="space-y-10">
-              <div className="relative h-180 w-full overflow-hidden rounded-2xl shadow-xl">
+              <div className="relative h-64 w-full overflow-hidden rounded-2xl shadow-xl sm:h-96 md:h-[30rem] lg:h-[45rem]">
                 <Image src="/Crafting Our Story Image.png" alt="Artisan at work" fill className="object-fit" />
               </div>
 
@@ -41,7 +41,7 @@ export default function About() {
                 for the art passed down through generations.
               </p>
 
-              <div className="relative h-180 w-full overflow-hidden rounded-2xl shadow-xl">
+              <div className="relative h-64 w-full overflow-hidden rounded-2xl shadow-xl sm:h-96 md:h-[30rem] lg:h-[45rem]">
                 <Image src="/Crafting Our Story Image 2.png" alt="Artisan at work" fill className="object-fit" />
               </div>
 
