@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { rooms } from '@/lib/transforming-data'
+import Link from 'next/link'
 
 export const dynamic = 'force-static'
 
@@ -21,9 +22,9 @@ export default async function RoomDetailPage({ params }: Props) {
     <main className="bg-background min-h-screen py-12 md:py-20">
       <div className="mx-auto max-w-5xl px-4">
         {/* Back link */}
-        <a href="/transforming-spaces" className="mb-8 inline-block text-(--color-wine-red) hover:underline">
+        <Link href="/transforming-spaces" className="mb-8 inline-block text-(--color-wine-red) hover:underline">
           ← Back to all inspirations
-        </a>
+        </Link>
 
         {/* Main Image */}
         <div className="relative mb-10 h-160 w-full overflow-hidden rounded-3xl shadow-2xl">
