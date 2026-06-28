@@ -71,14 +71,9 @@ export default function Page() {
 
             <div className="relative h-90 w-full overflow-hidden rounded-3xl shadow-xl">
               <img
-                src="/feat-products-hero/Landing Page/about page/Our Story Image on Landing Page - Mobile.jpg"
+                src="/Crafting Our Story Image.png"
                 alt="Crafting Our Story"
-                className="block h-full w-full object-cover md:hidden"
-              />
-              <img
-                src="/feat-products-hero/Landing Page/about page/Our Story Image on Landing Page - Website.jpg"
-                alt="Crafting Our Story"
-                className="hidden h-full w-full object-cover md:block"
+                className="h-full w-full object-cover"
               />
             </div>
           </div>

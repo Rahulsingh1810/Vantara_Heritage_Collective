@@ -50,24 +50,16 @@ export default function ProductShowcaseCarousel({ products }: { products: any[] 
 
       <div className="relative grid min-h-[500px] grid-cols-1 items-center gap-8 p-8 pb-20 md:p-16 md:pb-24 lg:grid-cols-2">
         {/* Image */}
-        <motion.div variants={itemVariants} className="relative h-96 overflow-hidden rounded-xl lg:h-full">
-          <div className="block h-full w-full md:hidden">
-            <Image
-              src={currentProduct?.image_mobile}
-              alt={currentProduct?.name}
-              fill
-              className="rounded-xl object-fill"
-            />
-          </div>
-          <div className="hidden h-full w-full md:block">
-            <Image
-              src={currentProduct?.image_desktop}
-              alt={currentProduct?.name}
-              fill
-              className="rounded-xl object-fill"
-            />
-          </div>
-        </motion.div>
+        <img
+          src={currentProduct?.image_mobile}
+          alt={currentProduct?.name}
+          className="block h-full w-full rounded-xl object-cover md:hidden"
+        />
+        <img
+          src={currentProduct?.image_desktop}
+          alt={currentProduct?.name}
+          className="hidden h-full w-full rounded-xl object-cover md:block"
+        />
 
         {/* Content */}
         <motion.div variants={itemVariants} className="space-y-6">
