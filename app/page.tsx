@@ -14,21 +14,24 @@ const featuredProducts = [
     name: 'All Products',
     slug: '/products',
     description: 'Bespoke artefacts from traditional ateliers',
-    image_url: '/All Products - Thumbnail.jpg'
+    image_mobile: '/feat-products-hero/Landing Page/All Products Thumbnail - Mobile.png',
+    image_desktop: '/feat-products-hero/Landing Page/All Products Thumbnail - Website.png'
   },
   {
     id: 'signature-pieces',
     name: 'Signature Pieces',
     slug: '/signature-pieces',
     description: 'Defining aesthetics with icons of lineage.',
-    image_url: '/Signature Pieces - Thumbnail.jpg'
+    image_mobile: '/feat-products-hero/Landing Page/Signature Pieces Thumbnail - Mobile.png',
+    image_desktop: '/feat-products-hero/Landing Page/Signature Pieces Thumbnail - Website.png'
   },
   {
     id: 'best-sellers',
     name: 'Best Sellers',
     slug: '/best-sellers',
     description: 'Heirlooms with enduring admiration.',
-    image_url: '/Bestsellers - Thumbnail.jpg'
+    image_mobile: '/feat-products-hero/Landing Page/Bestsellers Thumbnail - Mobile.png',
+    image_desktop: '/feat-products-hero/Landing Page/Bestsellers Thumbnail - Website.png'
   }
 ]
 
@@ -66,11 +69,18 @@ export default function Page() {
               </p>
             </div>
 
-            <img
-              src="/Crafting Our Story Image.png"
-              alt="Crafting Our Story Image"
-              className="h-90 w-full rounded-3xl object-cover shadow-xl"
-            />
+            <div className="relative h-90 w-full overflow-hidden rounded-3xl shadow-xl">
+              <img
+                src="/feat-products-hero/Landing Page/about page/Our Story Image on Landing Page - Mobile.jpg"
+                alt="Crafting Our Story"
+                className="block h-full w-full object-cover md:hidden"
+              />
+              <img
+                src="/feat-products-hero/Landing Page/about page/Our Story Image on Landing Page - Website.jpg"
+                alt="Crafting Our Story"
+                className="hidden h-full w-full object-cover md:block"
+              />
+            </div>
           </div>
         </div>
       </section>

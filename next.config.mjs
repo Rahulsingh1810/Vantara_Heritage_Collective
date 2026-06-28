@@ -4,8 +4,16 @@ const nextConfig = {
     ignoreBuildErrors: true
   },
   images: {
-    unoptimized: true
-  }
+    unoptimized: false,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+      },
+    ],
+  },
+  allowedDevOrigins: ['*'],
+
 }
 
 export default nextConfig

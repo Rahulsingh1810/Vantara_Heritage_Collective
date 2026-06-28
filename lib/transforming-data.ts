@@ -19,7 +19,7 @@ export const rooms: readonly RoomInspiration[] = [
     summerSoireeTitle: 'Summer Soirée',
     summerSoireeText:
       "Summer Soirée is an invitation to slow down and let the artefact take centre stage. Bathed in warm sunlight, these pieces are allowed to simply exist as they would in real life. They're placed in places with an outpour of sunlight, which enable casting shadows, and quietly shaping the mood of the space. This curation celebrates the ease of summer living. The environment is a perfect complement to colours that imply the season - yellows, reds, and oranges. In this bright and vibrant background, each artefact finds its groove, bedecked in the glistening aura of sunlight, with shadows adding just the right amount of drama.",
-    thumbnailImg: '/ES- Thumbnail.png',
+    thumbnailImg: 'transforming-spaces-thumbnails/ES- Thumbnail.png',
     mainImg: '/Summer Soiree - ES.png'
   },
   {
@@ -30,7 +30,7 @@ export const rooms: readonly RoomInspiration[] = [
     summerSoireeTitle: 'Summer Soirée',
     summerSoireeText:
       "Summer Soirée is an invitation to slow down and let the artefact take centre stage. Bathed in warm sunlight, these pieces are allowed to simply exist as they would in real life. They're placed in places with an outpour of sunlight, which enable casting shadows, and quietly shaping the mood of the space. This curation celebrates the ease of summer living. The environment is a perfect complement to colours that imply the season - yellows, reds, and oranges. In this bright and vibrant background, each artefact finds its groove, bedecked in the glistening aura of sunlight, with shadows adding just the right amount of drama.",
-    thumbnailImg: '/SL - Thumbnail.png',
+    thumbnailImg: '/transforming-spaces-thumbnails/SL - Thumbnail.png',
     mainImg: '/Summer Soiree - SL.png'
   },
   {
@@ -41,7 +41,7 @@ export const rooms: readonly RoomInspiration[] = [
     summerSoireeTitle: 'Summer Soirée',
     summerSoireeText:
       "Summer Soirée is an invitation to slow down and let the artefact take centre stage. Bathed in warm sunlight, these pieces are allowed to simply exist as they would in real life. They're placed in places with an outpour of sunlight, which enable casting shadows, and quietly shaping the mood of the space. This curation celebrates the ease of summer living. The environment is a perfect complement to colours that imply the season - yellows, reds, and oranges. In this bright and vibrant background, each artefact finds its groove, bedecked in the glistening aura of sunlight, with shadows adding just the right amount of drama.",
-    thumbnailImg: '/SW - Thumbnail.png',
+    thumbnailImg: '/transforming-spaces-thumbnails/SW - Thumbnail.png',
     mainImg: '/Summer Soiree - SW.png'
   },
   {
@@ -52,7 +52,7 @@ export const rooms: readonly RoomInspiration[] = [
     summerSoireeTitle: 'Summer Soirée',
     summerSoireeText:
       "Summer Soirée is an invitation to slow down and let the artefact take centre stage. Bathed in warm sunlight, these pieces are allowed to simply exist as they would in real life. They're placed in places with an outpour of sunlight, which enable casting shadows, and quietly shaping the mood of the space. This curation celebrates the ease of summer living. The environment is a perfect complement to colours that imply the season - yellows, reds, and oranges. In this bright and vibrant background, each artefact finds its groove, bedecked in the glistening aura of sunlight, with shadows adding just the right amount of drama.",
-    thumbnailImg: '/VS - Thumbnail.png',
+    thumbnailImg: '/transforming-spaces-thumbnails/VS - Thumbnail.png',
     mainImg: '/Summer Soiree - VS.png'
   }
 ] as const

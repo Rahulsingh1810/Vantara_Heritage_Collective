@@ -26,8 +26,23 @@ export default function About() {
           <div className="space-y-24">
             {/* STORY */}
             <div className="space-y-10">
-              <div className="relative h-64 w-full overflow-hidden rounded-2xl shadow-xl sm:h-96 md:h-[30rem] lg:h-[45rem]">
-                <Image src="/Crafting Our Story Image.png" alt="Artisan at work" fill className="object-fit" />
+              <div className="relative h-90 w-full overflow-hidden rounded-2xl shadow-xl sm:h-96 md:h-[30rem] lg:h-[45rem]">
+                <div className="block h-full w-full md:hidden">
+                  <Image
+                    src="/feat-products-hero/Landing Page/about page/Our Story Image on Landing Page - Mobile.jpg"
+                    alt="Artisan at work"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="hidden h-full w-full md:block">
+                  <Image
+                    src="/feat-products-hero/Landing Page/about page/Our Story Image on Landing Page - Website.jpg"
+                    alt="Artisan at work"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
 
               <p className="text-lg leading-relaxed text-(--color-wine-red)">
@@ -64,17 +79,39 @@ export default function About() {
             <CurationMasterDetail />
 
             {/* NOTE */}
-            <div className="rounded-3xl border border-(--color-wine-red)/20 bg-linear-to-br from-(--color-ivory) to-white p-10 shadow-lg">
-              <h2 className="mb-6 text-3xl font-bold text-(--color-wine-red)">A Note from the Collective</h2>
+            <div className="grid items-center gap-10 md:grid-cols-2">
+              <div className="relative h-full w-full overflow-hidden rounded-3xl shadow-xl sm:h-96 md:h-full md:min-h-[400px]">
+                <div className="block h-full w-full md:hidden">
+                  <Image
+                    src="/feat-products-hero/Landing Page/about page/Founder Image - Mobile.png"
+                    alt="Founder Note"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="hidden h-full w-full md:block">
+                  <Image
+                    src="/feat-products-hero/Landing Page/about page/Founder Image - Website.png"
+                    alt="Founder Note"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              <div className="flex h-full flex-col justify-center rounded-3xl border border-(--color-wine-red)/20 bg-linear-to-br from-(--color-ivory) to-white p-10 shadow-lg">
+                <h2 className="mb-6 text-3xl font-bold text-(--color-wine-red)">A Note from the Collective</h2>
 
-              <p className="mb-6 text-lg leading-relaxed text-(--color-wine-red) italic">
-                Vadānya was born from the conviction that long-standing handcrafted artefacts were more than relics of
-                the past. Their stories deserved to be etched in the present and find echoes in spaces filled with
-                warmth and love. In welcoming these artefacts into your space, you’re essentially gathering a piece of
-                history cherished and perfected over centuries.
-              </p>
+                <p className="mb-6 text-lg leading-relaxed text-(--color-wine-red) italic">
+                  Vadānya was born from the conviction that long-standing handcrafted artefacts were more than relics of
+                  the past. Their stories deserved to be etched in the present and find echoes in spaces filled with
+                  warmth and love. In welcoming these artefacts into your space, you’re essentially gathering a piece of
+                  history cherished and perfected over centuries.
+                </p>
 
-              <p className="text-right font-semibold text-(--color-wine-red)">— Vadānya Heritage Collective</p>
+                <p className="mt-auto text-right font-semibold text-(--color-wine-red)">
+                  — Vadānya Heritage Collective
+                </p>
+              </div>
             </div>
 
             {/* ENVIRONMENT */}
