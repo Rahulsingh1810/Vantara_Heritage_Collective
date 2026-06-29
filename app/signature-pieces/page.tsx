@@ -19,16 +19,28 @@ export default async function SignaturePieces() {
     console.error('Failed to fetch signature products:', e)
   }
 
-  const productsForGrid = products.map((p: any) => ({
-    id: `${p.productId}-${p.slug}`,
-    slug: p.slug,
-    title: p.productTitle,
-    description: p.productDescription,
-    image: p.productImagesCollection?.items?.[0]?.url ?? '/traditional-indian-artifact.jpg',
-    price: Number(p.productPrice) || 0,
-    category: p.productCategory,
-    vendor: p.vendor?.vendorName
-  }))
+  const seenIds = new Set<string>()
+  const productsForGrid: any[] = []
+
+  for (const p of products) {
+    if (!p.slug) continue
+    const productIdStr = p.productId !== null && p.productId !== undefined ? p.productId : ''
+    const generatedId = productIdStr ? `${productIdStr}-${p.slug}` : `temp-${p.slug}`
+
+    if (!seenIds.has(generatedId)) {
+      seenIds.add(generatedId)
+      productsForGrid.push({
+        id: generatedId,
+        slug: p.slug,
+        title: p.productTitle,
+        description: p.productDescription,
+        image: p.productImagesCollection?.items?.[0]?.url ?? '/traditional-indian-artifact.jpg',
+        price: Number(p.productPrice) || 0,
+        category: p.productCategory,
+        vendor: p.vendor?.vendorName
+      })
+    }
+  }
 
   return (
     <main>

@@ -19,19 +19,31 @@ export default async function Products() {
     rawProducts = []
   }
 
-  const allProducts: GridProduct[] = rawProducts.map((p: any) => ({
-    id: `${p.productId}-${p.slug}`,
-    slug: p.slug,
-    title: p.productTitle,
-    description: p.productDescription,
-    image: p.productImagesCollection?.items?.[0]?.url ?? '/traditional-indian-artifact.jpg',
-    price: Number(p.productPrice) || 0,
-    category: p.productCategory,
-    vendor: p.vendor?.vendorName,
-    bestSellers: p.bestSellers ?? false,
-    featured: p.featured ?? false,
-    productOrigin: p.productOrigin ?? ''
-  }))
+  const seenIds = new Set<string>()
+  const allProducts: GridProduct[] = []
+
+  for (const p of rawProducts) {
+    if (!p.slug) continue
+    const productIdStr = p.productId !== null && p.productId !== undefined ? p.productId : ''
+    const generatedId = productIdStr ? `${productIdStr}-${p.slug}` : `temp-${p.slug}`
+
+    if (!seenIds.has(generatedId)) {
+      seenIds.add(generatedId)
+      allProducts.push({
+        id: generatedId,
+        slug: p.slug,
+        title: p.productTitle,
+        description: p.productDescription,
+        image: p.productImagesCollection?.items?.[0]?.url ?? '/traditional-indian-artifact.jpg',
+        price: Number(p.productPrice) || 0,
+        category: p.productCategory,
+        vendor: p.vendor?.vendorName,
+        bestSellers: p.bestSellers ?? false,
+        featured: p.featured ?? false,
+        productOrigin: p.productOrigin ?? ''
+      })
+    }
+  }
 
   return (
     <main>

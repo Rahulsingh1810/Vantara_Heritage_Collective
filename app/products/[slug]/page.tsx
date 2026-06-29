@@ -28,7 +28,15 @@ export const dynamic = 'force-static'
 export async function generateStaticParams() {
   const products = await fetchProducts()
 
-  return products.map(product => ({
+  const seenSlugs = new Set<string>()
+  const uniqueProducts = products.filter(product => {
+    if (!product.slug) return false
+    if (seenSlugs.has(product.slug)) return false
+    seenSlugs.add(product.slug)
+    return true
+  })
+
+  return uniqueProducts.map(product => ({
     slug: product.slug
   }))
 }
