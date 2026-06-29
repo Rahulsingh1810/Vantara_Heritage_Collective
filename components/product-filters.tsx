@@ -1,6 +1,6 @@
 'use client'
 
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { X } from 'lucide-react'
@@ -8,14 +8,23 @@ import { X } from 'lucide-react'
 type ProductFiltersProps = {
   activeFilter: string | null
   onFilterChange: (value: string | null) => void
+  origins?: string[]
 }
 
-function ProductFilters({ activeFilter, onFilterChange }: ProductFiltersProps) {
+function ProductFilters({ activeFilter, onFilterChange, origins = [] }: ProductFiltersProps) {
   const handleFilterChange = (value: string | null) => {
     onFilterChange(value)
   }
 
   const clearFilters = () => onFilterChange(null)
+
+  const originOptions = useMemo(() => {
+    return origins.map(origin => ({
+      id: origin.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      label: origin,
+      value: `origin:${origin}`
+    }))
+  }, [origins])
 
   return (
     <div className="space-y-6">
@@ -49,26 +58,25 @@ function ProductFilters({ activeFilter, onFilterChange }: ProductFiltersProps) {
           </label>
 
           {/* Origins — visually grouped as sub-items under All Products */}
-          <div className="ml-4 space-y-1 border-l border-(--color-wine-red)/20 pl-3">
-            {[
-              { id: 'channapatna', label: 'Hues of Channapatna', value: 'origin:Hues of Channapatna' },
-              { id: 'bidar', label: 'Regal Bidar', value: 'origin:Regal Bidar' }
-            ].map(option => (
-              <label
-                key={option.id}
-                className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-1.5 text-sm text-(--color-wine-red)/80 transition-colors hover:bg-(--color-wine-red)/5 hover:text-(--color-wine-red)"
-              >
-                <input
-                  type="radio"
-                  name="product-filter"
-                  checked={activeFilter === option.value}
-                  onChange={() => handleFilterChange(option.value)}
-                  className="h-3.5 w-3.5 accent-(--color-wine-red)"
-                />
-                <span>{option.label}</span>
-              </label>
-            ))}
-          </div>
+          {originOptions.length > 0 && (
+            <div className="ml-4 space-y-1 border-l border-(--color-wine-red)/20 pl-3">
+              {originOptions.map(option => (
+                <label
+                  key={option.id}
+                  className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-1.5 text-sm text-(--color-wine-red)/80 transition-colors hover:bg-(--color-wine-red)/5 hover:text-(--color-wine-red)"
+                >
+                  <input
+                    type="radio"
+                    name="product-filter"
+                    checked={activeFilter === option.value}
+                    onChange={() => handleFilterChange(option.value)}
+                    className="h-3.5 w-3.5 accent-(--color-wine-red)"
+                  />
+                  <span>{option.label}</span>
+                </label>
+              ))}
+            </div>
+          )}
 
           {/* Divider */}
           <div className="my-2 border-t border-(--color-wine-red)/10" />

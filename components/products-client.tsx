@@ -15,6 +15,16 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
     setActiveFilter(value)
   }, [])
 
+  const origins = useMemo(() => {
+    const uniqueOrigins = new Set<string>()
+    for (const p of allProducts) {
+      if (p.productOrigin) {
+        uniqueOrigins.add(p.productOrigin)
+      }
+    }
+    return Array.from(uniqueOrigins).sort()
+  }, [allProducts])
+
   const filteredProducts = useMemo(() => {
     if (!activeFilter) return allProducts
 
@@ -38,7 +48,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-5">
       {/* Filters Column */}
       <div className="lg:col-span-1">
-        <FiltersSidebarToggle activeFilter={activeFilter} onFilterChange={handleFilterChange} />
+        <FiltersSidebarToggle activeFilter={activeFilter} onFilterChange={handleFilterChange} origins={origins} />
       </div>
 
       {/* Product Grid */}

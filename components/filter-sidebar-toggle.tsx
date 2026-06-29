@@ -7,9 +7,14 @@ import { ChevronDown } from 'lucide-react'
 type FiltersSidebarToggleProps = {
   activeFilter: string | null
   onFilterChange: (value: string | null) => void
+  origins?: string[]
 }
 
-export default function FiltersSidebarToggle({ activeFilter, onFilterChange }: FiltersSidebarToggleProps) {
+export default function FiltersSidebarToggle({
+  activeFilter,
+  onFilterChange,
+  origins = []
+}: FiltersSidebarToggleProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -25,7 +30,7 @@ export default function FiltersSidebarToggle({ activeFilter, onFilterChange }: F
 
       {/* Filters content - always visible on lg+, toggled on mobile */}
       <div className={`${open ? 'block' : 'hidden'} sticky top-24 lg:block`}>
-        <ProductFilters activeFilter={activeFilter} onFilterChange={onFilterChange} />
+        <ProductFilters activeFilter={activeFilter} onFilterChange={onFilterChange} origins={origins} />
       </div>
     </div>
   )

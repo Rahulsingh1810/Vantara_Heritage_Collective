@@ -15,7 +15,7 @@ export default function ProductImageGallery({ product }: ProductImageGalleryProp
 
   if (images.length === 0) {
     return (
-      <div className="bg-muted text-muted-foreground flex aspect-square items-center justify-center rounded-xl">
+      <div className="bg-muted text-muted-foreground flex aspect-[3/4] items-center justify-center rounded-xl">
         No images available
       </div>
     )
@@ -32,13 +32,13 @@ export default function ProductImageGallery({ product }: ProductImageGalleryProp
   return (
     <div className="space-y-4">
       {/* Main Image */}
-      <div className="bg-muted relative aspect-square w-full overflow-hidden rounded-xl">
+      <div className="bg-muted relative aspect-[3/4] w-full overflow-hidden rounded-xl">
         <Image
           src={images[currentIndex]}
           alt={`${product.productTitle} image ${currentIndex + 1}`}
           fill
           priority
-          className="h-28 object-cover transition-transform duration-500 hover:scale-105"
+          className="object-cover transition-transform duration-500 hover:scale-105"
         />
 
         {/* Navigation Arrows */}
@@ -75,7 +75,7 @@ export default function ProductImageGallery({ product }: ProductImageGalleryProp
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`relative h-20 min-w-[80px] overflow-hidden rounded-lg border-2 transition ${
+              className={`relative aspect-[3/4] h-20 overflow-hidden rounded-lg border-2 transition ${
                 currentIndex === index
                   ? 'border-primary ring-primary/40 ring-2'
                   : 'border-muted hover:border-primary/50'
