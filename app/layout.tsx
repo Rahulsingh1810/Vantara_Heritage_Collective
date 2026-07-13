@@ -14,9 +14,23 @@ const _geist = Geist({ subsets: ['latin'] })
 const _geistMono = Geist_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://vadanyaheritage.in'),
   title: 'Vadānya Heritage Collective - Traditional Artifacts & Cultural Treasures',
   description: 'Discover authentic traditional artifacts and cultural treasures from skilled artisans worldwide',
   generator: 'quantech.pro',
+  verification: {
+    google: '1lAOqMSQLNwm7PNGAxJoAfSOxNpHRe7qh1D8mn-n4Dw'
+  },
+  openGraph: {
+    images: [
+      {
+        url: '/og-image.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'Vadānya Heritage Collective Logo'
+      }
+    ]
+  },
   icons: {
     icon: [
       {

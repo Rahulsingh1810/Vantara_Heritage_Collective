@@ -142,7 +142,7 @@ function buildCustomerEmail(data: OrderEmailData): string {
 
     <!-- Footer -->
     <div style="background-color: #722F37; padding: 28px 32px; text-align: center;">
-      <p style="margin: 0; color: #faf7f2; font-size: 13px; opacity: 0.85;">Need help? Reply to this email or contact us</p>
+      <p style="margin: 0; color: #faf7f2; font-size: 13px; opacity: 0.85;">Need help? Reply to this email or contact us at <a href="mailto:info@vadanyaheritage.in" style="color: #faf7f2; text-decoration: underline;">info@vadanyaheritage.in</a></p>
       <p style="margin: 8px 0 0; color: #faf7f2; font-size: 11px; opacity: 0.6;">© ${new Date().getFullYear()} Vadānya Heritage Collective</p>
     </div>
   </div>

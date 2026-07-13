@@ -67,7 +67,7 @@ export default function Footer() {
               Address: No. 33, 2nd Cross, SBM Colony, Brindavan Nagar, Mathikere, Bengaluru – 560054
             </p>
             <p className="mt-2 text-sm opacity-90">Phone: +91 7259311212</p>
-            <p className="mt-2 text-sm opacity-90">Email: To be created</p>
+            <p className="mt-2 text-sm opacity-90">Email: info@vadanyaheritage.in</p>
           </div>
         </div>
 

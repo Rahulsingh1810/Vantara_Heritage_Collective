@@ -32,7 +32,7 @@ export default function Contact() {
               {
                 icon: Mail,
                 title: 'Email',
-                main: 'To be created',
+                main: 'info@vadanyaheritage.in',
                 sub: 'We respond within 24 hours'
               },
               {
