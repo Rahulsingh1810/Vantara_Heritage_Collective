@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/logo.png',
-        type: 'image/png'
+        url: '/favicon.ico',
+        sizes: '32x32'
       },
       {
         url: '/icon-light-32x32.png',
