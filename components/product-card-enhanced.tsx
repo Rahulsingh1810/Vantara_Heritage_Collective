@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { ShoppingCart } from 'lucide-react'
 import { ensureNumber } from '@/lib/utils'
 import { motion } from 'framer-motion'
+import RichTextRenderer from '@/components/rich-text-renderer'
 
 type ProductCardProps = {
   product: {
@@ -48,7 +49,9 @@ export default function ProductCardEnhanced({ product }: ProductCardProps) {
             </h3>
           </Link>
 
-          <p className="mb-4 line-clamp-2 flex-1 text-sm text-(--color-wine-red)/70">{product.description}</p>
+          <div className="mb-4 line-clamp-2 flex-1 text-sm">
+            <RichTextRenderer document={product.description} />
+          </div>
 
           {/* Pills */}
           {/* <div className="mb-5 flex flex-wrap gap-2">

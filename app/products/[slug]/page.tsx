@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 import AddToCartButton from '@/components/add-to-cart-button'
 import ProductImageGallery from '@/components/product-image-gallery'
 import ProductDetailsSection from '@/components/product-details-section'
+import RichTextRenderer from '@/components/rich-text-renderer'
 import fetchProductBySlug from '@/utils/queries/slugpage'
 import { Product } from '@/type/page'
 import fetchProducts from '@/utils/queries/page'
@@ -77,7 +78,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
                   {data.productTitle}
                 </h1>
 
-                <p className="text-lg leading-relaxed text-(--color-wine-red)/70">{data.productDescription}</p>
+                <RichTextRenderer document={data.productDescription} className="text-lg leading-relaxed" />
               </div>
 
               {/* Price box */}
