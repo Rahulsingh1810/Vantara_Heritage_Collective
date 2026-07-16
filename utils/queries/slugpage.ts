@@ -36,7 +36,6 @@ export default async function fetchProductBySlug(slug: string) {
               productStock
               productWeight
               productDimensions
-              productCulturalSignificance
               productCare
               careAndLongevity
           knowYourLegacy

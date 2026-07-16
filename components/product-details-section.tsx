@@ -12,7 +12,6 @@ interface ProductDetailsSectionProps {
   origin?: string
   stylingNotes?: string
   inYourSpace?: string
-  productCulturalSignificance?: string
   careAndLongevity?: string
   knowYourLegacy?: string
 }
@@ -23,7 +22,6 @@ export default function ProductDetailsSection({
   dimensions = 'Varies by piece (please refer to images)',
   stylingNotes,
   inYourSpace,
-  productCulturalSignificance,
   careAndLongevity,
   knowYourLegacy
 }: ProductDetailsSectionProps) {
@@ -136,16 +134,15 @@ export default function ProductDetailsSection({
         })}
       </div>
 
-      {productCulturalSignificance && (
-        <div className="mt-14 rounded-2xl border border-(--color-wine-red)/20 bg-(--color-ivory) p-6 shadow-sm">
-          <p className="font-bold text-(--color-wine-red)">⚠️ Disclaimer</p>
-          <p className="mt-2 text-sm leading-relaxed text-(--color-wine-red)/70">{productCulturalSignificance}</p>
-        </div>
-      )}
+      <div className="mt-14 rounded-2xl border border-(--color-wine-red)/20 bg-(--color-ivory) p-6 shadow-sm">
+        <p className="font-bold text-(--color-wine-red)">⚠️ Disclaimer</p>
+        <p className="mt-2 text-sm leading-relaxed text-(--color-wine-red)/70">
+          Each product is carefully manufactured and hand-painted. As a result, natural variations in colour,
+          craftsmanship, and finish may occur. Images are representative and intended as a guide.
+        </p>
+      </div>
 
-      <div
-        className={`${productCulturalSignificance ? 'mt-6' : 'mt-14'} rounded-2xl border border-(--color-wine-red)/20 bg-(--color-ivory) p-6 shadow-sm`}
-      >
+      <div className="mt-6 rounded-2xl border border-(--color-wine-red)/20 bg-(--color-ivory) p-6 shadow-sm">
         <p className="font-bold text-(--color-wine-red)">🇮🇳 Authentic Indian Heritage</p>
         <p className="mt-2 text-sm text-(--color-wine-red)/70">
           Each piece is thoughtfully sourced to honor and sustain traditional craftsmanship across India.

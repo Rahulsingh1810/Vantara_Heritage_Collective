@@ -112,7 +112,6 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
               origin={data.productOrigin}
               stylingNotes={data.placementsAndStylingNotes}
               inYourSpace={data.inYourSpace}
-              productCulturalSignificance={data.productCulturalSignificance}
               careAndLongevity={data.careAndLongevity}
               knowYourLegacy={data.knowYourLegacy}
             />

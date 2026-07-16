@@ -71,9 +71,12 @@ export default function Page() {
 
             <div className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-3xl shadow-xl md:aspect-[3/2] md:max-w-none">
               <picture>
-                <source media="(min-width: 768px)" srcSet="/Our Story Image on Landing Page - Website.jpg" />
+                <source
+                  media="(min-width: 768px)"
+                  srcSet="/Our%20Story%20Image%20on%20Landing%20Page%20-%20Website.jpg"
+                />
                 <img
-                  src="/Our Story Image on Landing Page - Mobile.jpg"
+                  src="/Our%20Story%20Image%20on%20Landing%20Page%20-%20Mobile.jpg"
                   alt="Crafting Our Story"
                   className="h-full w-full object-cover"
                 />
