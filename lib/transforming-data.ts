@@ -4,10 +4,16 @@ export interface RoomInspiration {
   slug: string
   title: string
   thumbnailText: string
+
   summerSoireeTitle: string
   summerSoireeText: string
+  summerSoireeImg?: string
+
+  beguilingBlueTitle?: string
+  beguilingBlueText?: string
+  beguilingBlueImg?: string
+
   thumbnailImg: string
-  mainImg: string
 }
 
 export const rooms: readonly RoomInspiration[] = [
@@ -16,43 +22,69 @@ export const rooms: readonly RoomInspiration[] = [
     title: 'Elegant Surfaces',
     thumbnailText:
       "Elegant Surfaces explores how heritage handicrafts flow across a plethora of planes. It's a journey of how each artefact lends itself into various colours and textures to be seamlessly woven into the modern living fabric. Here, we look into the textural look and feel that highlight and accentuate these pieces, positioning every one of them as part of the natural fluidity of the surface. From smooth finishes to natural mineral grains, every surface can contain a magnitude of aesthetic value when paired with the right product.",
+
     summerSoireeTitle: 'Summer Soirée',
     summerSoireeText:
       "Summer Soirée is an invitation to slow down and let the artefact take centre stage. Bathed in warm sunlight, these pieces are allowed to simply exist as they would in real life. They're placed in places with an outpour of sunlight, which enable casting shadows, and quietly shaping the mood of the space. This curation celebrates the ease of summer living. The environment is a perfect complement to colours that imply the season - yellows, reds, and oranges. In this bright and vibrant background, each artefact finds its groove, bedecked in the glistening aura of sunlight, with shadows adding just the right amount of drama.",
-    thumbnailImg: '/transforming-spaces-thumbnails/ES - Thumbnail.png',
-    mainImg: '/Summer Soiree - ES.png'
+    summerSoireeImg: '/Summer Soiree - ES.png',
+
+    beguilingBlueTitle: 'Beguiling Blue',
+    beguilingBlueText:
+      "Beguiling Blue is an invitation to let stillness speak. These artefacts are placed where blue dreamily holds court- in rooms where teal curtains filter the light, where slate walls carry a quiet depth, and where the glow of the evening turns every surface contemplative. This curation celebrates the art of demure solace. The environment is a natural counterpart to Bidriware's defining character, where the blackened zinc alloy and silver inlay of each piece finds its fullest expression against a palette of deep blues and cool tonalities. In this composed and considered setting, each artefact asserts its presence with an understated confidence, the silver catching light in the way only hand-carved inlay can.",
+    beguilingBlueImg: '/Beguiling Blue - ES.png',
+
+    thumbnailImg: '/transforming-spaces-thumbnails/ES - Thumbnail.png'
   },
+
   {
     slug: 'soulful-landscapes',
     title: 'Soulful Landscapes',
     thumbnailText:
       "Soulful Landscapes looks to situate artefacts within lived environments. It's a descriptive narration, kind of like painting a picture of a larger environmental context. Think of it as creating a set or a mise-en-scene of resplendent aesthetic. Here, each piece is part of the story, providing grounded appeals or fluid transitions in wide, open spaces. These artefacts are intended to lend character to their surroundings while exuding the essence of the space itself. Their interactions within the space, both bold and subtle, craft the perfect landscape outlook in modern living decor.",
+
     summerSoireeTitle: 'Summer Soirée',
     summerSoireeText:
       "Summer Soirée is an invitation to slow down and let the artefact take centre stage. Bathed in warm sunlight, these pieces are allowed to simply exist as they would in real life. They're placed in places with an outpour of sunlight, which enable casting shadows, and quietly shaping the mood of the space. This curation celebrates the ease of summer living. The environment is a perfect complement to colours that imply the season - yellows, reds, and oranges. In this bright and vibrant background, each artefact finds its groove, bedecked in the glistening aura of sunlight, with shadows adding just the right amount of drama.",
-    thumbnailImg: '/transforming-spaces-thumbnails/SL - Thumbnail.png',
-    mainImg: '/Summer Soiree - SL.png'
+    summerSoireeImg: '/Summer Soiree - SL.png',
+
+    beguilingBlueTitle: 'Beguiling Blue',
+    beguilingBlueText:
+      "Beguiling Blue is an invitation to let stillness speak. These artefacts are placed where blue dreamily holds court- in rooms where teal curtains filter the light, where slate walls carry a quiet depth, and where the glow of the evening turns every surface contemplative. This curation celebrates the art of demure solace. The environment is a natural counterpart to Bidriware's defining character, where the blackened zinc alloy and silver inlay of each piece finds its fullest expression against a palette of deep blues and cool tonalities. In this composed and considered setting, each artefact asserts its presence with an understated confidence, the silver catching light in the way only hand-carved inlay can.",
+    beguilingBlueImg: '/Beguiling Blue - SL.png',
+
+    thumbnailImg: '/transforming-spaces-thumbnails/SL - Thumbnail.png'
   },
+
   {
     slug: 'statement-walls',
     title: 'Statement Walls',
     thumbnailText:
       'Statement Walls is about accentuating walls to derive the most soothing and pleasing aesthetic possible. This curation explores how a single piece, or even a thoughtful pairing can transform a wall into a moment of expression. Colours, scale, and textures are thoughtfully highlighted here to create impact that flows well with the rhythm of each room. The artefacts are allowed to calmly assert their presence amidst solid blocks of negative space, making each segment feel grounded and intentional in the larger spatial setup and narrative.',
+
     summerSoireeTitle: 'Summer Soirée',
     summerSoireeText:
       "Summer Soirée is an invitation to slow down and let the artefact take centre stage. Bathed in warm sunlight, these pieces are allowed to simply exist as they would in real life. They're placed in places with an outpour of sunlight, which enable casting shadows, and quietly shaping the mood of the space. This curation celebrates the ease of summer living. The environment is a perfect complement to colours that imply the season - yellows, reds, and oranges. In this bright and vibrant background, each artefact finds its groove, bedecked in the glistening aura of sunlight, with shadows adding just the right amount of drama.",
-    thumbnailImg: '/transforming-spaces-thumbnails/SW - Thumbnail.png',
-    mainImg: '/Summer Soiree - SW.png'
+    summerSoireeImg: '/Summer Soiree - SW.png',
+
+    thumbnailImg: '/transforming-spaces-thumbnails/SW - Thumbnail.png'
   },
+
   {
     slug: 'vignette-shelves',
     title: 'Vignette Shelves',
     thumbnailText:
       'Vignette Shelves looks at how artefacts occupy smaller, intentional moments in a space. They are more like compositions of slow, quiet pauses- intended to add a delicate, feathery touch to shelved interiors. Here, shelves become little stages that allow the piece to stand, breathe, and simply be noticed. The curation focuses on respecting the form and placement of the artefact, and through it, add value to the functional balance of each shelf. Each fixture feels considered and instinctive, creating visual anchors that gently punctuate the rhythm of everyday living.',
+
     summerSoireeTitle: 'Summer Soirée',
     summerSoireeText:
       "Summer Soirée is an invitation to slow down and let the artefact take centre stage. Bathed in warm sunlight, these pieces are allowed to simply exist as they would in real life. They're placed in places with an outpour of sunlight, which enable casting shadows, and quietly shaping the mood of the space. This curation celebrates the ease of summer living. The environment is a perfect complement to colours that imply the season - yellows, reds, and oranges. In this bright and vibrant background, each artefact finds its groove, bedecked in the glistening aura of sunlight, with shadows adding just the right amount of drama.",
-    thumbnailImg: '/transforming-spaces-thumbnails/VS - Thumbnail.png',
-    mainImg: '/Summer Soiree - VS.png'
+    summerSoireeImg: '/Summer Soiree - VS.png',
+
+    beguilingBlueTitle: 'Beguiling Blue',
+    beguilingBlueText:
+      "Beguiling Blue is an invitation to let stillness speak. These artefacts are placed where blue dreamily holds court- in rooms where teal curtains filter the light, where slate walls carry a quiet depth, and where the glow of the evening turns every surface contemplative. This curation celebrates the art of demure solace. The environment is a natural counterpart to Bidriware's defining character, where the blackened zinc alloy and silver inlay of each piece finds its fullest expression against a palette of deep blues and cool tonalities. In this composed and considered setting, each artefact asserts its presence with an understated confidence, the silver catching light in the way only hand-carved inlay can.",
+    beguilingBlueImg: '/Beguiling Blue - VS.png',
+
+    thumbnailImg: '/transforming-spaces-thumbnails/VS - Thumbnail.png'
   }
 ] as const
