@@ -13,7 +13,6 @@ interface ProductDetailsSectionProps {
   stylingNotes?: string
   inYourSpace?: string
   careAndLongevity?: string
-  knowYourLegacy?: string
 }
 
 export default function ProductDetailsSection({
@@ -22,8 +21,7 @@ export default function ProductDetailsSection({
   dimensions = 'Varies by piece (please refer to images)',
   stylingNotes,
   inYourSpace,
-  careAndLongevity,
-  knowYourLegacy
+  careAndLongevity
 }: ProductDetailsSectionProps) {
   const sections = [
     {
@@ -65,15 +63,6 @@ export default function ProductDetailsSection({
       title: 'Styling & Placement',
       content: stylingNotes ? <p className="text-sm leading-relaxed whitespace-pre-line">{stylingNotes}</p> : null
     },
-
-    ...(knowYourLegacy
-      ? [
-          {
-            title: 'Know Your Legacy',
-            content: <p className="text-sm leading-relaxed whitespace-pre-line">{knowYourLegacy}</p>
-          }
-        ]
-      : []),
 
     ...(inYourSpace
       ? [
