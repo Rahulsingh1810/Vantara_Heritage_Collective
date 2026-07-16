@@ -100,14 +100,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ================= SECTION 3 — KNOW THE LEGACY ================= */}
-      <section className="bg-(--color-ivory) py-12 text-center">
-        <div className="mx-auto max-w-3xl px-4">
-          <h3 className="mb-4 text-2xl font-bold text-(--color-wine-red)">Know the Legacy</h3>
-          <p className="text-lg text-(--color-wine-red)/70">Discover the intricate craftsmanship of master artisans</p>
-        </div>
-      </section>
-
       {/* ================= SECTION 4 — TRANSFORMING SPACES ================= */}
       <section className="bg-background py-16">
         <div className="mx-auto max-w-5xl px-4 text-center">

@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, useMemo } from 'react'
+import { memo, useEffect, useMemo } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { X } from 'lucide-react'
@@ -11,12 +11,58 @@ type ProductFiltersProps = {
   origins?: string[]
 }
 
+const STORAGE_KEY = 'product-filter'
+const EXPIRY_TIME = 45 * 60 * 1000 // 45 minutes
+
 function ProductFilters({ activeFilter, onFilterChange, origins = [] }: ProductFiltersProps) {
+  // Restore filter on first load
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY)
+
+      if (!stored) return
+
+      const parsed = JSON.parse(stored)
+
+      if (Date.now() > parsed.expiry) {
+        localStorage.removeItem(STORAGE_KEY)
+        return
+      }
+
+      onFilterChange(parsed.value)
+    } catch {
+      localStorage.removeItem(STORAGE_KEY)
+    }
+  }, [onFilterChange])
+
+  // Save whenever filter changes
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    if (activeFilter === null) {
+      localStorage.removeItem(STORAGE_KEY)
+      return
+    }
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        value: activeFilter,
+        expiry: Date.now() + EXPIRY_TIME
+      })
+    )
+  }, [activeFilter])
+
   const handleFilterChange = (value: string | null) => {
     onFilterChange(value)
   }
 
-  const clearFilters = () => onFilterChange(null)
+  const clearFilters = () => {
+    localStorage.removeItem(STORAGE_KEY)
+    onFilterChange(null)
+  }
 
   const originOptions = useMemo(() => {
     return origins.map(origin => ({
@@ -57,7 +103,7 @@ function ProductFilters({ activeFilter, onFilterChange, origins = [] }: ProductF
             <span>All Products</span>
           </label>
 
-          {/* Origins — visually grouped as sub-items under All Products */}
+          {/* Origins */}
           {originOptions.length > 0 && (
             <div className="ml-4 space-y-1 border-l border-(--color-wine-red)/20 pl-3">
               {originOptions.map(option => (
@@ -78,7 +124,6 @@ function ProductFilters({ activeFilter, onFilterChange, origins = [] }: ProductF
             </div>
           )}
 
-          {/* Divider */}
           <div className="my-2 border-t border-(--color-wine-red)/10" />
 
           {/* Bestsellers */}
