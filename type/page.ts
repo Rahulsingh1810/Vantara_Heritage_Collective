@@ -32,6 +32,8 @@ export type Product = {
   productMaterial: string
   placementsAndStylingNotes: string
   inYourSpace: string
+  careAndLongevity?: string
+  knowYourLegacy?: string
 }
 
 export type ProductsCollection = {

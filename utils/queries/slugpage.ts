@@ -38,6 +38,8 @@ export default async function fetchProductBySlug(slug: string) {
               productDimensions
               productCulturalSignificance
               productCare
+              careAndLongevity
+          knowYourLegacy
               placementsAndStylingNotes
               inYourSpace
               productOrigin

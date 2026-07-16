@@ -44,6 +44,8 @@ export interface Product {
   productImagesCollection?: Media[]
   placementsAndStylingNotes?: string
   inYourSpace?: string
+  careAndLongevity?: string
+  knowYourLegacy?: string
 }
 
 export interface Order {

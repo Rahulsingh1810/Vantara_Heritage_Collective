@@ -19,4 +19,6 @@ export interface IProduct {
   productImagesCollection?: IMedia[]
   placementsAndStylingNotes?: string
   inYourSpace?: string
+  careAndLongevity?: string
+  knowYourLegacy?: string
 }
