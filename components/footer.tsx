@@ -19,6 +19,30 @@ export default function Footer() {
               />
             </Link>
             <p className="text-sm opacity-90">Reimagining cultural treasures in iconic living spaces</p>
+            <a
+              href="https://www.instagram.com/vadanyaheritagecollective/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-ivory)]/30 px-4 py-2 text-sm transition-all hover:bg-[var(--color-ivory)]/10"
+              aria-label="Follow us on Instagram"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+              Follow Us
+            </a>
           </div>
 
           {/* Quick Links */}

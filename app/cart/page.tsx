@@ -5,10 +5,16 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Trash2, ArrowLeft } from 'lucide-react'
+import { Trash2, ArrowLeft, Truck } from 'lucide-react'
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, total, clearCart, isLoaded } = useCart()
+
+  // Shipping cost logic: ₹99 flat rate, free for orders above ₹2000
+  const SHIPPING_COST = 99
+  const FREE_SHIPPING_THRESHOLD = 2000
+  const shippingCost = total >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST
+  const grandTotal = total + shippingCost
 
   if (!isLoaded) {
     return <div className="py-20 text-center text-(--color-wine-red)">Loading cart…</div>
@@ -147,13 +153,32 @@ export default function CartPage() {
                   </div>
 
                   <div className="flex justify-between border-b border-(--color-wine-red)/15 pb-4">
-                    <span className="text-(--color-wine-red)/70">Shipping</span>
-                    <span className="text-sm text-(--color-wine-red)/70">Calculated at checkout</span>
+                    <div className="flex items-center gap-1.5 text-(--color-wine-red)/70">
+                      <Truck className="h-3.5 w-3.5" />
+                      <span>Shipping</span>
+                    </div>
+                    {shippingCost === 0 ? (
+                      <span className="font-medium text-green-700">FREE</span>
+                    ) : (
+                      <span className="font-medium text-(--color-wine-red)">₹{shippingCost.toFixed(2)}</span>
+                    )}
                   </div>
+
+                  {shippingCost > 0 && (
+                    <div className="rounded-md bg-green-50 px-3 py-2 text-xs text-green-700">
+                      🎉 Add ₹{(FREE_SHIPPING_THRESHOLD - total).toFixed(2)} more for <strong>free shipping!</strong>
+                    </div>
+                  )}
+
+                  {shippingCost === 0 && total > 0 && (
+                    <div className="rounded-md bg-green-50 px-3 py-2 text-xs text-green-700">
+                      ✅ You qualify for <strong>free shipping!</strong>
+                    </div>
+                  )}
 
                   <div className="flex justify-between text-lg font-bold sm:text-xl">
                     <span className="text-(--color-wine-red)">Total</span>
-                    <span className="text-(--color-wine-red)">₹{total.toFixed(2)}</span>
+                    <span className="text-(--color-wine-red)">₹{grandTotal.toFixed(2)}</span>
                   </div>
 
                   <Link href="/checkout">

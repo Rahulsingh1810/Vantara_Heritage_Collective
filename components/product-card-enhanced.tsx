@@ -77,7 +77,6 @@ export default function ProductCardEnhanced({ product }: ProductCardProps) {
           <Link href={`/products/${product.slug}`} className="w-full">
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Button className="w-full rounded-xl bg-(--color-wine-red) text-(--color-ivory) shadow hover:bg-(--color-wine-red)/90">
-                <ShoppingCart className="mr-2 h-4 w-4" />
                 View Details
               </Button>
             </motion.div>

@@ -12,11 +12,18 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ensureNumber } from '@/lib/utils'
-import { CheckCircle, Loader2 } from 'lucide-react'
+import { CheckCircle, Loader2, Truck } from 'lucide-react'
 
 export default function CheckoutPage() {
   const router = useRouter()
   const { cart, total, clearCart } = useCart()
+
+  // Shipping cost logic: ₹99 flat rate, free for orders above ₹2000
+  const SHIPPING_COST = 99
+  const FREE_SHIPPING_THRESHOLD = 2000
+  const subtotal = ensureNumber(total)
+  const shippingCost = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST
+  const grandTotal = subtotal + shippingCost
   const { user, isLoading: userLoading } = useUser()
 
   const [showLogin, setShowLogin] = useState(false)
@@ -195,13 +202,13 @@ export default function CheckoutPage() {
                     <div className="flex gap-4 pt-6">
                       <RazorpayPayButton
                         items={cart}
-                        totalAmount={total}
+                        totalAmount={grandTotal}
                         onSuccess={handlePaymentSuccess}
                         onBeforePayment={saveCustomerBeforePayment}
                         disabled={!user || cart.length === 0 || !isFormValid || savingCustomer}
                         className="flex-1 bg-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90"
                       >
-                        {savingCustomer ? 'Saving...' : `🔒 Pay ₹${ensureNumber(total).toFixed(2)}`}
+                        {savingCustomer ? 'Saving...' : `🔒 Pay ₹${grandTotal.toFixed(2)}`}
                       </RazorpayPayButton>
 
                       <Link href="/cart" className="flex-1">
@@ -249,12 +256,36 @@ export default function CheckoutPage() {
                 <div className="space-y-3 border-t border-(--color-wine-red)/20 pt-4 text-(--color-wine-red)">
                   <div className="flex justify-between text-sm opacity-80">
                     <span>Subtotal</span>
-                    <span>₹{ensureNumber(total).toFixed(2)}</span>
+                    <span>₹{subtotal.toFixed(2)}</span>
                   </div>
 
-                  <div className="flex justify-between text-lg font-semibold">
+                  <div className="flex justify-between text-sm opacity-80">
+                    <div className="flex items-center gap-1.5">
+                      <Truck className="h-3.5 w-3.5" />
+                      <span>Shipping</span>
+                    </div>
+                    {shippingCost === 0 ? (
+                      <span className="font-medium text-green-700">FREE</span>
+                    ) : (
+                      <span>₹{shippingCost.toFixed(2)}</span>
+                    )}
+                  </div>
+
+                  {shippingCost > 0 && (
+                    <div className="rounded-md bg-green-50 px-3 py-2 text-xs text-green-700">
+                      🎉 Add ₹{(FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2)} more for <strong>free shipping!</strong>
+                    </div>
+                  )}
+
+                  {shippingCost === 0 && subtotal > 0 && (
+                    <div className="rounded-md bg-green-50 px-3 py-2 text-xs text-green-700">
+                      ✅ You qualify for <strong>free shipping!</strong>
+                    </div>
+                  )}
+
+                  <div className="flex justify-between border-t border-(--color-wine-red)/15 pt-3 text-lg font-semibold">
                     <span>Total</span>
-                    <span>₹{ensureNumber(total).toFixed(2)}</span>
+                    <span>₹{grandTotal.toFixed(2)}</span>
                   </div>
                 </div>
 
