@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Button } from '@/components/ui/button'
+import ContactForm from '@/components/contact-form'
 import { Card, CardContent } from '@/components/ui/card'
 import { Mail, Phone, MapPin } from 'lucide-react'
 
@@ -65,36 +65,7 @@ export default function Contact() {
               <CardContent className="p-10">
                 <h2 className="mb-6 text-2xl font-bold text-(--color-wine-red)">Send us a Message</h2>
 
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    {['Name', 'Email'].map(label => (
-                      <div key={label}>
-                        <label className="mb-2 block text-sm font-medium text-(--color-wine-red)">{label}</label>
-                        <input className="w-full rounded-lg border border-(--color-wine-red)/25 bg-(--color-ivory) px-4 py-2 text-(--color-wine-red) placeholder:text-(--color-wine-red)/50 focus:border-(--color-wine-red) focus:ring-2 focus:ring-(--color-wine-red)/40 focus:outline-none" />
-                      </div>
-                    ))}
-                  </div>
-
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-(--color-wine-red)">Subject</label>
-                    <input className="w-full rounded-lg border border-(--color-wine-red)/25 bg-(--color-ivory) px-4 py-2 text-(--color-wine-red) placeholder:text-(--color-wine-red)/50 focus:border-(--color-wine-red) focus:ring-2 focus:ring-(--color-wine-red)/40 focus:outline-none" />
-                  </div>
-
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-(--color-wine-red)">Message</label>
-                    <textarea
-                      rows={5}
-                      className="w-full resize-none rounded-lg border border-(--color-wine-red)/25 bg-(--color-ivory) px-4 py-2 text-(--color-wine-red) placeholder:text-(--color-wine-red)/50 focus:border-(--color-wine-red) focus:ring-2 focus:ring-(--color-wine-red)/40 focus:outline-none"
-                    />
-                  </div>
-
-                  <Button
-                    size="lg"
-                    className="w-full bg-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red)/90"
-                  >
-                    Send Message
-                  </Button>
-                </form>
+                <ContactForm />
               </CardContent>
             </Card>
           </div>

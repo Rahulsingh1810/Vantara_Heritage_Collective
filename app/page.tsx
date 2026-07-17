@@ -152,7 +152,7 @@ export default function Page() {
         </div>
       </section>
 
-      {showContactPopup && <ContactFormPopup />}
+      {showContactPopup && <ContactFormPopup onClose={() => setShowContactPopup(false)} />}
     </>
   )
 }
