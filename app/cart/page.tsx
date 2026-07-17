@@ -5,16 +5,22 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Trash2, ArrowLeft, Truck } from 'lucide-react'
+import { Trash2, ArrowLeft, Truck, Tag, Gift } from 'lucide-react'
+import { isOfferActive, getDiscount, DISCOUNT_PERCENT, MIN_ORDER_VALUE } from '@/lib/offer-config'
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, total, clearCart, isLoaded } = useCart()
 
+  // Offer discount logic
+  const offerActive = isOfferActive()
+  const discount = getDiscount(total)
+
   // Shipping cost logic: ₹99 flat rate, free for orders above ₹2000
   const SHIPPING_COST = 99
   const FREE_SHIPPING_THRESHOLD = 2000
-  const shippingCost = total >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST
-  const grandTotal = total + shippingCost
+  const afterDiscount = total - discount
+  const shippingCost = afterDiscount >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST
+  const grandTotal = afterDiscount + shippingCost
 
   if (!isLoaded) {
     return <div className="py-20 text-center text-(--color-wine-red)">Loading cart…</div>
@@ -152,6 +158,41 @@ export default function CartPage() {
                     <span className="font-medium text-(--color-wine-red)">₹{total.toFixed(2)}</span>
                   </div>
 
+                  {/* Coupon discount */}
+                  {offerActive && discount > 0 && (
+                    <div className="flex justify-between border-b border-(--color-wine-red)/15 pb-4">
+                      <div className="flex items-center gap-1.5 text-green-700">
+                        <Tag className="h-3.5 w-3.5" />
+                        <span>Coupon: HERITAGE10</span>
+                        <span className="rounded-full bg-green-100 px-2 py-0.5 text-[10px] font-semibold uppercase">
+                          Auto-applied
+                        </span>
+                      </div>
+                      <span className="font-medium text-green-700">−₹{discount.toFixed(2)}</span>
+                    </div>
+                  )}
+
+                  {offerActive && discount === 0 && total > 0 && total < MIN_ORDER_VALUE && (
+                    <div className="rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-700">
+                      🏷️ Add ₹{(MIN_ORDER_VALUE - total).toFixed(2)} more to unlock{' '}
+                      <strong>{DISCOUNT_PERCENT}% off!</strong>
+                    </div>
+                  )}
+
+                  {/* Free sticker */}
+                  {offerActive && cart.length > 0 && (
+                    <div className="flex justify-between border-b border-(--color-wine-red)/15 pb-4">
+                      <div className="flex items-center gap-1.5 text-(--color-wine-red)/70">
+                        <Gift className="h-3.5 w-3.5 text-pink-600" />
+                        <span>Free Sticker</span>
+                        <span className="rounded-full bg-pink-100 px-2 py-0.5 text-[10px] font-semibold text-pink-700 uppercase">
+                          Bonus
+                        </span>
+                      </div>
+                      <span className="font-medium text-green-700">₹0.00</span>
+                    </div>
+                  )}
+
                   <div className="flex justify-between border-b border-(--color-wine-red)/15 pb-4">
                     <div className="flex items-center gap-1.5 text-(--color-wine-red)/70">
                       <Truck className="h-3.5 w-3.5" />
@@ -166,7 +207,8 @@ export default function CartPage() {
 
                   {shippingCost > 0 && (
                     <div className="rounded-md bg-green-50 px-3 py-2 text-xs text-green-700">
-                      🎉 Add ₹{(FREE_SHIPPING_THRESHOLD - total).toFixed(2)} more for <strong>free shipping!</strong>
+                      🎉 Add ₹{(FREE_SHIPPING_THRESHOLD - afterDiscount).toFixed(2)} more for{' '}
+                      <strong>free shipping!</strong>
                     </div>
                   )}
 

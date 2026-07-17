@@ -12,18 +12,24 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ensureNumber } from '@/lib/utils'
-import { CheckCircle, Loader2, Truck } from 'lucide-react'
+import { isOfferActive, getDiscount, DISCOUNT_PERCENT, MIN_ORDER_VALUE } from '@/lib/offer-config'
+import { CheckCircle, Loader2, Truck, Tag, Gift } from 'lucide-react'
 
 export default function CheckoutPage() {
   const router = useRouter()
   const { cart, total, clearCart } = useCart()
 
+  // Offer discount logic
+  const subtotal = ensureNumber(total)
+  const offerActive = isOfferActive()
+  const discount = getDiscount(subtotal)
+  const afterDiscount = subtotal - discount
+
   // Shipping cost logic: ₹99 flat rate, free for orders above ₹2000
   const SHIPPING_COST = 99
   const FREE_SHIPPING_THRESHOLD = 2000
-  const subtotal = ensureNumber(total)
-  const shippingCost = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST
-  const grandTotal = subtotal + shippingCost
+  const shippingCost = afterDiscount >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST
+  const grandTotal = afterDiscount + shippingCost
   const { user, isLoading: userLoading } = useUser()
 
   const [showLogin, setShowLogin] = useState(false)
@@ -259,6 +265,41 @@ export default function CheckoutPage() {
                     <span>₹{subtotal.toFixed(2)}</span>
                   </div>
 
+                  {/* Coupon discount */}
+                  {offerActive && discount > 0 && (
+                    <div className="flex justify-between text-sm">
+                      <div className="flex items-center gap-1.5 text-green-700">
+                        <Tag className="h-3.5 w-3.5" />
+                        <span>Coupon: HERITAGE10</span>
+                        <span className="rounded-full bg-green-100 px-2 py-0.5 text-[10px] font-semibold uppercase">
+                          Auto-applied
+                        </span>
+                      </div>
+                      <span className="font-medium text-green-700">−₹{discount.toFixed(2)}</span>
+                    </div>
+                  )}
+
+                  {offerActive && discount === 0 && subtotal > 0 && subtotal < MIN_ORDER_VALUE && (
+                    <div className="rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-700">
+                      🏷️ Add ₹{(MIN_ORDER_VALUE - subtotal).toFixed(2)} more to unlock{' '}
+                      <strong>{DISCOUNT_PERCENT}% off!</strong>
+                    </div>
+                  )}
+
+                  {/* Free sticker */}
+                  {offerActive && cart.length > 0 && (
+                    <div className="flex justify-between text-sm">
+                      <div className="flex items-center gap-1.5 text-(--color-wine-red)/70">
+                        <Gift className="h-3.5 w-3.5 text-pink-600" />
+                        <span>Free Sticker</span>
+                        <span className="rounded-full bg-pink-100 px-2 py-0.5 text-[10px] font-semibold text-pink-700 uppercase">
+                          Bonus
+                        </span>
+                      </div>
+                      <span className="font-medium text-green-700">₹0.00</span>
+                    </div>
+                  )}
+
                   <div className="flex justify-between text-sm opacity-80">
                     <div className="flex items-center gap-1.5">
                       <Truck className="h-3.5 w-3.5" />
@@ -273,7 +314,8 @@ export default function CheckoutPage() {
 
                   {shippingCost > 0 && (
                     <div className="rounded-md bg-green-50 px-3 py-2 text-xs text-green-700">
-                      🎉 Add ₹{(FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2)} more for <strong>free shipping!</strong>
+                      🎉 Add ₹{(FREE_SHIPPING_THRESHOLD - afterDiscount).toFixed(2)} more for{' '}
+                      <strong>free shipping!</strong>
                     </div>
                   )}
 

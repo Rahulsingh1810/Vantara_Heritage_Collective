@@ -53,7 +53,7 @@ export default function RootLayout({
         <SplashScreen />
         <UserProvider>
           <CartProvider>
-            {/* <DiscountBanner /> */}
+            <DiscountBanner />
             <Navigation />
             {children}
             <Footer />
