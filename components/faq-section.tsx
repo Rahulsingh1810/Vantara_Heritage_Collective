@@ -33,7 +33,7 @@ const faqs = [
   {
     question: 'How can I stay informed about new releases?',
     answer:
-      'We’re coming up with several new collections over the year from various other locales. Keep an eye on this space — or sign up for the newsletter to receive exclusive information (and some exciting goodies!).'
+      'We’re coming up with several new collections over the year from various other locales. Keep an eye on this space — or follow our handle @vadanyaheritage on Instagram to receive exclusive information (and some exciting goodies!)'
   },
   {
     question: 'Do you ship internationally?',

@@ -20,7 +20,7 @@ export default function Footer() {
             </Link>
             <p className="text-sm opacity-90">Reimagining cultural treasures in iconic living spaces</p>
             <a
-              href="https://www.instagram.com/vadanyaheritagecollective/"
+              href="https://www.instagram.com/vadanyaheritage/"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-ivory)]/30 px-4 py-2 text-sm transition-all hover:bg-[var(--color-ivory)]/10"
