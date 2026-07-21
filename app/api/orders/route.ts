@@ -3,6 +3,50 @@ import { sql } from '@/lib/db'
 import { getRazorpay } from '@/lib/razorpay'
 import { getServerSessionUser } from '@/lib/auth-server'
 
+export async function GET() {
+  try {
+    const user = await getServerSessionUser()
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    // Look up the customer record for this user
+    const customers = await sql`
+      SELECT id FROM customers WHERE user_id = ${user.id} LIMIT 1
+    `
+    const customer = customers[0]
+    if (!customer) {
+      // No customer profile yet — return empty list
+      return NextResponse.json([])
+    }
+
+    const orders = await sql`
+      SELECT
+        id,
+        order_number,
+        total_amount,
+        status,
+        payment_status,
+        created_at
+      FROM orders
+      WHERE customer_id = ${customer.id}
+        AND payment_status = 'paid'
+      ORDER BY created_at DESC
+    `
+
+    // Convert amounts from paise to rupees for display
+    const mapped = orders.map((o: any) => ({
+      ...o,
+      total_amount: Number(o.total_amount) / 100
+    }))
+
+    return NextResponse.json(mapped)
+  } catch (err) {
+    console.error('Order history fetch failed:', err)
+    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const user = await getServerSessionUser()

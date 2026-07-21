@@ -145,31 +145,19 @@ export default function DashboardPage() {
                       <th className="px-4 py-4 text-left text-(--color-wine-red)">Order #</th>
                       <th className="px-4 py-4 text-left text-(--color-wine-red)">Date</th>
                       <th className="px-4 py-4 text-left text-(--color-wine-red)">Total</th>
-                      <th className="px-4 py-4 text-left text-(--color-wine-red)">Payment</th>
                     </tr>
                   </thead>
                   <tbody>
                     {orders.map(order => (
                       <tr
                         key={order.id}
-                        className="border-b border-(--color-wine-red)/20 hover:bg-(--color-wine-red)/5"
+                        className="border-b border-(--color-wine-red)/20 text-(--color-wine-red) hover:bg-(--color-wine-red)/5"
                       >
                         <td className="px-4 py-4">#{order.order_number}</td>
                         <td className="px-4 py-4">
                           {new Date(order.created_at).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}
                         </td>
                         <td className="px-4 py-4 font-medium">₹{ensureNumber(order.total_amount).toFixed(2)}</td>
-                        <td className="px-4 py-4">
-                          <span
-                            className={`rounded-full px-3 py-1 text-xs font-medium ${
-                              order.payment_status === 'paid'
-                                ? 'bg-green-100 text-green-800'
-                                : 'bg-yellow-100 text-yellow-800'
-                            }`}
-                          >
-                            {order.payment_status}
-                          </span>
-                        </td>
                       </tr>
                     ))}
                   </tbody>
