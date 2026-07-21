@@ -3,7 +3,7 @@
 // Minimum order value: ₹1000
 
 /** Offer start date: July 23, 2026 00:00:00 IST */
-const OFFER_START = new Date('2026-07-21T00:00:00+05:30')
+const OFFER_START = new Date('2026-07-23T00:00:00+05:30')
 
 /** Offer end date: August 5, 2026 23:59:59 IST */
 const OFFER_END = new Date('2026-08-05T23:59:59+05:30')
