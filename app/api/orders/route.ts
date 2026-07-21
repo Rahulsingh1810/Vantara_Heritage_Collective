@@ -94,7 +94,28 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Customer profile missing' }, { status: 400 })
     }
 
-    const orderNumber = `ORD_${Date.now()}`
+    // Generate order number: DDMMYYYY + 4-digit sequential (e.g., 210720260001)
+    const now = new Date()
+    const dd = String(now.getDate()).padStart(2, '0')
+    const mm = String(now.getMonth() + 1).padStart(2, '0')
+    const yyyy = String(now.getFullYear())
+    const datePrefix = `${dd}${mm}${yyyy}`
+
+    // Find the latest order number with this date prefix to get the next sequence
+    const lastOrder = await sql`
+      SELECT order_number FROM orders
+      WHERE order_number LIKE ${datePrefix + '%'}
+      ORDER BY order_number DESC
+      LIMIT 1
+    `
+
+    let seq = 1
+    if (lastOrder.length > 0) {
+      const lastSeq = parseInt(lastOrder[0].order_number.slice(8), 10)
+      if (!isNaN(lastSeq)) seq = lastSeq + 1
+    }
+
+    const orderNumber = `${datePrefix}${String(seq).padStart(4, '0')}`
 
     // Razorpay expects amount in paise (1 INR = 100 paise)
     const amountInPaise = Math.round(total_amount * 100)
