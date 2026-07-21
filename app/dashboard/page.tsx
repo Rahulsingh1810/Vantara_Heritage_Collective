@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { LogOut, ShoppingBag } from 'lucide-react'
+import { LogOut, ShoppingBag, ChevronDown, ChevronUp } from 'lucide-react'
 import ProfileEditor from '@/components/profile-editor'
 import { ensureNumber } from '@/lib/utils'
 
@@ -22,6 +22,12 @@ interface User {
   country?: string
 }
 
+interface OrderItem {
+  product_name: string
+  quantity: number
+  unit_price: number
+}
+
 interface Order {
   id: string
   order_number: string
@@ -29,6 +35,7 @@ interface Order {
   status: string
   payment_status: string
   created_at: string
+  items: OrderItem[]
 }
 
 export default function DashboardPage() {
@@ -36,6 +43,7 @@ export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null)
   const [orders, setOrders] = useState<Order[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [expandedOrder, setExpandedOrder] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -138,30 +146,64 @@ export default function DashboardPage() {
                 </Link>
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-[600px]">
-                  <thead>
-                    <tr className="border-b border-(--color-wine-red)/30">
-                      <th className="px-4 py-4 text-left text-(--color-wine-red)">Order #</th>
-                      <th className="px-4 py-4 text-left text-(--color-wine-red)">Date</th>
-                      <th className="px-4 py-4 text-left text-(--color-wine-red)">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {orders.map(order => (
-                      <tr
-                        key={order.id}
-                        className="border-b border-(--color-wine-red)/20 text-(--color-wine-red) hover:bg-(--color-wine-red)/5"
+              <div className="space-y-4">
+                {orders.map(order => {
+                  const isExpanded = expandedOrder === order.id
+                  return (
+                    <div key={order.id} className="overflow-hidden rounded-xl border border-(--color-wine-red)/20">
+                      {/* Order summary row */}
+                      <button
+                        onClick={() => setExpandedOrder(isExpanded ? null : order.id)}
+                        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-(--color-wine-red) transition-colors hover:bg-(--color-wine-red)/5"
                       >
-                        <td className="px-4 py-4">#{order.order_number}</td>
-                        <td className="px-4 py-4">
-                          {new Date(order.created_at).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}
-                        </td>
-                        <td className="px-4 py-4 font-medium">₹{ensureNumber(order.total_amount).toFixed(2)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                        <div className="flex flex-1 flex-wrap items-center gap-x-8 gap-y-2">
+                          <span className="font-semibold">#{order.order_number}</span>
+                          <span className="text-sm text-(--color-wine-red)/60">
+                            {new Date(order.created_at).toLocaleDateString('en-IN', {
+                              timeZone: 'Asia/Kolkata',
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            })}
+                          </span>
+                          <span className="text-sm text-(--color-wine-red)/60">
+                            {order.items.length} {order.items.length === 1 ? 'item' : 'items'}
+                          </span>
+                          <span className="ml-auto font-bold">₹{ensureNumber(order.total_amount).toFixed(2)}</span>
+                        </div>
+                        {isExpanded ? (
+                          <ChevronUp className="h-5 w-5 shrink-0 text-(--color-wine-red)/50" />
+                        ) : (
+                          <ChevronDown className="h-5 w-5 shrink-0 text-(--color-wine-red)/50" />
+                        )}
+                      </button>
+
+                      {/* Expanded details */}
+                      {isExpanded && (
+                        <div className="border-t border-(--color-wine-red)/15 bg-(--color-wine-red)/[0.02] px-5 py-4">
+                          <h4 className="mb-3 text-sm font-semibold text-(--color-wine-red)/70">Order Items</h4>
+                          <div className="space-y-2">
+                            {order.items.map((item, idx) => (
+                              <div
+                                key={idx}
+                                className="flex items-center justify-between rounded-lg bg-white/60 px-4 py-3 text-(--color-wine-red)"
+                              >
+                                <div>
+                                  <p className="font-medium">{item.product_name}</p>
+                                  <p className="text-sm text-(--color-wine-red)/50">Qty: {item.quantity}</p>
+                                </div>
+                                <p className="font-semibold">₹{ensureNumber(item.unit_price).toFixed(2)}</p>
+                              </div>
+                            ))}
+                          </div>
+                          {order.items.length === 0 && (
+                            <p className="py-2 text-sm text-(--color-wine-red)/50">No item details available.</p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
               </div>
             )}
           </CardContent>

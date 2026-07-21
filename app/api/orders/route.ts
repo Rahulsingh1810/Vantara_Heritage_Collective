@@ -22,22 +22,47 @@ export async function GET() {
 
     const orders = await sql`
       SELECT
-        id,
-        order_number,
-        total_amount,
-        status,
-        payment_status,
-        created_at
-      FROM orders
-      WHERE customer_id = ${customer.id}
-        AND payment_status = 'paid'
-      ORDER BY created_at DESC
+        o.id,
+        o.order_number,
+        o.total_amount,
+        o.status,
+        o.payment_status,
+        o.created_at
+      FROM orders o
+      WHERE o.customer_id = ${customer.id}
+        AND o.payment_status = 'paid'
+      ORDER BY o.created_at DESC
     `
+
+    if (orders.length === 0) {
+      return NextResponse.json([])
+    }
+
+    // Fetch all items for these orders in one query
+    const orderIds = orders.map((o: any) => o.id)
+    const items = await sql`
+      SELECT order_id, product_name, quantity, unit_price
+      FROM order_items
+      WHERE order_id = ANY(${orderIds})
+      ORDER BY created_at ASC
+    `
+
+    // Group items by order_id
+    const itemsByOrder: Record<string, any[]> = {}
+    for (const item of items) {
+      if (!itemsByOrder[item.order_id]) itemsByOrder[item.order_id] = []
+      itemsByOrder[item.order_id].push({
+        product_name: item.product_name,
+        quantity: item.quantity,
+        unit_price: Number(item.unit_price) / 100
+      })
+    }
 
     // Convert amounts from paise to rupees for display
     const mapped = orders.map((o: any) => ({
       ...o,
-      total_amount: Number(o.total_amount) / 100
+      total_amount: Number(o.total_amount) / 100,
+      items: itemsByOrder[o.id] || []
     }))
 
     return NextResponse.json(mapped)
