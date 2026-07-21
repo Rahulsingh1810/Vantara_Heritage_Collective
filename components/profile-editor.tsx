@@ -224,7 +224,7 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
             <Button
               variant="outline"
               onClick={handleCancel}
-              className="min-w-[140px] border-(--color-wine-red) text-(--color-wine-red) hover:bg-(--color-wine-red) hover:text-(--color-ivory)"
+              className="min-w-[140px] border-(--color-wine-red) text-(--color-ivory) hover:bg-(--color-wine-red) hover:text-(--color-ivory)"
             >
               Cancel
             </Button>
