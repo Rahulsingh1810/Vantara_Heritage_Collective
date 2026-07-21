@@ -53,14 +53,25 @@ export default function CartPage() {
 
   return (
     <main>
-      {/* Header */}
+      {/* Header */} {/* Header */}
       <div className="bg-(--color-wine-red) py-12 text-(--color-ivory)">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Link href="/products">
+            <Button
+              variant="secondary"
+              size="sm"
+              className="mb-5 inline-flex items-center gap-2 rounded-full border border-(--color-ivory)/20 bg-(--color-ivory)/10 px-5 text-(--color-ivory) backdrop-blur-sm transition-all hover:bg-(--color-ivory) hover:text-(--color-wine-red)"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back to Products
+            </Button>
+          </Link>
+
           <h1 className="text-3xl font-bold sm:text-4xl">Shopping Cart</h1>
+
           <p className="mt-2 opacity-90">{cart.length} items in your cart</p>
         </div>
       </div>
-
       {/* Content */}
       <section className="bg-background py-12 sm:py-14 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

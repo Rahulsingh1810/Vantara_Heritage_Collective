@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Check, X } from 'lucide-react'
 
 interface UserProfile {
   id: string
@@ -62,7 +61,7 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
       setIsEditing(false)
       onUpdate?.({ ...formData })
     } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.')
+      setError(err.message || 'Something went wrong.')
     } finally {
       setIsSaving(false)
     }
@@ -73,6 +72,20 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
     setIsEditing(false)
     setError('')
   }
+
+  const inputClass =
+    'mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none'
+
+  const renderField = (label: string, name: keyof UserProfile, editable = true, fallback = 'Not provided') => (
+    <div>
+      <label className="block text-sm font-medium text-(--color-wine-red)/70">{label}</label>
+      {isEditing && editable ? (
+        <input name={name} value={(formData[name] as string) || ''} onChange={handleChange} className={inputClass} />
+      ) : (
+        <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{(formData[name] as string) || fallback}</p>
+      )}
+    </div>
+  )
 
   return (
     <Card className="border-(--color-wine-red)/30 bg-(--color-ivory) shadow-sm">
@@ -97,119 +110,15 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
           </div>
         )}
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          {/* Left column */}
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">Full Name</label>
-              {isEditing ? (
-                <input
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
-                />
-              ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.name}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">Phone</label>
-              {isEditing ? (
-                <input
-                  name="phone"
-                  value={formData.phone || ''}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
-                />
-              ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.phone || 'Not provided'}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">Address Line 2</label>
-              {isEditing ? (
-                <input
-                  name="address_line2"
-                  value={formData.address_line2 || ''}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
-                />
-              ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
-                  {formData.address_line2 || 'Not provided'}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">State</label>
-              {isEditing ? (
-                <input
-                  name="state"
-                  value={formData.state || ''}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
-                />
-              ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.state || 'Not provided'}</p>
-              )}
-            </div>
-          </div>
-
-          {/* Right column */}
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">Email</label>
-              <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.email}</p>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">Address Line 1</label>
-              {isEditing ? (
-                <input
-                  name="address_line1"
-                  value={formData.address_line1 || ''}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
-                />
-              ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">
-                  {formData.address_line1 || 'Not provided'}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">City</label>
-              {isEditing ? (
-                <input
-                  name="city"
-                  value={formData.city || ''}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
-                />
-              ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.city || 'Not provided'}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-(--color-wine-red)/70">Pincode</label>
-              {isEditing ? (
-                <input
-                  name="pincode"
-                  value={formData.pincode || ''}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border border-(--color-wine-red)/40 bg-(--color-ivory) px-4 py-2.5 text-(--color-wine-red) focus:border-(--color-wine-red) focus:ring-1 focus:ring-(--color-wine-red) focus:outline-none"
-                />
-              ) : (
-                <p className="mt-1 text-lg font-medium text-(--color-wine-red)">{formData.pincode || 'Not provided'}</p>
-              )}
-            </div>
-          </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {renderField('Full Name', 'name')}
+          {renderField('Email', 'email', false)}
+          {renderField('Phone', 'phone')}
+          {renderField('Address Line 1', 'address_line1')}
+          {renderField('Address Line 2', 'address_line2')}
+          {renderField('City', 'city')}
+          {renderField('State', 'state')}
+          {renderField('Pincode', 'pincode')}
         </div>
 
         {isEditing && (
@@ -221,6 +130,7 @@ export default function ProfileEditor({ user, onUpdate }: ProfileEditorProps) {
             >
               {isSaving ? 'Saving...' : 'Save Changes'}
             </Button>
+
             <Button
               variant="outline"
               onClick={handleCancel}

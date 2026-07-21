@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { LogOut, ShoppingBag, ChevronDown, ChevronUp } from 'lucide-react'
 import ProfileEditor from '@/components/profile-editor'
 import { ensureNumber } from '@/lib/utils'
+import { useUser } from '@/lib/user-context'
 
 interface User {
   id: string
@@ -40,6 +41,7 @@ interface Order {
 
 export default function DashboardPage() {
   const router = useRouter()
+  const { refetchUser } = useUser()
   const [user, setUser] = useState<User | null>(null)
   const [orders, setOrders] = useState<Order[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -75,10 +77,25 @@ export default function DashboardPage() {
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/auth/logout', {
+      // Optional: Firebase sign out
+      try {
+        const { signOut } = await import('firebase/auth')
+        const { auth } = await import('@/lib/firebase')
+        await signOut(auth)
+      } catch (firebaseErr) {
+        console.warn('Firebase sign-out skipped or failed', firebaseErr)
+      }
+
+      const res = await fetch('/api/auth/logout', {
         method: 'POST',
         credentials: 'include'
       })
+
+      if (!res.ok) {
+        throw new Error('Logout request failed')
+      }
+
+      await refetchUser()
       router.push('/')
       router.refresh()
     } catch (err) {
